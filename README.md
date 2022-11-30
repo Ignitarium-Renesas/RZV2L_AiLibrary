@@ -1,4 +1,4 @@
-# RzV2L AI Library
+# RZV2L AI Library
 
 This Library has API functions for leveraging AI applications that will run on Rz/V2L Board. Currently this library will support following applications: 
 
@@ -40,18 +40,20 @@ Please follow the below steps:
 
 ```
 cd $work_dir
-git clone https://github.com/Ignitarium-Renesas/RzV2L_AILibrary 
-cd RzV2L_AILibrary 
+git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
+cd RZV2L_AiLibrary 
 make
 ```
 
 ## How to run sample application
 
-1. Copy the RzV2L_AILibrary directory to board (/home/root/).
-2. Please follow below steps:
+1. Download the weights file `01_head_count_weights.zip` file from the release.
+2. Extract it. Place `yolov3_bmp_weight.dat` file at location `exe/01_head_count/yolov3_bmp/`
+3. Now, copy the `RZV2L_AiLibrary` directory to the board (/home/root/).
+4. Please follow these steps:
 
 ```
-cd /home/root/RzV2L_AILibrary 
+cd /home/root/RZV2L_AiLibrary 
 cd exe/<path to sample application>
 ./sample_application
 ```
@@ -59,9 +61,9 @@ cd exe/<path to sample application>
 
 #### Example:
 ```
-cd /home/root/RzV2L_AILibrary 
-cd exe/head_count
-./head_count_app
+cd /home/root/RZV2L_AiLibrary 
+cd exe/01_head_count
+./01_head_count_app
 # When prompted for the image path
 ../../test_images/01_head_count/eagle_office.bmp
 ```
