@@ -15,7 +15,7 @@ cd exe/
 
 ### Image for the sample above command
 
-<img src="./Ignitarium_office.png" alt="Sample application output"
+<img src="./sample_office.png" alt="Sample application output"
      margin-bottom=10px; 
      width=600px;
      height=334px />
