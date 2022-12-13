@@ -82,11 +82,11 @@ static std::vector<detection> det;
 static float main_line_slope;
 static float main_line_intercept;
 
-static float left_line_slope;
-static float left_line_intercept;
+static float top_line_slope;
+static float top_line_intercept;
 
-static float right_line_slope;
-static float right_line_intercept;
+static float bottom_line_slope;
+static float bottom_line_intercept;
 
 /*****************************************
 * Function Name : timedifference_msec
@@ -601,16 +601,16 @@ void draw_bounding_box(void)
 
     // debugging the parallel lines
 
-    // left line 
+    // top line 
 
-    int left_y1 = left_line_slope * 0 + left_line_intercept;
-    int left_x2 = (int)(-left_line_intercept/left_line_slope);
-    // img.draw_line(0,left_y1,left_x2,0,WHITE_DATA);
+    int top_y1 = top_line_slope * 0 + top_line_intercept;
+    int top_x2 = (int)(-top_line_intercept/top_line_slope);
+    // img.draw_line(0,top_y1,top_x2,0,WHITE_DATA);
 
-    // right line 
-    int right_y1 = right_line_slope * 0 + right_line_intercept; // when x = 0
-    int right_x2 = (int)(-right_line_intercept/right_line_slope); // when y = 0
-    // img.draw_line(0,right_y1,right_x2,0,WHITE_DATA);
+    // bottom line 
+    int bottom_y1 = bottom_line_slope * 0 + bottom_line_intercept; // when x = 0
+    int bottom_x2 = (int)(-bottom_line_intercept/bottom_line_slope); // when y = 0
+    // img.draw_line(0,bottom_y1,bottom_x2,0,WHITE_DATA);
 
 
 
@@ -679,12 +679,12 @@ void draw_bounding_box(void)
                         {
                             /* condition check for
                             1. It is in ROI
-                            2. right to the left line
-                            3. left to the right line
+                            2. bottom to the top line
+                            3. top to the bottom line
                             4. Was present in the other ROI*/
                             
                             
-                            if((y - x*main_line_slope-main_line_intercept<=0) && ((y - x*left_line_slope - left_line_intercept)>=0) && (y - x*right_line_slope-right_line_intercept<=0) && (ID_MAP[I_ID] == 0))
+                            if((x<=((y-main_line_intercept)/main_line_slope)) && (y>=(top_line_slope*x + top_line_intercept)) && (y<=(bottom_line_slope*x + bottom_line_intercept)) && (ID_MAP[I_ID] == 0))
                             {
                                 COUNT++;
                                 DONE_IDS.insert(I_ID);
@@ -692,7 +692,7 @@ void draw_bounding_box(void)
                         }
                     }
                     else{
-                        if((y - x*main_line_slope-main_line_intercept>=0) && ((y - x*left_line_slope - left_line_intercept)>=0) && (y - x*right_line_slope-right_line_intercept<=0)) ID_MAP.insert({I_ID,0}); // set id was present in the other ROI
+                        if((x>=((y-main_line_intercept)/main_line_slope)) && (y>=(top_line_slope*x + top_line_intercept)) && (y<=(bottom_line_slope*x + bottom_line_intercept))) ID_MAP.insert({I_ID,0}); // set id was present in the other ROI
                         else if (x < 10 || y < 10) {} // passes the outliers from the tracker 
                         else ID_MAP.insert({I_ID,1}); // set id was not present in the other ROI
                     }
@@ -705,7 +705,7 @@ void draw_bounding_box(void)
                         // checks if the id was not present in the id set.
                         {
 
-                            if ((y - x*main_line_slope-main_line_intercept>=0) && ((y - x*left_line_slope - left_line_intercept)>=0) && (y - x*right_line_slope-right_line_intercept<=0) && (ID_MAP[I_ID] == 1))
+                            if ((x>=((y-main_line_intercept)/main_line_slope)) && (y>=(top_line_slope*x + top_line_intercept)) && (y<=(bottom_line_slope*x + bottom_line_intercept)) && (ID_MAP[I_ID] == 1))
                             {
                                 COUNT++;
                                 DONE_IDS.insert(I_ID);
@@ -713,7 +713,7 @@ void draw_bounding_box(void)
                         }
                     }
                     else{
-                        if((y - x*main_line_slope-main_line_intercept<=0) && ((y - x*left_line_slope - left_line_intercept)>=0) && (y - x*right_line_slope-right_line_intercept<=0)) ID_MAP.insert({I_ID,1});
+                        if((x<=((y-main_line_intercept)/main_line_slope)) && (y>=(top_line_slope*x + top_line_intercept)) && (y<=(bottom_line_slope*x + bottom_line_intercept))) ID_MAP.insert({I_ID,1});
                         else if (x < 10 || y < 10) {}
                         else ID_MAP.insert({I_ID,0});
                     }
@@ -1194,26 +1194,26 @@ void set_all_line_params(int x1, int y1,int x2, int y2)
     main_line_slope = (y2-y1)/(x2-x1);
     main_line_intercept = y1-main_line_slope*x1;
 
-    left_line_slope = -1/main_line_slope;
-    right_line_slope = -1/main_line_slope;
+    top_line_slope = -1/main_line_slope;
+    bottom_line_slope = -1/main_line_slope;
 
-    int left_x,left_y,right_x ,right_y;
+    int top_x,top_y,bottom_x ,bottom_y;
 
-    if(x1<x2)
+    if(y1<y2)
     {
-        left_x = x1;
-        left_y = y1;
-        right_x = x2;
-        right_y = y2;
+        top_x = x1;
+        top_y = y1;
+        bottom_x = x2;
+        bottom_y = y2;
     }
     else{
-        left_x = x2;
-        left_y = y2;
-        right_x = x1;
-        right_y = y1;
+        top_x = x2;
+        top_y = y2;
+        bottom_x = x1;
+        bottom_y = y1;
     }
-    left_line_intercept = left_y - left_line_slope*left_x;
-    right_line_intercept = right_y - right_line_slope*right_x;
+    top_line_intercept = top_y - top_line_slope*top_x;
+    bottom_line_intercept = bottom_y - bottom_line_slope*bottom_x;
 
 }
 
