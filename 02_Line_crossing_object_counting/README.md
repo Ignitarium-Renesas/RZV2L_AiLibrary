@@ -1,40 +1,20 @@
-**03_Line_crossing_object_counting**
+# RZV2L AI Library - Line crossing object counting
 
-### Installing the application
+## Introduction
+Line crossing object counting is a sample application that demonstrates counting of the objects when they cross a virtual line drawn by the user.
+Application uses a deep learning based object detector - tinyYoloV2 and a centroid based tracker combination. 
 
-~~~ 
-make
-~~~
-
-### Command to run the application
-
-~~~ 
-cd exe/
-./03_Line_crossing_object_counting person 150 0 350 450 1
-~~~
-
-### Image for the sample above command
-
-<img src="./sample_office.png" alt="Sample application output"
-     margin-bottom=10px; 
-     width=600px;
-     height=334px />
-
-
-### What's the command
-
-**<application_name> <class_name> <line_pointx1> <line_pointy1> <line_pointx2> <line_pointy2> <flow_direction>**
-
-1. Applicaiton name :- 03_Line_crossing_object_counting
-2. Class_name :- person,car,cat,dog...(any class from coco dataset)(string dtype)
-3. line_pointx1 :- xmin for the line (int dtype)
-4. line_pointx1 :- ymin for the line (int dtype)
-5. line_pointx1 :- xmax for the line (int dtype)
-6. line_pointx1 :- ymax for the line (int dtype)
-7. flow_direction :- 0/1 (0 for top-bottom/ 1 for bottom-top) (int dtype)
-
+## Application details
 
 ### Sample Application Workflow
+
+The application has 4 threads as described below:
+- **Main thread** -> initializing all the parameters data, drawing bbox,running tracker and sending data to wayland.
+- **Inference thread** -> setting of paramters related to drpai, inferencing from the model and storing the results from the model.
+- **Camera thread** -> reading the image from the camera device,storing the image into the buffer,later passed to the model(inference thread).
+- **Termination thread** -> or Keyboard hit thread, waits for the user to press enter in the terminal, once pressed it will join to the main thread and main thread will terminate the other thread to stop the program.
+
+This pictorial representation describes these 4 threads in detail:
 
      |
      |  Main Thread
@@ -52,72 +32,84 @@ cd exe/
      | application terminated
 
 
-- **Main thread** -> initializing all the parameters data, drawing bbox,running tracker and sending data to wayland.
-- **Inference thread** -> setting of paramters related to drpai, inferencing from the model and storing the results from the model.
-- **Camera thread** -> reading the image from the camera device,storing the image into the buffer,later passed to the model(inference thread).
-- **Termination thread** -> or Keyboard hit thread, waits for the user to press enter in the terminal, once pressed it will join to the main thread and main thread will terminate the other thread to stop the program.
 
 ### Image pipeline
+The overall flow of the application can be described in following sequence :
+1. Image is captured from the camera device and is stored into the buffer from the 'camera thread'.
+2. The content in the buffer is processed by 'Inference thread'. This involves preprocessing, inference by the deep learning model (the DRP-AI model) and post processing specfic to the model.
+3. Detections are then diplayed on the monitor. Already stored detections are used by the object tracking algorithm to track the object. Tracker algorithm assigns a unique identification number (ID) to an object.
+4. Movement of the object in one direction is ensured by the tracker. Unique IDs are mapped to the actual count of the object. 
+5. This object count, along with the detection bounding boxes is displayed on the monitor.
 
-1. Image captured from the device and stored into the buffer from camera thread.
-2. Buffer is passed through the model, post processing specfic to the model is done and detections are stored.
-3. Detections are then diplayed, stored detections are used by the tracker to track the object and gives the id.
-4. Unidirectional flow of the images are checked using the tracker and id to increase the counter and mapped into the image.
-5. Output, detection mapped image then passed to the wayland to display out.
+###  Deep learning model details
 
-### Models(TinyYolov2,Centroid based Tracker)
-
-**<ins>TinyYoloV2</ins>** :- Tiny yolov2 , SOTA model, related to yolo family with lesser number of parameters to train.
-
-**<ins>Centroid Based Tracker</ins>** :- Generating a unique ID for each detected object based on centroid detection, tracking the objects as they move around in a video while maintaining the ID assignment.
+**<ins>TinyYoloV2</ins>** :- TinyYoloV2 is a state of the art neural network model. It belongs to well known Yolo family of object detectors. It requires less parameters to get  trained properly. official link : [ Official Yolo website](https://pjreddie.com/darknet/yolov2/) 
 
 #### <ins>Working of centroid tracker</ins>
+**<ins>Centroid Based Tracker</ins>** :- Centroid based tracker generates a unique ID for each detected object based on centroid detection. It tracks the detected objects as they move around in a video while maintaining the assigned ID for preselected frame numbers.
 
-1. Centroids are calculated based on detected bounding boxes.
-2. Calculate the Euclidean distance between the centroid/s of all the objects detected in current frame and previous frames.
-3. If the distance between the centroid of current frame and previous frame is less than the threshold, it is the same object in motion. Hence, use the existing object Id and update the bounding box coordinates of the object to the new bounding box value.
-4. If the distance between the centroid of current frame and previous frame exceeds the threshold, add a new object id.
-5. When objects detected in the previous frame cannot be matched to any existing objects, remove the object id from tracking.
-6. If the object wasn't detected in previous n_frames, remove the object id from tracking.
+1. Centroids are calculated based on the x and y coordinates of detected bounding boxes.
+2. Euclidean distance between the centroid/s of all the detected objects is calculated in current frame and previous frames.
+3. If the distance between the centroid of current frame and previous frame is less than a predefined threshold, it is considerd as the same object in motion. Hence, the same existing object Id is used.
+4. If the distance between the centroid of current frame and previous frame exceeds the threshold, a new object id is added.
+5. When objects detected in the previous frame can not be matched to any existing objects, the object id from tracking is removed.
+6. If the object wasn't detected in previous 'n' number of frames, the object id from tracking is removed.
 
 #### <ins>How line crossing/counting works</ins>
 
-- User gives the co-ordinates to draw the line (x1,y1),(x2,y2) and flow of direction(0/1).
-- Based on line we define our two roi(top_roi,bottom_roi).
-- To check if an object/person moved from one roi to another, we store their first occurance(object_id) in a hashmap.
-- When an object from one roi moves to the other roi, depending upon the direction we increment the counter.
+- User gives the co-ordinates to draw the line (x1,y1),(x2,y2) and flow of direction(0/1). ( 0 means left to right, 1 means right to left).
+- This line creates two virtual region of interest (top_roi,bottom_roi).
+- To check if an object/person has moved from one roi to another, their first occurance(object_id) is stored in a hashmap.
+- When an object from one roi moves to the other roi, depending upon the direction the counter is incremented.
 
 <img src="./tracker_ss.png" alt="Sample application output"
-     margin-bottom=10px; 
+     margin-right=10px; 
      width=600px;
      height=334px />
 
-#### <ins>Pros</ins>
+### Building the application
+Perform this steps in a X86 laptop as suggested in the main ReadMe file (TODO: add a building section in main readme.provide link here)
+~~~ 
+make
+~~~
 
+## Running the application
+The generated executable file from laptop needs to be transfered on the RZv2L board along with other files. (TODO: add a execution section in main readme.provide link here)
+~~~ 
+cd exe/
+./02_Line_crossing_object_counting person 150 0 350 450 1
+~~~
+
+### Image for the sample above command
+
+<img src="./Ignitarium_office.png" alt="Sample application output"
+     margin-right=10px; 
+     width=600px;
+     height=334px />
+
+### detailed explaination of the syntax
+
+**./<application_name> <class_name> <line_pointx1> <line_pointy1> <line_pointx2> <line_pointy2> <flow_direction>**
+
+1. Applicaiton name :- 02_Line_crossing_object_counting
+2. Class_name :- person,car,cat,dog...(any class from coco dataset)(string dtype)
+3. line_pointx1 :- xmin(leftmost x co-ordinate) for the line (int dtype)
+4. line_pointx1 :- ymin(leftmost y co-ordinate) for the line (int dtype)
+5. line_pointx1 :- xmax(rightmost x co-ordinate) for the line (int dtype)
+6. line_pointx1 :- ymax(rightmost y co-ordinate) for the line (int dtype)
+7. flow_direction :- 0/1 (0 for left to right/ 1 for right to left) (int dtype)
+
+## Limitations
+This is a simple sample tutorial application. It is provided for an user to experiment with an object detection model with a very basic tracker algorithm.
+ 
 **TinyYolov2** :- 
-- SOTA model
-- Easy to implement(sequntial)
-- Few conv operations
-- Less complexity
-- Fast inference speed.
+- Light-weight model :- Total number of learnable parameters are less as compared to other yolo models.
+- Few labelled classes :- Supports only 20 classes.
+- Low mAP:- Mean average precision is comparetively lower that other yolo models. This suggests that the model has lesser detection accuracy.
+- Comparatively lower accuracy performance:- Some detections are missed in the challenging environment like fast moving objects, noisy background etc.
 
 **Centroid Based Tracker** :- 
-- Easy to implement
-- Faster.
-
-#### <ins>Cons</ins>
-
-**TinyYolov2** :- 
-- Light-weight model(less learning)
-- Few labelled classes
-- mAP is low
-- Comparatively poor performance.
-
-**Centroid Based Tracker** :- 
-- Works poor on occlusion
-- ID switching
-- Missed detection
-- No concept of re-identification
-- No learning(compared to other DNN trackers.)
-
+- Performance is strictly average in case of occlusions.
+- ID switching :- ID switching occurs when two objects are moving closeby.
+- Missed detection :- In case of missed detection, tracker may not be able to predict the precise location of bounding boxes.
 
