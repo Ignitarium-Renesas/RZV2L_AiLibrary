@@ -1,0 +1,230 @@
+input_to_pre:
+- name: yuv_data
+  shape:
+  - 480
+  - 640
+  - 2
+  order: HWC
+  format: YUY2
+  type: uint8
+input_to_body:
+- name: input1
+  shape:
+  - 256
+  - 192
+  - 3
+  order: HWC
+  format: RGB
+  type: fp16
+output_from_body:
+- name: output1
+  shape:
+  - 64
+  - 48
+  - 17
+  order: HWC
+  type: fp16
+output_from_post:
+- name: post_out
+  shape:
+  - 17
+  - 64
+  - 48
+  order: CHW
+  type: fp32
+preprocess:
+- src:
+  - yuv_data
+  shape_in:
+  - - 480
+    - 640
+    - 2
+  dtype_in:
+  - uint8
+  dorder_in:
+  - HWC
+  dest:
+  - input1
+  shape_out:
+  - - 256
+    - 192
+    - 3
+  dtype_out:
+  - fp16
+  dorder_out:
+  - HWC
+  operations:
+  - op: conv_yuv2rgb
+    shape_in:
+    - - 480
+      - 640
+      - 2
+    dtype_in:
+    - uint8
+    dorder_in:
+    - HWC
+    shape_out:
+    - - 480
+      - 640
+      - 3
+    dtype_out:
+    - uint8
+    dorder_out:
+    - HWC
+    param:
+      DOUT_RGB_FORMAT: 0
+  - op: crop
+    shape_in:
+    - - 480
+      - 640
+      - 3
+    dtype_in:
+    - uint8
+    dorder_in:
+    - HWC
+    shape_out:
+    - - 480
+      - 640
+      - 3
+    dtype_out:
+    - uint8
+    dorder_out:
+    - HWC
+    param:
+      CROP_POS_X: 0
+      CROP_POS_Y: 0
+      DATA_TYPE: 0
+      DATA_FORMAT: 0
+      shape_out:
+      - 480
+      - 640
+  - op: resize_hwc
+    shape_in:
+    - - 480
+      - 640
+      - 3
+    dtype_in:
+    - uint8
+    dorder_in:
+    - HWC
+    shape_out:
+    - - 256
+      - 192
+      - 3
+    dtype_out:
+    - uint8
+    dorder_out:
+    - HWC
+    param:
+      RESIZE_ALG: 1
+      DATA_TYPE: 0
+      shape_out:
+      - 256
+      - 192
+  - op: cast_any_to_fp16
+    shape_in:
+    - - 256
+      - 192
+      - 3
+    dtype_in:
+    - uint8
+    dorder_in:
+    - HWC
+    shape_out:
+    - - 256
+      - 192
+      - 3
+    dtype_out:
+    - fp16
+    dorder_out:
+    - HWC
+    param:
+      DIN_FORMAT: 0
+  - op: normalize
+    shape_in:
+    - - 256
+      - 192
+      - 3
+    dtype_in:
+    - fp16
+    dorder_in:
+    - HWC
+    shape_out:
+    - - 256
+      - 192
+      - 3
+    dtype_out:
+    - fp16
+    dorder_out:
+    - HWC
+    param:
+      DOUT_RGB_ORDER: 0
+      cof_add:
+      - -123.675
+      - -116.28
+      - -103.53
+      cof_mul:
+      - 0.01712475
+      - 0.017507
+      - 0.01742919
+postprocess:
+- src:
+  - output1
+  shape_in:
+  - - 64
+    - 48
+    - 17
+  dtype_in:
+  - fp16
+  dorder_in:
+  - HWC
+  dest:
+  - post_out
+  shape_out:
+  - - 17
+    - 64
+    - 48
+  dtype_out:
+  - fp32
+  dorder_out:
+  - CHW
+  operations:
+  - op: transpose
+    shape_in:
+    - - 64
+      - 48
+      - 17
+    dtype_in:
+    - fp16
+    dorder_in:
+    - HWC
+    shape_out:
+    - - 17
+      - 64
+      - 48
+    dtype_out:
+    - fp16
+    dorder_out:
+    - CHW
+    param:
+      WORD_SIZE: 1
+      IS_CHW2HWC: 0
+  - op: cast_fp16_fp32
+    shape_in:
+    - - 17
+      - 64
+      - 48
+    dtype_in:
+    - fp16
+    dorder_in:
+    - CHW
+    shape_out:
+    - - 17
+      - 64
+      - 48
+    dtype_out:
+    - fp32
+    dorder_out:
+    - CHW
+    param:
+      CAST_MODE: 0
