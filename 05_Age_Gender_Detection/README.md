@@ -1,9 +1,9 @@
-# RZV2L AI Library - Age and gender detection
+# RZV2L AI Library - Age and Gender detection
 # WORK IN PROGRESS. LIMITED ACCURACY AVAILABLE CURRENTLY.
 
 ## Introduction
 
-This particular application is showcases the capability of deep neural networks to predict age and detect the gender of a person.
+This particular application showcases the capability of deep neural networks to predict age and detect the gender of a person.
 This is a work in progress application. Only image based gender recognition code is pushed as of Dec 2022 last week. More updates will be available during January 2023.
 
 ## Application details
