@@ -1,0 +1,32 @@
+6  # driver version  v0.2 
+24  # driver version >v0.3
+# conv_yuv2rgb  [MASK : ON]
+# resize_hwc  [MASK : ON]
+# imagescaler  [MASK : ON]
+# maxpooling_k3_st2  [MASK : ON]
+# gap  [MASK : ON]
+# softmax  [MASK : ON]
+# ============================
+# Address data in drp_param.bin
+# DRP LIB name[Layer Name]
+# [Start position], [Size(Byte)], [Param name], [Value]
+conv_yuv2rgb[post_0_0_conv_yuv2rgb]
+Start:0[Byte],Size:4[Byte],Param:raddr,Value:0x80000000
+Start:4[Byte],Size:4[Byte],Param:waddr,Value:0x800e1000
+resize_hwc[post_0_1_resize_hwc]
+Start:56[Byte],Size:4[Byte],Param:raddr,Value:0x800e1000
+Start:60[Byte],Size:4[Byte],Param:waddr,Value:0x801c2000
+imagescaler[post_0_1_imagescaler]
+Start:112[Byte],Size:4[Byte],Param:raddr,Value:0x801c2000
+Start:116[Byte],Size:4[Byte],Param:waddr,Value:0x801e6c00
+Start:160[Byte],Size:4[Byte],Param:ADD_ADDR,Value:0x8245bc80
+Start:164[Byte],Size:4[Byte],Param:MUL_ADDR,Value:0x8245bc88
+maxpooling_k3_st2[StatefulPartitionedCall/sequential/resnet50/pool1_pool/MaxPool:0]
+Start:176[Byte],Size:4[Byte],Param:raddr,Value:0x80230400
+Start:180[Byte],Size:4[Byte],Param:waddr,Value:0x803b8400
+gap[optimizer.flatten1]
+Start:232[Byte],Size:4[Byte],Param:raddr,Value:0x82119c00
+Start:236[Byte],Size:4[Byte],Param:waddr,Value:0x8214ac00
+softmax[post_0_0_softmax]
+Start:280[Byte],Size:4[Byte],Param:raddr,Value:0x8214bc00
+Start:284[Byte],Size:4[Byte],Param:waddr,Value:0x8214bc40
