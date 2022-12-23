@@ -65,16 +65,6 @@ static bool start_flag[NUM_MAX_PERSON] = {false};
 static uint8_t fall_frame_count[NUM_MAX_PERSON] = {0};
 static bool fall_flag[NUM_MAX_PERSON] = {false};
 
-/*Line equations*/
-static float main_line_slope;
-static float main_line_intercept;
-
-static float top_line_slope;
-static float top_line_intercept;
-
-static float bottom_line_slope;
-static float bottom_line_intercept;
-
 
 /*AI Inference for DRPAI*/
 static std::string prefix;
@@ -1739,30 +1729,6 @@ void set_all_line_params(int x1, int y1,int x2, int y2)
     line_y1 = y1;
     line_x2 = x2;
     line_y2 = y2;
-    main_line_slope = (y2-y1)/(x2-x1);
-    main_line_intercept = y1-main_line_slope*x1;
-
-    top_line_slope = -1/main_line_slope;
-    bottom_line_slope = -1/main_line_slope;
-
-    int top_x,top_y,bottom_x ,bottom_y;
-
-    if(y1<y2)
-    {
-        top_x = x1;
-        top_y = y1;
-        bottom_x = x2;
-        bottom_y = y2;
-    }
-    else{
-        top_x = x2;
-        top_y = y2;
-        bottom_x = x1;
-        bottom_y = y1;
-    }
-    top_line_intercept = top_y - top_line_slope*top_x;
-    bottom_line_intercept = bottom_y - bottom_line_slope*bottom_x;
-
 }
 
 /*
