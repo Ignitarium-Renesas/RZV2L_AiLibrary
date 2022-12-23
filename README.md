@@ -32,34 +32,4 @@ These sample applications run on a Renesas RZ/V2L-SMARC board.
 
 ## Editing and building sample applications
 
-Please follow the below steps:
-
-```
-cd $work_dir
-git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
-cd RZV2L_AiLibrary/01_Head_count/Head_count_img
-make
-```
-
-## Running sample application
-
-1. Download the weights file `01_head_count_weights.zip` file from the release.
-2. Extract it. Place `yolov3_bmp_weight.dat` file at location `01_Head_count/Head_count_img/exe/yolov3_bmp/`
-3. Now, copy the `RZV2L_AiLibrary` directory to the board (/home/root/).
-4. Please follow these steps:
-
-```
-cd /home/root/RZV2L_AiLibrary 
-cd 01_Head_count/Head_count_img/exe/<path to sample application>
-./sample_application
-```
-3. Enter the relative path for the test_image with respect to the directory of the executable when prompted
-
-### Example:
-```
-cd /home/root/RZV2L_AiLibrary 
-cd 01_Head_count/Head_count_img/exe/
-./01_head_count_app
-# When prompted for the image path
-./test_images/Ben_001_640_480.bmp
-```
+Please follow the steps available in README files of individual application.
