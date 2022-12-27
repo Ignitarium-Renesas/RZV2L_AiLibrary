@@ -9,13 +9,13 @@ It can utilize the API, "*PRED_SHV()*" provided in this library. Input to this A
 ## Application details
 
 ### Model details
-A commonly known object detection model, YoloV3 is used in this application. official link [YoloV3](https://pjreddie.com/darknet/yolo/).
+A commonly known object detection model, YoloV3 is used in this application as object detector model. official link [YoloV3](https://pjreddie.com/darknet/yolo/).
 Yolov3 is trained on a open source dataset.
-You can find the [dataset](https://github.com/MinhNKB/helmet-safety-vest-detection) and [Kaggle dataset](https://www.kaggle.com/datasets/andrewmvd/hard-hat-detection) here
+You can find the [dataset](https://github.com/MinhNKB/helmet-safety-vest-detection) and [Kaggle dataset](https://www.kaggle.com/datasets/andrewmvd/hard-hat-detection) here.
 
 ### How to build the sample application
 
-Please follow the below steps:
+Please follow the below steps once the desired changes are made in the source code:
 
 ```
 cd $work_dir
@@ -25,10 +25,10 @@ make
 ```
 
 ## Running the application
-
-1. Extract it. Place `yolov3_Helmet_vest_detection_weights.dat` file at the location `04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_cam/exe/yolov3/` or `04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_img/exe/yolov3/` according to to the application that needs to be run.
-2. Now, copy the `RZV2L_AiLibrary` directory to the board (/home/root/).
-3. Please follow these steps:
+1. Download the `yolov3_Helmet_vest_detection_weights.dat` weights file from the release v1.2.2. 
+2. Place `yolov3_Helmet_vest_detection_weights.dat` file at the location `04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_cam/exe/yolov3/` or `04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_img/exe/yolov3/` according to to the application that needs to be run.
+3. Now, copy the `RZV2L_AiLibrary` directory to the board (/home/root/).
+4. Please follow these steps:
 
 ### Application with camera input
 
@@ -38,7 +38,6 @@ cd 04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_cam/exe
 ./04_Safety_helmet_vest_cam_app
 ```
 ### Application with image input
-
 
 Enter the relative path for the test_image with respect to the directory of the executable when prompted
 
