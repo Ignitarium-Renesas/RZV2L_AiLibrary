@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This application is used to count the human heads present in an image. It can be deployed to count the incoming and outgoing visitors in shops, museums, cafes, restaurants, clubs, class rooms, offices, theaters, festivals etc.
+This application is used to count the human heads present in an image or a video from camera input.
 
 It can utilize the API, "*PRET_HC()*" provided in this library. Input to this API will be an image buffer address and it's height and width of the image. 
 > Refer [Head_count_img/examples/head_count_example.cpp](Head_count_img/examples/head_count_example.cpp) for an example usage
@@ -37,9 +37,10 @@ It can utilize the API, "*PRET_HC()*" provided in this library. Input to this AP
 ### Model details
 
 #### YOLOv3
+In this application YOLOv3 is used for head detection.
 - Official paper - [YOLOv3: An Incremental Improvement](https://arxiv.org/pdf/1804.02767.pdf)
+- Official website - [YoloV3](https://pjreddie.com/darknet/yolo/)
 - Dataset - [HollywoodHeads](https://www.di.ens.fr/willow/research/headdetection/)
-- In this application YOLOv3 is used for head detection.
 
 ### Application with image input
 - The user must input the relative path to the image.
@@ -50,14 +51,12 @@ It can utilize the API, "*PRET_HC()*" provided in this library. Input to this AP
 - Camera input is fed to the model with proper pre-processing.
 - The count is calculated based on the detected heads.
 
-
 ### Building the sample application:
 
-This is an optional step since already compiled application is available in exe/.
+This is an optional step since already compiled application is available in the `exe/` folder.
+These steps must be performed in Laptop/PC with the support of RZV2L toolchain. Find the steps in the repository's Readme file available at home page.
 
-These steps must be performed in Laptop/PC with the support of RZV2L toolchain.
-
-Please follow the below steps for image application:
+After doing desired modifications in the source code, please follow the below steps to create he executable: 
 
 ```
 cd $work_dir
@@ -88,5 +87,3 @@ cd 01_Head_count/Head_count_cam/exe/
 ./01_head_count_cam_app
 ```
 
-## Limitations
-- Inference time is around 350ms.
