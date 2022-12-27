@@ -2,68 +2,91 @@
 
 ## Introduction
 
-This application is used to count the human heads present in an image.
+This application is used to count the human heads present in an image. It can be deployed to count the incoming and outgoing visitors in shops, museums, cafes, restaurants, clubs, class rooms, offices, theaters, festivals etc.
+
 It can utilize the API, "*PRET_HC()*" provided in this library. Input to this API will be an image buffer address and it's height and width of the image. 
-> Refer [01_Head_count/Head_count_img/examples/head_count_example.cpp](01_Head_count/Head_count_img/examples/head_count_example.cpp) for an example usage
+> Refer [Head_count_img/examples/head_count_example.cpp](Head_count_img/examples/head_count_example.cpp) for an example usage
 
 
 ## Application details
+```
+|-- 01_Head_count.mp4 # sample demo
+|-- Head_count_cam/ # Head count application on images
+|   |-- Makefile
+|   |-- etc/ # address map and pre/post process configuration of yolov3
+|   |-- examples/
+|   |   `-- head_count_cam_example.cpp # example inference code on image
+|   |-- exe/
+|   |   |-- 01_head_count_cam_app # the executable
+|   |   `-- yolov3_cam # DRP-AI files of yolov3
+|   `-- src/ # source code directory
+|-- Head_count_img # Head count application on camera input
+|   |-- Makefile
+|   |-- etc/ # address map and pre/post process configuration of yolov3
+|   |-- examples/
+|   |   `-- head_count_example.cpp #example inference code on camera input
+|   |-- exe/
+|   |   |-- 01_head_count_img_app # the executable
+|   |   |-- labels.txt # label map
+|   |   `-- yolov3_bmp # DRP-AI files of yolov3
+|   |-- src/ # source code directory
+|   `-- test_images # test images directory
+`-- README.md
+```
 
 ### Model details
-add yoloV3 details here. training dataset etc.
+
+#### YOLOv3
+- Official paper - [YOLOv3: An Incremental Improvement](https://arxiv.org/pdf/1804.02767.pdf)
+- Dataset - [HollywoodHeads](https://www.di.ens.fr/willow/research/headdetection/)
+- In this application YOLOv3 is used for head detection.
 
 ### Application with image input
-Add details like how image is read, resized, preprocessed, inferred, post processed etc.
+- The user must input the relative path to the image.
+- The image is then resized to 640x480.
+- The count is calculated based on the detected heads.
 
 ### Application with camera input
-Add details like how inference happends on video stream. is it the stream or frame?
+- Camera input is fed to the model with proper pre-processing.
+- The count is calculated based on the detected heads.
 
-## Running the application
 
 ### Building the sample application:
 
-TODO
-Mention that this needs to be done on laptop and not on the board.
-SDK steps.
-Code changes.
+This is an optional step since already compiled application is available in exe/.
+
+These steps must be performed in Laptop/PC with the support of RZV2L toolchain.
 
 Please follow the below steps for image application:
 
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
-cd RZV2L_AiLibrary/01_Head_count/Head_count_img
+cd RZV2L_AiLibrary/01_Head_count/<app dir>
 make
 ```
 
-Please follow the below steps for camera application:
-TODO
-
 ### Running the sample application
 Praparation on laptop:
-1. Download the weights file `yolov3_Head_counting_weights.dat` file from the release.
-2. Place this file at location `01_Head_count/Head_count_img/exe/yolov3_bmp/` or `01_Head_count/Head_count_cam/exe/yolov3_cam/`
+1. Download the weights files (*.dat) from the release(https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.1).
+2. Place the weight files at location proper location `01_Head_count/Head_count_img/exe/yolov3_bmp/` or `01_Head_count/Head_count_cam/exe/yolov3_cam/`
 3. Now, copy the `RZV2L_AiLibrary` directory to the RZV2L board (/home/root/).
 4. Please follow these steps:
 
-```
-cd /home/root/RZV2L_AiLibrary 
-cd 01_Head_count/Head_count_img/exe/<path to sample application>
-./sample_application
-```
-3. Enter the relative path for the test_image with respect to the directory of the executable when prompted
-
-### Example:
+#### Application with image input
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/Head_count_img/exe/
-./01_head_count_app
-# When prompted for the image path
-./test_images/Ben_001_640_480.bmp
+./01_head_count_img_app
+../test_images/Ben_001_640_480.bmp
 ```
 
+#### Application with camera input
+```
+cd /home/root/RZV2L_AiLibrary 
+cd 01_Head_count/Head_count_cam/exe/
+./01_head_count_cam_app
+```
 
 ## Limitations
-TODO:
-enter the limitations. constraints etc.
-
+- Inference time is around 350ms.
