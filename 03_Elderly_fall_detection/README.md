@@ -49,7 +49,7 @@ This is an optional step since already compiled application is available in `exe
 
 These steps must be performed in Laptop/PC with the support of RZV2L toolchain.
 
-Please follow the below steps for image application:
+Please follow the below steps for image application once the desired changes in he source code are made:
 
 ```
 cd $work_dir
@@ -83,8 +83,6 @@ cd 03_Elderly_fall_detection/exe/
 ./03_Elderly_fall_detection 0 240 640 240 0
 ```
 
-
 ## Limitations
 
-1. Inference time is around 200 ms. 
-2. Full body of the person should be visible in the camera. 
+1. Full body of the person should be visible in the camera. This is the limitation from HR-Net keypoints detector. 
