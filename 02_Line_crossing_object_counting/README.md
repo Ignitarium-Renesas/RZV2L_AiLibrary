@@ -32,7 +32,6 @@ This pictorial representation describes these 4 threads in detail:
      | application terminated
 
 
-
 ### Image pipeline
 The overall flow of the application can be described in following sequence :
 1. Image is captured from the camera device and is stored into the buffer from the 'camera thread'.
@@ -68,21 +67,22 @@ The overall flow of the application can be described in following sequence :
      height=334px />
 
 ### Building the application
-Perform this steps in a X86 laptop as suggested in the main ReadMe file (TODO: add a building section in main readme.provide link here)
+After doing desired modifications in the source code, Perform this steps on a laptop/PC with SDK installed.
 ~~~ 
+cd RZV2L_AiLibrary/02_Line_crossing_object_counting
 make
 ~~~
 
 ## Running the application
-The generated executable file from laptop needs to be transfered on the RZv2L board along with other files. (TODO: add a execution section in main readme.provide link here)
+The generated executable file from laptop needs to be transfered on the RZv2L board along with other files.
 ~~~ 
 cd exe/
 ./02_Line_crossing_object_counting person 150 0 350 450 1
 ~~~
 
-### Image for the sample above command
+### Sample image for the command entered above:
 
-<img src="./Ignitarium_office.png" alt="Sample application output"
+<img src="./sample_office.png" alt="Sample application output"
      margin-right=10px; 
      width=600px;
      height=334px />
@@ -104,8 +104,6 @@ This is a simple sample tutorial application. It is provided for an user to expe
  
 **TinyYolov2** :- 
 - Light-weight model :- Total number of learnable parameters are less as compared to other yolo models.
-- Few labelled classes :- Supports only 20 classes.
-- Low mAP:- Mean average precision is comparetively lower that other yolo models. This suggests that the model has lesser detection accuracy.
 - Comparatively lower accuracy performance:- Some detections are missed in the challenging environment like fast moving objects, noisy background etc.
 
 **Centroid Based Tracker** :- 
