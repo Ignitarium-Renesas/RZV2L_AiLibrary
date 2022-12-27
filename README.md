@@ -6,14 +6,120 @@ This Library has API functions for leveraging AI applications that will run on R
 
 1. Human Head Counter. 
 2. Line crossing object Counter.
-3. Elderly people fall detection (Work in progress)
-4. Safety helmet and vest detection
+3. Elderly people fall detection.
+4. Safety helmet and vest detection.
 5. Human age and gender detection (Work in progress)
 6. Face recognition and spoof detection (Work in progress)
 
 ## Prerequisites
-1. Board bring up sequence. (TODO).
-2. SDK installation steps(TODO).
+### 1. Board bring up sequence
+These steps are required to make the Renesas RZV2L board working.
+There are 2 major sections:
+1. Building the image and preparing the micro SD card.
+2. Board setup
+
+#### 1.Building the image and preparing the micro SD card.
+Follow **R01US0556EJ0102** from the Renesas Official Website to bring up RZV2L board. Below mentioned steps are from the same document.
+
+##### Requirements
+- A labtop with Ubuntu 20.04 LTS (64 bit) operating system.
+- 100GB free space on hard disk is necessary. If this is not available, laptop will freeze during build process.
+
+##### Build Instructions
+Install dependencies:
+
+```
+sudo apt-get update
+sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib \
+build-essential chrpath socat cpio python python3 python3-pip python3-pexpect \
+xz-utils debianutils iputils-ping libsdl1.2-dev xterm p7zip-full libyaml-dev
+```
+
+##### Configuring Git
+```
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+```
+> Note: Copy all files obtained from Renesas into your home directory prior to the steps below.
+
+##### Create a working directory at your home directory, and decompress Yocto recipe package
+```
+mkdir ~/rzv_vlp_v3.0.0
+cd ~/rzv_vlp_v3.0.0
+unzip ~/RTK0EF0045Z0024AZJ-v3.0.0-update2.zip
+tar zxvf ./RTK0EF0045Z0024AZJ-v3.0.0-update2/rzv_bsp_v3.0.0.tar.gz
+```
+
+##### Enable Graphics and Video Codec
+Please copy the Graphics package (RTK0EF0045Z13001ZJ-v1.xx_EN.zip or RTK0EF0045Z13001ZJ-v1.xx_JP.zip) to working directory and run the commands below.
+```
+cd ~/rzv_vlp_v3.0.0
+unzip ~/RTK0EF0045Z13001ZJ-v1.xx_EN.zip
+tar zxvf ./RTK0EF0045Z13001ZJ-v1.xx_EN/meta-rz-features.tar.gz
+```
+
+Please copy the video codec package (RTK0EF0045Z15001ZJ-v0.xx_EN.zip or RTK0EF0045Z15001ZJ-v0.xx_JP.zip) to working directory and run the commands below.
+```
+cd ~/rzv_vlp_v3.0.0
+unzip ~/RTK0EF0045Z15001ZJ-v0.xx_EN.zip
+tar zxvf ./RTK0EF0045Z15001ZJ-v0.xx_EN/meta-rz-features.tar.gz
+```
+
+##### Unzip the DRP-AI Support Package Recipe
+```
+cd $WORK
+tar -zxvf ./rzv2l_drpai-driver/meta-rz-features.tar.gz
+```
+
+##### Setup a build environment
+```
+cd ~/rzv_vlp_v3.0.0
+source poky/oe-init-build-env
+```
+
+##### Prepare the default configuration files for the target board
+```
+cd ~/rzv_vlp_v3.0.0/build
+cp ../meta-renesas/docs/template/conf/smarc-rzv2l/*.conf
+```
+
+##### Expected directory structure
+
+```
+|- WORK
+   |- build
+   |- meta-gplv2
+   |- meta-openembedded
+   |- meta-qt5
+   |- meta-renesas
+   |- meta-rz-features
+      |- conf
+      |- include
+      |- recipes-drpai
+      |- recipes-graphics
+   |- meta-virtualization
+   |- poky
+   |- rzv2l_drpai-driver
+      |- meta-rz-features.tar.gz
+```
+
+##### Build
+```
+cd $WORK/build
+bitbake core-image-weston
+```
+
+After the Build, following files will be generated under $WORK/build/tmp/deploy/images/smarc-rzv2l
+
+```
+Image-smarc-rzv2l.bin
+Image-r9a07g054l2-smarc.dtb
+core-image-weston-smarc-rzv2l.tar.bz2
+```
+#### 2.Board setup
+TODO - refer from the documentation.
+
+### 2. SDK installation steps(TODO).
 
 ## Hardware details 
  
