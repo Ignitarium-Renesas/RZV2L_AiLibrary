@@ -120,6 +120,155 @@ core-image-weston-smarc-rzv2l.tar.bz2
 TODO - refer from the documentation.
 
 ### 2. SDK installation steps(TODO).
+The directory structure should look like this:
+
+```
+|- WORK
+   |- build
+   |- meta-gplv2
+   |- meta-openembedded
+   |- meta-qt5
+   |- meta-renesas
+   |- meta-rz-features
+      |- conf
+      |- include
+      |- recipes-drpai
+      |- recipes-graphics
+   |- meta-virtualization
+   |- poky
+   |- rzv2l_drpai-driver
+      |- meta-rz-features.tar.gz
+```
+
+#### Install ISP Support package
+
+Unzip the ISP support package. 
+```
+cd $WORK
+$ unzip ~/r11an0561ej0120-rzv2l-isp-sp.zip
+$ tar zxvf ./r11an0561ej0120-rzv2l-isp-sp/meta-rz-features.tar.gz
+```
+Now, the directory structure should look like this:
+
+```
+|- WORK
+   |- build
+   |- meta-gplv2
+   |- meta-openembedded
+   |- meta-qt5
+   |- meta-renesas
+   |- meta-rz-features
+      |- conf
+      |- include
+      |- recipes-drpai
+      |- recipes-graphics
+      |- recipes-isp
+   |- meta-virtualization
+   |- poky
+   |- rzv2l_drpai-driver
+      |- meta-rz-features.tar.gz
+```
+Set up build environment for ISP Support :
+
+```
+cd $WORK
+source poky/oe-init-build-env
+cp ../meta-renesas/docs/template/conf/smarc-rzv2l/* conf/
+```
+
+Build the image with  bitbake
+
+```
+cd $WORK/build
+bitbake core-image-weston
+```
+
+Now, Build the SDK.
+
+Before executing following commands, apply all necessary recipes required for the Compile
+Environment.
+
+The directory structure looks like this: 
+
+```
+|- WORK
+   |- build
+   |- meta-gplv2
+   |- meta-openembedded
+   |- meta-qt5
+   |- meta-renesas
+   |- meta-rz-features
+      |- conf
+      |- include
+      |- recipes-drpai
+      |- recipes-graphics
+      |- recipes-isp
+   |- meta-virtualization
+   |- poky
+   |- rzv2l_drpai-driver
+      |- meta-rz-features.tar.gz
+```
+
+Populate the sdk with bitbake. Use following command:
+
+```
+cd $WORK
+source poky/oe-init-build-env
+bitbake core-image-weston -c populate_sdk
+```
+
+After the Build process is completed, following files will be generated under **$WORK/build/tmp/deploy/sdk**.
+
+Filename:- **poky-glibc-x86_64-core-image-weston-aarch64-smarc-rzv2l-toolchain-
+3.1.14.sh**
+
+#### Install SDK
+Install the SDK using this command:
+```
+cd $WORK/build
+./tmp/deploy/sdk/poky-glibc-x86_64-core-image-weston-aarch64-smarc-rzv2l-toolchain-3.1.14.sh
+```
+
+In the Installer, specify the SDK installation directory and press the enter key.
+
+Example below installs the SDK to default directory, “/opt/poky/3.1.14”.
+
+Note:
+“/opt/poky/3.1.14” will be replaced with your SDK installed path.
+
+Confirm that following directories and files are generated under the specified directory.
+
+```
+|-opt
+     |-poky
+          |-3.1.14
+               |- sysroots
+               |- environment-setup-aarch64-poky-linux
+               |- environment-setup-armv7vet2hf-neon-vfpv4-pokymllib32-linux-gnueabi
+               |- site-config-aarch64-poky-linux
+               |- site-config-armv7vet2hf-neon-vfpv4-pokymllib32-linux-gnueabi
+               |- version-aarch64-poky-linux
+               |- version-armv7vet2hf-neon-vfpv4-pokymllib32-linux-gnueabi
+```
+
+To use the SDK run the bellow command
+
+```
+source /opt/poky/3.1.14/environment-setup-aarch64-poky-linux
+```
+
+Once the source is done, it can be used as SDK for the RZV2L board.
+
+#### Sample command to use SDK and build the executable application
+
+~~~
+source /opt/poky/3.1.14/environment-setup-aarch64-poky-linux
+git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary
+cd RZV2L_AiLibrary/<application_name>
+make
+~~~
+
+Output of the make i.e executable will be stored int the **exe** folder.
 
 ## Hardware details 
  
