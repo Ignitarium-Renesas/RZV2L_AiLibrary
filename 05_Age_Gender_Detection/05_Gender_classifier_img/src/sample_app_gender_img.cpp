@@ -485,7 +485,7 @@ int32_t predict_gender(uint8_t* in_img_addr, uint32_t width, uint32_t height)
 
     /* Starting app */
     printf("RZ/V2L DRP-AI Sample Application\n");
-    printf("Model : Darknet YOLO      | %s\n", drpai_prefix.c_str());
+    printf("Model : ResNet50      | %s\n", drpai_prefix.c_str());
 
     int32_t ret = 0;
 
