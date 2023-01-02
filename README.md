@@ -22,7 +22,7 @@ There are 2 major sections:
 Follow **R01US0556EJ0102** from the Renesas Official Website to bring up RZV2L board. Below mentioned steps are from the same document.
 
 ##### Requirements
-- A labtop with Ubuntu 20.04 LTS (64 bit) operating system.
+- A laptop with Ubuntu 20.04 LTS (64 bit) operating system.
 - 100GB free space on hard disk is necessary. If this is not available, laptop will freeze during build process.
 
 ##### Build Instructions
@@ -117,9 +117,9 @@ Image-r9a07g054l2-smarc.dtb
 core-image-weston-smarc-rzv2l.tar.bz2
 ```
 #### 2.Board setup
-TODO - refer from the documentation.
+Carefully follow instructions from the document R01US0556EJ0102. 
 
-### 2. SDK installation steps(TODO).
+### 2. SDK installation steps
 The directory structure should look like this:
 
 ```
