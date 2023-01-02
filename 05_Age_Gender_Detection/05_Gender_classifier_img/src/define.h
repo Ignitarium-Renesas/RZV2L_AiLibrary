@@ -51,7 +51,7 @@ extern std::string gender_path;
 *  - input_img = input image to DRP-AI (size and format are determined in DRP-AI Translator)
 ******************************************/
 const static std::string label_list     = gender_path+"/gender_classes.txt";
-const static std::string drpai_prefix   = "Gender_classifier_img";
+const static std::string drpai_prefix   = "gender_pytorch";
 static std::string input_img      = "sample.bmp";
 static std::vector<std::string> label_file_map = {};
 
