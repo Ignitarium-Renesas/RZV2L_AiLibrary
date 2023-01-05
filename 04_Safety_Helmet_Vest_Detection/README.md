@@ -8,10 +8,47 @@ It can utilize the API, "*PRED_SHV()*" provided in this library. Input to this A
 
 ## Application details
 
-### Model details
+```
+|-- 04_Safety_helmet_vest.mp4 # sample demo
+|-- Safety_helmet_vest_cam/ # Safety Helmet Vest Detection application on images
+|   |-- Makefile
+|   |-- etc/ # address map and pre/post process configuration of yolov3
+|   |-- examples/
+|   |   `-- Safety_helmet_vest_cam_example.cpp # example inference code on image
+|   |-- exe/
+|   |   |-- 04_Safety_helmet_vest_cam_app # the executable
+|   |   `-- yolov3_cam # DRP-AI files of yolov3
+|   `-- src/ # source code directory
+|-- Safety_helmet_vest_img # Safety Helmet Vest Detection application on camera input
+|   |-- Makefile
+|   |-- etc/ # address map and pre/post process configuration of yolov3
+|   |-- examples/
+|   |   `-- Safety_helmet_vest_example.cpp #example inference code on camera input
+|   |-- exe/
+|   |   |-- 04_Safety_helmet_vest_img_app # the executable
+|   |   |-- labels.txt # label map
+|   |   `-- yolov3_bmp # DRP-AI files of yolov3
+|   |-- src/ # source code directory
+|   `-- test_images # test images directory
+`-- README.md
+```
+
+## Model details
+
+### Yolov3
+
 A commonly known object detection model, YoloV3 is used in this application as object detector model. official link [YoloV3](https://pjreddie.com/darknet/yolo/).
 Yolov3 is trained on a open source dataset.
 You can find the [dataset](https://github.com/MinhNKB/helmet-safety-vest-detection) and [Kaggle dataset](https://www.kaggle.com/datasets/andrewmvd/hard-hat-detection) here.
+
+### Application with image input
+- The user must input the relative path to the image.
+- The image is then resized to 640x480.
+- The count is calculated based on the detected heads.
+
+### Application with camera input
+- Camera input is fed to the model with proper pre-processing.
+- The detections are calculated based on the detected helmets and vests.
 
 ### How to build the sample application
 
