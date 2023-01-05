@@ -1,5 +1,0 @@
-resize_hwc.mem                    1133294528     201900
-imagescaler.mem                   1133496432     173836
-maxpooling_k3_st2.mem             1133670272     131864
-gap.mem                           1133802144     141508
-cast_fp16_fp32.mem                1133943664     101648
