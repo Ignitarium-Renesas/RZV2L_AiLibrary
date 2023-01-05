@@ -7,16 +7,36 @@ The facial biometric system is widely being used for multiple applications. Its 
 
 ## Application details
 
+This whole application is divided into multiple single applications as described below.
+
+### Face Registration
+
+A tool to create face register database integrated with Coral camera to capture and save faces.
+
+#### Face Recognition Image
+
+Identifies a person using facial features in an image.
+
+
 ```
-|-- Makefile
-|-- README.md
-|-- etc/ # address map and pre/post process configuration of resnet-50
-|-- exe/
-|   |-- 06_Face_recognition_spoof_detection # The executable
-|   |-- face_features.csv # Feature vectors of known people
-|   |-- resnet50_bmp # DRP-AI files of resnet-50
-|   `-- sample.bmp # sample test image
-`-- src/ # source code directory
+|-- 06_Face_Recognition.mp4		# Demo video
+|-- database				
+    |-- face_features.csv		# Sample face feature database 
+|-- Face_registration   		# Face registration app
+|   |-- Makefile
+|   |-- etc
+|   |-- exe
+|   |   |-- Face_registration	# The executable 
+|   |   `-- resnet50_bmp		# DRP-AI files of resnet50
+|   `-- src
+|-- Face_recognition_img		# Face recognition on image app
+|   |-- Makefile
+|   |-- etc
+|   |-- exe
+|   |   |-- Face_recognition_img	# The executable
+|   |   `-- resnet50_bmp		# DRP-AI files of resnet50
+|   `-- src
+`-- README.md
 ```
 
 ### Model details
@@ -26,12 +46,11 @@ The facial biometric system is widely being used for multiple applications. Its 
 - Official paper - [Deep Residual Learning for Image Recognition](https://arxiv.org/pdf/1512.03385.pdf)
 - Dataset - [VGGFace2](https://www.robots.ox.ac.uk/~vgg/data/vgg_face2/)
 - In this application ResNet-50 is used for extracting facial features.
-
-> Note: No transfer learning on custom data was performed for this application.
+- Finetuned the model with 2190 images of 73 classes to get 512 feature embeddings.
 
 ### Application with image input
 
-- The user has to create embeddings of people and save them in `exe/face_features.csv`.
+- The user has to create embeddings using `Face_registration` app, and will be saved in `database/face_features.csv`.
 - The facial features of test image (ie, `sample.bmp`) obtained from ResNet-50 are compared with the embeddings of known people by taking euclidean distance. The identity is considered to be the person whose name corresponds to the shortest distance.
 - Outputs the recognized person if the distance is less than a threshold value.
 
@@ -48,32 +67,104 @@ Please follow the below steps for image application:
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
-cd RZV2L_AiLibrary/06_Face_recognition_spoof_detection/
+cd RZV2L_AiLibrary/06_Face_recognition_spoof_detection/<application>
 make
 ```
 
-### Running the sample application
+### Running the sample applications
+
+#### Face Registration
 
 1. Copy the `RZV2L_AiLibrary` directory to the board (/home/root/).
 2. Follow below steps;
 
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 06_Face_recognition_spoof_detection/exe/
-./06_Face_recognition_spoof_detection
+cd 06_Face_recognition_spoof_detection/Face_registration/exe/
+./Face_registration
 ```
+3. Choose whether to capture image, append or write database.
+    1. for capturing new face
+        1. Enter the name of the image to be saved.
+        2. The face must be inside the square box.
+        3. Press "Enter" key to capture.
+        ```
+        root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration/exe# ./Face_registration 
+        Choose any one option from below
+        [0] for capturing new face
+        [1] for creating new face register [Erasing previous register]
+        [2] for adding new face to register [Add new values to existing register]
+        0
+        ---------------------------
+        Capturing from Coral Camera
+        ---------------------------
 
-### Example:
+        Enter the name of the picture
+        test 
+        ---------------------------
+        ..Press Enter to capture..
+        ---------------------------
+        ```
+        ![](res/wayland-screenshot-2023-01-03_07-09-10.png)
+    2. for creating new face register or for adding new face to register.
+        1. Enter the number of samples to be embdded.
+        2. Enter person name and path to his/her image.
+        ```
+        root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration/exe# ./Face_registration 
+        Choose any one option from below
+        [0] for capturing new face
+        [1] for creating new face register [Erasing previous register]
+        [2] for adding new face to register [Add new values to existing register]
+        1
+        Enter the number of samples to be embedded 
+        5
+        Enter the person name 
+        Christo
+        Enter the image path 
+        /home/root/06_Face_recognition_spoof_detection_backup/Capture_face/captures/Chris.bmp           
+        Loading : resnet50_bmp/drp_desc.bin
+        Loading : resnet50_bmp/resnet50_bmp_drpcfg.mem
+        Loading : resnet50_bmp/drp_param.bin
+        Loading : resnet50_bmp/aimac_desc.bin
+        Loading : resnet50_bmp/resnet50_bmp_weight.dat
+        Inference -----------------------------------------------
+        [START] DRP-AI
+        [END] DRP-AI
+        Input: /home/root/06_Face_recognition_spoof_detection_backup/Capture_face/captures/Chris.bmp
+        ```
+6. The face embedding database - `database/face_features.csv` would get updated.
+
+#### Face Recognition Image
+
+1. Copy the `RZV2L_AiLibrary` directory to the board (/home/root/).
+2. Follow below steps;
 
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 06_Face_recognition_spoof_detection/exe/
-./06_Face_recognition_spoof_detection
+cd 06_Face_recognition_spoof_detection/Face_recognition_img/exe/
 ```
+3. Copy test image (`sample.bmp`) to `06_Face_recognition_spoof_detection/Face_recognition_img/exe/`
+4. Run the executable.
+```
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_img/exe# ./Face_recognition_img 
+RZ/V2L DRP-AI Sample Application
+Model : PyTorch ResNet    | resnet50_bmp
+Input : Windows Bitmap v3 | sample.bmp
+Loading : resnet50_bmp/drp_desc.bin
+Loading : resnet50_bmp/resnet50_bmp_drpcfg.mem
+Loading : resnet50_bmp/drp_param.bin
+Loading : resnet50_bmp/aimac_desc.bin
+Loading : resnet50_bmp/resnet50_bmp_weight.dat
+Inference -----------------------------------------------
+[START] DRP-AI
+[END] DRP-AI
+Input: sample.bmp
 
+Recognized person is Abin
+```
 
 ## Limitations
 
-1. Image input size (640x480) is fixed.
-2. No provision to create face_features.csv from user end.(To Do)
+1. Image input size (224x224) is fixed.
+2. Background and light conditions is affecting the prediction.
 3. Spoof detection is not implemented.(To Do)

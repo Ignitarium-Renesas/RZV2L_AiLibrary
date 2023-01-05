@@ -1,0 +1,4 @@
+imagescaler.mem                   1116173536     173836
+maxpooling_k3_st2.mem             1116347376     131864
+gap.mem                           1116479248     141508
+cast_fp16_fp32.mem                1116620768     101648
