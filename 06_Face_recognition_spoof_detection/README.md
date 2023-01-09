@@ -17,11 +17,14 @@ A tool to create face register database integrated with Coral camera to capture 
 
 Identifies a person using facial features in an image.
 
+#### Face Recognition Camera
+
+Identifies a person using facial features from camera frames.
 
 ```
 |-- 06_Face_Recognition.mp4		# Demo video
 |-- database				
-    |-- face_features.csv		# Sample face feature database 
+|   |-- face_features.csv		# Sample face feature database 
 |-- Face_registration   		# Face registration app
 |   |-- Makefile
 |   |-- etc
@@ -34,6 +37,13 @@ Identifies a person using facial features in an image.
 |   |-- etc
 |   |-- exe
 |   |   |-- Face_recognition_img	# The executable
+|   |   `-- resnet50_bmp		# DRP-AI files of resnet50
+|   `-- src
+|-- Face_recognition_cam		# Face recognition on cam app
+|   |-- Makefile
+|   |-- etc
+|   |-- exe
+|   |   |-- Face_recognition_cam	# The executable
 |   |   `-- resnet50_bmp		# DRP-AI files of resnet50
 |   `-- src
 `-- README.md
@@ -50,8 +60,14 @@ Identifies a person using facial features in an image.
 
 ### Application with image input
 
-- The user has to create embeddings using `Face_registration` app, and will be saved in `database/face_features.csv`.
+- The user has to create multiple embeddings using `Face_registration` app, and will be saved in `database/face_features.csv`.
 - The facial features of test image (ie, `sample.bmp`) obtained from ResNet-50 are compared with the embeddings of known people by taking euclidean distance. The identity is considered to be the person whose name corresponds to the shortest distance.
+- Outputs the recognized person if the distance is less than a threshold value.
+
+### Application with camera input
+
+- The user has to create multiple embeddings using `Face_registration` app, and will be saved in `database/face_features.csv`.
+- The facial features of obtained from camera input are compared with the embeddings of known people by taking euclidean distance. The identity is considered to be the person whose name corresponds to the shortest distance.
 - Outputs the recognized person if the distance is less than a threshold value.
 
 ## Running the application
@@ -92,8 +108,8 @@ cd 06_Face_recognition_spoof_detection/Face_registration/exe/
         root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration/exe# ./Face_registration 
         Choose any one option from below
         [0] for capturing new face
-        [1] for creating new face register [Erasing previous register]
-        [2] for adding new face to register [Add new values to existing register]
+        [1] for adding new face to register [Add new values to existing register]
+        [2] for creating new face register [Erasing previous register]
         0
         ---------------------------
         Capturing from Coral Camera
@@ -113,8 +129,8 @@ cd 06_Face_recognition_spoof_detection/Face_registration/exe/
         root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration/exe# ./Face_registration 
         Choose any one option from below
         [0] for capturing new face
-        [1] for creating new face register [Erasing previous register]
-        [2] for adding new face to register [Add new values to existing register]
+        [1] for adding new face to register [Add new values to existing register]
+        [2] for creating new face register [Erasing previous register]
         1
         Enter the number of samples to be embedded 
         5
@@ -143,7 +159,7 @@ cd 06_Face_recognition_spoof_detection/Face_registration/exe/
 cd /home/root/RZV2L_AiLibrary 
 cd 06_Face_recognition_spoof_detection/Face_recognition_img/exe/
 ```
-3. Copy test image (`sample.bmp`) to `06_Face_recognition_spoof_detection/Face_recognition_img/exe/`
+3. Copy test image (`sample.bmp`) to `06_Face_recognition_spoof_detection/Face_recognition_img/exe/`.
 4. Run the executable.
 ```
 root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_img/exe# ./Face_recognition_img 
@@ -163,8 +179,56 @@ Input: sample.bmp
 Recognized person is Abin
 ```
 
+#### Face Recognition Camera
+
+1. Copy the `RZV2L_AiLibrary` directory to the board (/home/root/).
+2. Follow below steps;
+
+```
+cd /home/root/RZV2L_AiLibrary 
+cd 06_Face_recognition_spoof_detection/Face_recognition_cam/exe/
+```
+4. Run the executable.
+```
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_cam/exe# ./Face_recognition_cam 
+RZ/V2L DRP-AI Sample Application
+Model : PyTorch ResNet    | resnet50_cam
+Input : Coral Camera
+Loading : resnet50_cam/drp_desc.bin
+Loading : resnet50_cam/resnet50_cam_drpcfg.mem
+Loading : resnet50_cam/drp_param.bin
+Loading : resnet50_cam/aimac_desc.bin
+Loading : resnet50_cam/resnet50_cam_weight.dat
+media-ctl -d /dev/media0 -r
+system ret = 0
+media-ctl -d /dev/media0 -V "'ov5645 0-003c':0 [fmt:UYVY8_2X8/640x480 field:none]"
+system ret = 0
+media-ctl -d /dev/media0 -l "'rzg2l_csi2 10830400.csi2':1 -> 'CRU output':0 [1]"
+system ret = 0
+media-ctl -d /dev/media0 -V "'rzg2l_csi2 10830400.csi2':1 [fmt:UYVY8_2X8/640x480 field:none]"
+system ret = 0
+[INFO] CSI2 Camera: /dev/video0
+Key Hit Thread Starting
+************************************************
+* Press ENTER key to quit. *
+************************************************
+Main Loop Starts
+Capture Thread Starting
+Inference Thread Starting
+Inference Loop Starting
+Background calibration is done
+
+key Detected.
+Key Hit Thread Terminated
+Main Process Terminated
+AI Inference Thread Terminated
+Capture Thread Terminated
+Application End
+```
+
 ## Limitations
 
 1. Image input size (224x224) is fixed.
-2. Background and light conditions is affecting the prediction.
-3. Spoof detection is not implemented.(To Do)
+2. Background and light conditions are affecting the prediction.
+3. Multiple face embeddings of a person may require for better predictions.
+4. Spoof detection is not implemented.(To Do)

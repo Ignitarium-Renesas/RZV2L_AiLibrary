@@ -443,26 +443,27 @@ int8_t print_embedding(float* floatarr, int &choice, string name)
     switch (choice)
     {
     case 1:
-        file.open (feature_list, std::ios::out);
-        file << name << ",";
-        for(int i = 0; i < NUM_FEATURES; i++){
-            file << floatarr[i] << ",";
-        }
-        file << endl;
-        choice = 2;
-        break;
-    case 2:
         file.open (feature_list, std::ios::app);
         file << name <<",";
         for(int i = 0; i < NUM_FEATURES; i++){
             file << floatarr[i] << ",";
         }
         file << endl;
-        break;      
+        break;  
+    case 2:
+        file.open (feature_list, std::ios::out);
+        file << name << ",";
+        for(int i = 0; i < NUM_FEATURES; i++){
+            file << floatarr[i] << ",";
+        }
+        file << endl;
+        choice = 1;
+        break;    
     default:
         exit;
         break;
       }
+      
     return 0;
 }
 
@@ -697,8 +698,8 @@ int32_t main(int32_t argc, char * argv[])
     string name = "";
     std::cout << "Choose any one option from below\n" 
               << "[0] for capturing new face\n" 
-              << "[1] for creating new face register [Erasing previous register]\n" 
-              << "[2] for adding new face to register [Add new values to existing register]\n";
+              << "[1] for adding new face to register [Add new values to existing register]\n"
+              << "[2] for creating new face register [Erasing previous register]\n";
     std::cin >> choice;
     switch(choice)
     {
