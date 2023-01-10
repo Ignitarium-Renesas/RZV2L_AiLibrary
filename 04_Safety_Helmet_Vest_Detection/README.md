@@ -6,6 +6,8 @@ Safety Helmet Vest Detection application is used to detect the safety helmet and
 It can utilize the API, "*PRED_SHV()*" provided in this library. Input to this API will be an image buffer address and it's height and width of the image. 
 > Refer [Safety_helmet_vest_cam/examples/Safety_helmet_vest_cam_example.cpp](04_Safety_helmet_vest_cam/examples/Safety_helmet_vest_cam_example.cpp) for an example usage
 
+sample video on YouTube -[Safety helmet & vest detection demo video](https://youtu.be/49FlBoSaC_E)
+
 ## Application details
 
 ```
@@ -86,3 +88,10 @@ cd 04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_img/exe
 # When prompted for the image path
 ./test_images/6.jpg
 ```
+### Known issues:
+1. [ERROR] Image buffer address is NULL : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.
+2. Segmentation fault : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is larger than the actual image dimensions, then a segmentation fault will occur.
+3. Improper output : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is smaller than the actual image dimensions, then improper or unexpected outputs will be observed.
+4. [ERROR] Failed to initialize Coral Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
+5. permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.
+6. [ERROR] Failed to open: <prefix>/<prefix>_weight.dat error=2. [ERROR] Failed to load data from memory: <prefix>/<prefix>_weight.dat Failed to load DRP-AI object files - This error suggests that the weight file is not availbale in the `exe` folder. Download the weight file from the release in github and place it properly in the `exe/subfolder`.

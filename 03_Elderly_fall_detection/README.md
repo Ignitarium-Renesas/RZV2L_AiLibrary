@@ -4,6 +4,8 @@
 
 Falling while standing is one of the major accident that occurs with elderly people causing severe injuries. Therefore, fall detection systems are becoming increasingly important  at old age homes, hospitals and even normal residence. Fall detection systems enabled with vision based Ai examine human movement and perform activity recognition to detect falling events in input videos from camera.
 
+sample video on YouTube -[Fall detection demo](https://youtu.be/TAv-9xwLd1E)
+
 ## Application details
 
 ```
@@ -73,7 +75,7 @@ cd 03_Elderly_fall_detection/exe/
     - <y1> - ymin of line of separation (int)
     - <x2> - xmax of line of separation (int)
     - <y2> - ymax of line of separation (int)
-    - <direction> - 0/1 (to recognize region of fall with respect to line of separation)
+    - <direction> - 0/1 (to recognize region of fall with respect to line of separation. Typically it's 0 for horizontal line. but user need to change it if camera orientation is changed.)
 
 ### Example:
 
@@ -86,3 +88,8 @@ cd 03_Elderly_fall_detection/exe/
 ## Limitations
 
 1. Full body of the person should be visible in the camera. This is the limitation from HR-Net keypoints detector. 
+
+## Known issues
+- [ERROR] Failed to initialize Coral Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
+- permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.  
+ 
