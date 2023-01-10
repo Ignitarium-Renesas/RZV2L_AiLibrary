@@ -4,7 +4,9 @@
 ## Introduction
 
 This particular application showcases the capability of deep neural networks to predict age and detect the gender of a person.
-This is a work in progress application. Only image based gender recognition code is pushed as of Dec 2022 last week. More updates will be available during January 2023.
+Image based gender recognition implementation is availbale. More updates will be made available soon.
+
+sample video on YouTube -[Gender detection demo](https://youtu.be/YGhGVh51r10)
 
 ## Application details
 
@@ -38,3 +40,9 @@ cd 05_Age_Gender_Detection/05_Gender_classifier_img/exe
 # When prompted for the image path
 ./sample.bmp
 ```
+### Known issues:
+1. [ERROR] Image buffer address is NULL : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.
+2. Segmentation fault : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is larger than the actual image dimensions, then a segmentation fault will occur.
+3. Improper output : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is smaller than the actual image dimensions, then improper or unexpected outputs will be observed.
+4. permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.
+
