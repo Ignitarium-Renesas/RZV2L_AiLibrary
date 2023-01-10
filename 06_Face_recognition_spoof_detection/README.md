@@ -5,6 +5,8 @@
 
 The facial biometric system is widely being used for multiple applications. Its popularity is increasing because of its ease of use. One of the problem in this system is, its vulnerability to the spoof attacks. Facial spoof detection is the task of identifying false facial verification by using a photo, video, mask or a different substitute for an authorized person's face.
 
+sample video on YouTube -[Face recognition demo](https://youtu.be/dTIHvEtwGtc)
+
 ## Application details
 
 This whole application is divided into multiple single applications as described below.
@@ -227,8 +229,16 @@ Application End
 ```
 
 ## Limitations
-
 1. Image input size (224x224) is fixed.
-2. Background and light conditions are affecting the prediction.
-3. Multiple face embeddings of a person may require for better predictions.
+2. Background and light conditions affect the face recognition performance. It is recommeneded to fix device's place and then register a new face.
+3. Multiple face embeddings of a person are required for better face recognition.
 4. Spoof detection is not implemented.(To Do)
+
+### Known issues:
+1. [ERROR] Image buffer address is NULL : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.
+2. Segmentation fault : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is larger than the actual image dimensions, then a segmentation fault will occur.
+3. Improper output : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is smaller than the actual image dimensions, then improper or unexpected outputs will be observed.
+4. [ERROR] Failed to initialize Coral Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
+5. permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.
+6. [ERROR] Failed to open: <prefix>/<prefix>_weight.dat error=2. [ERROR] Failed to load data from memory: <prefix>/<prefix>_weight.dat Failed to load DRP-AI object files - This error suggests that the weight file is not availbale in the `exe` folder. Download the weight file from the release in github and place it properly in the `exe/subfolder`.
+
