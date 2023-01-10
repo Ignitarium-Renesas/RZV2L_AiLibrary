@@ -2,17 +2,19 @@
 
 ## Introduction
 Line crossing object counting is a sample application that demonstrates counting of the objects when they cross a virtual line drawn by the user.
-Application uses a deep learning based object detector - tinyYoloV2 and a centroid based tracker combination. 
+Application uses a deep learning based object detector tinyYoloV2 to detect the objects and a centroid based tracker to track the objects. 
+
+sample video on YouTube -[Line crossing object counting demo](https://youtu.be/-fZypjgsBYo)
 
 ## Application details
 
 ### Sample Application Workflow
 
 The application has 4 threads as described below:
-- **Main thread** -> initializing all the parameters data, drawing bbox,running tracker and sending data to wayland.
-- **Inference thread** -> setting of paramters related to drpai, inferencing from the model and storing the results from the model.
-- **Camera thread** -> reading the image from the camera device,storing the image into the buffer,later passed to the model(inference thread).
-- **Termination thread** -> or Keyboard hit thread, waits for the user to press enter in the terminal, once pressed it will join to the main thread and main thread will terminate the other thread to stop the program.
+- **Main thread** -> initializing all the parameters data, drawing bounding boxes around the detected object,running the tracker and sending data to display (wayland).
+- **Inference thread** -> setting of paramters related to DRP-AI, inferencing from the deep learning model and assigning the results from the model to a variable.
+- **Camera thread** -> reading the frame from the camera device, storing the frame into the buffer,later passed to the inference thread.
+- **Termination thread** -> This thread waits for the user to press 'enter key' in the terminal, once pressed, it will join to the main thread and main thread will terminate the other thread to stop the program execution.
 
 This pictorial representation describes these 4 threads in detail:
 
@@ -36,7 +38,7 @@ This pictorial representation describes these 4 threads in detail:
 The overall flow of the application can be described in following sequence :
 1. Image is captured from the camera device and is stored into the buffer from the 'camera thread'.
 2. The content in the buffer is processed by 'Inference thread'. This involves preprocessing, inference by the deep learning model (the DRP-AI model) and post processing specfic to the model.
-3. Detections are then diplayed on the monitor. Already stored detections are used by the object tracking algorithm to track the object. Tracker algorithm assigns a unique identification number (ID) to an object.
+3. Detections are then diplayed on the monitor. Existing detections are used by the object tracking algorithm to track the object. Tracker algorithm assigns a unique identification number (ID) to an object.
 4. Movement of the object in one direction is ensured by the tracker. Unique IDs are mapped to the actual count of the object. 
 5. This object count, along with the detection bounding boxes is displayed on the monitor.
 
@@ -100,7 +102,8 @@ cd exe/
 7. flow_direction :- 0/1 (0 for left to right/ 1 for right to left) (int dtype)
 
 ## Limitations
-This is a simple sample tutorial application. It is provided for an user to experiment with an object detection model with a very basic tracker algorithm.
+- This is a simple sample tutorial application. It is provided for an user to experiment with an object detection model with a very basic tracker algorithm.
+- It shows limited performance if people are moving very fast. this limitation can be improved with custom trained, better deep learning model. 
  
 **TinyYolov2** :- 
 - Light-weight model :- Total number of learnable parameters are less as compared to other yolo models.
@@ -110,4 +113,7 @@ This is a simple sample tutorial application. It is provided for an user to expe
 - Performance is strictly average in case of occlusions.
 - ID switching :- ID switching occurs when two objects are moving closeby.
 - Missed detection :- In case of missed detection, tracker may not be able to predict the precise location of bounding boxes.
+
+- [ERROR] Failed to initialize Coral Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
+- permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.  
 
