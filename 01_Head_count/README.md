@@ -7,6 +7,7 @@ This application is used to count the human heads present in an image or a video
 It can utilize the API, "*PRET_HC()*" provided in this library. Input to this API will be an image buffer address and it's height and width of the image. 
 > Refer [Head_count_img/examples/head_count_example.cpp](Head_count_img/examples/head_count_example.cpp) for an example usage
 
+sample video on YouTube -[Head counting demo](https://youtu.be/YNcCCiSx9YM)
 
 ## Application details
 ```
@@ -43,13 +44,12 @@ In this application YOLOv3 is used for head detection.
 - Dataset - [HollywoodHeads](https://www.di.ens.fr/willow/research/headdetection/)
 
 ### Application with image input
-- The user must input the relative path to the image.
-- The image is then resized to 640x480.
-- The count is calculated based on the detected heads.
+- The user should input the relative path to the image,it's width and height.
+- The number of heads in the image is detected and showed on the terminal.
 
 ### Application with camera input
 - Camera input is fed to the model with proper pre-processing.
-- The count is calculated based on the detected heads.
+- The count is calculated & displayed based on the detected heads.
 
 ### Building the sample application:
 
@@ -86,4 +86,10 @@ cd /home/root/RZV2L_AiLibrary
 cd 01_Head_count/Head_count_cam/exe/
 ./01_head_count_cam_app
 ```
-
+### Known issues:
+1. [ERROR] Image buffer address is NULL : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.
+2. Segmentation fault : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is larger than the actual image dimensions, then a segmentation fault will occur.
+3. Improper output : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is smaller than the actual image dimensions, then improper or unexpected outputs will be observed.
+4. [ERROR] Failed to initialize Coral Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
+5. permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.
+6. [ERROR] Failed to open: <prefix>/<prefix>_weight.dat error=2. [ERROR] Failed to load data from memory: <prefix>/<prefix>_weight.dat Failed to load DRP-AI object files - This error suggests that the weight file is not availbale in the `exe` folder. Download the weight file from the release in github and place it properly in the `exe/subfolder`.
