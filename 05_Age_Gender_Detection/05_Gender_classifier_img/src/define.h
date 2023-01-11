@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : define.h
 * Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for PyTorch ResNet Image version
+* Description  : RZ/V2L DRP-AI Sample Application for PyTorch ResNet50 Image version
 ***********************************************************************************************************************/
 
 #ifndef DEFINE_MACRO_H

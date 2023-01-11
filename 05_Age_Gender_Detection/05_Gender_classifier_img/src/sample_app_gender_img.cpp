@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : sample_app_resnet50_img.cpp
 * Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for PyTorch ResNet Image version
+* Description  : RZ/V2L DRP-AI Sample Application for PyTorch ResNet50 Image version
 ***********************************************************************************************************************/
 
 /*****************************************

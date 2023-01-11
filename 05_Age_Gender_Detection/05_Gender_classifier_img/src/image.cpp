@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : image.cpp
 * Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLO Image version
+* Description  : RZ/V2L DRP-AI Sample Application for PyTorch ResNet50 Image version
 ***********************************************************************************************************************/
 
 /*****************************************
