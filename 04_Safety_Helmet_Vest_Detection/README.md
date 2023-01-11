@@ -6,7 +6,7 @@ Safety Helmet Vest Detection application is used to detect the safety helmet and
 It can utilize the API, "*PRED_SHV()*" provided in this library. Input to this API will be an image buffer address and it's height and width of the image. 
 > Refer [Safety_helmet_vest_cam/examples/Safety_helmet_vest_cam_example.cpp](04_Safety_helmet_vest_cam/examples/Safety_helmet_vest_cam_example.cpp) for an example usage
 
-sample video on YouTube -[Safety helmet & vest detection demo video](https://youtu.be/49FlBoSaC_E)
+sample video on YouTube -[Safety helmet & vest detection demo video](https://youtu.be/GwyEKvzptm0)
 
 ## Application details
 
