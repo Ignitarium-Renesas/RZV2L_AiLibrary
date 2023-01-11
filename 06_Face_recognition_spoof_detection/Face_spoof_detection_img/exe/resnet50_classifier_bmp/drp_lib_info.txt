@@ -1,0 +1,24 @@
+4  # driver version  v0.2 
+16  # driver version >v0.3
+# imagescaler  [MASK : ON]
+# maxpooling_k3_st2  [MASK : ON]
+# gap  [MASK : ON]
+# softmax  [MASK : ON]
+# ============================
+# Address data in drp_param.bin
+# DRP LIB name[Layer Name]
+# [Start position], [Size(Byte)], [Param name], [Value]
+imagescaler[post_0_-1_imagescaler]
+Start:0[Byte],Size:4[Byte],Param:raddr,Value:0x80000000
+Start:4[Byte],Size:4[Byte],Param:waddr,Value:0x80024c00
+Start:48[Byte],Size:4[Byte],Param:ADD_ADDR,Value:0x8239b080
+Start:52[Byte],Size:4[Byte],Param:MUL_ADDR,Value:0x8239b088
+maxpooling_k3_st2[/maxpool/MaxPool_output_0]
+Start:64[Byte],Size:4[Byte],Param:raddr,Value:0x8006e400
+Start:68[Byte],Size:4[Byte],Param:waddr,Value:0x801f6400
+gap[/avgpool/GlobalAveragePool_output_0]
+Start:120[Byte],Size:4[Byte],Param:raddr,Value:0x82059000
+Start:124[Byte],Size:4[Byte],Param:waddr,Value:0x8208a000
+softmax[post_0_0_softmax]
+Start:168[Byte],Size:4[Byte],Param:raddr,Value:0x8208b000
+Start:172[Byte],Size:4[Byte],Param:waddr,Value:0x8208b040
