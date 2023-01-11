@@ -25,7 +25,7 @@ SRC_HC_IMG=examples/gender_example.cpp \
 
 INC_DIR_HC_IMG = -I src/
 CFLAGS_HC_IMG = ${INC_DIR_HC_IMG}
-# CFLAGS_HC_IMG += -DYOLOV3
+
 
 
 05_gender_img: ${SRC_HC_IMG}
