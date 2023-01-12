@@ -11,7 +11,6 @@ class Safety
 {
     public:
         int32_t run_camera_inference(void);
-
 };
 
 /* Run Safety inference */
