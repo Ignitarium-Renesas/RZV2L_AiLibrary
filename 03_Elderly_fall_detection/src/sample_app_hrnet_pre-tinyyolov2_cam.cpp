@@ -61,9 +61,9 @@ static uint64_t udmabuf_address = 0;
 static Image img;
 static int8_t DIRECTION = 1; /* 1 for down 0 for up*/
 static int line_x1, line_y1, line_x2, line_y2;
-static bool start_flag[NUM_MAX_PERSON] = {false};
-static uint8_t fall_frame_count[NUM_MAX_PERSON] = {0};
-static bool fall_flag[NUM_MAX_PERSON] = {false};
+static bool start_flag[NUM_MAX_PERSON] = {false}; /* to track starting position of persons */
+static uint8_t fall_frame_count[NUM_MAX_PERSON] = {0}; /* to track consistancy of falling */
+static bool fall_flag[NUM_MAX_PERSON] = {false}; /* to indicate fall */
 
 
 /*AI Inference for DRPAI*/
@@ -1739,6 +1739,7 @@ direction by default = 0
 
 int32_t main(int32_t argc, char * argv[])
 {
+    /* Set the argument parameters */
     if(argc >= 5)
     {
         set_all_line_params(std::atoi(argv[1]), std::atoi(argv[2]), std::atoi(argv[3]), std::atoi(argv[4]));
