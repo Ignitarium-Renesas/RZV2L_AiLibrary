@@ -446,28 +446,16 @@ int8_t print_result(float* floatarr)
     /* Load label from label file */
     string labels = label_list;
     map<int32_t, string> label_file_map = load_label_file(labels);
-
     if (label_file_map.empty())
     {
         fprintf(stderr,"[ERROR] Failed to load label file: %s\n",labels.c_str());
         return -1;
     }
-
-    /* Post-processing */
-    map<float, int32_t> result;
-    result.clear();
-    /* Score the model, and print scores for first 5 classes */
-    for (i = 0; i < NUM_CLASS; i++)
-    {
-        result[floatarr[i]] = i;
-    }
-    for ( auto it = result.rbegin(); it != result.rend(); it++)
-    {
-        result_cnt++;
-        if (5 < result_cnt) break;
-        printf("  Top %d [%5.1f%%] : [%s]\n", result_cnt, (*it).first*100,label_file_map[(*it).second].c_str());
-    }
-
+    /* Find the class with maximum confidence and print the result */
+    int N = sizeof(floatarr) / sizeof(float);
+    int ind =  std::distance(floatarr, std::max_element(floatarr, floatarr + N));
+    printf(" Person in the input image is a %s most probably.\n",label_file_map[ind].c_str());
+    
     return 0;
 }
 
@@ -538,7 +526,6 @@ int32_t predict_gender(uint8_t* in_img_addr, uint32_t width, uint32_t height)
         ret = -1;
         goto end_gender;
     }
-
 
     /* Open DRP-AI Driver */
     errno = 0;
