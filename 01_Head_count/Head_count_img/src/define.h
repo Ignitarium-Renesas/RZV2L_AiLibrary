@@ -45,13 +45,6 @@
 #include <math.h>
 
 /*****************************************
-* Common Static Variables
-*  - input_img = input image to DRP-AI (size and format are determined in DRP-AI Translator)
-*  - output_img = output image from the application with bounding box
-******************************************/
-extern std::string hc_path;
-
-/*****************************************
 * Static Variables and Macro for each YOLO model
 ******************************************/
 #if defined(YOLOV3)
@@ -61,7 +54,7 @@ extern std::string hc_path;
 /* Directory name of DRP-AI Object files (DRP-AI Translator output) */
 const static std::string drpai_prefix   = "yolov3_bmp";
 /* Class labels to be classified */
-const static std::string label_list     = hc_path+"/labels.txt";
+const static std::string label_list     = "labels.txt";
 /* Empty since labels will be loaded from label_list file */
 static std::vector<std::string> label_file_map = {};
 
@@ -185,14 +178,14 @@ const static double anchors[] =
 * Following variables are the file name of each DRP-AI Object file
 * drpai_file_path order must be same as the INDEX_* defined later.
 ******************************************/
-const static std::string drpai_address_file = hc_path+"/"+drpai_prefix+"/"+drpai_prefix+"_addrmap_intm.txt";
+const static std::string drpai_address_file = drpai_prefix+"/"+drpai_prefix+"_addrmap_intm.txt";
 const static std::string drpai_file_path[5] =
 {
-    hc_path+"/"+drpai_prefix+"/drp_desc.bin",
-    hc_path+"/"+drpai_prefix+"/"+drpai_prefix+"_drpcfg.mem",
-    hc_path+"/"+drpai_prefix+"/drp_param.bin",
-    hc_path+"/"+drpai_prefix+"/aimac_desc.bin",
-    hc_path+"/"+drpai_prefix+"/"+drpai_prefix+"_weight.dat",
+    drpai_prefix+"/drp_desc.bin",
+    drpai_prefix+"/"+drpai_prefix+"_drpcfg.mem",
+    drpai_prefix+"/drp_param.bin",
+    drpai_prefix+"/aimac_desc.bin",
+    drpai_prefix+"/"+drpai_prefix+"_weight.dat",
 };
 
 /*****************************************
