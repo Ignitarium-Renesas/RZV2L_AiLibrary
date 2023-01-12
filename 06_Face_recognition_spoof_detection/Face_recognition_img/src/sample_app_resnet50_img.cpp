@@ -327,38 +327,6 @@ int8_t load_drpai_data(int8_t drpai_fd)
 }
 
 /*****************************************
-* Function Name     : load_label_file
-* Description       : Load label list text file and return the label list that contains the label.
-* Arguments         : label_file_name = filename of label list. must be in txt format
-* Return value      : map<int32_t, string> list = list contains labels
-*                     empty if error occured
-******************************************/
-map<int32_t, string> load_label_file(string label_file_name)
-{
-    int32_t n = 0;
-    map<int32_t, string> list = {};
-    map<int32_t, string> empty = {};
-    ifstream infile(label_file_name);
-
-    if (!infile.is_open())
-    {
-        return list;
-    }
-
-    string line = "";
-    while (getline(infile,line))
-    {
-        list[n++] = line;
-        if (infile.fail())
-        {
-            return empty;
-        }
-    }
-
-    return list;
-}
-
-/*****************************************
 * Function Name : get_result
 * Description   : Get DRP-AI Output from memory via DRP-AI Driver
 * Arguments     : drpai_fd = file descriptor of DRP-AI Driver
@@ -375,8 +343,8 @@ int8_t get_result(int8_t drpai_fd, uint32_t output_addr, uint32_t output_size)
     drpai_data.size = output_size;
     int32_t i = 0;
     int8_t ret = 0;
-
     errno = 0;
+    
     /* Assign the memory address and size to be read */
     ret = ioctl(drpai_fd, DRPAI_ASSIGN, &drpai_data);
     if (-1 == ret)
@@ -426,7 +394,6 @@ int8_t print_result(float* floatarr)
     /* Post-processing */
     string name = "";
     float min_distance = numeric_limits<float>::max();
-
     ifstream fin;
     string line;
     fin.open(feature_list);
@@ -435,7 +402,7 @@ int8_t print_result(float* floatarr)
     while(!fin.eof()){
         float embeddings[NUM_FEATURES] = {0};
     	float sum = 0;
-
+        
         getline(fin, line);
         if(line == "")
             break;

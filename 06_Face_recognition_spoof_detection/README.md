@@ -5,8 +5,6 @@
 
 The facial biometric system is widely being used for multiple applications. Its popularity is increasing because of its ease of use. One of the problem in this system is, its vulnerability to the spoof attacks. Facial spoof detection is the task of identifying false facial verification by using a photo, video, mask or a different substitute for an authorized person's face.
 
-sample video on YouTube -[Face recognition demo](https://youtu.be/Yoo-W1mMLu4)
-
 ## Application details
 
 This whole application is divided into multiple single applications as described below.
@@ -23,6 +21,13 @@ Identifies a person using facial features in an image.
 
 Identifies a person using facial features from camera frames.
 
+#### Face Spoof Detection Image
+
+Classifies the given image to genuine or spoofed.
+
+#### Face Spoof Detection Camera
+
+Classifies the given camera frame to genuine or spoofed.
 ```
 |-- 06_Face_Recognition.mp4		# Demo video
 |-- database				
@@ -47,6 +52,20 @@ Identifies a person using facial features from camera frames.
 |   |-- exe
 |   |   |-- Face_recognition_cam	# The executable
 |   |   `-- resnet50_bmp		# DRP-AI files of resnet50
+|   `-- src
+|-- Face_spoof_detection_img		# Face spoof detection on image app
+|   |-- Makefile
+|   |-- etc
+|   |-- exe
+|   |   |-- Face_spoof_detection_img	# The executable
+|   |   `-- resnet50_classifier_bmp	# DRP-AI files of resnet50
+|   `-- src
+|-- Face_spoof_detection_cam		# Face spoof detection on cam app
+|   |-- Makefile
+|   |-- etc
+|   |-- exe
+|   |   |-- Face_spoof_detection_cam	# The executable
+|   |   `-- resnet50_classifier_cam	# DRP-AI files of resnet50
 |   `-- src
 `-- README.md
 ```
@@ -228,17 +247,50 @@ Capture Thread Terminated
 Application End
 ```
 
+#### Face Spoof Detection Image
+
+1. Copy the `RZV2L_AiLibrary` directory to the board (/home/root/).
+2. Follow below steps;
+
+```
+cd /home/root/RZV2L_AiLibrary 
+cd 06_Face_recognition_spoof_detection/Face_spoof_detection_img/exe/
+```
+4. Copy the image to be checked to `Face_spoof_detection_img/exe/sample.bmp`.
+5. Run the executable.
+```
+root@smarc-rzv2l:~RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_spoof_detection_img/exe# ./Face_spoof_detection_img 
+RZ/V2L DRP-AI Sample Application
+Model : PyTorch ResNet    | resnet50_classifier_bmp
+Input : Windows Bitmap v3 | sample.bmp
+Loading : resnet50_classifier_bmp/drp_desc.bin
+Loading : resnet50_classifier_bmp/resnet50_classifier_bmp_drpcfg.mem
+Loading : resnet50_classifier_bmp/drp_param.bin
+Loading : resnet50_classifier_bmp/aimac_desc.bin
+Loading : resnet50_classifier_bmp/resnet50_classifier_bmp_weight.dat
+Inference -----------------------------------------------
+[START] DRP-AI
+[END] DRP-AI
+ 
+Genuine Face Detected
+```
+
+#### Face Spoof Detection Camera
+
+1. Copy the `RZV2L_AiLibrary` directory to the board (/home/root/).
+2. Follow below steps;
+
+```
+cd /home/root/RZV2L_AiLibrary 
+cd 06_Face_recognition_spoof_detection/Face_spoof_detection_cam/exe/
+```
+4. Run the executable.
+```
+./Face_spoof_detection_cam
+```
+
 ## Limitations
+
 1. Image input size (224x224) is fixed.
-2. Background and light conditions affect the face recognition performance. It is recommeneded to fix device's place and then register a new face.
-3. Multiple face embeddings of a person are required for better face recognition.
-4. Spoof detection is not implemented.(To Do)
-
-### Known issues:
-1. [ERROR] Image buffer address is NULL : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.
-2. Segmentation fault : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is larger than the actual image dimensions, then a segmentation fault will occur.
-3. Improper output : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is smaller than the actual image dimensions, then improper or unexpected outputs will be observed.
-4. [ERROR] Failed to initialize Coral Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
-5. permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.
-6. [ERROR] Failed to open: <prefix>/<prefix>_weight.dat error=2. [ERROR] Failed to load data from memory: <prefix>/<prefix>_weight.dat Failed to load DRP-AI object files - This error suggests that the weight file is not availbale in the `exe` folder. Download the weight file from the release in github and place it properly in the `exe/subfolder`.
-
+2. Background and light conditions are affecting the prediction.
+3. Multiple face embeddings of a person may require for better predictions.

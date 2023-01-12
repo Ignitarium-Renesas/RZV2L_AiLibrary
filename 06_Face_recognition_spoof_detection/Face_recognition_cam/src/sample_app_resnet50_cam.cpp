@@ -319,38 +319,6 @@ int8_t load_drpai_data(int8_t drpai_fd)
 }
 
 /*****************************************
-* Function Name     : load_label_file
-* Description       : Load label list text file and return the label list that contains the label.
-* Arguments         : label_file_name = filename of label list. must be in txt format
-* Return value      : std::map<int32_t, std::string> list = list contains labels
-*                     empty if error occured
-******************************************/
-std::map<int32_t, std::string> load_label_file(std::string label_file_name)
-{
-    int32_t n = 0;
-    std::map<int32_t, std::string> list = {};
-    std::map<int32_t, std::string> empty = {};
-    std::ifstream infile(label_file_name);
-
-    if (!infile.is_open())
-    {
-        return list;
-    }
-
-    std::string line = "";
-    while (std::getline(infile,line))
-    {
-        list[n++] = line;
-        if (infile.fail())
-        {
-            return empty;
-        }
-    }
-
-    return list;
-}
-
-/*****************************************
 * Function Name : get_result
 * Description   : Get DRP-AI Output from memory via DRP-AI Driver
 * Arguments     : drpai_fd = file descriptor of DRP-AI Driver
@@ -415,7 +383,6 @@ int8_t get_result(int8_t drpai_fd, uint32_t output_addr, uint32_t output_size)
 ******************************************/
 int8_t calibrate_background(float* floatarr)
 {
-    //memcpy(bg_embedding, floatarr, NUM_FEATURES);
     for(int i=0; i<NUM_FEATURES; i++){                      
         bg_embedding[i] = floatarr[i];   
     }
@@ -477,7 +444,7 @@ int8_t print_result(float* floatarr, Image* img)
         }                                                
     }
 
-    // Background check
+    /*Background check*/
     sum = 0;
     for(i=0; i<NUM_FEATURES; i++){                      
         sum += pow((bg_embedding[i] - floatarr[i]), 2);   
@@ -916,7 +883,6 @@ end_threads:
     printf("Main Process Terminated\n");
     return main_ret;
 }
-
 
 int32_t main(int32_t argc, char * argv[])
 {

@@ -45,18 +45,12 @@
 #include <cmath>
 
 /*****************************************
-* For database 
-******************************************/
-#define DATA_DIR "../../database/"
-
-/*****************************************
 * Static Variables for ResNet50
 * Following variables need to be changed in order to custormize the AI model
 *  - feature_list = embeddings of known people
 *  - drpai_prefix = directory name of DRP-AI Object files (DRP-AI Translator output)
 *  - input_img = input image to DRP-AI (size and format are determined in DRP-AI Translator)
 ******************************************/
-const static std::string feature_list     = (std::string)DATA_DIR+"face_features.csv";
 const static std::string drpai_prefix   = "resnet50_classifier_bmp";
 const static std::string input_img      = "sample.bmp";
 

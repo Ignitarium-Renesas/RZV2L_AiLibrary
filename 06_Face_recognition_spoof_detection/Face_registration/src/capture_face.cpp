@@ -48,56 +48,56 @@ static int capture_face(void){
     cout << "..Press Enter to capture.." << endl;
     cout << "---------------------------" << endl;
 
-    // init Coral camera
+    /* init Coral camera */
     coral_cam_init();
 
-    // create capture dir
+    /* create capture dir */
     make_cap_dir();
 
-    // Create a VideoCapture object.
+    /* Create a VideoCapture object.*/
     VideoCapture cap(0); 
 
-    // Check if camera opened successfully
+    /* Check if camera opened successfully */
     if(!cap.isOpened()){
         cout << "Error opening video stream or file" << endl;
         return -1;
     }
 
-    // Top Left Coordinates
+    /* Top Left Coordinates*/
     int thickness = 2;
     Point p1(208-thickness, 128-thickness);
-    // Bottom Right Coordinates
+    /* Bottom Right Coordinates*/
     Point p2(432+thickness, 352+thickness);
 
     while(1){
 
         Mat frame;
-        // Capture frame-by-frame
+        /*Capture frame-by-frame*/
         cap >> frame;
     
-        // If the frame is empty, break immediately
+        /* If the frame is empty, break immediately*/
         if (frame.empty())
         break;
     
-        // Display the resulting frame
+        /* Display the resulting frame*/
         rectangle(frame, p1, p2, Scalar(255, 0, 0), thickness, LINE_8);
         imshow("Coral Capture", frame);
     
-        // Press Enter on keyboard to exit
+        /*Press Enter on keyboard to exit*/
         char c = (char)waitKey(1);
         if(c == 13)
         {
-            // Save the cropped image
+            /* Save the cropped image */
             Mat cropped_frame = frame(Range(128, 352), Range(208, 432));
             cv::imwrite((string)CAPTURE_DIR+"/"+file_name+".bmp", cropped_frame);
             break;
         }
     }
 
-    // When everything done, release the video capture object
+    /* When everything done, release the video capture object*/
     cap.release();
 
-    // Closes all the frames
+    /* Closes all the frames */
     destroyAllWindows();
 
     return 0;
