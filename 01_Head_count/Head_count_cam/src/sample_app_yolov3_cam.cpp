@@ -625,6 +625,7 @@ int8_t print_result(Image* img)
         /* Skip the overlapped bounding boxes */
         if (det[i].prob == 0) continue;
         
+        /* To count bounding boxes */
         result_cnt++;
         /* Clear string stream for bounding box labels */
         stream.str("");
@@ -638,6 +639,7 @@ int8_t print_result(Image* img)
     str = stream.str();
     img->write_string_rgb(str, DRPAI_IN_WIDTH * RESIZE_SCALE + TEXT_WIDTH_OFFSET, LINE_HEIGHT, CHAR_SCALE_LARGE, WHITE_DATA);
 
+    /* DRP-AI inference time calculation */
     if (ai_inf_prev != (uint32_t) ai_time)
     {
         ai_inf_prev = (uint32_t) ai_time;

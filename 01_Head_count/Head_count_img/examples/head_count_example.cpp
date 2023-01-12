@@ -6,9 +6,6 @@
 using namespace std;
 using namespace cv;
 
-//path to head count exe
-string hc_path = "../../exe/01_head_count_img";
-
 /* We initialize the demo class here */
 class HCDemo
 {
