@@ -33,7 +33,6 @@ Image::Image()
 
 }
 
-
 Image::~Image()
 {
     int32_t i;
@@ -57,7 +56,6 @@ uint32_t Image::get_H()
     return img_h;
 }
 
-
 /*****************************************
 * Function Name : get_W
 * Description   : Function to get the image width
@@ -70,7 +68,6 @@ uint32_t Image::get_W()
     return img_w;
 }
 
-
 /*****************************************
 * Function Name : get_C
 * Description   : Function to set the number of image channel
@@ -82,7 +79,6 @@ uint32_t Image::get_C()
 {
     return img_c;
 }
-
 
 /*****************************************
 * Function Name : init
@@ -139,7 +135,6 @@ uint8_t Image::init(uint32_t w, uint32_t h, uint32_t c,
     return 0;
 }
 
-
 /*****************************************
 * Function Name : write_string_rgb
 * Description   : OpenCV putText() in RGB
@@ -163,7 +158,6 @@ void Image::write_string_rgb(std::string str, uint32_t x, uint32_t y, float scal
     cv::putText(bgra_image, str.c_str(), cv::Point(x, y), cv::FONT_HERSHEY_SIMPLEX, scale, cv::Scalar(b, g, r), thickness);
 }
 
-
 /*****************************************
 * Function Name : convert_format
 * Description   : Convert YUYV image to BGRA format
@@ -178,7 +172,6 @@ void Image::convert_format()
     cv::cvtColor(yuyv_image, bgra_image, cv::COLOR_YUV2BGRA_YUYV);
     memcpy(out_image.data, bgra_image.data, img_w * img_h * out_c);
 }
-
 
 /*****************************************
 * Function Name : convert_size
@@ -232,7 +225,6 @@ void Image::camera_to_image(const uint8_t* buffer, int32_t size)
     memcpy(img_buffer[buf_id], buffer, sizeof(uint8_t)*size);
 }
 
-
 /*****************************************
 * Function Name : at
 * Description   : Get the value of img_buffer at index a.
@@ -258,6 +250,7 @@ void Image::set(int32_t a, uint8_t val)
     img_buffer[buf_id][a] = val;
     return;
 }
+
 /*****************************************
 * Function Name : get_buf_id
 * Description   : Get the value of the buf_id.

@@ -329,38 +329,6 @@ int8_t load_drpai_data(int8_t drpai_fd)
 }
 
 /*****************************************
-* Function Name     : load_label_file
-* Description       : Load label list text file and return the label list that contains the label.
-* Arguments         : label_file_name = filename of label list. must be in txt format
-* Return value      : map<int32_t, string> list = list contains labels
-*                     empty if error occured
-******************************************/
-map<int32_t, string> load_label_file(string label_file_name)
-{
-    int32_t n = 0;
-    map<int32_t, string> list = {};
-    map<int32_t, string> empty = {};
-    ifstream infile(label_file_name);
-
-    if (!infile.is_open())
-    {
-        return list;
-    }
-
-    string line = "";
-    while (getline(infile,line))
-    {
-        list[n++] = line;
-        if (infile.fail())
-        {
-            return empty;
-        }
-    }
-
-    return list;
-}
-
-/*****************************************
 * Function Name : get_result
 * Description   : Get DRP-AI Output from memory via DRP-AI Driver
 * Arguments     : drpai_fd = file descriptor of DRP-AI Driver
@@ -430,38 +398,41 @@ static void make_data_dir(void)
 /*****************************************
 * Function Name : print_embedding
 * Description   : Process CPU post-processing creating the face embeddings
-* Arguments     : floatarr = float DRP-AI output data, choice = 0 to write or 1 to append database, name = identity of face
+* Arguments     : floatarr = float DRP-AI output data, choice = 1 to write or 2 to append database, name = identity of face
 * Return value  : 0 if succeeded
 *               not 0 otherwise
 ******************************************/
 int8_t print_embedding(float* floatarr, int &choice, string name)
 {
     /* Post-processing */
-
     make_data_dir();
+
     std::ofstream file;
+
     switch (choice)
     {
-    case 1:
-        file.open (feature_list, std::ios::app);
-        file << name <<",";
-        for(int i = 0; i < NUM_FEATURES; i++){
-            file << floatarr[i] << ",";
-        }
-        file << endl;
-        break;  
-    case 2:
-        file.open (feature_list, std::ios::out);
-        file << name << ",";
-        for(int i = 0; i < NUM_FEATURES; i++){
-            file << floatarr[i] << ",";
-        }
-        file << endl;
-        choice = 1;
-        break;    
-    default:
-        exit;
-        break;
+        case 1:
+            file.open (feature_list, std::ios::app);
+            file << name <<",";
+            for(int i = 0; i < NUM_FEATURES; i++){
+                file << floatarr[i] << ",";
+            }
+            file << endl;
+            break;  
+
+        case 2:
+            file.open (feature_list, std::ios::out);
+            file << name << ",";
+            for(int i = 0; i < NUM_FEATURES; i++){
+                file << floatarr[i] << ",";
+            }
+            file << endl;
+            choice = 1;
+            break;   
+    
+        default:
+            exit;
+            break;
       }
       
     return 0;
@@ -706,6 +677,7 @@ int32_t main(int32_t argc, char * argv[])
         case 0:
             capture_face();
             break;
+
         case 1:
         case 2: 
             std::cout << "Enter the number of samples to be embedded \n";

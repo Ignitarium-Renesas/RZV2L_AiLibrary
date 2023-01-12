@@ -38,7 +38,6 @@ Camera::~Camera()
 {
 }
 
-
 /*****************************************
 * Function Name : start_camera
 * Description   : Function to initialize MIPI camera capture
@@ -128,7 +127,6 @@ int8_t Camera::start_camera()
     return 0;
 }
 
-
 /*****************************************
 * Function Name : close_capture
 * Description   : Close camera and free buffer
@@ -152,7 +150,6 @@ int8_t Camera::close_camera()
     close(m_fd);
     return 0;
 }
-
 
 /*****************************************
 * Function Name : xioctl
@@ -212,7 +209,6 @@ int8_t Camera::capture_qbuf()
     }
     return 0;
 }
-
 
 /*****************************************
 * Function Name : capture_image
@@ -394,7 +390,6 @@ int8_t Camera::init_buffer()
     return 0;
 }
 
-
 /*****************************************
 * Function Name : save_bin
 * Description   : Get the capture image from buffer and save it into binary file
@@ -423,7 +418,6 @@ int8_t Camera::save_bin(std::string filename)
     return 0;
 }
 
-
 /*****************************************
 * Function Name : get_img
 * Description   : Function to return the camera buffer
@@ -434,7 +428,6 @@ uint8_t * Camera::get_img()
 {
     return buffer[buf_capture.index];
 }
-
 
 /*****************************************
 * Function Name : get_size

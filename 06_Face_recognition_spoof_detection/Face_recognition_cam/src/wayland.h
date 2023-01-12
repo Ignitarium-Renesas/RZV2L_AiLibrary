@@ -25,7 +25,6 @@
 #ifndef WAYLAND_H
 #define WAYLAND_H
 
-
 #include "define.h"
 #include <wayland-client.h>
 

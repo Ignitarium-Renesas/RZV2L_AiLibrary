@@ -29,7 +29,6 @@
 #include "wayland.h"
 #include <wayland-client.h>
 
-
 /*****************************************
  * Function Name : registry_global
  * Description   : wl_registry_listener callback
@@ -218,7 +217,6 @@ uint8_t Wayland::exit()
     wl_display_disconnect(display);
     return 0;
 }
-
 
 /*****************************************
  * Function Name : commit
