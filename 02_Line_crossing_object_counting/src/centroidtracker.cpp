@@ -15,11 +15,11 @@ CentroidTracker::CentroidTracker(int maxDisappear, int maxDist) {
 * Arguments     : 4 co-ordinates (x1,y1,x2,y2)
 * Return value  : distance
 ******************************************/
+
 double CentroidTracker::calcDistance(double xmin, double ymin, double xmax, double ymax) {
     double x = xmin - xmax;
     double y = ymin - ymax;
-    double dist = sqrt((x * x) + (y * y));       //calculating Euclidean distance
-
+    double dist = sqrt((x * x) + (y * y));      /* calculating Euclidean distance */
     return dist;
 }
 
@@ -71,16 +71,16 @@ vector<pair<int, pair<int, int>>> CentroidTracker::update(vector<vector<int>> bo
                 }), this->objects.end());
 
                 this->path_keeper.erase(it->first);
-
                 it = this->disappeared.erase(it);
-            } else {
+            } 
+            else {
                 ++it;
             }
         }
         return this->objects;
     }
 
-    // initialize an array of input centroids for the current frame
+    /* initialize an array of input centroids for the current frame */
     vector<pair<int, int>> inputCentroids;
     for (auto box : boxes) {
         int centerX = int((box[0] + box[2]) / 2.0);
@@ -89,15 +89,14 @@ vector<pair<int, pair<int, int>>> CentroidTracker::update(vector<vector<int>> bo
         inputCentroids.push_back(make_pair(centerX, centerY));
     }
 
-    //if we are currently not tracking any objects take the input centroids and register each of them
+    /* if we are currently not tracking any objects take the input centroids and register each of them */
     if (this->objects.empty()) {
         for (auto ip_cent: inputCentroids) {
             this->register_Object(ip_cent.first, ip_cent.second);
         }
     }
-
-        // otherwise, there are currently tracking objects so we need to try to match the
-        // input centroids to existing object centroids
+    /* otherwise, there are currently tracking objects so we need to try to match the
+       input centroids to existing object centroids */
     else {
         vector<int> objectIDs;
         vector<pair<int, int>> objectCentroids;
@@ -106,7 +105,7 @@ vector<pair<int, pair<int, int>>> CentroidTracker::update(vector<vector<int>> bo
             objectCentroids.push_back(make_pair(object.second.first, object.second.second));
         }
 
-//        Calculate Distances
+        /* Calculate Distances */
         vector<vector<float>> Distances;
         for (int i = 0; i < objectCentroids.size(); ++i) {
             vector<float> temp_D;
@@ -119,50 +118,49 @@ vector<pair<int, pair<int, int>>> CentroidTracker::update(vector<vector<int>> bo
             Distances.push_back(temp_D);
         }
 
-        // load rows and cols
+        /* load rows and cols */
         vector<int> cols;
         vector<int> rows;
 
-        //find indices for cols
+        /* find indices for cols */
         for (auto v: Distances) {
             auto temp = findMin(v);
             cols.push_back(temp);
         }
 
-        //rows calculation
-        //sort each mat row for rows calculation
+        /* rows calculation
+           sort each mat row for rows calculation */
         vector<vector<float>> D_copy;
         for (auto v: Distances) {
             sort(v.begin(), v.end());
             D_copy.push_back(v);
         }
 
-        // use cols calc to find rows
-        // slice first elem of each column
+        /* use cols calc to find rows
+           slice first elem of each column */
         vector<pair<float, int>> temp_rows;
         int k = 0;
         for (auto i: D_copy) {
             temp_rows.push_back(make_pair(i[0], k));
             k++;
         }
-        //print sorted indices of temp_rows
+        
         for (auto const &x : temp_rows) {
             rows.push_back(x.second);
         }
 
         set<int> usedRows;
         set<int> usedCols;
-
-        //loop over the combination of the (rows, columns) index tuples
+        /* loop over the combination of the (rows, columns) index tuples */
         for (int i = 0; i < rows.size(); i++) {
-            //if we have already examined either the row or column value before, ignore it
-            if (usedRows.count(rows[i]) || usedCols.count(cols[i])) { continue; }
 
-            // Added maxDist logic here
-            if (Distances[rows[i]][cols[i]] > this->maxDist) { continue; }
-           
-            //otherwise, grab the object ID for the current row, set its new centroid,
-            // and reset the disappeared counter
+            /* if we have already examined either the row or column value before, ignore it */
+            if (usedRows.count(rows[i]) || usedCols.count(cols[i])) continue;
+            /* Added maxDist logic here */
+            if (Distances[rows[i]][cols[i]] > this->maxDist) continue; 
+
+            /* otherwise, grab the object ID for the current row, set its new centroid,
+               and reset the disappeared counter    */
             int objectID = objectIDs[rows[i]];
             for (int t = 0; t < this->objects.size(); t++) {
                 if (this->objects[t].first == objectID) {
@@ -171,36 +169,32 @@ vector<pair<int, pair<int, int>>> CentroidTracker::update(vector<vector<int>> bo
                 }
             }
             this->disappeared[objectID] = 0;
-
             usedRows.insert(rows[i]);
             usedCols.insert(cols[i]);
         }
 
-        // compute indexes we have NOT examined yet
+        /* compute indexes we have NOT examined yet */
         set<int> objRows;
         set<int> inpCols;
 
-        //D.shape[0]
         for (int i = 0; i < objectCentroids.size(); i++) {
             objRows.insert(i);
         }
-        //D.shape[1]
+
         for (int i = 0; i < inputCentroids.size(); i++) {
             inpCols.insert(i);
         }
 
         set<int> unusedRows;
         set<int> unusedCols;
-
         set_difference(objRows.begin(), objRows.end(), usedRows.begin(), usedRows.end(),
                        inserter(unusedRows, unusedRows.begin()));
         set_difference(inpCols.begin(), inpCols.end(), usedCols.begin(), usedCols.end(),
                        inserter(unusedCols, unusedCols.begin()));
 
-
-        //If objCentroids > InpCentroids, we need to check and see if some of these objects have potentially disappeared
+        /* If objCentroids > InpCentroids, we need to check and see if some of these objects have potentially disappeared */
         if (objectCentroids.size() >= inputCentroids.size()) {
-            // loop over unused row indexes
+            /* loop over unused row indexes */
             for (auto row: unusedRows) {
                 int objectID = objectIDs[row];
                 this->disappeared[objectID] += 1;
@@ -211,7 +205,6 @@ vector<pair<int, pair<int, int>>> CentroidTracker::update(vector<vector<int>> bo
                     }), this->objects.end());
 
                     this->path_keeper.erase(objectID);
-
                     this->disappeared.erase(objectID);
                 }
             }
@@ -221,7 +214,7 @@ vector<pair<int, pair<int, int>>> CentroidTracker::update(vector<vector<int>> bo
             }
         }
     }
-    //loading path tracking points
+    /* loading path tracking points */
     if (!objects.empty()) {
         for (auto obj: objects) {
 
@@ -231,7 +224,5 @@ vector<pair<int, pair<int, int>>> CentroidTracker::update(vector<vector<int>> bo
             path_keeper[obj.first].push_back(make_pair(obj.second.first, obj.second.second));
         }
     }
-
-
     return this->objects;
 }

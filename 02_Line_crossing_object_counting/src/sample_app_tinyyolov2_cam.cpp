@@ -595,24 +595,15 @@ void draw_bounding_box(void)
     
     /* Draw bounding box on RGB image. */
     int32_t i = 0;
-
-
     img.draw_line(line_x1,line_y1,line_x2,line_y2,WHITE_DATA);
 
-    // debugging the parallel lines
-
-    // top line 
-
+    /* top line */ 
     int top_y1 = top_line_slope * 0 + top_line_intercept;
     int top_x2 = (int)(-top_line_intercept/top_line_slope);
-    // img.draw_line(0,top_y1,top_x2,0,WHITE_DATA);
 
-    // bottom line 
+    /* bottom line */  
     int bottom_y1 = bottom_line_slope * 0 + bottom_line_intercept; // when x = 0
     int bottom_x2 = (int)(-bottom_line_intercept/bottom_line_slope); // when y = 0
-    // img.draw_line(0,bottom_y1,bottom_x2,0,WHITE_DATA);
-
-
 
     for (i = 0; i < det.size(); i++)
     {
@@ -620,12 +611,10 @@ void draw_bounding_box(void)
         if (det[i].prob == 0) continue;
 
         result_str = label_file_map[det[i].c];
-
-
-        if (strcmp(result_str.c_str(),class_name.c_str())!=0)   // checks only for the given class  
+        /* checks for required class name*/
+        if (strcmp(result_str.c_str(),class_name.c_str())!=0)  
             continue;
 
-            
         int32_t x = (int)det[i].bbox.x;
         int32_t y = (int)det[i].bbox.y;
         int32_t w = (int)det[i].bbox.w;
@@ -635,19 +624,15 @@ void draw_bounding_box(void)
         int32_t y_min = y - round(h / 2.);
         int32_t x_max = x + round(w / 2.) - 1;
         int32_t y_max = y + round(h / 2.) - 1;
-        
-        
 
         boxes.insert(boxes.end(), {x_min,y_min,x_max,y_max});
-        
-        stream.str("");
-        
+        stream.str("");       
         stream << std::fixed << std::setprecision(2) << det[i].prob;
         result_str = label_file_map[det[i].c]+ " "+ stream.str();
         img.draw_rect((int)det[i].bbox.x, (int)det[i].bbox.y, (int)det[i].bbox.w, (int)det[i].bbox.h, result_str.c_str());
     }
+
     auto objects = centroidTracker->update(boxes);
-    
     if (!objects.empty()) {
             
             for (auto obj: objects) {
@@ -665,25 +650,22 @@ void draw_bounding_box(void)
                 // draw the centroid
                 img.draw_rect(x,y,0,0, ID.c_str());
 
-                // Tracker code.
-
-                // counting and parsing the centroid
+                /* Tracker code */
+                /* counting and parsing the centroid */
                 
                 int I_ID = std::atoi(ID.c_str());
                 if(DIRECTION==1)
                 {
                     if(ID_MAP.find(I_ID)!=ID_MAP.end()){
-                        // check if it was previously present in the alternate roi area.
+                        /* check if it was previously present in the alternate roi area. */
                         if (DONE_IDS.find(I_ID)==DONE_IDS.end())
-                        // checks if the id was not present in the id set.
+                        /* checks if the id was not present in the id set. */
                         {
                             /* condition check for
                             1. It is in ROI
                             2. bottom to the top line
                             3. top to the bottom line
                             4. Was present in the other ROI*/
-                            
-                            
                             if((x<=((y-main_line_intercept)/main_line_slope)) && (y>=(top_line_slope*x + top_line_intercept)) && (y<=(bottom_line_slope*x + bottom_line_intercept)) && (ID_MAP[I_ID] == 0))
                             {
                                 COUNT++;
@@ -693,18 +675,16 @@ void draw_bounding_box(void)
                     }
                     else{
                         if((x>=((y-main_line_intercept)/main_line_slope)) && (y>=(top_line_slope*x + top_line_intercept)) && (y<=(bottom_line_slope*x + bottom_line_intercept))) ID_MAP.insert({I_ID,0}); // set id was present in the other ROI
-                        else if (x < 10 || y < 10) {} // passes the outliers from the tracker 
-                        else ID_MAP.insert({I_ID,1}); // set id was not present in the other ROI
+                        else if (x < 10 || y < 10) {} /* passes the outliers from the tracker  */
+                        else ID_MAP.insert({I_ID,1}); /* set id was not present in the other ROI */
                     }
                 }
                 else{
                     if(ID_MAP.find(I_ID)!=ID_MAP.end()){
-                        // check if it was previously present in the alternate roi area.
-
+                        /* check if it was previously present in the alternate roi area. */
                         if (DONE_IDS.find(I_ID)==DONE_IDS.end())
-                        // checks if the id was not present in the id set.
+                        /* checks if the id was not present in the id set. */
                         {
-
                             if ((x>=((y-main_line_intercept)/main_line_slope)) && (y>=(top_line_slope*x + top_line_intercept)) && (y<=(bottom_line_slope*x + bottom_line_intercept)) && (ID_MAP[I_ID] == 1))
                             {
                                 COUNT++;
@@ -745,11 +725,8 @@ int8_t print_result(Image* img)
     {
         /* Skip the overlapped bounding boxes */
         result_str = label_file_map[det[i].c];
-        if (strcmp(result_str.c_str(),class_name.c_str())!=0)
-        {
-            // std::cout<<result_str.length()<<":"<<class_name.length()<<"\n";
-            continue;
-        }
+        if (strcmp(result_str.c_str(),class_name.c_str())!=0) continue;
+
         if (det[i].prob == 0) continue;
         
         result_cnt++;
@@ -1180,6 +1157,7 @@ main_proc_end:
     printf("Main Process Terminated\n");
     return main_ret;
 }
+
 /*****************************************
 * Function Name : set_all_line_params
 * Description   : sets all parameters for 3 lines
@@ -1217,11 +1195,11 @@ void set_all_line_params(int x1, int y1,int x2, int y2)
 
 }
 
-/*
+/****************************************
 command line arguments
 filename,class_name,x1,y1,x2,y2,direction
 direction by default = 0
-*/
+*****************************************/
 int32_t main(int32_t argc, char * argv[])
 {
     int8_t main_proc = 0;
