@@ -8,8 +8,11 @@ This Library has API functions for leveraging AI applications that will run on R
 2. Line Crossing Object Counter.
 3. Elderly People Fall Detection.
 4. Safety Helmet and Vest Detection.
-5. Human Age and Gender Detection
-6. Face Recognition and Spoof Detection
+5. Human Age and Gender Detection (Camera based application updated).
+6. Face Recognition and Spoof Detection.
+7. Animal Detection .
+8. Hand Gesture Recognition.
+9. Human Gaze Recognition.
 
 ## Prerequisites
 ### 1. Board bring up sequence
