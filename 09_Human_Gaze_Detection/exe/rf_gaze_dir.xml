@@ -1,0 +1,335 @@
+<?xml version="1.0"?>
+<opencv_storage>
+<opencv_ml_rtrees>
+  <format>3</format>
+  <is_classifier>1</is_classifier>
+  <var_all>197</var_all>
+  <var_count>196</var_count>
+  <ord_var_count>196</ord_var_count>
+  <cat_var_count>1</cat_var_count>
+  <training_params>
+    <use_surrogates>0</use_surrogates>
+    <max_categories>10</max_categories>
+    <regression_accuracy>9.9999997764825821e-03</regression_accuracy>
+    <max_depth>16</max_depth>
+    <min_sample_count>20</min_sample_count>
+    <cross_validation_folds>0</cross_validation_folds>
+    <nactive_vars>0</nactive_vars></training_params>
+  <global_var_idx>1</global_var_idx>
+  <var_idx>
+    0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+    26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48
+    49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+    72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94
+    95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112
+    113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129
+    130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146
+    147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163
+    164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180
+    181 182 183 184 185 186 187 188 189 190 191 192 193 194 195</var_idx>
+  <var_type>
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1</var_type>
+  <cat_ofs>
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</cat_ofs>
+  <class_labels>
+    1 2 3 4 5</class_labels>
+  <missing_subst>
+    0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+    0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+    0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+    0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+    0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+    0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+    0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+    0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+    0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.</missing_subst>
+  <oob_error>0.</oob_error>
+  <ntrees>7</ntrees>
+  <trees>
+    <_>
+      <nodes>
+        <_>
+          <depth>0</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx>
+          <splits>
+            <_><var>112</var>
+              <quality>2.2243244171142578e+01</quality>
+              <le>6.3841408491134644e-01</le></_></splits></_>
+        <_>
+          <depth>1</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx>
+          <splits>
+            <_><var>23</var>
+              <quality>2.3500000000000000e+01</quality>
+              <le>8.8000589609146118e-01</le></_></splits></_>
+        <_>
+          <depth>2</depth>
+          <value>2.</value>
+          <norm_class_idx>1</norm_class_idx></_>
+        <_>
+          <depth>2</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx></_>
+        <_>
+          <depth>1</depth>
+          <value>4.</value>
+          <norm_class_idx>3</norm_class_idx></_></nodes></_>
+    <_>
+      <nodes>
+        <_>
+          <depth>0</depth>
+          <value>2.</value>
+          <norm_class_idx>1</norm_class_idx>
+          <splits>
+            <_><var>143</var>
+              <quality>21.</quality>
+              <le>5.0477981567382812e-01</le></_></splits></_>
+        <_>
+          <depth>1</depth>
+          <value>3.</value>
+          <norm_class_idx>2</norm_class_idx>
+          <splits>
+            <_><var>90</var>
+              <quality>1.9083333969116211e+01</quality>
+              <le>5.3684926033020020e-01</le></_></splits></_>
+        <_>
+          <depth>2</depth>
+          <value>3.</value>
+          <norm_class_idx>2</norm_class_idx></_>
+        <_>
+          <depth>2</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx>
+          <splits>
+            <_><var>110</var>
+              <quality>1.6125000000000000e+01</quality>
+              <le>5.6320530176162720e-01</le></_></splits></_>
+        <_>
+          <depth>3</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx></_>
+        <_>
+          <depth>3</depth>
+          <value>4.</value>
+          <norm_class_idx>3</norm_class_idx></_>
+        <_>
+          <depth>1</depth>
+          <value>2.</value>
+          <norm_class_idx>1</norm_class_idx></_></nodes></_>
+    <_>
+      <nodes>
+        <_>
+          <depth>0</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx>
+          <splits>
+            <_><var>49</var>
+              <quality>2.0146615982055664e+01</quality>
+              <le>7.6258903741836548e-01</le></_></splits></_>
+        <_>
+          <depth>1</depth>
+          <value>4.</value>
+          <norm_class_idx>3</norm_class_idx>
+          <splits>
+            <_><var>68</var>
+              <quality>19.</quality>
+              <le>5.3837174177169800e-01</le></_></splits></_>
+        <_>
+          <depth>2</depth>
+          <value>2.</value>
+          <norm_class_idx>1</norm_class_idx></_>
+        <_>
+          <depth>2</depth>
+          <value>4.</value>
+          <norm_class_idx>3</norm_class_idx></_>
+        <_>
+          <depth>1</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx></_></nodes></_>
+    <_>
+      <nodes>
+        <_>
+          <depth>0</depth>
+          <value>4.</value>
+          <norm_class_idx>3</norm_class_idx>
+          <splits>
+            <_><var>189</var>
+              <quality>2.2142856597900391e+01</quality>
+              <le>8.0262613296508789e-01</le></_></splits></_>
+        <_>
+          <depth>1</depth>
+          <value>4.</value>
+          <norm_class_idx>3</norm_class_idx>
+          <splits>
+            <_><var>6</var>
+              <quality>2.1454545974731445e+01</quality>
+              <le>1.7594495415687561e-01</le></_></splits></_>
+        <_>
+          <depth>2</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx>
+          <splits>
+            <_><var>120</var>
+              <quality>1.6909090042114258e+01</quality>
+              <le>2.1664378046989441e-01</le></_></splits></_>
+        <_>
+          <depth>3</depth>
+          <value>3.</value>
+          <norm_class_idx>2</norm_class_idx></_>
+        <_>
+          <depth>3</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx></_>
+        <_>
+          <depth>2</depth>
+          <value>4.</value>
+          <norm_class_idx>3</norm_class_idx></_>
+        <_>
+          <depth>1</depth>
+          <value>2.</value>
+          <norm_class_idx>1</norm_class_idx></_></nodes></_>
+    <_>
+      <nodes>
+        <_>
+          <depth>0</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx>
+          <splits>
+            <_><var>22</var>
+              <quality>2.1388889312744141e+01</quality>
+              <le>3.9303976297378540e-01</le></_></splits></_>
+        <_>
+          <depth>1</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx>
+          <splits>
+            <_><var>138</var>
+              <quality>1.9103679656982422e+01</quality>
+              <le>6.3893508911132812e-01</le></_></splits></_>
+        <_>
+          <depth>2</depth>
+          <value>5.</value>
+          <norm_class_idx>4</norm_class_idx></_>
+        <_>
+          <depth>2</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx>
+          <splits>
+            <_><var>81</var>
+              <quality>23.</quality>
+              <le>4.9966502189636230e-01</le></_></splits></_>
+        <_>
+          <depth>3</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx></_>
+        <_>
+          <depth>3</depth>
+          <value>2.</value>
+          <norm_class_idx>1</norm_class_idx></_>
+        <_>
+          <depth>1</depth>
+          <value>4.</value>
+          <norm_class_idx>3</norm_class_idx></_></nodes></_>
+    <_>
+      <nodes>
+        <_>
+          <depth>0</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx>
+          <splits>
+            <_><var>161</var>
+              <quality>2.1571428298950195e+01</quality>
+              <le>7.5905621051788330e-01</le></_></splits></_>
+        <_>
+          <depth>1</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx>
+          <splits>
+            <_><var>108</var>
+              <quality>1.8769229888916016e+01</quality>
+              <le>6.5048742294311523e-01</le></_></splits></_>
+        <_>
+          <depth>2</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx>
+          <splits>
+            <_><var>108</var>
+              <quality>1.9538461685180664e+01</quality>
+              <le>4.8091179132461548e-01</le></_></splits></_>
+        <_>
+          <depth>3</depth>
+          <value>3.</value>
+          <norm_class_idx>2</norm_class_idx></_>
+        <_>
+          <depth>3</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx></_>
+        <_>
+          <depth>2</depth>
+          <value>4.</value>
+          <norm_class_idx>3</norm_class_idx></_>
+        <_>
+          <depth>1</depth>
+          <value>2.</value>
+          <norm_class_idx>1</norm_class_idx></_></nodes></_>
+    <_>
+      <nodes>
+        <_>
+          <depth>0</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx>
+          <splits>
+            <_><var>18</var>
+              <quality>1.9648649215698242e+01</quality>
+              <le>3.5089781880378723e-01</le></_></splits></_>
+        <_>
+          <depth>1</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx>
+          <splits>
+            <_><var>157</var>
+              <quality>1.9518518447875977e+01</quality>
+              <le>7.7530884742736816e-01</le></_></splits></_>
+        <_>
+          <depth>2</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx>
+          <splits>
+            <_><var>164</var>
+              <quality>1.8157894134521484e+01</quality>
+              <le>5.1632344722747803e-01</le></_></splits></_>
+        <_>
+          <depth>3</depth>
+          <value>3.</value>
+          <norm_class_idx>2</norm_class_idx></_>
+        <_>
+          <depth>3</depth>
+          <value>1.</value>
+          <norm_class_idx>0</norm_class_idx></_>
+        <_>
+          <depth>2</depth>
+          <value>2.</value>
+          <norm_class_idx>1</norm_class_idx></_>
+        <_>
+          <depth>1</depth>
+          <value>4.</value>
+          <norm_class_idx>3</norm_class_idx></_></nodes></_></trees></opencv_ml_rtrees>
+</opencv_storage>
