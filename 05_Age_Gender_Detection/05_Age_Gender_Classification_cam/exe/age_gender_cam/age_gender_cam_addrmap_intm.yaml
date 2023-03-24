@@ -1,0 +1,14 @@
+-
+  name: ALL
+  addr: 0x8000_0000
+  size:  0x16c_8830
+  lst_elemsp:
+    - { name: data_in,          addr: 0x8000_0000, size:    0x9_6000 }
+    - { name: data,             addr: 0x8009_6000, size:   0x6a_b3e0 }
+    - { name: data_out,         addr: 0x8074_1400, size:        0x1c }
+    - { name: work,             addr: 0x8074_1440, size:       0x200 }
+    - { name: weight,           addr: 0x8074_1640, size:   0xd7_f620 }
+    - { name: drp_config,       addr: 0x814c_0c80, size:   0x1f_a1c0 }
+    - { name: drp_param,        addr: 0x816b_ae40, size:       0x2b0 }
+    - { name: desc_aimac,       addr: 0x816b_b100, size:      0xd390 }
+    - { name: desc_drp,         addr: 0x816c_84c0, size:       0x370 }
