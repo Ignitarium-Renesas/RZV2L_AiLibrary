@@ -1,0 +1,6 @@
+conv_yuv2rgb.mem                  1191074752     179492
+resize_hwc.mem                    1191254256     201900
+imagescaler.mem                   1191456160     173836
+resize_onnx.mem                   1191630000     167632
+transpose.mem                     1191797632     143052
+cast_fp16_fp32.mem                1191940688     101648
