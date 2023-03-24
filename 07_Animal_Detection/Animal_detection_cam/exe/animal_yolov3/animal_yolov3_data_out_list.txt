@@ -1,0 +1,15 @@
+Output_node_name: post_out1
+         Address: 0x86958bc0
+         Channel: 48
+         Width  : 13
+         Height : 13
+Output_node_name: post_out2
+         Address: 0x86960a80
+         Channel: 48
+         Width  : 26
+         Height : 26
+Output_node_name: post_out3
+         Address: 0x86980580
+         Channel: 48
+         Width  : 52
+         Height : 52
