@@ -5,7 +5,10 @@
 These application showcases the capability of deep neural networks to predict age-group and detect the gender of a person.
 Image based gender classification and age classification applications are available in the respective folders identifiable with respective prefixes.
 
-sample video on YouTube -[Age and gender detection demo video](https://youtu.be/-DpAGb7q4pM)
+sample video on YouTube -
+Image based demo : [Age and gender detection demo video](https://youtu.be/-DpAGb7q4pM)
+Camera based demo : [Age and gender detection demo video](https://youtu.be/azJW8TZ2-Hg)
+
 
 ## Age Application details
 

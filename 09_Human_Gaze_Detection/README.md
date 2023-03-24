@@ -4,8 +4,7 @@
 
 Gaze Detection is a task to predict where a person is looking at. Human gaze is important information for applications such as Driver Monitor Systems to monitor driver's attentiveness. It can also help to analyse viewer's attention data in case of digital signage and retail industry.
 
-ToDo;
-sample video on YouTube -[Gaze detection demo]()
+sample video on YouTube -[Gaze detection demo](https://youtu.be/mFzOm5VhIjc)
 
 ## Application details
 

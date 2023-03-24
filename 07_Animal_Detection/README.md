@@ -22,7 +22,7 @@ This application is used to detect specific set of animals in a given image or c
 It can utilize the API, "PRET_AD()" provided in this library. Input to this API will be an image buffer address and it's height and width of the image. The camera application utilizes the API "get_camera_inference" to initiate the inference process.
 > Refer [Animal_detection_img/examples/animal_detection_example.cpp](animal_detection_img/examples/animal_detection_example.cpp) for an example usage
 
-sample video on YouTube -[Animal Detection demo](https://youtu.be/)
+sample video on YouTube -[Animal Detection demo video](https://youtu.be/sJgDmCYcef4)
 
 ## Application details
 ```
