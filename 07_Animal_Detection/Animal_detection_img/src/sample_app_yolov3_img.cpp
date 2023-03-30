@@ -600,7 +600,7 @@ int8_t print_result_yolo(float* floatarr, Image * img, string animal, float alar
             }
         }
     }
-    if det.size() != 0
+    if(det.size()!= 0)
     {
     /* Non-Maximum Supression filter */
     filter_boxes_nms(det, det.size(), TH_NMS);
@@ -628,7 +628,7 @@ int8_t print_result_yolo(float* floatarr, Image * img, string animal, float alar
     return n;
     }
     else {
-    printf("No %s with given threshold: %f value was detected",animal, alarm); 
+    printf("No %s with given threshold: %f value was detected",animal.c_str(), alarm); 
     return 0;
     }
 }
