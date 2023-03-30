@@ -88,7 +88,7 @@ make
 
 ### Running the sample application
 Praparation on laptop:
-1. Download the weights files (*.dat) from the release(https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.1).
+1. Download the weights files (*.dat) from the release(https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.3).
 2. Place the weight files at location proper location `07_Animal_detection/Animal_detection_img/exe/yolov3_bmp/` or `07_Animal_detection/Animal_detection_cam/exe/yolov3_cam/`
 3. Now, copy the `RZV2L_AiLibrary` directory to the RZV2L board (/home/root/).
 4. Please follow these steps:
