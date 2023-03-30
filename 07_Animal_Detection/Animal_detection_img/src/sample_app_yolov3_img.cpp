@@ -464,9 +464,8 @@ void print_box(detection d, int32_t i, string animal)
     return;
     }
     else
-    {
     return;
-    }
+    
 }
 
 /*****************************************
@@ -591,7 +590,7 @@ int8_t print_result_yolo(float* floatarr, Image * img, string animal, float alar
 
                     /* Store the result into the list if the probability is more than the threshold */
                     probability = max_pred * objectness;
-                    if ((probability > alarm) && (label_file_map[d.c].c_str() == animal))      		/*Replaced TH_PROB with alarm*/
+                    if (probability > alarm)      		/*Replaced TH_PROB with alarm*/
                     {
                         d = {bb, pred_class, probability};
                         det.push_back(d);
@@ -600,14 +599,11 @@ int8_t print_result_yolo(float* floatarr, Image * img, string animal, float alar
             }
         }
     }
-    if(det.size()!= 0)
-    {
     /* Non-Maximum Supression filter */
     filter_boxes_nms(det, det.size(), TH_NMS);
 
     /* Render boxes on image and print their details */
     n = 0;
-    
     for (i = 0;i < det.size(); i++)
     {
         /* Skip the overlapped bounding boxes */
@@ -623,14 +619,8 @@ int8_t print_result_yolo(float* floatarr, Image * img, string animal, float alar
         string result_str = animal+ " "+ stream.str();
         img->draw_rect((int32_t) det[i].bbox.x, (int32_t)det[i].bbox.y,
             (int32_t)det[i].bbox.w, (int32_t)det[i].bbox.h, result_str.c_str());
-    } 
+    }
     
-    return n;
-    }
-    else {
-    printf("No %s with given threshold: %f value was detected",animal.c_str(), alarm); 
-    return 0;
-    }
 }
 
 

@@ -29,9 +29,7 @@ void Animal::get_image_path(void)
     
     cout << "Enter animal to detect from the list provided below:\n" << endl;
     for (int i = 0; i < 11; i++)
-    {
       cout << animal_list[i] << "\n";
-    }
     cout << "----------------------------------------" << endl << endl;
     cin >> animal;
     bool found = false;
@@ -46,17 +44,13 @@ void Animal::get_image_path(void)
         cout << "Incorrect animal name" << endl;
         cout << "Enter animal to detect from the list provided below:" << endl;
         for (int i = 0; i < 11; i++)
-        {
             cout << animal_list[i] << "\n";
-        }
         cout <<"Animal to detect:";
         cin >> animal;
         for (int i = 0; i < 11; ++i)
     	{
 		if (animal_list[i] == animal)
-		{
 			found = true;
-		}
 	}
     }
     
