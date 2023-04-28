@@ -11,7 +11,7 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
 ```
 ├── etc # address map and pre/post process configuration of both age_gender and tiny-yolov2
 ├── exe
-│   ├── age_gender_cam # DRP-AI files of age_gender
+│   ├── fairface_cam # DRP-AI files of age_gender
 │   ├── 05_age_gender_cam_app # The executable
 │   └── tinyyolov2_cam # DRP-AI files of tiny-yolov2
 ├── Makefile

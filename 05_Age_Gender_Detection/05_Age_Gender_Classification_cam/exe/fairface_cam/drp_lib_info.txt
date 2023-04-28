@@ -1,0 +1,36 @@
+7  # driver version  v0.2 
+28  # driver version >v0.3
+# conv_yuv2rgb  [MASK : ON]
+# crop  [MASK : ON]
+# resize_hwc  [MASK : ON]
+# imagescaler  [MASK : ON]
+# maxpooling_k3_st2  [MASK : ON]
+# gap  [MASK : ON]
+# cast_fp16_fp32  [MASK : ON]
+# ============================
+# Address data in drp_param.bin
+# DRP LIB name[Layer Name]
+# [Start position], [Size(Byte)], [Param name], [Value]
+conv_yuv2rgb[post_0_0_conv_yuv2rgb]
+Start:0[Byte],Size:4[Byte],Param:raddr,Value:0x80000000
+Start:4[Byte],Size:4[Byte],Param:waddr,Value:0x80096000
+crop[post_0_1_crop]
+Start:56[Byte],Size:4[Byte],Param:raddr,Value:0x80096000
+Start:60[Byte],Size:4[Byte],Param:waddr,Value:0x80177000
+resize_hwc[post_0_2_resize_hwc]
+Start:112[Byte],Size:4[Byte],Param:raddr,Value:0x80177000
+Start:116[Byte],Size:4[Byte],Param:waddr,Value:0x80258000
+imagescaler[post_0_2_imagescaler]
+Start:168[Byte],Size:4[Byte],Param:raddr,Value:0x80258000
+Start:172[Byte],Size:4[Byte],Param:waddr,Value:0x8027cc00
+Start:216[Byte],Size:4[Byte],Param:ADD_ADDR,Value:0x80ffb8c0
+Start:220[Byte],Size:4[Byte],Param:MUL_ADDR,Value:0x80ffb8c8
+maxpooling_k3_st2[/maxpool/MaxPool_output_0]
+Start:232[Byte],Size:4[Byte],Param:raddr,Value:0x802c6400
+Start:236[Byte],Size:4[Byte],Param:waddr,Value:0x8044e400
+gap[/avgpool/GlobalAveragePool_output_0]
+Start:288[Byte],Size:4[Byte],Param:raddr,Value:0x80cdf000
+Start:292[Byte],Size:4[Byte],Param:waddr,Value:0x80ceb400
+cast_fp16_fp32[post_0_0_cast_fp16_fp32]
+Start:336[Byte],Size:4[Byte],Param:raddr,Value:0x80ceb800
+Start:340[Byte],Size:4[Byte],Param:waddr,Value:0x80ceb840

@@ -1,8 +1,8 @@
 /***********************************************************************************************************************
 * DISCLAIMER
-* This software is suheadied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
+* This software is supplied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
 * other uses are authorized. This software is owned by Renesas Electronics Corporation and is protected under all
-* aheadicable laws, including copyright laws.
+* applicable laws, including copyright laws.
 * THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
 * THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAIMED. TO THE MAXIMUM
@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : define.h
 * Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for Classification Age_gender with TinyYOLOv2 MIPI Camera version
+* Description  : RZ/V2L DRP-AI Sample Application for Resnet34 with TinyYOLOv2 MIPI Camera version
 ***********************************************************************************************************************/
 
 #ifndef DEFINE_MACRO_H
@@ -63,23 +63,20 @@ const static double anchors[] =
     9.42,   5.11,
     16.62,  10.52
 };
-const static std::string label_list = "coco-labels-2014_2017.txt";
 
 /*****************************************
-* Macro for Age_gender pre TinyYOLOV2
+* Macro for MMPose Resnet34 pre TinyYOLOV2
 ******************************************/
 /*Inference Related Parameters*/
 #define AI0_DESC_NAME               "tinyyolov2_cam"
-#define AI_DESC_NAME                "age_gender_cam"
+#define AI_DESC_NAME                "fairface_cam"
+
 /*Age_gender Related*/
-#define INF_OUT_SIZE                (7)
-#define AGE_OUT                     (5)
+#define INF_OUT_SIZE                (18)
+#define AGE_OUT                     (9)
 #define GENDER_OUT                  (2)
-// #define NUM_OUTPUT_KEYPOINT      (98)
-#define AGE_GENDER_IN_WIDTH         (200)
-#define AGE_GENDER_IN_HEIGHT        (200)
-/*Graphic Drawing Settings Related*/
-// #define KEY_POINT_SIZE              (2)
+#define AGE_GENDER_IN_WIDTH         (224)
+#define AGE_GENDER_IN_HEIGHT        (224)
 
 /*Index to access drpai_file_path[]*/
 #define INDEX_D                   (0)
@@ -108,12 +105,12 @@ const static std::string label_list = "coco-labels-2014_2017.txt";
 #define DISPLAY_WIDTH             (MIPI_WIDTH)
 #define DISPLAY_HEIGHT            (MIPI_HEIGHT)
 #define DISPLAY_TEXT_SIZE         (256)
-
+#define INF_OUT_SIZE_YOLO         (0x373c8c)
 
 /*Age_gender Post Processing & Drawing Related*/
 #define OUTPUT_ADJ_X              (2)
 #define OUTPUT_ADJ_Y              (0)
-#define NUM_MAX_FACE              (7)
+#define NUM_MAX_FACE            (7)
 #define CROP_ADJ_X                (20)
 #define CROP_ADJ_Y                (20)
 
@@ -131,7 +128,7 @@ const static std::string label_list = "coco-labels-2014_2017.txt";
 /* Number for [region] layer num parameter */
 #define NUM_BB                      (5)
 /* Thresholds */
-#define TH_PROB                     (0.5f)
+#define TH_PROB                     (0.6f)
 #define TH_NMS                      (0.5f)
 /* Size of input image to the model */
 #define MODEL_IN_W                  (416)
@@ -139,7 +136,7 @@ const static std::string label_list = "coco-labels-2014_2017.txt";
 #define INF_OUT_SIZE_TINYYOLOV2     (84500)
 
 /*****************************************
-* Macro for Aheadication
+* Macro for Application
 ******************************************/
 /* Coral Camera support */
 #define INPUT_CORAL
@@ -149,7 +146,7 @@ const static std::string label_list = "coco-labels-2014_2017.txt";
 
 /*Frame threshold to execute inference in every loop
  *This value must be determined by DRP-AI processing time and capture processing time.
- *For your information Age_gender takes around 20 msec and capture takes around 35 msec. */
+ *For your information Resnet34 takes around 60 msec and capture takes around 35 msec. */
 #define INF_FRAME_NUM               (3)
 
 /*Camera:: Capture Image Information*/
