@@ -1,8 +1,8 @@
 /***********************************************************************************************************************
 * DISCLAIMER
-* This software is sufaceied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
+* This software is supplied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
 * other uses are authorized. This software is owned by Renesas Electronics Corporation and is protected under all
-* afaceicable laws, including copyright laws.
+* applicable laws, including copyright laws.
 * THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
 * THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAIMED. TO THE MAXIMUM
@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : sample_app_age_gender_tinyyolov2_cam.cpp
 * Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for  Age & Gender with TinyYOLOv2 and Custom Classifier MIPI Camera version
+* Description  : RZ/V2L DRP-AI Sample Application for Resnet34 with TinyYOLOv2 MIPI Camera version
 ***********************************************************************************************************************/
 
 /*****************************************
@@ -37,7 +37,8 @@
 #include "wayland.h"
 /*TinyYOLOv2 Post-Processing*/
 #include "box.h"
-
+/*for min value*/
+#include <limits>
 
 /*****************************************
 * Global Variables
@@ -72,8 +73,9 @@ static uint32_t ai_time = 0;
 static uint32_t total_time = 0;
 static uint32_t yolo_time = 0;
 static uint32_t age_gender_time[NUM_MAX_FACE];
+
 static float age_gender_out[INF_OUT_SIZE];
-static std::string age_range[5] = {"0-10", "11-20","20-40","40-60","60+"} ;
+static std::string age_range[9] = {"0-2", "3-9","10-19","20-29","30-39","40-49","50-59","60-69","70+"} ;
 static std::string gender_ls[2] = {"Male", "Female"};
 static std::string age;
 static std::string gender;
@@ -82,6 +84,8 @@ static int16_t cropx[NUM_MAX_FACE];
 static int16_t cropy[NUM_MAX_FACE];
 static int16_t croph[NUM_MAX_FACE];
 static int16_t cropw[NUM_MAX_FACE];
+static float lowest_kpt_score[NUM_MAX_FACE];
+static float lowest_kpt_score_local[NUM_MAX_FACE]; /*To be used only in Inference Threads*/
 
 /*TinyYOLOv2*/
 static uint32_t bcount = 0;
@@ -584,7 +588,7 @@ static void R_Post_Proc(float* floatarr, std::vector<detection>& det, uint32_t* 
 
                 /* Store the result into the list if the probability is more than the threshold */
                 probability = max_pred * objectness;
-                if ((probability > TH_PROB))    //face = 14
+                if (probability > TH_PROB)   //face = 14
                 {
                     d = {bb, pred_class, probability};
                     det.push_back(d);
@@ -596,24 +600,53 @@ static void R_Post_Proc(float* floatarr, std::vector<detection>& det, uint32_t* 
     /* Non-Maximum Supression filter */
     filter_boxes_nms(det, det.size(), TH_NMS);
     *box_count = count;
-
+    Box box1;
+    Box box2;
+    for (int8_t i = 0; i < det.size(); i++)
+    {
+        box1 = det[i].bbox;
+        for (int8_t j = 0; j < det.size(); j++)
+        {
+            if (i == j)
+            {
+                continue;
+            }
+            if (det[i].c != det[j].c)
+            {
+                continue;
+            }
+            if (det[i].prob == 0 || det[j].prob==0)
+            {
+                continue;
+            }            
+            box2 = det[j].bbox;
+            if ((box1.h * box1.w) > (box2.h * box2.w))
+            {
+                    det[j].prob= 0;
+            }
+            if ((box1.h * box1.w) < (box2.h * box2.w))
+            {
+                det[i].prob= 0;
+            }
+        }
+    }    
     return ;
 }
 
 
 /*****************************************
-* Function Name : face_counter
-* Description   : Function to count the real number of face detected and does not exceeds the maximum number
+* Function Name : people_counter
+* Description   : Function to count the real number of people detected and does not exceeds the maximum number
 * Arguments     : det = detected boxes details
-*                 face = detected face details
+*                 ppl = detected people details
 *                 box_count = total number of boxes
-*                 face_count = actual number of face
+*                 face_count = actual number of faces
 * Return value  : -
 ******************************************/
-static void face_counter(std::vector<detection>& det, std::vector<detection>& face, uint32_t box_count, uint32_t* face_count)
+static void people_counter(std::vector<detection>& det, std::vector<detection>& ppl, uint32_t box_count, uint32_t* face_count)
 {
     uint32_t count = 0;
-    face.clear();
+    ppl.clear();
     for(uint32_t i = 0; i<box_count; i++)
     {
         if(0 == det[i].prob)
@@ -622,7 +655,7 @@ static void face_counter(std::vector<detection>& det, std::vector<detection>& fa
         }
         else
         {
-            face.push_back(det[i]);
+            ppl.push_back(det[i]);
             count++;
             if(count > NUM_MAX_FACE-1)
             {
@@ -632,6 +665,7 @@ static void face_counter(std::vector<detection>& det, std::vector<detection>& fa
     }
     *face_count = count;
 }
+
 
 /*****************************************
 * Function Name : sign
@@ -645,17 +679,17 @@ static int8_t sign(int32_t x)
 }
 
 /*****************************************
-* Function Name : R_Post_Proc_Age_gender
-* Description   : CPU post-processing for Age_gender 
+* Function Name : R_Post_Proc_ResNet34
+* Description   : CPU post-processing for Resnet34 
 * Arguments     : floatarr = drpai output address
 *                 n_pers = number of the face detected
 * Return value  : -
 ******************************************/
-static void R_Post_Proc_Age_gender(float* floatarr, uint8_t n_pers)
+static void R_Post_Proc_ResNet34(float* floatarr, uint8_t n_pers)
 {
-    int max = INT_MIN;
-    int index = -1;
-    for(int i=0;i<AGE_OUT;i++)
+    float max = std::numeric_limits<float>::min();
+    int8_t index = -1;
+    for(int8_t i=9;i<INF_OUT_SIZE;i++)
     {
         if(floatarr[i]>max)
         {
@@ -663,15 +697,17 @@ static void R_Post_Proc_Age_gender(float* floatarr, uint8_t n_pers)
             index = i;
         }
     }
-    age = age_range[index];
-    if (floatarr[5] > floatarr[6])
-        {
-            gender = gender_ls[0];
-        } 
-        else
-        {
-            gender =  gender_ls[1];
-        }
+    
+    age = age_range[index-9];
+
+    if (floatarr[7] > floatarr[8])
+    {
+        gender = gender_ls[0];
+    } 
+    else
+    {
+        gender =  gender_ls[1];
+    }
     return;
 }
 
@@ -739,7 +775,6 @@ end:
     }
     return ret_load_para;
 }
-
 
 
 /*****************************************
@@ -831,16 +866,15 @@ void *R_Inf_Thread(void *threadid)
     static struct timespec yolo_start_time;
     static struct timespec start_time;
     static struct timespec inf_end_time;
-    /*Age_gender Modify Parameters*/
+    /*Resnet34 Modify Parameters*/
     drpai_crop_t crop_param;
     static std::string drpai_param_file;
     uint32_t drp_param_info_size;
-    static std::string labels = label_list;
     uint8_t i;
     uint32_t yolo_time_tmp = 0;
 
     printf("Inference Thread Starting\n");
-    /*Age_gender*/
+    /*Resnet34*/
     proc[DRPAI_INDEX_INPUT].address = drpai_address.data_in_addr;
     proc[DRPAI_INDEX_INPUT].size = drpai_address.data_in_size;
     proc[DRPAI_INDEX_DRP_CFG].address = drpai_address.drp_config_addr;
@@ -872,7 +906,7 @@ void *R_Inf_Thread(void *threadid)
     proc0[DRPAI_INDEX_OUTPUT].size = drpai_address0.data_out_size;
 
     /*DRP-AI Output Memory Preparation*/
-    /*Age_gender*/
+    /*Resnet34*/
     drpai_data.address = drpai_address.data_out_addr;
     drpai_data.size = drpai_address.data_out_size;
     /*TinyYOLOv2*/
@@ -1007,8 +1041,8 @@ void *R_Inf_Thread(void *threadid)
                     R_Post_Proc(&drpai_output_buf0[0], det_res, &bcount);
                     /*Count the Number of People Detected*/
                     face_count_local = 0;
-                    face_counter(det_res, det_face, bcount, &face_count_local);
-                    /*If Person is detected run Age_gender three times*/
+                    people_counter(det_res, det_face, bcount, &face_count_local);
+                    /*If Person is detected run Resnet34 for Pose Estimation three times*/
                     if(face_count_local > 0)
                     {
                         for(i = 0; i < face_count_local; i++)
@@ -1077,7 +1111,7 @@ void *R_Inf_Thread(void *threadid)
                             {
                                 croph[i] = IMREAD_IMAGE_HEIGHT - cropy[i];
                             }
-                            /*Change Age_gender Crop Parameters*/
+                            /*Change Resnet34 Crop Parameters*/
                             crop_param.img_owidth = (uint16_t)cropw[i];
                             crop_param.img_oheight = (uint16_t)croph[i];
                             crop_param.pos_x = (uint16_t)cropx[i];
@@ -1163,8 +1197,8 @@ void *R_Inf_Thread(void *threadid)
                                             fprintf(stderr, "[ERROR] Failed to read via DRP-AI Driver: errno=%d\n", errno);
                                             goto err;
                                         }
-                                        /*CPU Post Processing For Age_gender & Display the Results*/
-                                       R_Post_Proc_Age_gender (&drpai_output_buf[0],i);
+                                        /*CPU Post Processing For Resnet34 & Display the Results*/
+                                        R_Post_Proc_ResNet34(&drpai_output_buf[0],i);
                                         break;
                                     }
                                     else //inf_status != 0
@@ -1349,9 +1383,6 @@ void *R_Display_Thread(void *threadid)
         /* Check img_obj_ready flag which is set in Capture Thread. */
         if (img_obj_ready.load())
         {
-            /* Draw Complete Skeleton. */
-            // draw_skeleton();
-
             /* Convert YUYV image to BGRA format. */
             img.convert_format();
             
@@ -1535,7 +1566,7 @@ int32_t main(int32_t argc, char * argv[])
     udmabuf_address &=0xFFFFFFFF;
 
     printf("RZ/V2L DRP-AI Sample Application\n");
-    printf("Model : Age_gender with TinyYOLOv2 for face detection and Custom model age & gender classification | age_gender_cam, tinyyolov2_cam\n");
+    printf("Model : Resnet34 with TinyYOLOv2 | fairface_cam, tinyyolov2_cam\n");
     printf("Input : Coral Camera\n");
 
     /*DRP-AI Driver Open*/
@@ -1547,7 +1578,7 @@ int32_t main(int32_t argc, char * argv[])
         fprintf(stderr, "[ERROR] Failed to open DRP-AI Driver: errno=%d\n", errno);
         return -1;
     }
-    /*For Age_gender*/
+    /*For Resnet*/
     errno = 0;
     drpai_fd = open("/dev/drpai0", O_RDWR);
     if (0 > drpai_fd)
@@ -1575,7 +1606,7 @@ int32_t main(int32_t argc, char * argv[])
         ret_main = ret;
         goto end_close_drpai;
     }
-    /* Age_gender */
+    /* Resnet */
     prefix = AI_DESC_NAME;
     dir = prefix + "/";
     address_file = dir + prefix + "_addrmap_intm.txt";

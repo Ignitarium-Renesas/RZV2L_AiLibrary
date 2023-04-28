@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : image.h
 * Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Aheadication for  Age & Gender with TinyYOLOv2 and Custom Classifier MIPI Camera version
+* Description  : RZ/V2L DRP-AI Sample Aheadication for  Age & Gender with TinyYOLOv2 and Resnet34 Classifier MIPI Camera version
 ***********************************************************************************************************************/
 
 #ifndef IMAGE_H
