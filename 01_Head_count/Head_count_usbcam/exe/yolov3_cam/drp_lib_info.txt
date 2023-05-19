@@ -1,0 +1,52 @@
+11  # driver version  v0.2 
+44  # driver version >v0.3
+# conv_yuv2rgb  [MASK : ON]
+# resize_hwc  [MASK : ON]
+# imagescaler  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# transpose  [MASK : ON]
+# cast_fp16_fp32  [MASK : ON]
+# transpose  [MASK : ON]
+# cast_fp16_fp32  [MASK : ON]
+# transpose  [MASK : ON]
+# cast_fp16_fp32  [MASK : ON]
+# ============================
+# Address data in drp_param.bin
+# DRP LIB name[Layer Name]
+# [Start position], [Size(Byte)], [Param name], [Value]
+conv_yuv2rgb[post_0_0_conv_yuv2rgb]
+Start:0[Byte],Size:4[Byte],Param:raddr,Value:0x80000000
+Start:4[Byte],Size:4[Byte],Param:waddr,Value:0x80096000
+resize_hwc[post_0_1_resize_hwc]
+Start:56[Byte],Size:4[Byte],Param:raddr,Value:0x80096000
+Start:60[Byte],Size:4[Byte],Param:waddr,Value:0x80177000
+imagescaler[post_0_1_imagescaler]
+Start:112[Byte],Size:4[Byte],Param:raddr,Value:0x80177000
+Start:116[Byte],Size:4[Byte],Param:waddr,Value:0x801f5c00
+Start:160[Byte],Size:4[Byte],Param:ADD_ADDR,Value:0x86983a80
+Start:164[Byte],Size:4[Byte],Param:MUL_ADDR,Value:0x86983a88
+resize_onnx[onnx::Concat_651]
+Start:176[Byte],Size:4[Byte],Param:raddr,Value:0x85c91000
+Start:180[Byte],Size:4[Byte],Param:waddr,Value:0x85ca6200
+resize_onnx[onnx::Concat_680]
+Start:232[Byte],Size:4[Byte],Param:raddr,Value:0x8609c200
+Start:236[Byte],Size:4[Byte],Param:waddr,Value:0x860c6600
+transpose[post_0_0_transpose]
+Start:288[Byte],Size:4[Byte],Param:raddr,Value:0x868b2600
+Start:292[Byte],Size:4[Byte],Param:waddr,Value:0x868d1914
+cast_fp16_fp32[post_0_1_cast_fp16_fp32]
+Start:344[Byte],Size:4[Byte],Param:raddr,Value:0x868d1914
+Start:348[Byte],Size:4[Byte],Param:waddr,Value:0x868f0c40
+transpose[post_1_0_transpose]
+Start:400[Byte],Size:4[Byte],Param:raddr,Value:0x868b3dc4
+Start:404[Byte],Size:4[Byte],Param:waddr,Value:0x868d30d8
+cast_fp16_fp32[post_1_1_cast_fp16_fp32]
+Start:456[Byte],Size:4[Byte],Param:raddr,Value:0x868d30d8
+Start:460[Byte],Size:4[Byte],Param:waddr,Value:0x868f3bc8
+transpose[post_2_0_transpose]
+Start:512[Byte],Size:4[Byte],Param:raddr,Value:0x868b9cd4
+Start:516[Byte],Size:4[Byte],Param:waddr,Value:0x868d8fe8
+cast_fp16_fp32[post_2_1_cast_fp16_fp32]
+Start:568[Byte],Size:4[Byte],Param:raddr,Value:0x868d8fe8
+Start:572[Byte],Size:4[Byte],Param:waddr,Value:0x868ff9e8

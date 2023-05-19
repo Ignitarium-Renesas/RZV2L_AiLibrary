@@ -1,0 +1,11 @@
+Boar
+Deer
+Crow
+Monkey
+Bear
+Raccoon
+Fox
+Weasel
+Skunk
+Dog
+Cat
