@@ -1,0 +1,32 @@
+6  # driver version  v0.2 
+24  # driver version >v0.3
+# conv_yuv2rgb  [MASK : ON]
+# crop  [MASK : ON]
+# imagescaler  [MASK : ON]
+# maxpooling_k3_st2  [MASK : ON]
+# gap  [MASK : ON]
+# softmax  [MASK : ON]
+# ============================
+# Address data in drp_param.bin
+# DRP LIB name[Layer Name]
+# [Start position], [Size(Byte)], [Param name], [Value]
+conv_yuv2rgb[post_0_0_conv_yuv2rgb]
+Start:0[Byte],Size:4[Byte],Param:raddr,Value:0x80000000
+Start:4[Byte],Size:4[Byte],Param:waddr,Value:0x80096000
+crop[post_0_1_crop]
+Start:56[Byte],Size:4[Byte],Param:raddr,Value:0x80096000
+Start:60[Byte],Size:4[Byte],Param:waddr,Value:0x80177000
+imagescaler[post_0_1_imagescaler]
+Start:112[Byte],Size:4[Byte],Param:raddr,Value:0x80177000
+Start:116[Byte],Size:4[Byte],Param:waddr,Value:0x8019bc00
+Start:160[Byte],Size:4[Byte],Param:ADD_ADDR,Value:0x82512080
+Start:164[Byte],Size:4[Byte],Param:MUL_ADDR,Value:0x82512088
+maxpooling_k3_st2[/maxpool/MaxPool_output_0]
+Start:176[Byte],Size:4[Byte],Param:raddr,Value:0x801e5400
+Start:180[Byte],Size:4[Byte],Param:waddr,Value:0x8036d400
+gap[/avgpool/GlobalAveragePool_output_0]
+Start:232[Byte],Size:4[Byte],Param:raddr,Value:0x821d0000
+Start:236[Byte],Size:4[Byte],Param:waddr,Value:0x82201000
+softmax[post_0_0_softmax]
+Start:280[Byte],Size:4[Byte],Param:raddr,Value:0x82202000
+Start:284[Byte],Size:4[Byte],Param:waddr,Value:0x82202040

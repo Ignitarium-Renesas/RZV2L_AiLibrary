@@ -12,7 +12,7 @@ This whole application is divided into multiple single applications as described
 
 ### Face Registration
 
-A tool to create face register database integrated with Coral camera to capture and save faces.
+A tool to create face register database integrated with USB camera to capture and save faces.
 
 #### Face Recognition Image
 
@@ -38,21 +38,21 @@ Classifies the given camera frame to genuine or spoofed.
 |   |-- etc
 |   |-- exe
 |   |   |-- Face_registration	# The executable 
-|   |   `-- resnet50_bmp		# DRP-AI files of resnet50
+|   |   `-- arcface_bmp		# DRP-AI files of arcface
 |   `-- src
 |-- Face_recognition_img		# Face recognition on image app
 |   |-- Makefile
 |   |-- etc
 |   |-- exe
 |   |   |-- Face_recognition_img	# The executable
-|   |   `-- resnet50_bmp		# DRP-AI files of resnet50
+|   |   `-- arcface_bmp		# DRP-AI files of arcface
 |   `-- src
 |-- Face_recognition_cam		# Face recognition on cam app
 |   |-- Makefile
 |   |-- etc
 |   |-- exe
 |   |   |-- Face_recognition_cam	# The executable
-|   |   `-- resnet50_bmp		# DRP-AI files of resnet50
+|   |   `-- arcface_bmp		# DRP-AI files of arcface
 |   `-- src
 |-- Face_spoof_detection_img		# Face spoof detection on image app
 |   |-- Makefile
@@ -72,6 +72,11 @@ Classifies the given camera frame to genuine or spoofed.
 ```
 
 ### Model details
+
+#### ArcFace
+
+- ArcFace is a CNN based model for face recognition which learns discriminative features of faces and produces embeddings for input face images. To enhance the discriminative power of softmax loss, a novel supervisor signal called additive angular margin (ArcFace) is used here as an additive term in the softmax loss.
+- Pretrained model reference - [ArcFace](https://github.com/onnx/models/tree/main/vision/body_analysis/arcface)
 
 #### ResNet-50
 
@@ -134,7 +139,7 @@ cd 06_Face_recognition_spoof_detection/Face_registration/exe/
         [2] for creating new face register [Erasing previous register]
         0
         ---------------------------
-        Capturing from Coral Camera
+        Capturing from USB Camera
         ---------------------------
 
         Enter the name of the picture
@@ -160,11 +165,11 @@ cd 06_Face_recognition_spoof_detection/Face_registration/exe/
         Christo
         Enter the image path 
         /home/root/06_Face_recognition_spoof_detection_backup/Capture_face/captures/Chris.bmp           
-        Loading : resnet50_bmp/drp_desc.bin
-        Loading : resnet50_bmp/resnet50_bmp_drpcfg.mem
-        Loading : resnet50_bmp/drp_param.bin
-        Loading : resnet50_bmp/aimac_desc.bin
-        Loading : resnet50_bmp/resnet50_bmp_weight.dat
+        Loading : arcface_bmp/drp_desc.bin
+        Loading : arcface_bmp/resnet50_bmp_drpcfg.mem
+        Loading : arcface_bmp/drp_param.bin
+        Loading : arcface_bmp/aimac_desc.bin
+        Loading : arcface_bmp/resnet50_bmp_weight.dat
         Inference -----------------------------------------------
         [START] DRP-AI
         [END] DRP-AI
@@ -186,19 +191,19 @@ cd 06_Face_recognition_spoof_detection/Face_recognition_img/exe/
 ```
 root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_img/exe# ./Face_recognition_img 
 RZ/V2L DRP-AI Sample Application
-Model : PyTorch ResNet    | resnet50_bmp
+Model : ArcFace    | arcface_bmp
 Input : Windows Bitmap v3 | sample.bmp
-Loading : resnet50_bmp/drp_desc.bin
-Loading : resnet50_bmp/resnet50_bmp_drpcfg.mem
-Loading : resnet50_bmp/drp_param.bin
-Loading : resnet50_bmp/aimac_desc.bin
-Loading : resnet50_bmp/resnet50_bmp_weight.dat
+Loading : arcface_bmp/drp_desc.bin
+Loading : arcface_bmp/arcface_bmp_drpcfg.mem
+Loading : arcface_bmp/drp_param.bin
+Loading : arcface_bmp/aimac_desc.bin
+Loading : arcface_bmp/arcface_bmp_weight.dat
 Inference -----------------------------------------------
 [START] DRP-AI
 [END] DRP-AI
 Input: sample.bmp
 
-Recognized person is Abin
+Recognized person is Paul
 ```
 
 #### Face Recognition Camera
@@ -210,26 +215,18 @@ Recognized person is Abin
 cd /home/root/RZV2L_AiLibrary 
 cd 06_Face_recognition_spoof_detection/Face_recognition_cam/exe/
 ```
-4. Run the executable.
+4. Run the executable. When calibrating the background no faces or moving objects be present in the frame.
 ```
 root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_cam/exe# ./Face_recognition_cam 
 RZ/V2L DRP-AI Sample Application
-Model : PyTorch ResNet    | resnet50_cam
+Model : ArcFace    | arcface_cam
 Input : Coral Camera
-Loading : resnet50_cam/drp_desc.bin
-Loading : resnet50_cam/resnet50_cam_drpcfg.mem
-Loading : resnet50_cam/drp_param.bin
-Loading : resnet50_cam/aimac_desc.bin
-Loading : resnet50_cam/resnet50_cam_weight.dat
-media-ctl -d /dev/media0 -r
-system ret = 0
-media-ctl -d /dev/media0 -V "'ov5645 0-003c':0 [fmt:UYVY8_2X8/640x480 field:none]"
-system ret = 0
-media-ctl -d /dev/media0 -l "'rzg2l_csi2 10830400.csi2':1 -> 'CRU output':0 [1]"
-system ret = 0
-media-ctl -d /dev/media0 -V "'rzg2l_csi2 10830400.csi2':1 [fmt:UYVY8_2X8/640x480 field:none]"
-system ret = 0
-[INFO] CSI2 Camera: /dev/video0
+Loading : arcface_cam/drp_desc.bin
+Loading : arcface_cam/arcface_cam_drpcfg.mem
+Loading : arcface_cam/drp_param.bin
+Loading : arcface_cam/aimac_desc.bin
+Loading : arcface_cam/arcface_cam_weight.dat
+[INFO] USB Camera: /dev/video1
 Key Hit Thread Starting
 ************************************************
 * Press ENTER key to quit. *
@@ -238,6 +235,32 @@ Main Loop Starts
 Capture Thread Starting
 Inference Thread Starting
 Inference Loop Starting
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+Background calibration is in progress...Stay away from the frame...
+
 Background calibration is done
 
 key Detected.
@@ -292,14 +315,15 @@ cd 06_Face_recognition_spoof_detection/Face_spoof_detection_cam/exe/
 
 ## Limitations
 
-1. Image input size (224x224) is fixed.
+1. Image input size (112x112) is fixed.
 2. Background and light conditions are affecting the prediction.
 3. Multiple face embeddings of a person may require for better predictions.
+4. The face must be aligned in the box showing on the screen.
 
 ### Known issues:
 1. [ERROR] Image buffer address is NULL : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.
 2. Segmentation fault : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is larger than the actual image dimensions, then a segmentation fault will occur.
 3. Improper output : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is smaller than the actual image dimensions, then improper or unexpected outputs will be observed.
-4. [ERROR] Failed to initialize Coral Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
+4. [ERROR] Failed to initialize USB Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
 5. permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.
 6. [ERROR] Failed to open: <prefix>/<prefix>_weight.dat error=2. [ERROR] Failed to load data from memory: <prefix>/<prefix>_weight.dat Failed to load DRP-AI object files - This error suggests that the weight file is not availbale in the `exe` folder. Download the weight file from the release in github and place it properly in the `exe/subfolder`.
