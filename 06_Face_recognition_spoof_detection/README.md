@@ -99,6 +99,14 @@ Classifies the given camera frame to genuine or spoofed.
 
 ## Running the application
 
+Weight files for this application are availbale in release 1.2.4. https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.4
+Kindly paste the file https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v1.2.4/arcface_bmp_weight.dat in folders 
+06_Face_recognition_spoof_detection/Face_recognition_img/exe/arcface_bmp/
+06_Face_recognition_spoof_detection/Face_registration/exe/arcface_bmp/
+
+and https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v1.2.4/arcface_cam_weight.dat file in folder
+06_Face_recognition_spoof_detection/Face_recognition_cam/exe/arcface_cam/
+
 ### Building the sample application:
 
 This is an optional step since already compiled application is available in `exe/`.
