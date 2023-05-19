@@ -1,7 +1,0 @@
-conv_yuv2rgb.mem                  1098489696     179492
-resize_hwc.mem                    1098669200     201900
-imagescaler.mem                   1098871104     173836
-maxpooling_k2_st2.mem             1099044944     107184
-maxpooling_k2_st1.mem             1099152128     125668
-transpose.mem                     1099277808     143052
-cast_fp16_fp32.mem                1099420864     101648
