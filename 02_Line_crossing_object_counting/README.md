@@ -2,12 +2,32 @@
 
 ## Introduction
 Line crossing object counting is a sample application that demonstrates counting of the objects when they cross a virtual line drawn by the user.
-Application uses a deep learning based object detector tinyYoloV2 to detect the objects and a centroid based tracker to track the objects. 
+Application uses a deep learning based object detector tinyYoloV3 to detect the objects and a SORT based tracker to track the objects. 
 
 sample video on YouTube -[Line crossing object counting demo](https://youtu.be/-fZypjgsBYo)
 
 ## Application details
-
+```
+|-- 02_Line_crossing_object_counting_MIPI_cam/ # Line crossing application on Coral camera input
+|   |-- Makefile
+|   |-- etc/ # address map and pre/post process configuration of tiny yolov3
+|   |-- examples/
+|   |-- exe/
+|   |   |-- 02_Line_crossing_object_counting # the executable
+|   |   |-- tinyyolov3_crossing # DRP-AI files of yolov3
+|   |   `-- labels.txt  # label file
+|   `-- src/ # source code directory
+|-- 02_Line_crossing_object_counting_USB_cam/ # Line crossing application on USB camera input
+|   |-- Makefile
+|   |-- etc/ # address map and pre/post process configuration of tiny yolov3
+|   |-- examples/
+|   |-- exe/
+|   |   |-- 02_Line_crossing_object_counting # the executable
+|   |   |-- tinyyolov3_crossing # DRP-AI files of yolov3
+|   |   `-- labels.txt  # label file
+|   `-- src/ # source code directory
+`-- README.md
+```
 ### Sample Application Workflow
 
 The application has 4 threads as described below:
@@ -44,24 +64,21 @@ The overall flow of the application can be described in following sequence :
 
 ###  Deep learning model details
 
-**<ins>TinyYoloV2</ins>** :- TinyYoloV2 is a state of the art neural network model. It belongs to well known Yolo family of object detectors. It requires less parameters to get  trained properly. official link : [ Official Yolo website](https://pjreddie.com/darknet/yolov2/) 
+**<ins>TinyYoloV3</ins>** :- TinyYoloV3 is a state of the art neural network model. It belongs to well known Yolo family of object detectors. It requires less parameters to get  trained properly. 
+- official link : [ Official Yolo website](https://pjreddie.com/darknet/yolo/)
+- Dataset: [HollywoodHeads](https://www.di.ens.fr/willow/research/headdetection/)
 
-#### <ins>Working of centroid tracker</ins>
-**<ins>Centroid Based Tracker</ins>** :- Centroid based tracker generates a unique ID for each detected object based on centroid detection. It tracks the detected objects as they move around in a video while maintaining the assigned ID for preselected frame numbers.
 
-1. Centroids are calculated based on the x and y coordinates of detected bounding boxes.
-2. Euclidean distance between the centroid/s of all the detected objects is calculated in current frame and previous frames.
-3. If the distance between the centroid of current frame and previous frame is less than a predefined threshold, it is considerd as the same object in motion. Hence, the same existing object Id is used.
-4. If the distance between the centroid of current frame and previous frame exceeds the threshold, a new object id is added.
-5. When objects detected in the previous frame can not be matched to any existing objects, the object id from tracking is removed.
-6. If the object wasn't detected in previous 'n' number of frames, the object id from tracking is removed.
+#### <ins>Working of SORT tracker</ins>
+**<ins>SORT Tracker</ins>** :- SORT Tracker is a visual multiple object tracking framework based on rudimentary data association and state estimation techniques. It is designed for online tracking applications where only past and current frames are available and the method produces object identities on the fly.
+- Tracker:[SORT](https://github.com/yasenh/sort-cpp)
 
 #### <ins>How line crossing/counting works</ins>
 
 - User gives the co-ordinates to draw the line (x1,y1),(x2,y2) and flow of direction(0/1). ( 0 means left to right, 1 means right to left).
 - This line creates two virtual region of interest (top_roi,bottom_roi).
-- To check if an object/person has moved from one roi to another, their first occurance(object_id) is stored in a hashmap.
-- When an object from one roi moves to the other roi, depending upon the direction the counter is incremented.
+- To check if an person has moved from one roi to another, their first occurance(object_id) is stored in a hashmap.
+- When a person from one roi moves to the other roi, depending upon the direction the counter is incremented.
 
 <img src="./tracker_ss.png" alt="Sample application output"
      margin-right=10px; 
@@ -105,13 +122,12 @@ cd exe/
 - This is a simple sample tutorial application. It is provided for an user to experiment with an object detection model with a very basic tracker algorithm.
 - It shows limited performance if people are moving very fast. this limitation can be improved with custom trained, better deep learning model. 
  
-**TinyYolov2** :- 
+**TinyYolov3** :- 
 - Light-weight model :- Total number of learnable parameters are less as compared to other yolo models.
 - Comparatively lower accuracy performance:- Some detections are missed in the challenging environment like fast moving objects, noisy background etc.
 
-**Centroid Based Tracker** :- 
+**SORT Tracker** :- 
 - Performance is strictly average in case of occlusions.
-- ID switching :- ID switching occurs when two objects are moving closeby.
 - Missed detection :- In case of missed detection, tracker may not be able to predict the precise location of bounding boxes.
 
 - [ERROR] Failed to initialize Coral Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
