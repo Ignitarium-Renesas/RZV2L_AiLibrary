@@ -22,7 +22,7 @@ This application is used to detect specific set of animals in a given image or c
 It can utilize the API, "PRET_AD()" provided in this library. Input to this API will be an image buffer address and it's height and width of the image. The camera application utilizes the API "get_camera_inference" to initiate the inference process.
 > Refer [Animal_detection_img/examples/animal_detection_example.cpp](animal_detection_img/examples/animal_detection_example.cpp) for an example usage
 
-sample video on YouTube -[Animal Detection demo video](https://youtu.be/sJgDmCYcef4)
+sample video on YouTube -[Animal Detection demo](https://youtu.be/)
 
 ## Application details
 ```
@@ -46,6 +46,15 @@ sample video on YouTube -[Animal Detection demo video](https://youtu.be/sJgDmCYc
 |   |   |-- labels.txt # label map
 |   |   `-- animal_yolov3_bmp # DRP-AI files of yolov3
 |   |-- src/ # source code directory
+|-- Animal_detection_usbcam/ # Animal detection application on images
+|   |-- Makefile
+|   |-- etc/ # address map and pre/post process configuration of yolov3
+|   |-- examples/
+|   |   `-- animal_detection_usbcam_example.cpp # example inference code on image
+|   |-- exe/
+|   |   |-- 07_animal_detection_usbcam_app # the executable
+|   |   `-- animal_yolov3_cam # DRP-AI files of yolov3
+|   `-- src/ # source code directory
 |   `-- test_images # test images directory
 `-- README.md
 ```
@@ -88,7 +97,7 @@ make
 
 ### Running the sample application
 Praparation on laptop:
-1. Download the weights files (*.dat) from the release(https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.3).
+1. Download the weights files (*.dat) from the release(https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.1).
 2. Place the weight files at location proper location `07_Animal_detection/Animal_detection_img/exe/yolov3_bmp/` or `07_Animal_detection/Animal_detection_cam/exe/yolov3_cam/`
 3. Now, copy the `RZV2L_AiLibrary` directory to the RZV2L board (/home/root/).
 4. Please follow these steps:
@@ -136,12 +145,21 @@ Enter the height:
 256
 ```
 
-#### Application with camera input
+#### Application with coral camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 07_Animal_detection/Animal_detection_cam/exe/
 ./07_animal_detection_cam_app
 ```
+
+#### Application with usb camera input
+```
+cd /home/root/RZV2L_AiLibrary 
+cd 07_Animal_detection/Animal_detection_usbcam/exe/
+./07_animal_detection_usbcam_app
+```
+
+
 ### Known issues:
 1. [ERROR] Image buffer address is NULL : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.
 2. Segmentation fault : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is larger than the actual image dimensions, then a segmentation fault will occur.
