@@ -121,6 +121,10 @@ git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary
 cd RZV2L_AiLibrary/06_Face_recognition_spoof_detection/<application>
 make
 ```
+Note: For supporting Coral Camera input for face recognition and spoof detection applications uncomment below line from `src/define.h`
+```
+//#define INPUT_CORAL
+```
 
 ### Running the sample applications
 
@@ -156,7 +160,7 @@ cd 06_Face_recognition_spoof_detection/Face_registration/exe/
         ..Press Enter to capture..
         ---------------------------
         ```
-        ![](res/wayland-screenshot-2023-01-03_07-09-10.png)
+        ![](res/wayland-screenshot-2023-05-23_08-17-39.png)
     2. for creating new face register or for adding new face to register.
         1. Enter the number of samples to be embdded.
         2. Enter person name and path to his/her image.
@@ -228,7 +232,7 @@ cd 06_Face_recognition_spoof_detection/Face_recognition_cam/exe/
 root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_cam/exe# ./Face_recognition_cam 
 RZ/V2L DRP-AI Sample Application
 Model : ArcFace    | arcface_cam
-Input : Coral Camera
+Input : USB Camera
 Loading : arcface_cam/drp_desc.bin
 Loading : arcface_cam/arcface_cam_drpcfg.mem
 Loading : arcface_cam/drp_param.bin
@@ -335,3 +339,8 @@ cd 06_Face_recognition_spoof_detection/Face_spoof_detection_cam/exe/
 4. [ERROR] Failed to initialize USB Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
 5. permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.
 6. [ERROR] Failed to open: <prefix>/<prefix>_weight.dat error=2. [ERROR] Failed to load data from memory: <prefix>/<prefix>_weight.dat Failed to load DRP-AI object files - This error suggests that the weight file is not availbale in the `exe` folder. Download the weight file from the release in github and place it properly in the `exe/subfolder`.
+7. When capturing a new face, USB camera is not detecting then edit `Face_registration/src/capture_face.cpp` and build new executable.
+```
+    /* Create a VideoCapture object. Change the constructor argument based on the video feed (/dev/video1 is being captured below) */
+    VideoCapture cap(1);
+```

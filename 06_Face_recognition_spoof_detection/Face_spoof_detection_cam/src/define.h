@@ -52,7 +52,7 @@
 *  - drpai_prefix = directory name of DRP-AI Object files (DRP-AI Translator output)
 *  - input_img = input image to DRP-AI (size and format are determined in DRP-AI Translator)
 ******************************************/
-const static std::string drpai_prefix   = "arcface_cam";
+const static std::string drpai_prefix   = "resnet50_classifier_cam";
 
 /*****************************************
 * Static Variables (No need to change)
@@ -87,7 +87,12 @@ const static std::string drpai_file_path[5] =
 #define CAM_IMAGE_WIDTH         (640)
 #define CAM_IMAGE_HEIGHT        (480)
 #define CAM_IMAGE_CHANNEL_YUY2  (2)
+//#define INPUT_CORAL
+#ifdef INPUT_CORAL
 #define CAP_BUF_NUM                 (6)
+#else /* INPUT_CORAL */
+#define CAP_BUF_NUM                 (3)
+#endif /* INPUT_CORAL */
 
 /*DRP-AI Input image information*/
 #define DRPAI_IN_WIDTH              (CAM_IMAGE_WIDTH)

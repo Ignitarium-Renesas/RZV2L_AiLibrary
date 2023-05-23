@@ -110,6 +110,7 @@ const static std::string drpai_file_path[5] =
 /*****************************************
 * For capturing faces
 ******************************************/
+//#define INPUT_CORAL
 #define CAPTURE_DIR "captures"
 
 /*****************************************

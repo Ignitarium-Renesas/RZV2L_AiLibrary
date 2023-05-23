@@ -37,6 +37,31 @@ static void make_cap_dir(void)
     return;
 }
 
+#ifdef INPUT_CORAL
+static int coral_cam_init(void)
+{
+    const char* commands[4] =
+    {
+        "media-ctl -d /dev/media0 -r",
+        "media-ctl -d /dev/media0 -V \"\'ov5645 0-003c\':0 [fmt:UYVY8_2X8/640x480 field:none]\"",
+        "media-ctl -d /dev/media0 -l \"\'rzg2l_csi2 10830400.csi2\':1 -> \'CRU output\':0 [1]\"",
+        "media-ctl -d /dev/media0 -V \"\'rzg2l_csi2 10830400.csi2\':1 [fmt:UYVY8_2X8/640x480 field:none]\""
+    };
+
+    /* media-ctl command */
+    for (int i=0; i<4; i++)
+    {
+        int ret = system(commands[i]);
+        if (ret<0)
+        {
+            printf("%s: failed media-ctl commands. index = %d\n", __func__, i);
+            return -1;
+        }
+    }
+    return 0;
+}
+#endif /* INPUT_CORAL */
+
 static int capture_face(void){
 
     string file_name;
@@ -49,11 +74,16 @@ static int capture_face(void){
     cout << "..Press Enter to capture.." << endl;
     cout << "---------------------------" << endl;
 
+#ifdef INPUT_CORAL
+    // init Coral camera
+    coral_cam_init();
+#endif /* INPUT_CORAL */
+
     /* create capture dir */
     make_cap_dir();
 
-    /* Create a VideoCapture object. Change the constructor argument based on the video feed (/dev/video1 is being captured below) */
-    VideoCapture cap(1); 
+    /* Create a VideoCapture object. Change the constructor argument based on the video feed (/dev/video0 is being captured below) */
+    VideoCapture cap(0); 
 
     /* Check if camera opened successfully */
     if(!cap.isOpened()){
