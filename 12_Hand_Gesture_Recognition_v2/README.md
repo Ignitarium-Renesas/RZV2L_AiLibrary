@@ -30,8 +30,7 @@ Model Reference https://github.com/cansik/yolo-hand-detection
 
 Pretrained Resnet18 based classifier is used to recognize hand gesture from the detected hands. The classifier is trained on HAgrid (HAnd Gesture And Gesture Recognition Image Dataset) dataset.
 
-Model Reference https://github.com/hukenovs/hagrid (This work is licensed under a variant of Creative Commons Attribution-ShareAlike 4.0 International License by original authors.
-Please see the specific license before using this application).
+Model Reference https://github.com/hukenovs/hagrid
 
 
 ### Application with camera input
@@ -74,7 +73,7 @@ cd 12_Hand_Gesture_Recognition_v2/exe
 ./12_Hand_Gesture_Recognition_v2
 ```
 ## Limitation
-1. The prediction works best when the distance between camera and hand is approximately 0.5 metre.
+1. The prediction works best when the distance between camera and hand is in between 0.5 - 1.0 metre.
 2. The accuracy improves with minimum background noise or movement. 
 
 ### Known issues:

@@ -74,6 +74,7 @@ static uint32_t total_time = 0;
 static uint32_t yolo_time = 0;
 static uint32_t hand_gesture_time[NUM_MAX_HAND];
 static std::string gesture;
+static float thresh_score = 0;
 
 static int16_t cropx[NUM_MAX_HAND];
 static int16_t cropy[NUM_MAX_HAND];
@@ -731,6 +732,7 @@ static void R_Post_Proc_ResNet18(float* floatarr, uint8_t n_pers)
 {
     int32_t i = 0;
     int32_t result_cnt = 0;
+    float percent_score = 0;
     /* Load label from label file */
     std::string labels = label_list;
     std::map<int32_t, std::string> label_file_map = load_label_file(labels);
@@ -754,7 +756,10 @@ static void R_Post_Proc_ResNet18(float* floatarr, uint8_t n_pers)
     }
     for (auto it = result.rbegin(); it != result.rend(); it++)
     {
+        percent_score = (*it).first*100;
+        thresh_score = percent_score;
         gesture = label_file_map[(*it).second];
+
         break;
     }
 
@@ -884,20 +889,12 @@ static int8_t print_result(Image* img)
         str1 = stream.str();
     }    
 
-    if (ai_time_prev != (uint32_t) ai_time)
-    {
-        ai_time_prev = (uint32_t) ai_time;
-        stream.str("");
-        stream << "Hand Gesture Time: " <<std::setw(3) << ai_time_prev << "msec";
-        str4 = stream.str();
-    }
     img->write_string_rgb(str4, TEXT_WIDTH_OFFSET, LINE_HEIGHT*2, CHAR_SCALE_SMALL, WHITE_DATA);
 
-    if(hand_count == 0)
-    {
-
+    if(hand_count == 0 && thresh_score > 70)
+     {
         stream.str("");
-        stream << " Hand Not Detected " << std::setw(3);
+        stream << "Gesture Detected :"<< gesture<<" (With low confidence)"<< std::setw(3);
         str3 = stream.str();
         img->write_string_rgb(str3, TEXT_WIDTH_OFFSET, LINE_HEIGHT*3, CHAR_SCALE_SMALL, WHITE_DATA);
     }
@@ -905,7 +902,7 @@ static int8_t print_result(Image* img)
     {
 
         stream.str("");
-        stream << "Gesture :" << gesture << std::setw(3);
+        stream << "Gesture Detected :" << gesture << std::setw(3) ;
         str3 = stream.str();
         img->write_string_rgb(str3, TEXT_WIDTH_OFFSET, LINE_HEIGHT*3, CHAR_SCALE_SMALL, WHITE_DATA);
     }
@@ -915,7 +912,7 @@ static int8_t print_result(Image* img)
         stream << "Multiple hands detected.!!!\n" << std::setw(3);
         str2 = stream.str();
 
-        img->write_string_rgb(str2, TEXT_WIDTH_OFFSET, LINE_HEIGHT*3, CHAR_SCALE_SMALL, WHITE_DATA);
+        img->write_string_rgb(str2, TEXT_WIDTH_OFFSET, LINE_HEIGHT*4, CHAR_SCALE_SMALL, WHITE_DATA);
     }
 
     return 0;
@@ -1268,6 +1265,7 @@ void *R_Inf_Thread(void *threadid)
                                         }
                                         /*CPU Post Processing For Resnet34 & Display the Results*/
                                         R_Post_Proc_ResNet18(&drpai_output_buf[0],i);
+                                        // std::cout<<"percentage  = "<<thresh_score<<std::endl;
                                         break;
                                     }
                                     else //inf_status != 0
