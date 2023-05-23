@@ -1,8 +1,8 @@
 /***********************************************************************************************************************
 * DISCLAIMER
-* This software is supplied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
+* This software is suheadied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
 * other uses are authorized. This software is owned by Renesas Electronics Corporation and is protected under all
-* applicable laws, including copyright laws.
+* aheadicable laws, including copyright laws.
 * THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
 * THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAIMED. TO THE MAXIMUM
@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : camera.cpp
 * Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLOv3 MIPI Camera version
+* Description  : RZ/V2L DRP-AI Sample Application for face spoof detection with Pytorch-ResNet MIPI Camera version
 ***********************************************************************************************************************/
 
 /*****************************************
@@ -41,7 +41,7 @@ Camera::~Camera()
 
 /*****************************************
 * Function Name : start_camera
-* Description   : Function to initialize MIPI camera capture
+* Description   : Function to initialize USB/MIPI camera capture
 * Arguments     : -
 * Return value  : 0 if succeeded
 *                 not 0 otherwise
@@ -51,7 +51,9 @@ int8_t Camera::start_camera()
     int8_t ret = 0;
     int32_t i = 0;
     int32_t n = 0;
+    uint8_t* word_ptr;
     
+#ifdef INPUT_CORAL
     const char* commands[4] =
     {
         "media-ctl -d /dev/media0 -r",
@@ -72,6 +74,7 @@ int8_t Camera::start_camera()
             return -1;
         }
     }
+#endif /* INPUT_CORAL */
 
     ret = open_camera_device();
     if (0 != ret) return ret;
@@ -101,7 +104,7 @@ int8_t Camera::start_camera()
         * Note: Do not use memset() for this.
         *       Because it does not work as expected. */
         {
-            uint8_t * word_ptr = buffer[n];
+            word_ptr = buffer[n];
             for(i = 0 ; i < imageLength; i++)
             {
                 word_ptr[i] = 0;
@@ -307,12 +310,22 @@ int8_t Camera::open_camera_device()
             return -1;
         }
 
+#ifdef INPUT_CORAL
         ret = strcmp((const char*)fmt.driver, "rzg2l_cru");
         if (0 == ret)
         {
             printf("[INFO] CSI2 Camera: %s\n", dev_name);
             break;
         }
+#else /* INPUT_CORAL */
+        /* Search USB camera */
+        ret = strcmp((const char*)fmt.driver, "uvcvideo");
+        if (0 == ret)
+        {
+            printf("[INFO] USB Camera: %s\n", dev_name);
+            break;
+        }
+#endif /* INPUT_CORAL */
         close(m_fd);
     }
 
