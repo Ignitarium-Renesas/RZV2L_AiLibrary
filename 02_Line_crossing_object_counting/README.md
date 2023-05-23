@@ -85,10 +85,16 @@ The overall flow of the application can be described in following sequence :
      width=600px;
      height=334px />
 
-### Building the application
+### Building the application 
 After doing desired modifications in the source code, Perform this steps on a laptop/PC with SDK installed.
+- MIPI Cam
 ~~~ 
-cd RZV2L_AiLibrary/02_Line_crossing_object_counting
+cd RZV2L_AiLibrary/02_Line_crossing_object_counting/02_Line_crossing_object_counting_MIPI_cam
+make
+~~~
+- USB Cam
+~~~ 
+cd RZV2L_AiLibrary/02_Line_crossing_object_counting/02_Line_crossing_object_counting_USB_cam
 make
 ~~~
 
@@ -105,13 +111,13 @@ cd exe/
      margin-right=10px; 
      width=600px;
      height=334px />
-
+     
 ### detailed explaination of the syntax
 
 **./<application_name> <class_name> <line_pointx1> <line_pointy1> <line_pointx2> <line_pointy2> <flow_direction>**
 
 1. Applicaiton name :- 02_Line_crossing_object_counting
-2. Class_name :- person,car,cat,dog...(any class from coco dataset)(string dtype)
+2. Class_name :- person,car,cat,dog...(any class from coco dataset but limited to person for now)(string dtype)
 3. line_pointx1 :- xmin(leftmost x co-ordinate) for the line (int dtype)
 4. line_pointx1 :- ymin(leftmost y co-ordinate) for the line (int dtype)
 5. line_pointx1 :- xmax(rightmost x co-ordinate) for the line (int dtype)
