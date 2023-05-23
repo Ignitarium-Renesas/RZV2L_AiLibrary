@@ -7,7 +7,7 @@ This application is used to count the human heads present in an image or a video
 It can utilize the API, "*PRET_HC()*" provided in this library. Input to this API will be an image buffer address and it's height and width of the image. 
 > Refer [Head_count_top_img/examples/headcount_top_img_example.cpp](Head_count_top_img/examples/headcount_top_img_example.cpp) for an example usage
 
-sample video on YouTube -[Head counting from top demo]()
+sample video on YouTube -[Head counting from top demo](https://youtu.be/z2WW2yyLAV0)
 
 ## Application details
 ```

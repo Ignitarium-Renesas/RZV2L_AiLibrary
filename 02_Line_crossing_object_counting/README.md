@@ -4,7 +4,7 @@
 Line crossing object counting is a sample application that demonstrates counting of the objects when they cross a virtual line drawn by the user.
 Application uses a deep learning based object detector tinyYoloV3 to detect the objects and a SORT based tracker to track the objects. 
 
-sample video on YouTube -[Line crossing object counting demo](https://youtu.be/-fZypjgsBYo)
+sample video on YouTube -[Line crossing object counting demo](https://youtu.be/nbX9TVnLcO8)
 
 ## Application details
 ```
