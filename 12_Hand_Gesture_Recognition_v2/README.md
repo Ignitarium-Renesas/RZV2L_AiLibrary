@@ -9,14 +9,25 @@ sample video on YouTube -[Hand gesture recognition demo video](https://youtu.be/
 
 ## Hand Gesture Recognition Application details
 ```
-├── etc # address map and pre/post process configuration of both hand gesture recognition (resnet18) and tiny-yolov3 (hand detection)
-├── exe
-│   ├── resnet18_cam # DRP-AI files of hand gesture
-│   ├── 12_Hand_Gesture_Recognition_v2 # The executable
-│   └── tinyyolov3_cam # DRP-AI files of tiny-yolov3
-├── Makefile
-├── README.md
-└── src # source code directory
+|-- Hand_Gesture_Recognition_v2_cam # Application with CORAL camera input
+|   |-- Makefile
+|   |-- etc # address map and pre/post process configuration of both hand gesture recognition (resnet18) and tiny-yolov3 (hand detection)
+|   |-- exe
+|   |   |-- hagrid_labels.txt # Gesture labels
+|   |   |-- hand_gesture_recognition_v2_cam_app # The executable
+|   |   |-- resnet18_cam # DRP-AI files of hand gesture
+|   |   `-- tinyyolov3_cam # DRP-AI files of tiny-yolov3
+|   `-- src # source code directory
+|-- Hand_Gesture_Recognition_v2_usbcam # Application with USB camera input
+|   |-- Makefile
+|   |-- etc # address map and pre/post process configuration of both hand gesture recognition (resnet18) and tiny-yolov3 (hand detection)
+|   |-- exe
+|   |   |-- hagrid_labels.txt # Gesture labels
+|   |   |-- hand_gesture_recognition_v2_usbcam_app # The executable
+|   |   |-- resnet18_cam # DRP-AI files of hand gesture
+|   |   `-- tinyyolov3_cam # DRP-AI files of tiny-yolov3
+|   `-- src # source code directory
+`-- README.md
 ```
 
 ### Model Details
@@ -48,13 +59,8 @@ Please follow the below steps:
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
-cd RZV2L_AiLibrary/12_Hand_Gesture_Recognition_v2
+cd RZV2L_AiLibrary/12_Hand_Gesture_Recognition_v2/Hand_Gesture_Recognition_v2_<cam/usbcam>
 make
-```
-Note: For supporting Coral Camera input for face recognition and spoof detection applications uncomment below line from `src/define.h`.
-```
-//#define INPUT_CORAL
-```
 
 ### Running the sample application
 
@@ -63,15 +69,15 @@ Note: For supporting Coral Camera input for face recognition and spoof detection
 
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 12_Hand_Gesture_Recognition_v2/exe
-./12_Hand_Gesture_Recognition_v2
+cd 12_Hand_Gesture_Recognition_v2/Hand_Gesture_Recognition_v2_<cam/usbcam>/exe
+./hand_gesture_recognition_v2_<cam/usbcam>_app
 ```
 
 #### Example:
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 12_Hand_Gesture_Recognition_v2/exe
-./12_Hand_Gesture_Recognition_v2
+cd 12_Hand_Gesture_Recognition_v2/Hand_Gesture_Recognition_v2_usbcam/exe
+./hand_gesture_recognition_v2_usbcam_app
 ```
 ## Limitation
 1. The prediction works best when the distance between camera and hand is in between 0.5 - 1.0 metre.

@@ -1,6 +1,0 @@
-conv_yuv2rgb.mem                  1090967552     179492
-resize_hwc.mem                    1091147056     201900
-imagescaler.mem                   1091348960     173836
-maxpooling_k3_st2.mem             1091522800     131864
-gap.mem                           1091654672     141508
-softmax.mem                       1091796192     151892
