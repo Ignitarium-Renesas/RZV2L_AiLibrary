@@ -4,18 +4,26 @@
 
 Hand gesture recognition application is used to recognize the hand signs i.e,(one, two/scissor, three, four, five/paper, thumbs_down, thumbs_up, rock, blank) shown by an user in front of the camera.
 
-> Refer [08_hand_gesture_detection/src/sample_gesture_prediction.cpp](08_hand_gesture_detection/src/sample_gesture_prediction.cpp) for an example usage
+> Refer [08_Hand_Gesture_Recognition/Hand_Gesture_Recognition_usbcam/src/sample_gesture_prediction.cpp](08_hand_gesture_detection/src/sample_gesture_prediction.cpp) for an example usage
 
 sample video on YouTube - [hand gesture detection video](https://youtu.be/hP-Gr_Sq8a8)
 
 ## Application details
 
 ```
-|-- 08_hand_gesture_detection/ 
+|-- 08_Hand_Gesture_Recognition/
+|-- | Hand_Gesture_Recognition_cam/
 |   |-- Makefile
 |   |-- etc/ # address map and pre/post process configuration
 |   |-- exe/
-|   |   |-- 08_hand_gesture_detection # the executable
+|   |   |-- hand_gesture_detection_cam_app # the executable
+|   |   `-- hand_cam # DRP-AI files of hrnetv2
+|   `-- src/ # source code directory
+|-- | Hand_Gesture_Recognition_usbcam/
+|   |-- Makefile
+|   |-- etc/ # address map and pre/post process configuration
+|   |-- exe/
+|   |   |-- hand_gesture_detection_usbcam_app # the executable
 |   |   `-- hand_cam # DRP-AI files of hrnetv2
 |   `-- src/ # source code directory
 `-- README.md
@@ -74,7 +82,6 @@ You can find the [dataset](https://github.com/jin-s13/COCO-WholeBody/).
 Random forest is a commonly-used machine learning algorithm, which combines the output of multiple decision trees to reach a single result. It was trained on custom dataset for selected classes i.e, [one, two/scissor, three, four, five/paper, thumbs_down, thumbs_up, rock, blank].
 
 
-
 ### Application with camera input
 - Camera input is fed to the model with proper pre-processing.
 - Model produces 21 keypoints for the hand.
@@ -87,7 +94,7 @@ Please follow the below steps once the desired changes are made in the source co
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
-cd RZV2L_AiLibrary/08_hand_gesture_detection/ 
+cd RZV2L_AiLibrary/08_Hand_Gesture_Recognition/Hand_Gesture_Recognition_<cam/usbcam>/exe 
 make
 ```
 
