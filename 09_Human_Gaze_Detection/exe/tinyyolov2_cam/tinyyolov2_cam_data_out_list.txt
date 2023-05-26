@@ -1,5 +1,0 @@
-Output_node_name: post_out
-         Address: 0x88bda140
-         Channel: 30
-         Width  : 13
-         Height : 13

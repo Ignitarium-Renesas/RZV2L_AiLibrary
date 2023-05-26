@@ -9,14 +9,25 @@ sample video on YouTube -[Gaze detection demo](https://youtu.be/X_eH5UcThrc)
 ## Application details
 
 ```
-|-- Makefile
-|-- README.md
-|-- etc # address map and pre/post process configuration of both eth-xgaze and tiny-yolov2
-|-- exe
-|   |-- 09_Human_Gaze_Detection # The executable
-|   |-- resnet18_cam # DRP-AI files of resnet-18
-|   `-- tinyyolov2_cam # DRP-AI files of tinyyolov2
-`-- src # source code directory
+|-- 09_Human_Gaze_Detection
+|-- Human_Gaze_Detection_cam
+|  |-- Makefile
+|  |-- README.md
+|  |-- etc # address map and pre/post process configuration of both eth-xgaze and tiny-yolov2
+|  |-- exe
+|  |  |-- Human_Gaze_Detection_cam_app # The executable
+|  |  |-- resnet18_cam # DRP-AI files of resnet-18
+|  |  |-- tinyyolov2_cam # DRP-AI files of tinyyolov2
+|  |-- src # source code directory
+|-- Human_Gaze_Detection_usbcam
+|  |-- Makefile
+|  |-- README.md
+|  |-- etc # address map and pre/post process configuration of both eth-xgaze and tiny-yolov2
+|  |-- exe
+|  |  |-- Human_Gaze_Detection_usbcam_app # The executable
+|  |  |-- resnet18_cam # DRP-AI files of resnet-18
+|  |  |-- tinyyolov2_cam # DRP-AI files of tinyyolov2
+|  |-- src # source code directory
 ```
 
 ### Model details
@@ -52,7 +63,7 @@ Please follow the below steps for image application once the desired changes in 
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary
-cd RZV2L_AiLibrary/09_Human_Gaze_detection/
+cd RZV2L_AiLibrary/09_Human_Gaze_detection/Human_Gaze_detection_usbcam/
 make
 ```
 
@@ -63,16 +74,16 @@ make
 
 ```
 cd /home/root/RZV2L_AiLibrary
-cd 09_Human_Gaze_detection/exe/
-./09_Human_Gaze_detection
+cd 09_Human_Gaze_detection/Human_Gaze_detection_usbcam/exe/
+./09_Human_Gaze_detection_usbcam_app
 ```
 
 ### Example:
 
 ```
 cd /home/root/RZV2L_AiLibrary
-cd 09_Human_Gaze_detection/exe/
-./09_Human_Gaze_detection
+cd 09_Human_Gaze_detection/Human_Gaze_detection_usbcam/exe/
+./09_Human_Gaze_detection_usbcam_app
 ```
 
 ## Limitations
