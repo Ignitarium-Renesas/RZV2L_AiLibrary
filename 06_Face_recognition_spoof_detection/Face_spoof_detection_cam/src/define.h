@@ -87,7 +87,7 @@ const static std::string drpai_file_path[5] =
 #define CAM_IMAGE_WIDTH         (640)
 #define CAM_IMAGE_HEIGHT        (480)
 #define CAM_IMAGE_CHANNEL_YUY2  (2)
-//#define INPUT_CORAL
+#define INPUT_CORAL
 #ifdef INPUT_CORAL
 #define CAP_BUF_NUM                 (6)
 #else /* INPUT_CORAL */

@@ -84,7 +84,7 @@ const static std::string drpai_file_path[5] =
 /*****************************************
 * Macro for Application
 ******************************************/
-//#define INPUT_CORAL
+#define INPUT_CORAL
 /*Camera:: Capture Information */
 #ifdef INPUT_CORAL
 #define CAP_BUF_NUM                 (6)

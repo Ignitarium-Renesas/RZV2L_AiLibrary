@@ -13,7 +13,7 @@ BSP_SDK_FLAG = \
 all: src/sample_app_resnet50_cam.cpp
 	${CXX} -std=c++14 src/sample_app_resnet50_cam.cpp src/camera.cpp src/image.cpp src/wayland.cpp \
 	${OPENCV_LINK} ${BSP_SDK_FLAG} \
-	-lpthread -O2 -ldl ${LDFLAGS} -o exe/Face_spoof_detection_cam
+	-lpthread -O2 -ldl ${LDFLAGS} -o exe/face_spoof_detection_cam_app
 
 clean:
-	rm -rf *.o exe/Face_spoof_detection_cam
+	rm -rf *.o exe/face_spoof_detection_cam_app

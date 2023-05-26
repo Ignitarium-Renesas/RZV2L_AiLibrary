@@ -1,0 +1,66 @@
+#######################################
+# Input data
+#######################################
+input_to_pre:
+  -
+    name: "bgr_data"
+    format: "BGR"
+    order: "HWC"
+    shape: [112, 112, 3]
+    type: "uint8"
+
+input_to_body:
+  -
+    name: "data"        # must match ONNX's input name
+    format: "RGB"
+    order: "HWC"          # Inference part can handle only HWC order
+    shape: [112, 112, 3]  # must match ONNX's input shape
+    type: "fp16"          # Inference part can handle only FP16 data
+
+#######################################
+# Output data
+#######################################
+output_from_body:
+  -
+    name: "fc1"
+    shape: [512]
+    order: "C"
+    type: "fp16"
+
+output_from_post:
+  -
+    name: "post_out"
+    shape: [512]
+    order: "C"
+    type: "fp32"
+
+#######################################
+# Preprocess
+#######################################
+preprocess:
+  -
+    src      : ["bgr_data"]
+
+    dest     : ["data"]
+
+    operations:
+
+    -
+      op: cast_any_to_fp16
+      param:
+        DIN_FORMAT: 0 # "uint8"
+
+#######################################
+# Postprocess
+#######################################
+postprocess:
+  -
+    src: ["fc1"]
+
+    dest: ["post_out"]
+
+    operations:
+    -
+      op : cast_fp16_fp32
+      param:
+        CAST_MODE : 0 # FP16 to FP32
