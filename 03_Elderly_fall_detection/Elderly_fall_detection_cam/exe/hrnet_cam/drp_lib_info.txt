@@ -1,0 +1,144 @@
+34  # driver version  v0.2 
+136  # driver version >v0.3
+# conv_yuv2rgb  [MASK : ON]
+# crop  [MASK : ON]
+# resize_hwc  [MASK : ON]
+# imagescaler  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# resize_onnx  [MASK : ON]
+# transpose  [MASK : ON]
+# cast_fp16_fp32  [MASK : ON]
+# ============================
+# Address data in drp_param.bin
+# DRP LIB name[Layer Name]
+# [Start position], [Size(Byte)], [Param name], [Value]
+conv_yuv2rgb[post_0_0_conv_yuv2rgb]
+Start:0[Byte],Size:4[Byte],Param:raddr,Value:0x80000000
+Start:4[Byte],Size:4[Byte],Param:waddr,Value:0x80096000
+crop[post_0_1_crop]
+Start:56[Byte],Size:4[Byte],Param:raddr,Value:0x80096000
+Start:60[Byte],Size:4[Byte],Param:waddr,Value:0x80177000
+resize_hwc[post_0_2_resize_hwc]
+Start:112[Byte],Size:4[Byte],Param:raddr,Value:0x80177000
+Start:116[Byte],Size:4[Byte],Param:waddr,Value:0x80258000
+imagescaler[post_0_2_imagescaler]
+Start:168[Byte],Size:4[Byte],Param:raddr,Value:0x80258000
+Start:172[Byte],Size:4[Byte],Param:waddr,Value:0x8027c000
+Start:216[Byte],Size:4[Byte],Param:ADD_ADDR,Value:0x841ea400
+Start:220[Byte],Size:4[Byte],Param:MUL_ADDR,Value:0x841ea408
+resize_onnx[onnx::Add_1873]
+Start:232[Byte],Size:4[Byte],Param:raddr,Value:0x818e4000
+Start:236[Byte],Size:4[Byte],Param:waddr,Value:0x818f0000
+resize_onnx[onnx::Add_1985]
+Start:288[Byte],Size:4[Byte],Param:raddr,Value:0x81c74000
+Start:292[Byte],Size:4[Byte],Param:waddr,Value:0x81c77000
+resize_onnx[onnx::Add_1999]
+Start:344[Byte],Size:4[Byte],Param:raddr,Value:0x81ca7000
+Start:348[Byte],Size:4[Byte],Param:waddr,Value:0x81cad000
+resize_onnx[onnx::Add_1977]
+Start:400[Byte],Size:4[Byte],Param:raddr,Value:0x81de5000
+Start:404[Byte],Size:4[Byte],Param:waddr,Value:0x81df1000
+resize_onnx[onnx::Add_2106]
+Start:456[Byte],Size:4[Byte],Param:raddr,Value:0x82241000
+Start:460[Byte],Size:4[Byte],Param:waddr,Value:0x8224d000
+resize_onnx[onnx::Add_2114]
+Start:512[Byte],Size:4[Byte],Param:raddr,Value:0x82391000
+Start:516[Byte],Size:4[Byte],Param:waddr,Value:0x82394000
+resize_onnx[onnx::Add_2128]
+Start:568[Byte],Size:4[Byte],Param:raddr,Value:0x82664000
+Start:572[Byte],Size:4[Byte],Param:waddr,Value:0x8266a000
+resize_onnx[onnx::Add_2235]
+Start:624[Byte],Size:4[Byte],Param:raddr,Value:0x827ba000
+Start:628[Byte],Size:4[Byte],Param:waddr,Value:0x827c6000
+resize_onnx[onnx::Add_2243]
+Start:680[Byte],Size:4[Byte],Param:raddr,Value:0x828f2000
+Start:684[Byte],Size:4[Byte],Param:waddr,Value:0x828f5000
+resize_onnx[onnx::Add_2257]
+Start:736[Byte],Size:4[Byte],Param:raddr,Value:0x82bc5000
+Start:740[Byte],Size:4[Byte],Param:waddr,Value:0x82bcb000
+resize_onnx[onnx::Add_2364]
+Start:792[Byte],Size:4[Byte],Param:raddr,Value:0x82d1b000
+Start:796[Byte],Size:4[Byte],Param:waddr,Value:0x82d27000
+resize_onnx[onnx::Add_2372]
+Start:848[Byte],Size:4[Byte],Param:raddr,Value:0x82e53000
+Start:852[Byte],Size:4[Byte],Param:waddr,Value:0x82e56000
+resize_onnx[onnx::Add_2386]
+Start:904[Byte],Size:4[Byte],Param:raddr,Value:0x8313b000
+Start:908[Byte],Size:4[Byte],Param:waddr,Value:0x83141000
+resize_onnx[onnx::Add_2524]
+Start:960[Byte],Size:4[Byte],Param:raddr,Value:0x83291000
+Start:964[Byte],Size:4[Byte],Param:waddr,Value:0x8329d000
+resize_onnx[onnx::Add_2540]
+Start:1016[Byte],Size:4[Byte],Param:raddr,Value:0x83399000
+Start:1020[Byte],Size:4[Byte],Param:waddr,Value:0x83399c00
+resize_onnx[onnx::Add_2562]
+Start:1072[Byte],Size:4[Byte],Param:raddr,Value:0x833c9c00
+Start:1076[Byte],Size:4[Byte],Param:waddr,Value:0x833cb400
+resize_onnx[onnx::Add_2582]
+Start:1128[Byte],Size:4[Byte],Param:raddr,Value:0x833e3400
+Start:1132[Byte],Size:4[Byte],Param:waddr,Value:0x833e6400
+resize_onnx[onnx::Add_2532]
+Start:1184[Byte],Size:4[Byte],Param:raddr,Value:0x83482400
+Start:1188[Byte],Size:4[Byte],Param:waddr,Value:0x83485400
+resize_onnx[onnx::Add_2554]
+Start:1240[Byte],Size:4[Byte],Param:raddr,Value:0x8379a400
+Start:1244[Byte],Size:4[Byte],Param:waddr,Value:0x837a0400
+resize_onnx[onnx::Add_2726]
+Start:1296[Byte],Size:4[Byte],Param:raddr,Value:0x83908400
+Start:1300[Byte],Size:4[Byte],Param:waddr,Value:0x83914400
+resize_onnx[onnx::Add_2734]
+Start:1352[Byte],Size:4[Byte],Param:raddr,Value:0x83a5e400
+Start:1356[Byte],Size:4[Byte],Param:waddr,Value:0x83a61400
+resize_onnx[onnx::Add_2756]
+Start:1408[Byte],Size:4[Byte],Param:raddr,Value:0x83ac1400
+Start:1412[Byte],Size:4[Byte],Param:waddr,Value:0x83ac7400
+resize_onnx[onnx::Add_2742]
+Start:1464[Byte],Size:4[Byte],Param:raddr,Value:0x83b69400
+Start:1468[Byte],Size:4[Byte],Param:waddr,Value:0x83b6a000
+resize_onnx[onnx::Add_2764]
+Start:1520[Byte],Size:4[Byte],Param:raddr,Value:0x83e0a000
+Start:1524[Byte],Size:4[Byte],Param:waddr,Value:0x83e0b800
+resize_onnx[onnx::Add_2928]
+Start:1576[Byte],Size:4[Byte],Param:raddr,Value:0x83f5b800
+Start:1580[Byte],Size:4[Byte],Param:waddr,Value:0x83f67800
+resize_onnx[onnx::Add_2784]
+Start:1632[Byte],Size:4[Byte],Param:raddr,Value:0x83fc7800
+Start:1636[Byte],Size:4[Byte],Param:waddr,Value:0x83fca800
+resize_onnx[onnx::Add_2936]
+Start:1688[Byte],Size:4[Byte],Param:raddr,Value:0x84072800
+Start:1692[Byte],Size:4[Byte],Param:waddr,Value:0x84075800
+resize_onnx[onnx::Add_2944]
+Start:1744[Byte],Size:4[Byte],Param:raddr,Value:0x84123800
+Start:1748[Byte],Size:4[Byte],Param:waddr,Value:0x84124400
+transpose[post_0_0_transpose]
+Start:1800[Byte],Size:4[Byte],Param:raddr,Value:0x84184400
+Start:1804[Byte],Size:4[Byte],Param:waddr,Value:0x8419dc00
+cast_fp16_fp32[post_0_1_cast_fp16_fp32]
+Start:1856[Byte],Size:4[Byte],Param:raddr,Value:0x8419dc00
+Start:1860[Byte],Size:4[Byte],Param:waddr,Value:0x841b7400

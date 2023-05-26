@@ -8,15 +8,26 @@ sample video on YouTube -[Fall detection demo](https://youtu.be/4ALde_vP1lo)
 
 ## Application details
 
+
 ```
-|-- Makefile
-|-- README.md
-|-- etc/ # address map and pre/post process configuration of both hrnet and tiny-yolov2
-|-- exe/
-|   |-- 03_Fall_detection # The executable
-|   |-- hrnet_cam/ # DRP-AI files of hrnet
-|   `-- tinyyolov2_cam/ # DRP-AI files of tiny-yolov2
-`-- src/ # source code directory
+├── Elderly_fall_detection_cam # Elderly fall detection application on CORAL camera input
+│   ├── etc/ # address map and pre/post process configuration of both hrnet and tiny-yolov2
+│   ├── exe/
+│   │   ├── Elderly_fall_detection_cam_app # The executable
+│   │   ├── hrnet_cam/ # DRP-AI files of hrnet
+│   │   └── tinyyolov2_cam/ # DRP-AI files of tiny-yolov2
+│   ├── Makefile
+│   ├── src # source code directory
+|   └── README.md
+└── Elderly_fall_detection_usbcam # Elderly fall detection application on USB camera input
+│    ├── etc # address map and pre/post process configuration of both hrnet and tiny-yolov2
+│    ├── exe
+│    │   ├── Elderly_fall_detection_usbcam_app # The executable
+│    │   ├── hrnet_cam/ # DRP-AI files of hrnet
+│    │   └── tinyyolov2_cam/ # DRP-AI files of tiny-yolov2
+│    ├── Makefile
+│    ├── src # source code directory
+|    └── README.md
 ```
 
 ### Model details
@@ -56,7 +67,7 @@ Please follow the below steps for image application once the desired changes in 
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
-cd RZV2L_AiLibrary/03_Elderly_fall_detection/
+cd RZV2L_AiLibrary/03_Elderly_fall_detection/Elderly_fall_detection_usbcam
 make
 ```
 
@@ -67,8 +78,8 @@ make
 
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 03_Elderly_fall_detection/exe/
-./03_Elderly_fall_detection <x1> <y1> <x2> <y2> <direction>
+cd 03_Elderly_fall_detection/Elderly_fall_detection_usbcam/exe/
+./Elderly_fall_detection_usbcam <x1> <y1> <x2> <y2> <direction>
 ```
 3. Argument description;
     - <x1> - xmin of line of separation (int)
@@ -81,8 +92,8 @@ cd 03_Elderly_fall_detection/exe/
 
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 03_Elderly_fall_detection/exe/
-./03_Elderly_fall_detection 0 240 640 240 0
+cd 03_Elderly_fall_detection/Elderly_fall_detection_usbcam/exe/
+./Elderly_fall_detection_usbcam 0 240 640 240 0
 ```
 
 ## Limitations
