@@ -30,45 +30,67 @@ Classifies the given image to genuine or spoofed.
 
 Classifies the given camera frame to genuine or spoofed.
 ```
-|-- 06_Face_Recognition.mp4		# Demo video
-|-- database				
-|   |-- face_features.csv		# Sample face feature database 
-|-- Face_registration   		# Face registration app
+|-- Face_recognition_cam # Face recognition with CORAL camera input
 |   |-- Makefile
 |   |-- etc
 |   |-- exe
-|   |   |-- Face_registration	# The executable 
-|   |   `-- arcface_bmp		# DRP-AI files of arcface
+|   |   |-- arcface_cam # DRP-AI files of arcface
+|   |   `-- face_recognition_cam_app # The executable
 |   `-- src
-|-- Face_recognition_img		# Face recognition on image app
+|-- Face_recognition_img # Face recognition with image input
 |   |-- Makefile
 |   |-- etc
 |   |-- exe
-|   |   |-- Face_recognition_img	# The executable
-|   |   `-- arcface_bmp		# DRP-AI files of arcface
+|   |   |-- face_recognition_img_app # The executable
+|   |   |-- arcface_bmp # DRP-AI files of arcface
+|   |   `-- sample.bmp
 |   `-- src
-|-- Face_recognition_cam		# Face recognition on cam app
+|-- Face_recognition_usbcam # Face recognition with USB camera input
 |   |-- Makefile
 |   |-- etc
 |   |-- exe
-|   |   |-- Face_recognition_cam	# The executable
-|   |   `-- arcface_bmp		# DRP-AI files of arcface
+|   |   |-- arcface_cam # DRP-AI files of arcface
+|   |   `-- face_recognition_usbcam_app # The executable
 |   `-- src
-|-- Face_spoof_detection_img		# Face spoof detection on image app
+-- Face_registration_cam # Face registration app with CORAL camera input
 |   |-- Makefile
 |   |-- etc
 |   |-- exe
-|   |   |-- Face_spoof_detection_img	# The executable
-|   |   `-- resnet50_classifier_bmp	# DRP-AI files of resnet50
+|   |   |-- arcface_bmp # DRP-AI files of arcface
+|   |   `-- face_registration_cam_app # The executable
 |   `-- src
-|-- Face_spoof_detection_cam		# Face spoof detection on cam app
+|-- Face_registration_usbcam # Face registration app with USB camera input
 |   |-- Makefile
 |   |-- etc
 |   |-- exe
-|   |   |-- Face_spoof_detection_cam	# The executable
-|   |   `-- resnet50_classifier_cam	# DRP-AI files of resnet50
+|   |   |-- arcface_bmp # DRP-AI files of arcface
+|   |   `-- face_registration_usbcam_app # The executable
 |   `-- src
-`-- README.md
+|-- Face_spoof_detection_cam # Face spoof detection on CORAL Camera input
+|   |-- Makefile
+|   |-- etc
+|   |-- exe
+|   |   |-- face_spoof_detection_cam_app # The executable
+|   |   `-- resnet50_classifier_cam # DRP-AI files of resnet50
+|   `-- src
+|-- Face_spoof_detection_img # Face spoof detection on image input
+|   |-- Makefile
+|   |-- etc
+|   |-- exe
+|   |   |-- face_spoof_detection_img_app # The executable
+|   |   |-- resnet50_classifier_bmp # DRP-AI files of resnet50
+|   |   `-- sample.bmp
+|   `-- src
+|-- Face_spoof_detection_usbcam Face spoof detection on USB Camera input
+|   |-- Makefile
+|   |-- etc
+|   |-- exe
+|   |   |-- face_spoof_detection_usbcam_app # The executable
+|   |   `-- resnet50_classifier_cam # DRP-AI files of resnet50
+|   `-- src
+|-- README.md
+|-- database
+    `-- face_features.csv # Sample face feature database
 ```
 
 ### Model details
@@ -99,13 +121,18 @@ Classifies the given camera frame to genuine or spoofed.
 
 ## Running the application
 
-Weight files for this application are availbale in release 1.2.4. https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.4
-Kindly paste the file https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v1.2.4/arcface_bmp_weight.dat in folders 
+Weight files for this application are availbale in [release 1.2.4](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.4).
+Kindly paste the file [arcface_bmp_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v1.2.4/arcface_bmp_weight.dat) in below folders 
+```
 06_Face_recognition_spoof_detection/Face_recognition_img/exe/arcface_bmp/
-06_Face_recognition_spoof_detection/Face_registration/exe/arcface_bmp/
-
-and https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v1.2.4/arcface_cam_weight.dat file in folder
+06_Face_recognition_spoof_detection/Face_registration_usbcam/exe/arcface_bmp/
+06_Face_recognition_spoof_detection/Face_registration_cam/exe/arcface_bmp/
+```
+and [arcface_cam_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v1.2.4/arcface_cam_weight.dat) file in below folders.
+```
 06_Face_recognition_spoof_detection/Face_recognition_cam/exe/arcface_cam/
+06_Face_recognition_spoof_detection/Face_recognition_usbcam/exe/arcface_cam/
+```
 
 ### Building the sample application:
 
@@ -121,10 +148,6 @@ git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary
 cd RZV2L_AiLibrary/06_Face_recognition_spoof_detection/<application>
 make
 ```
-Note: For supporting Coral Camera input for face recognition and spoof detection applications uncomment below line from `src/define.h`
-```
-//#define INPUT_CORAL
-```
 
 ### Running the sample applications
 
@@ -135,8 +158,8 @@ Note: For supporting Coral Camera input for face recognition and spoof detection
 
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 06_Face_recognition_spoof_detection/Face_registration/exe/
-./Face_registration
+cd 06_Face_recognition_spoof_detection/Face_registration_<cam/usbcam>/exe/
+./face_registration_cam
 ```
 3. Choose whether to capture image, append or write database.
     1. for capturing new face
@@ -144,28 +167,28 @@ cd 06_Face_recognition_spoof_detection/Face_registration/exe/
         2. The face must be inside the square box.
         3. Press "Enter" key to capture.
         ```
-        root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration/exe# ./Face_registration 
-        Choose any one option from below
-        [0] for capturing new face
-        [1] for adding new face to register [Add new values to existing register]
-        [2] for creating new face register [Erasing previous register]
-        0
-        ---------------------------
-        Capturing from USB Camera
-        ---------------------------
+	root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration_cam/exe# ./face_registration_cam 
+	Choose any one option from below
+	[0] for capturing new face
+	[1] for adding new face to register [Add new values to existing register]
+	[2] for creating new face register [Erasing previous register]
+	0
+	---------------------------
+	Capturing from USB Camera
+	---------------------------
 
-        Enter the name of the picture
-        test 
-        ---------------------------
-        ..Press Enter to capture..
-        ---------------------------
+	Enter the name of the picture
+	rohit
+	---------------------------
+	..Press Enter to capture..
+	---------------------------
         ```
         ![](res/wayland-screenshot-2023-05-23_08-17-39.png)
     2. for creating new face register or for adding new face to register.
         1. Enter the number of samples to be embdded.
         2. Enter person name and path to his/her image.
         ```
-        root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration/exe# ./Face_registration 
+	root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration_cam/exe# ./face_registration_cam 
         Choose any one option from below
         [0] for capturing new face
         [1] for adding new face to register [Add new values to existing register]
@@ -201,7 +224,7 @@ cd 06_Face_recognition_spoof_detection/Face_recognition_img/exe/
 3. Copy test image (`sample.bmp`) to `06_Face_recognition_spoof_detection/Face_recognition_img/exe/`.
 4. Run the executable.
 ```
-root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_img/exe# ./Face_recognition_img 
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_img/exe# ./face_recognition_img_app
 RZ/V2L DRP-AI Sample Application
 Model : ArcFace    | arcface_bmp
 Input : Windows Bitmap v3 | sample.bmp
@@ -225,11 +248,11 @@ Recognized person is Paul
 
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 06_Face_recognition_spoof_detection/Face_recognition_cam/exe/
+cd 06_Face_recognition_spoof_detection/Face_recognition_<cam/webcam>/exe/
 ```
 4. Run the executable. When calibrating the background no faces or moving objects be present in the frame.
 ```
-root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_cam/exe# ./Face_recognition_cam 
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_cam/exe# ./face_recognition_cam_app 
 RZ/V2L DRP-AI Sample Application
 Model : ArcFace    | arcface_cam
 Input : USB Camera
@@ -295,7 +318,7 @@ cd 06_Face_recognition_spoof_detection/Face_spoof_detection_img/exe/
 4. Copy the image to be checked to `Face_spoof_detection_img/exe/sample.bmp`.
 5. Run the executable.
 ```
-root@smarc-rzv2l:~RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_spoof_detection_img/exe# ./Face_spoof_detection_img 
+root@smarc-rzv2l:~RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_spoof_detection_img/exe# ./face_spoof_detection_img_app 
 RZ/V2L DRP-AI Sample Application
 Model : PyTorch ResNet    | resnet50_classifier_bmp
 Input : Windows Bitmap v3 | sample.bmp
@@ -318,11 +341,11 @@ Genuine Face Detected
 
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 06_Face_recognition_spoof_detection/Face_spoof_detection_cam/exe/
+cd 06_Face_recognition_spoof_detection/Face_spoof_detection_<cam/webcam>/exe/
 ```
 4. Run the executable.
 ```
-./Face_spoof_detection_cam
+./face_spoof_detection_cam_app
 ```
 
 ## Limitations
