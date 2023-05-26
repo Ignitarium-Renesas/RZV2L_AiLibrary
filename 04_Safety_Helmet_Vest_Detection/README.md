@@ -11,27 +11,37 @@ sample video on YouTube -[Safety helmet & vest detection demo video](https://you
 ## Application details
 
 ```
-|-- 04_Safety_helmet_vest.mp4 # sample demo
-|-- Safety_helmet_vest_cam/ # Safety Helmet Vest Detection application on images
+|
+|-- Safety_helmet_vest_cam/ # Safety Helmet Vest Detection application on camera
 |   |-- Makefile
 |   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- examples/
-|   |   `-- Safety_helmet_vest_cam_example.cpp # example inference code on image
+|   |   `-- Safety_helmet_vest_cam_example.cpp # example inference code on camera
 |   |-- exe/
-|   |   |-- 04_Safety_helmet_vest_cam_app # the executable
+|   |   |-- Safety_helmet_vest_cam_app # the executable
 |   |   `-- yolov3_cam # DRP-AI files of yolov3
 |   `-- src/ # source code directory
-|-- Safety_helmet_vest_img # Safety Helmet Vest Detection application on camera input
+|-- Safety_helmet_vest_img # Safety Helmet Vest Detection application on images input
 |   |-- Makefile
 |   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- examples/
-|   |   `-- Safety_helmet_vest_example.cpp #example inference code on camera input
+|   |   `-- Safety_helmet_vest_example.cpp #example inference code on image input
 |   |-- exe/
-|   |   |-- 04_Safety_helmet_vest_img_app # the executable
+|   |   |-- Safety_helmet_vest_img_app # the executable
 |   |   |-- labels.txt # label map
 |   |   `-- yolov3_bmp # DRP-AI files of yolov3
 |   |-- src/ # source code directory
 |   `-- test_images # test images directory
+|-- Safety_helmet_vest_usbcam # Safety Helmet Vest Detection application on usb camera input
+|   |-- Makefile
+|   |-- etc/ # address map and pre/post process configuration of yolov3
+|   |-- examples/
+|   |   `-- Safety_helmet_vest_example.cpp #example inference code on usb camera input
+|   |-- exe/
+|   |   |-- Safety_helmet_vest_usbcam_app # the executable
+|   |   |-- labels.txt # label map
+|   |   `-- yolov3_bmp # DRP-AI files of yolov3
+|   `-- src/ # source code directory
 `-- README.md
 ```
 
@@ -59,13 +69,13 @@ Please follow the below steps once the desired changes are made in the source co
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
-cd RZV2L_AiLibrary/04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_cam 
+cd RZV2L_AiLibrary/04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_<cam/img/usbcam>
 make
 ```
 
 ## Running the application
 1. Download the `yolov3_Helmet_vest_detection_weights.dat` weights file from the release v1.2.2. 
-2. Place `yolov3_Helmet_vest_detection_weights.dat` file at the location `04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_cam/exe/yolov3/` or `04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_img/exe/yolov3/` according to to the application that needs to be run.
+2. Place `yolov3_Helmet_vest_detection_weights.dat` file at the location `04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_cam/exe/yolov3/` or `04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_img/exe/yolov3/` or `04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_usbcam/exe/yolov3/` according to to the application that needs to be run.
 3. Now, copy the `RZV2L_AiLibrary` directory to the board (/home/root/).
 4. Please follow these steps:
 
@@ -73,8 +83,8 @@ make
 
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_cam/exe
-./04_Safety_helmet_vest_cam_app
+cd 04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_<cam/img/usbcam>/exe
+./Safety_helmet_vest_<cam/img/usbcam>_app
 ```
 ### Application with image input
 
