@@ -11,28 +11,38 @@ sample video on YouTube -[Head counting from top demo](https://youtu.be/z2WW2yyL
 
 ## Application details
 ```
-|-- 11_Head_count_top.mp4 # sample demo
-|-- Head_count_top_cam/ # Top Head detection application on images
-|   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of yolov3
-|   |-- examples/
-|   |   `-- headcount_top_cam_example.cpp # example inference code on image
-|   |-- exe/
-|   |   |-- 11_headcount_top_cam_app # the executable
-|   |   `-- yolov3_headcount_top_cam # DRP-AI files of yolov3
-|   `-- src/ # source code directory
-|-- Head_count_top_img # Top Head detection application on camera input
-|   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of yolov3
-|   |-- examples/
-|   |   `-- headcount_top_img_example.cpp #example inference code on camera input
-|   |-- exe/
-|   |   |-- 11_headcount_top_img_app # the executable
-|   |   |-- labels.txt # label map
-|   |   `-- yolov3_headcount_top_img # DRP-AI files of yolov3
-|   |-- src/ # source code directory
-|   `-- test_images # test images directory
-`-- README.md
+├── Head_count_topview_cam # Top view Head detection application on CORAL camera input
+│   ├── etc # address map and pre/post process configuration of yolov3
+│   ├── examples
+│   │   └── headcount_topview_cam_example.cpp #example inference code on camera input
+│   ├── exe
+│   │   ├── headcount_topview_cam_app # the executable
+│   │   ├── labels.txt # label map
+│   │   └── yolov3_headcount_topview_cam # DRP-AI files of yolov3
+│   ├── Makefile
+│   └── src # source code directory
+├── Head_count_topview_img
+│   ├── etc # address map and pre/post process configuration of yolov3
+│   ├── examples
+│   │   └── headcount_topview_img_example.cpp # example inference code on image
+│   ├── exe
+│   │   ├── headcount_topview_img_app # the executable
+│   │   ├── labels.txt # label map
+│   │   └── yolov3_headcount_topview_img # DRP-AI files of yolov3
+│   ├── Makefile
+│   ├── src # source code directory
+│   └── test_images # test images directory
+├── Head_count_topview_usbcam # Top view Head detection application on USB camera input
+│   ├── etc # address map and pre/post process configuration of yolov3
+│   ├── examples
+│   │   └── headcount_topview_usbcam_example.cpp #example inference code on camera input
+│   ├── exe
+│   │   ├── headcount_topview_usbcam_app # the executable
+│   │   ├── labels.txt # label map
+│   │   └── yolov3_headcount_topview_cam # DRP-AI files of yolov3
+│   ├── Makefile
+│   └── src # source code directory
+└── README.md
 ```
 
 ### Model details
@@ -65,7 +75,7 @@ After doing desired modifications in the source code, please follow the below st
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
-cd RZV2L_AiLibrary/11_Head_detection_from_top/<app dir>
+cd RZV2L_AiLibrary/11_Head_count_topview/<app dir>
 make
 ```
 
@@ -79,16 +89,16 @@ Praparation on laptop:
 #### Application with image input
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 11_Head_detection_from_top/Head_count_top_img/exe/
-./11_headcount_top_img_app
+cd 11_Head_detection_from_top/Head_count_topview_img/exe/
+./headcount_topview_img_app
 ../test_images/01.bmp
 ```
 
 #### Application with camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 11_Head_detection_from_top/Head_count_top_cam/exe/
-./11_headcount_top_cam_app
+cd 11_Head_count_topview/Head_count_topview_<cam/usbcam>/exe/
+./headcount_topview_<cam/usbcam>_app
 ```
 ### Known issues:
 1. [ERROR] Image buffer address is NULL : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.
