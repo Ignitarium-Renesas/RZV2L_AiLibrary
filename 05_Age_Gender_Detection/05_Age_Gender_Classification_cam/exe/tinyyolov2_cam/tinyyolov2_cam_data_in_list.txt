@@ -1,5 +1,0 @@
-Input_node_name: yuv_data
-         Address: 0x87b1a000
-         Channel: 2
-         Width  : 480
-         Height : 640

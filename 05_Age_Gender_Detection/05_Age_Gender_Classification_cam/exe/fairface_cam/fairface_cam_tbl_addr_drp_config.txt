@@ -1,7 +1,0 @@
-conv_yuv2rgb.mem                  1103421824     179492
-crop.mem                          1103601328     120524
-resize_hwc.mem                    1103721856     201900
-imagescaler.mem                   1103923760     173836
-maxpooling_k3_st2.mem             1104097600     131864
-gap.mem                           1104229472     141508
-cast_fp16_fp32.mem                1104370992     101648
