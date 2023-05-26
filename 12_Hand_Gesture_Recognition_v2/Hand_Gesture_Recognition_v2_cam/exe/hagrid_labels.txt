@@ -1,0 +1,18 @@
+Thumbs Up
+Thumbs Down
+Rock
+Four
+Thumbs Up
+One
+Two
+One
+Five
+Two / Scissors
+Rock
+Rock
+Rock
+Three
+Two / Scissors
+Two / Scissors
+Three
+Two / Scissors
