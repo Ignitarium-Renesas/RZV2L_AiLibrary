@@ -2,12 +2,18 @@
 
 ## Introduction
 
-Driver Monitoring System application focuses at predicting the status of driver by determing if the driver is distracted or drowsy. Various states of driver predicted are looking top, down, left, right, blink and yawn.
+Driver Monitoring System application identifies attentiveness of a driver. This is a basic variant of the DMS system. This basic variant has features like driver's head pose detection(left, right and center head pose), eye blick detection and yawn detection.
 
 
 sample video on YouTube -[Driver Monitoring System demo](https://youtu.be/LKe9k9XYWJY)
-ToDo : Add image of camera setup.
 
+It is recommended to setup the camera as shown in the image below. This application needs user at a particular distance from a camera. 
+
+<img src="./DMS_sample_setup.JPG" alt="DMS setup"
+     margin-right=10px; 
+     width=1277px;
+     height=723px />
+     
 ## Application detailsl
 
 ```
@@ -34,21 +40,21 @@ ToDo : Add image of camera setup.
 
 ### Model details
 
+#### TinyYolov2
+
+- Official paper - [YOLO9000: Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242.pdf)
+- Dataset - [WIDERFACE](http://shuoyang1213.me/WIDERFACE/)
+- In this application Tiny Yolov2 is used for detecting faces.
+
 #### DeepPose
 
 - Model - [MMPose Facial Landmark Localization](https://mmpose.readthedocs.io/en/latest/topics/face.html#deeppose-resnet-on-wflw)
 - Dataset - [WFLW](https://wywu.github.io/projects/LAB/WFLW.html)
 - In this application DeepPose is used for detecting face landmarks.
 
-#### Tiny Yolov2
-
-- Official paper - [YOLO9000: Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242.pdf)
-- Dataset - [WIDERFACE](http://shuoyang1213.me/WIDERFACE/)
-- In this application Tiny Yolov2 is used for detecting faces.
-
 ### Application with camera input
 
-- Camera input is fed to object detector (tiny yolov2) to detect faces.
+- Camera input is fed to object detector (TinyYolov2) to detect faces.
 - Face landmarks are extracted from the detected faces.
 - The face landmarks are used to classify the gaze directions (`CENTER`, `UP`, `DOWN`, `LEFT` & `RIGHT`) using a Random Forest algorithm.
 
@@ -90,7 +96,7 @@ cd 10_Driver_monitoring_system/Driver_Monitoring_System_usbcam/exe/
 
 ## Limitations
 
-1. Face keypoints based random forest classifier is not accurate enough.
+1. Face keypoints based random forest classifier is not accurate enough. This may result in false head pose detection.
 
 ## Known issues
 - [ERROR] Failed to initialize Coral Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
