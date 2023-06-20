@@ -38,9 +38,19 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
 |   ├── README.md
     └── src # source code directory
 ```
+### Model details
+
+#### Tiny Yolov2
+
+- Official paper - [YOLO9000: Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242.pdf)
+- Dataset - [WIDERFACE](http://shuoyang1213.me/WIDERFACE/)
+- In this application Tiny Yolov2 is used for detecting faces.
+
+#### FairFace model
+- FairFace model is used to recognise the gender and age of a person. 
+- Pretrained model is obtained from this GitHub : https://github.com/dchen236/FairFace
 
 ### Application with camera input
-
 
 1)Camera input is fed to object detector (tiny yolov2) to detect faces.
 2)Facial features are extracted from the detected faces. 
