@@ -13,6 +13,9 @@ This Library has API functions for leveraging AI applications that will run on R
 7. Animal Detection .
 8. Hand Gesture Recognition.
 9. Human Gaze Recognition.
+10. Drivr Monitoring System
+11. Head Count Top View
+12. Hand Gesture Recognition V2
 
 ## Prerequisites
 ### 1. Board bring up sequence
