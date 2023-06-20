@@ -4,8 +4,8 @@
 
 Driver Monitoring System application focuses at predicting the status of driver by determing if the driver is distracted or drowsy. Various states of driver predicted are looking top, down, left, right, blink and yawn.
 
-ToDo:
-sample video on YouTube -[Driver Monitoring System demo]()
+
+sample video on YouTube -[Driver Monitoring System demo](https://youtu.be/LKe9k9XYWJY)
 ToDo : Add image of camera setup.
 
 ## Application detailsl

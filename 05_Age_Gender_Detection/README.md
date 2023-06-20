@@ -5,7 +5,7 @@
 This application showcases the capability of deep neural networks to predict age-group and detect the gender of a person.
 Camera based age and gender classification application is available now with better usability. 
 
-sample video on YouTube -[Age and gender detection demo video](https://youtu.be/azJW8TZ2-Hg)
+sample video on YouTube -[Age and gender detection demo video](https://youtu.be/mJlwSfazT7I)
 
 ## Age&Gender Application details
 ```
