@@ -185,7 +185,10 @@ rohit
 ---------------------------
 ```
 
-        ![](res/wayland-screenshot-2023-05-23_08-17-39.png)
+    <img src=".res/wayland-screenshot-2023-05-23_08-17-39.png" alt="Display screen"
+     margin-right=10px; 
+     width=1920px;
+     height=1080px />
     2. for creating new face register or for adding new face to register.
         1. Enter the number of samples to be embdded.
         2. Enter person name and path to his/her image.
