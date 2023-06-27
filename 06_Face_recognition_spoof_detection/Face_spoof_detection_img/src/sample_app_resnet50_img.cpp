@@ -31,80 +31,13 @@
 #include "define.h"
 
 using namespace std;
+using namespace cv;
 /*****************************************
 * Global Variables
 ******************************************/
 st_addr_t drpai_address;
 float drpai_output_buf[NUM_CLASSES];
 unsigned char* img_buffer;
-
-/*****************************************
-* Function Name : read_bmp
-* Description   : Function to load BMP file into img_buffer
-* NOTE          : This is just the simplest example to read Windows Bitmap v3 file.
-*                 This function does not have header check.
-* Arguments     : filename = name of BMP file to be read
-*                 width  = BMP image width
-*                 height = BMP image height
-*                 channel = BMP image color channel
-* Return value  : 0 if succeeded
-*                 not 0 otherwise
-******************************************/
-int8_t read_bmp(string filename, uint32_t width, uint32_t height, uint32_t channel)
-{
-    int32_t i = 0;
-    FILE *fp = NULL;
-    size_t ret = 0;
-    uint32_t header_size = FILEHEADERSIZE + INFOHEADERSIZE_W_V3;
-    /*  Read header for Windows Bitmap v3 file. */
-    uint8_t bmp_header[header_size];
-    uint8_t * bmp_line_data;
-
-    /* Number of byte in single row */
-    /* NOTE: Number of byte in single row of Windows Bitmap image must be aligned to 4 bytes. */
-    int32_t line_width = width * channel + width % 4;
-
-    fp = fopen(filename.c_str(), "rb");
-    if (NULL == fp)
-    {
-        return -1;
-    }
-    /* Read all header */
-    errno = 0;
-    ret = fread(bmp_header, sizeof(uint8_t), header_size, fp);
-    if (!ret)
-    {
-        fclose(fp);
-        fprintf(stderr, "[ERROR] Failed to run fread(): errno=%d\n", errno);
-        return -1;
-    }
-    /* Single row image data */
-    bmp_line_data = (uint8_t *) malloc(sizeof(uint8_t) * line_width);
-    if (NULL == bmp_line_data)
-    {
-        free(bmp_line_data);
-        fclose(fp);
-        return -1;
-    }
-
-    for (i = height-1; i >= 0; i--)
-    {
-        errno = 0;
-        ret = fread(bmp_line_data, sizeof(uint8_t), line_width, fp);
-        if (!ret)
-        {
-            free(bmp_line_data);
-            fclose(fp);
-            fprintf(stderr, "[ERROR] Failed to run fread(): errno=%d\n", errno);
-            return -1;
-        }
-        memcpy(img_buffer+i*width*channel, bmp_line_data, sizeof(uint8_t)*width*channel);
-    }
-
-    free(bmp_line_data);
-    fclose(fp);
-    return 0;
-}
 
 /*****************************************
 * Function Name : read_addrmap_txt
@@ -407,6 +340,7 @@ int32_t main(int32_t argc, char * argv[])
     int32_t ret = 0;
     int8_t udmabuf_fd;
     int32_t i;
+    Mat img, resized_img;
     
     /* Obtain udmabuf memory area starting address */
     uint64_t udmabuf_address = 0;
@@ -515,14 +449,10 @@ int32_t main(int32_t argc, char * argv[])
         }
     }
 
-    /* Read image (Windows Bitmap v3) */
-    ret = read_bmp(input_img.c_str(), DRPAI_IN_WIDTH, DRPAI_IN_HEIGHT, DRPAI_IN_CHANNEL_BGR);
-    if (0 != ret )
-    {
-        fprintf(stderr, "[ERROR] Failed to read BMP file: %s\n", input_img.c_str());
-        ret = -1;
-        goto end_munmap_udmabuf;
-    }
+    /* Read image */
+    img = imread(input_img.c_str(), IMREAD_COLOR);
+    resize(img, resized_img, Size(DRPAI_IN_HEIGHT, DRPAI_IN_WIDTH), INTER_LINEAR);
+    memcpy(img_buffer, resized_img.data, sizeof(uint8_t)*DRPAI_IN_WIDTH*DRPAI_IN_HEIGHT*DRPAI_IN_CHANNEL_BGR);
 
     /**********************************************************************
     * START Inference
