@@ -43,6 +43,7 @@
 #include <cstring>
 #include <limits>
 #include <cmath>
+#include<opencv2/opencv.hpp>
 
 /*****************************************
 * Static Variables for ResNet50

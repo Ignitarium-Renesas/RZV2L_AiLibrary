@@ -166,50 +166,54 @@ cd 06_Face_recognition_spoof_detection/Face_registration_<cam/usbcam>/exe/
         1. Enter the name of the image to be saved.
         2. The face must be inside the square box.
         3. Press "Enter" key to capture.
-        ```
-	root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration_cam/exe# ./face_registration_cam 
-	Choose any one option from below
-	[0] for capturing new face
-	[1] for adding new face to register [Add new values to existing register]
-	[2] for creating new face register [Erasing previous register]
-	0
-	---------------------------
-	Capturing from USB Camera
-	---------------------------
 
-	Enter the name of the picture
-	rohit
-	---------------------------
-	..Press Enter to capture..
-	---------------------------
-        ```
+```
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration_cam/exe# ./face_registration_cam 
+Choose any one option from below
+[0] for capturing new face
+[1] for adding new face to register [Add new values to existing register]
+[2] for creating new face register [Erasing previous register]
+0
+---------------------------
+Capturing from USB Camera
+---------------------------
+
+Enter the name of the picture
+rohit
+---------------------------
+..Press Enter to capture..
+---------------------------
+```
+
         ![](res/wayland-screenshot-2023-05-23_08-17-39.png)
     2. for creating new face register or for adding new face to register.
         1. Enter the number of samples to be embdded.
         2. Enter person name and path to his/her image.
-        ```
-	root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration_cam/exe# ./face_registration_cam 
-        Choose any one option from below
-        [0] for capturing new face
-        [1] for adding new face to register [Add new values to existing register]
-        [2] for creating new face register [Erasing previous register]
-        1
-        Enter the number of samples to be embedded 
-        5
-        Enter the person name 
-        Christo
-        Enter the image path 
-        /home/root/06_Face_recognition_spoof_detection_backup/Capture_face/captures/Chris.bmp           
-        Loading : arcface_bmp/drp_desc.bin
-        Loading : arcface_bmp/resnet50_bmp_drpcfg.mem
-        Loading : arcface_bmp/drp_param.bin
-        Loading : arcface_bmp/aimac_desc.bin
-        Loading : arcface_bmp/resnet50_bmp_weight.dat
-        Inference -----------------------------------------------
-        [START] DRP-AI
-        [END] DRP-AI
-        Input: /home/root/06_Face_recognition_spoof_detection_backup/Capture_face/captures/Chris.bmp
-        ```
+
+```
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration_cam/exe# ./face_registration_cam 
+Choose any one option from below
+[0] for capturing new face
+[1] for adding new face to register [Add new values to existing register]
+[2] for creating new face register [Erasing previous register]
+1
+Enter the number of samples to be embedded 
+5
+Enter the person name 
+Christo
+Enter the image path 
+/home/root/06_Face_recognition_spoof_detection_backup/Capture_face/captures/Chris.bmp
+Loading : arcface_bmp/drp_desc.bin
+Loading : arcface_bmp/resnet50_bmp_drpcfg.mem
+Loading : arcface_bmp/drp_param.bin
+Loading : arcface_bmp/aimac_desc.bin
+Loading : arcface_bmp/resnet50_bmp_weight.dat
+Inference -----------------------------------------------
+[START] DRP-AI
+[END] DRP-AI
+Input: /home/root/06_Face_recognition_spoof_detection_backup/Capture_face/captures/Chris.bmp
+```
+
 6. The face embedding database - `database/face_features.csv` would get updated.
 
 #### Face Recognition Image
@@ -250,7 +254,9 @@ Recognized person is Paul
 cd /home/root/RZV2L_AiLibrary 
 cd 06_Face_recognition_spoof_detection/Face_recognition_<cam/webcam>/exe/
 ```
+
 4. Run the executable. When calibrating the background no faces or moving objects be present in the frame.
+
 ```
 root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_cam/exe# ./face_recognition_cam_app 
 RZ/V2L DRP-AI Sample Application
