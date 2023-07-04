@@ -894,7 +894,7 @@ static int8_t print_result(Image* img)
     if(hand_count == 0 && thresh_score > 70)
      {
         stream.str("");
-        stream << "Gesture Detected :"<< gesture<<" (With low confidence)"<< std::setw(3);
+        stream << "Gesture Detected : "<< gesture<< std::setw(3);
         str3 = stream.str();
         img->write_string_rgb(str3, TEXT_WIDTH_OFFSET, LINE_HEIGHT*3, CHAR_SCALE_SMALL, WHITE_DATA);
     }
@@ -902,7 +902,7 @@ static int8_t print_result(Image* img)
     {
 
         stream.str("");
-        stream << "Gesture Detected :" << gesture << std::setw(3) ;
+        stream << "Gesture Detected : " << gesture << std::setw(3) ;
         str3 = stream.str();
         img->write_string_rgb(str3, TEXT_WIDTH_OFFSET, LINE_HEIGHT*3, CHAR_SCALE_SMALL, WHITE_DATA);
     }
