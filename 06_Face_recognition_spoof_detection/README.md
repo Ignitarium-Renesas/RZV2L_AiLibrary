@@ -165,24 +165,26 @@ cd 06_Face_recognition_spoof_detection/Face_registration_<cam/usbcam>/exe/
     1. for capturing new face
         1. Enter the name of the image to be saved.
         2. The face must be inside the square box.
-        3. Press "Enter" key to capture.
+        3. Enter c (c+Enter) to capture.
 
 ```
-root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration_cam/exe# ./face_registration_cam 
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration_usbcam/exe# ./face_registration_usbcam_app
 Choose any one option from below
 [0] for capturing new face
 [1] for adding new face to register [Add new values to existing register]
 [2] for creating new face register [Erasing previous register]
 0
 ---------------------------
-Capturing from USB Camera
+Capturing from Coral Camera
 ---------------------------
 
 Enter the name of the picture
-rohit
+ipokw
 ---------------------------
-..Press Enter to capture..
+..Enter c (c+Enter) to capture..
 ---------------------------
+c
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration_usbcam/exe#
 ```
 
 After above command, a window will appear on the screen.

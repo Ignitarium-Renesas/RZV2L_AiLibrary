@@ -174,6 +174,19 @@ void Image::convert_format()
 }
 
 /*****************************************
+* Function Name : draw_detection_area
+* Description   : Draw detection area in circle
+* Arguments     : -
+* Return value  : -
+******************************************/
+void Image::draw_detection_area()
+{
+    cv::Point center(CAM_IMAGE_WIDTH/2, CAM_IMAGE_HEIGHT/2);
+    cv::Mat org_image(img_h, img_w, CV_8UC4, img_buffer[buf_id]);
+    cv::circle(org_image, center, CROPPED_IMAGE_WIDTH, cv::Scalar(0, 0, 255, 255), 2);
+}
+
+/*****************************************
 * Function Name : convert_size
 * Description   : Scale up the input data (640x480) to the intermediate data (960x720) using OpenCV.
 *                 To convert to the final output size (1280x720), fill the right margin of the

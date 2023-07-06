@@ -47,6 +47,7 @@ class Image
         uint8_t init(uint32_t w, uint32_t h, uint32_t c, uint32_t ow, uint32_t oh, uint32_t oc);
 
         void convert_format();
+        void draw_detection_area();
         void convert_size();
         void camera_to_image(const uint8_t* buffer, int32_t size);
         void draw_line(int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint32_t color);
