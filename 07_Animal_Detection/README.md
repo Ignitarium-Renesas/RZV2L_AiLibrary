@@ -74,7 +74,7 @@ In this application YOLOv3 is used for detecting animals.
 |<p> 10 <p> 11 |<p> Dog <p> Cat | [Coco Dataset](https://cocodataset.org/#download) |
 
 ### Application with image input
-- The user should input the relative path to the image,it's width and height.
+- The user should pass the path to the image as an argument, optionally it's width and height.
 - The specified set of animal(s) in the image is(are) detected and confidence value of each animal class is displayed on terminal.
 
 ### Application with camera input
@@ -102,23 +102,20 @@ Praparation on laptop:
 3. Now, copy the `RZV2L_AiLibrary` directory to the RZV2L board (/home/root/).
 4. Please follow these steps:
 For image input continue with steps 5 to 7.
-5. Now enter the animal name(Note: case sensitive) to be detected from the list displayed on terminal.
-6. Enter the corresponding alarm threshold for that animal in the closed range[0,1].
-7. Enter the image path and its dimensions when prompted.
+5. The user should pass the path to the image as an argument, optionally it's width and height.
+6. Now enter the animal name(Note: case sensitive) to be detected from the list displayed on terminal.
+7. Enter the corresponding alarm threshold for that animal in the closed range[0,1].
 
 #### Application with image input
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 07_Animal_detection/Animal_detection_img/exe/
-./07_animal_detection_img_app
+root@smarc-rzv2l:~/RZV2L_AiLibrary/07_Animal_detection/Animal_detection_img/exe# ./07_animal_detect_img_app ../test_images/raccoon.bmp 
+----------------------------------------
 Running Animal detection demo
 ----------------------------------------
 
- 
-
 Enter animal to detect from the list provided below:
-
- 
 
 Boar
 Deer
@@ -133,16 +130,35 @@ Dog
 Cat
 ----------------------------------------
 
-Deer
+Raccoon
 
- 
-Enter alarm threshold in closed range[0,1]: 0.4
-Enter the relative path for the input image:
-../test_images/deer.bmp
-Enter the width:
-256
-Enter the height:
-256
+Enter alarm threshold in closed range[0,1]: 0.5
+RZ/V2L DRP-AI Sample Application
+Model : Darknet YOLO      | animal_yolov3
+Loading : animal_yolov3/drp_desc.bin
+Loading : animal_yolov3/animal_yolov3_drpcfg.mem
+Loading : animal_yolov3/drp_param.bin
+Loading : animal_yolov3/aimac_desc.bin
+Loading : animal_yolov3/animal_yolov3_weight.dat
+Inference -----------------------------------------------
+[START] DRP-AI
+[END] DRP-AI
+DRP-AI Time: 290.367432 msec
+Result 4 -----------------------------------------*
+Class           : Raccoon
+(X, Y, W, H)    : (50, 107, 33, 38)
+Probability     : 82.0 %
+
+Result 20 -----------------------------------------*
+Class           : Raccoon
+(X, Y, W, H)    : (394, 474, 482, 2060)
+Probability     : 72.4 %
+
+Result 21 -----------------------------------------*
+Class           : Raccoon
+(X, Y, W, H)    : (492, 456, 354, 756)
+Probability     : 56.9 %
+
 ```
 
 #### Application with coral camera input

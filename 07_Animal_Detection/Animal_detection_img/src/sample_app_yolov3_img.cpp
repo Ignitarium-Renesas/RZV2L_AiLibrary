@@ -620,7 +620,8 @@ int8_t print_result_yolo(float* floatarr, Image * img, string animal, float alar
         img->draw_rect((int32_t) det[i].bbox.x, (int32_t)det[i].bbox.y,
             (int32_t)det[i].bbox.w, (int32_t)det[i].bbox.h, result_str.c_str());
     }
-    
+
+    return 0;
 }
 
 

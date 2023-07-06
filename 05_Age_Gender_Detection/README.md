@@ -50,6 +50,12 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
 - FairFace model is used to recognise the gender and age of a person. 
 - Pretrained model is obtained from this GitHub : https://github.com/dchen236/FairFace
 
+### Application with image input
+
+1)The user should pass the path to the image as an argument, optionally it's width and height.
+2)Facial features are extracted from the detected faces.
+3)The facial features are used to determine the age & gender of the person.
+
 ### Application with camera input
 
 1)Camera input is fed to object detector (tiny yolov2) to detect faces.
@@ -64,7 +70,7 @@ Please follow the below steps:
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
-cd RZV2L_AiLibrary/05_Age_Gender_Detection/Age_Gender_Classification_usbcam
+cd RZV2L_AiLibrary/05_Age_Gender_Detection/Age_Gender_Classification_<img/cam/usbcam>
 make
 ```
 
@@ -73,18 +79,23 @@ make
 1. Now, copy the `RZV2L_AiLibrary` directory to the board (/home/root/).
 2. Please follow these steps:
 
+#### Running the camera application
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 05_Age_Gender_Detection/Age_Gender_Classification_usbcam/exe
-./Age_gender_classification_usbcam_app
+cd 05_Age_Gender_Detection/Age_Gender_Classification_<cam/usbcam>/exe
+./Age_gender_classification_<cam/usbcam>_app
 ```
 
-#### Example:
+#### Running the image application
+
+The user should pass the path to the image as an argument, optionally it's width and height.
+
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 05_Age_Gender_Detection/Age_Gender_Classification_usbcam/exe
-./Age_gender_classification_usbcam_app
+cd 05_Age_Gender_Detection/Age_Gender_Classification_img/exe
+./Age_gender_classification_img_app ../test_files/21-40_02.bmp
 ```
+
 ## Limitation
 1. The classification is dependent on face detected by tiny yolov2.
 2. The age-group classification appears to lose its accuracy in camera application.

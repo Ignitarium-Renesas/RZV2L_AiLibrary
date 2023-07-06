@@ -10,17 +10,21 @@ using namespace cv;
 class ADDemo
 {
     public:
-        void start(void);
+        void start(string img_path, int width, int height);
 };
 
 /* This method invokes the API */
-void ADDemo::start(void)
+void ADDemo::start(string img_path, int width, int height)
 {
     /* Initialize the Animal class */
     Animal AD = Animal();
 
-    /* Obtain the relative image path of the input image */
-    AD.get_image_path();
+    AD.img_path = img_path;
+    AD.width = width;
+    AD.height = height;
+
+    /* Obtain animal name and alarm type */
+    AD.get_user_input();
 
     /* read image */
     Mat image = imread(AD.img_path.c_str());
@@ -31,6 +35,13 @@ void ADDemo::start(void)
         return;
     }
 
+    if(AD.width != image.size().width ||
+       AD.height != image.size().height)
+    {
+        AD.width = image.size().width;
+        AD.height = image.size().height;
+    }
+
     /* Get inference */
     AD.PRET_AD(image.data, AD.width, AD.height, AD.animal, AD.alarm);
     
@@ -39,11 +50,26 @@ void ADDemo::start(void)
 
 int32_t main(int32_t argc, char * argv[])
 {
+    if(argc != 2 && argc != 4)
+    {
+        printf("Usage :\n");
+        printf("\t%s [image_path]\n", argv[0]);
+        printf("\t%s [image_path] [width] [height]\n\n", argv[0]);
+        printf("Note : width and height are optional\n");
+    }
+
     /* Initialize the demo object*/
     ADDemo demo = ADDemo();
 
     /* Start the demo */
-    demo.start();
+    if(argc == 2)
+    {
+        demo.start(argv[1], 0, 0);
+    }
+    else if(argc == 4)
+    {
+        demo.start(argv[1], atoi(argv[2]), atoi(argv[3]));
+    }
     
     return 0;
 }

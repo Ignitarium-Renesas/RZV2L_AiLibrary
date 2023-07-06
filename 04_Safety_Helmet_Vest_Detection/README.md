@@ -54,7 +54,7 @@ Yolov3 is trained on a open source dataset.
 You can find the [dataset](https://github.com/MinhNKB/helmet-safety-vest-detection) and [Kaggle dataset](https://www.kaggle.com/datasets/andrewmvd/hard-hat-detection) here.
 
 ### Application with image input
-- The user must input the relative path to the image.
+- The user should pass the path to the image as an argument, optionally it's width and height.
 - The image is then resized to 640x480.
 - The count is calculated based on the detected heads.
 
@@ -88,15 +88,13 @@ cd 04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_<cam/img/usbcam>/exe
 ```
 ### Application with image input
 
-Enter the relative path for the test_image with respect to the directory of the executable when prompted
+The user should pass the path to the image as an argument, optionally it's width and height.
 
 #### Example:
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_img/exe
-./04_Safety_helmet_vest_img
-# When prompted for the image path
-./test_images/6.jpg
+./04_Safety_helmet_vest_img_app ../test_images/20.jpg
 ```
 ### Known issues:
 1. [ERROR] Image buffer address is NULL : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.
