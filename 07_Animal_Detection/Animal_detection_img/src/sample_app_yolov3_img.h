@@ -14,19 +14,19 @@ class Animal
         const string animal_list[11] = { "Boar", "Deer", "Crow", "Monkey", "Bear", "Raccoon", "Fox", "Weasel", "Skunk", "Dog", "Cat" };
         uint32_t width, height;
         float alarm;
-        void get_image_path(void);
+        void get_user_input(void);
         int32_t PRET_AD(uint8_t* in_img_addr, uint32_t width, uint32_t height, string animal, float alarm);
 
 };
 
 /* This method is used to get the input image relative path with 
 respect to the executable directory and the animal to detect with its corresponding alram threshold*/
-void Animal::get_image_path(void)
+void Animal::get_user_input(void)
 {
     cout << "----------------------------------------" << endl;
     cout << "Running Animal detection demo" << endl;
     cout << "----------------------------------------" << endl << endl;
-    
+
     cout << "Enter animal to detect from the list provided below:\n" << endl;
     for (int i = 0; i < 11; i++)
       cout << animal_list[i] << "\n";
@@ -63,13 +63,6 @@ void Animal::get_image_path(void)
         cout << "\nEnter threshold in closed range[0,1]: ";
         cin >> alarm;
     }
-
-    cout << "Enter the relative path for the input image:" << endl;
-    cin >> img_path;
-    cout << "Enter the width:" << endl;
-    cin >> width;
-    cout << "Enter the height:" << endl;
-    cin >> height;
 }
 
 /* This method wraps the get_animal_detect function which is declared above. 

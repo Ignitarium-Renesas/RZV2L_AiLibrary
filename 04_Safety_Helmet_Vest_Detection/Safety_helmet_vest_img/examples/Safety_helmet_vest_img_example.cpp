@@ -13,17 +13,18 @@ string shv_path = ".";
 class SHVDemo
 {
     public:
-        void start(void);
+        void start(string img_path, int width, int height);
 };
 
 /* This method invokes the API */
-void SHVDemo::start(void)
+void SHVDemo::start(string img_path, int width, int height)
 {
     /* Initialize the SafetyHelmetVest class */
     SafetyHelmetVest SHV = SafetyHelmetVest();
 
-    /* Obtain the relative image path of the input image */
-    SHV.get_image_path();
+    SHV.img_path = img_path;
+    SHV.width = width;
+    SHV.height = height;
 
     /* read image */
     Mat image = imread(SHV.img_path.c_str());
@@ -34,6 +35,13 @@ void SHVDemo::start(void)
         return;
     }
 
+    if(SHV.width != image.size().width ||
+       SHV.height != image.size().height)
+    {
+        SHV.width = image.size().width;
+        SHV.height = image.size().height;
+    }
+
     /* Get inference */
     SHV.PRED_SHV(image.data, SHV.width, SHV.height);
     
@@ -42,11 +50,26 @@ void SHVDemo::start(void)
 
 int32_t main(int32_t argc, char * argv[])
 {
+    if(argc != 2 && argc != 4)
+    {
+        printf("Usage :\n");
+        printf("\t%s [image_path]\n", argv[0]);
+        printf("\t%s [image_path] [width] [height]\n\n", argv[0]);
+        printf("Note : width and height are optional\n");
+    }
+
     /* Initialize the demo object*/
     SHVDemo demo = SHVDemo();
 
     /* Start the demo */
-    demo.start();
+    if(argc == 2)
+    {
+        demo.start(argv[1], 0, 0);
+    }
+    else if(argc == 4)
+    {
+        demo.start(argv[1], atoi(argv[2]), atoi(argv[3]));
+    }
     
     return 0;
 }

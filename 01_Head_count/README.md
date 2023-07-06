@@ -53,7 +53,7 @@ In this application YOLOv3 is used for head detection.
 - Dataset - [HollywoodHeads](https://www.di.ens.fr/willow/research/headdetection/)
 
 ### Application with image input
-- The user should input the relative path to the image,it's width and height.
+- The user should pass the path to the image as an argument, optionally it's width and height.
 - The number of heads in the image is detected and showed on the terminal.
 
 ### Application with camera input
@@ -85,9 +85,9 @@ Praparation on laptop:
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/Head_count_img/exe/
-./01_head_count_img_app
-../test_images/Ben_001_640_480.bmp
+./01_head_count_img_app ../test_images/elevator_google_0007_640_480.bmp
 ```
+Optionally the user can pass width and height as arguments.
 
 #### Application with Coral camera input
 ```
