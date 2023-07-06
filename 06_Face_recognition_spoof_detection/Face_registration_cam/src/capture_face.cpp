@@ -66,12 +66,12 @@ static int capture_face(void){
 
     string file_name;
     cout << "---------------------------" << endl;
-    cout << "Capturing from USB Camera" << endl;
+    cout << "Capturing from Coral Camera" << endl;
     cout << "---------------------------" << endl << endl;
     cout << "Enter the name of the picture" << endl;
     cin >> file_name;
     cout << "---------------------------" << endl;
-    cout << "..Press Enter to capture.." << endl;
+    cout << "..Enter c (c+Enter) to capture.." << endl;
     cout << "---------------------------" << endl;
 
 #ifdef INPUT_CORAL
@@ -79,11 +79,21 @@ static int capture_face(void){
     coral_cam_init();
 #endif /* INPUT_CORAL */
 
+    /*Set Standard Input to Non Blocking*/
+    errno = 0;
+    int8_t ret = fcntl(0, F_SETFL, O_NONBLOCK);
+    if (-1 == ret)
+    {
+        fprintf(stderr, "[ERROR] Failed to run fctnl(): errno=%d\n", errno);
+        return -1;
+    }
+
+
     /* create capture dir */
     make_cap_dir();
 
     /* Create a VideoCapture object. Change the constructor argument based on the video feed (/dev/video0 is being captured below) */
-    VideoCapture cap(0); 
+    VideoCapture cap(0);
 
     /* Check if camera opened successfully */
     if(!cap.isOpened()){
@@ -91,11 +101,10 @@ static int capture_face(void){
         return -1;
     }
 
-    /* Top Left Coordinates*/
+    /* Draw Detection Area*/
+    Point center(640/2, 480/2);
+    int bbox_radius = 112;
     int thickness = 2;
-    Point p1(208-thickness, 128-thickness);
-    /* Bottom Right Coordinates*/
-    Point p2(432+thickness, 352+thickness);
 
     while(1){
 
@@ -108,12 +117,14 @@ static int capture_face(void){
         break;
     
         /* Display the resulting frame*/
-        rectangle(frame, p1, p2, Scalar(255, 0, 0), thickness, LINE_8);
+        circle(frame, center, bbox_radius, cv::Scalar(0, 0, 255, 255), thickness);
         imshow("Capture", frame);
     
-        /*Press Enter on keyboard to exit*/
-        char c = (char)waitKey(1);
-        if(c == 13)
+        waitKey(1);
+
+        /*Press c+Enter on keyboard to exit*/
+        int32_t c = getchar();
+        if (99 == c)
         {
             /* Save the cropped image */
             Mat resized_frame;

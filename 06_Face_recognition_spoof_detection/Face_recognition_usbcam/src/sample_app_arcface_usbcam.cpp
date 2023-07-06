@@ -829,10 +829,10 @@ int8_t R_Main_Process()
         /* Check img_obj_ready flag which is set in Capture Thread. */
         if (img_obj_ready.load())
         {
-            /*Draw The Detection Area Box*/
-            img.draw_rect(OUTPUT_LEFT, OUTPUT_TOP, CROPPED_IMAGE_WIDTH * 2 - 1, CROPPED_IMAGE_HEIGHT * 2 - 1, YELLOW_DATA);
-
             img.convert_format();
+
+            /*Draw the detection area circle*/
+            img.draw_detection_area();
 
             img.convert_size();
 
