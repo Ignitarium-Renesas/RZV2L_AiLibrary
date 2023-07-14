@@ -55,7 +55,7 @@
 * YOLOv3
 ******************************************/
 /* Directory name of DRP-AI Object files (DRP-AI Translator output) */
-const static std::string drpai_prefix   = "yolov3";
+const static std::string drpai_prefix   = "yolov3_Helmet_vest_detection";
 /* Empty since labels will be loaded from label_list file */
 static std::vector<std::string> label_file_map = {"Helmet","Safety Vest",};
 

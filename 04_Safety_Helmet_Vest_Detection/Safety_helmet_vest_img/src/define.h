@@ -59,7 +59,7 @@ extern std::string shv_path;
 * YOLOv3
 ******************************************/
 /* Directory name of DRP-AI Object files (DRP-AI Translator output) */
-const static std::string drpai_prefix   = "yolov3";
+const static std::string drpai_prefix   = "yolov3_Helmet_vest_detection";
 /* Class labels to be classified */
 const static std::string label_list     = shv_path+"/labels.txt";
 /* Empty since labels will be loaded from label_list file */
