@@ -27,7 +27,7 @@ SRC_HC_CAM = examples/Safety_helmet_vest_cam_example.cpp \
         src/wayland.h \
         src/sample_app_yolov3_cam.cpp \
         src/sample_app_yolov3_cam.h \
-
+		
 INC_DIR_HC_CAM = -I src/
 CFLAGS_HC_CAM = ${INC_DIR_HC_CAM}
 
