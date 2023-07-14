@@ -23,34 +23,34 @@ input_to_body:
 output_from_body:
   -
     name: "output1"
-    shape: [13, 13, 30]
+    shape: [13, 13, 21]
     order: "HWC"
     type: "fp16"
   -
     name: "output2"
-    shape: [26, 26, 30]
+    shape: [26, 26, 21]
     order: "HWC"
     type: "fp16"
   -
     name: "output3"
-    shape: [52, 52, 30]
+    shape: [52, 52, 21]
     order: "HWC"
     type: "fp16"
 
 output_from_post:
   -
     name: "post_out1"
-    shape: [30, 13, 13]
+    shape: [21, 13, 13]
     order: "CHW"
     type: "fp32"
   -
     name: "post_out2"
-    shape: [30, 26, 26]
+    shape: [21, 26, 26]
     order: "CHW"
     type: "fp32"
   -
     name: "post_out3"
-    shape: [30, 52, 52]
+    shape: [21, 52, 52]
     order: "CHW"
     type: "fp32"
 

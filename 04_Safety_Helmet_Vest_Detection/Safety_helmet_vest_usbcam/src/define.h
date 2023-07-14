@@ -57,10 +57,10 @@
 /* Directory name of DRP-AI Object files (DRP-AI Translator output) */
 const static std::string drpai_prefix   = "yolov3";
 /* Empty since labels will be loaded from label_list file */
-static std::vector<std::string> label_file_map = {"Hardhat","Safety Vest","person with full safety","person without safety","None"};
+static std::vector<std::string> label_file_map = {"Helmet","Safety Vest",};
 
 /* Number of class to be detected */
-#define NUM_CLASS           (5)
+#define NUM_CLASS           (2)
 /* Number for [yolo] layer num parameter */
 #define NUM_BB              (3)
 /* Number of output layers. This value MUST match with the length of num_grids[] below */
@@ -98,8 +98,8 @@ const static std::string drpai_file_path[5] =
     drpai_prefix+"/aimac_desc.bin",
     drpai_prefix+"/"+drpai_prefix+"_weight.dat",
 };
-#define TH_PROB                     (0.5f)
-#define TH_NMS                      (0.5f)
+#define TH_PROB                     (0.2f)
+#define TH_NMS                      (0.2f)
 /* Size of input image to the model */
 #define MODEL_IN_W                  (416)
 #define MODEL_IN_H                  (416)
