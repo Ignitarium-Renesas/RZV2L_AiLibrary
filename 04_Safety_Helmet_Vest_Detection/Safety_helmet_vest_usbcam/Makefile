@@ -35,7 +35,7 @@ CFLAGS_HC_CAM = ${INC_DIR_HC_CAM}
 	${CXX} -std=c++14 $(filter %.cpp,${SRC_HC_CAM}) ${CFLAGS_HC_CAM} \
 	${OPENCV_LINK} ${BSP_SDK_FLAG} \
 	-lpthread -O2 -ldl ${LDFLAGS} \
-	-o exe/Safety_helmet_vest_usbcam_app
+	-o exe/safety_helmet_vest_usbcam_app
 
 clean:
-	rm -rf exe/Safety_helmet_vest_usbcam_app
+	rm -rf exe/safety_helmet_vest_usbcam_app
