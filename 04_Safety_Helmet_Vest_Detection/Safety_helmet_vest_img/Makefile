@@ -34,7 +34,7 @@ CFLAGS_SHV_IMG += -DYOLOV3
 	${CXX} -std=c++14 $(filter %.cpp,${SRC_SHV_IMG}) ${CFLAGS_SHV_IMG} \
 	${OPENCV_LINK} ${BSP_SDK_FLAG} \
 	-lpthread -O2 -ldl ${LDFLAGS} \
-	-o exe/04_Safety_helmet_vest_img_app
+	-o exe/safety_helmet_vest_img_app
 
 clean:
-	rm -rf exe/04_Safety_helmet_vest_img_app
+	rm -rf exe/safety_helmet_vest_img_app

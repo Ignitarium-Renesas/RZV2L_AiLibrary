@@ -27,7 +27,7 @@ SRC_HC_CAM = examples/Safety_helmet_vest_cam_example.cpp \
         src/wayland.h \
         src/sample_app_yolov3_cam.cpp \
         src/sample_app_yolov3_cam.h \
-
+		
 INC_DIR_HC_CAM = -I src/
 CFLAGS_HC_CAM = ${INC_DIR_HC_CAM}
 
@@ -35,7 +35,7 @@ CFLAGS_HC_CAM = ${INC_DIR_HC_CAM}
 	${CXX} -std=c++14 $(filter %.cpp,${SRC_HC_CAM}) ${CFLAGS_HC_CAM} \
 	${OPENCV_LINK} ${BSP_SDK_FLAG} \
 	-lpthread -O2 -ldl ${LDFLAGS} \
-	-o exe/04_Safety_helmet_vest_cam_app
+	-o exe/safety_helmet_vest_cam_app
 
 clean:
-	rm -rf exe/04_Safety_helmet_vest_cam_app
+	rm -rf exe/safety_helmet_vest_cam_app

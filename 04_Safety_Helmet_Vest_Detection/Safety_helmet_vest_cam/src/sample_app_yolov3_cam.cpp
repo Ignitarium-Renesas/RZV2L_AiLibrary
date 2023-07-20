@@ -37,7 +37,7 @@
 #include "wayland.h"
 /*box drawing*/
 #include "box.h"
-
+#include <iostream>
 /*****************************************
 * Global Variables
 ******************************************/
@@ -63,7 +63,7 @@ static int8_t drpai_fd = -1;
 static float ai_time = 0;
 static Wayland wayland;
 static std::vector<detection> det;
-
+using namespace std;
 /*****************************************
 * Function Name : timedifference_msec
 * Description   : compute the time differences in ms between two moments
@@ -630,6 +630,7 @@ int8_t print_result(Image* img)
         stream.str("");
         /* Create bounding box label */
         stream << "Class " << ": " << label_file_map[det[i].c].c_str() ;
+        // std::cout<<"testing----------------"<<std::endl;
         str = stream.str();
         img->write_string_rgb(str, DRPAI_IN_WIDTH * RESIZE_SCALE + TEXT_WIDTH_OFFSET, LINE_HEIGHT+2*LINE_HEIGHT_OFFSET+result_cnt*LINE_HEIGHT, CHAR_SCALE_SMALL, WHITE_DATA);
     }
@@ -1089,7 +1090,7 @@ int32_t Safety_helmet_vest_cam(void)
 
     printf("RZ/V2L DRP-AI Sample Application\n");
     printf("Model : Darknet YOLOv3 | %s\n", drpai_prefix.c_str());
-    printf("Input : Coral Camera\n");
+    printf("Input : CORAL Camera\n");
 
     /* Read DRP-AI Object files address and size */
     ret = read_addrmap_txt(drpai_address_file);
