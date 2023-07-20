@@ -1,33 +1,6 @@
-OFFSET_ADD:0, layer name: post_0_0_conv_yuv2rgb
+OFFSET_ADD:0, layer name: post_0_0_resize_hwc
   Param: raddr               Value: 0x80000000
-  Param: waddr               Value: 0x80096000
-  Param: IMG_IWIDHT          Value: 0x280
-  Param: IMG_IHEIGHT         Value: 0x1e0
-  Param: RFU1                Value: 0x0
-  Param: RFU2                Value: 0x0
-  Param: IMG_OWIDTH          Value: 0x280
-  Param: IMG_OHEIGHT         Value: 0x1e0
-  Param: RFU3                Value: 0x0
-  Param: RFU4                Value: 0x0
-  Param: OCH0_SYNCSET_DT     Value: 0x1
-  Param: OCH0_SYNCSET_ID     Value: 0xc
-  Param: OCH1_SYNCSET_DT     Value: 0x2
-  Param: OCH1_SYNCSET_ID     Value: 0xc
-  Param: OCH2_SYNCSET_DT     Value: 0x4
-  Param: OCH2_SYNCSET_ID     Value: 0xc
-  Param: OCH3_SYNCSET_DT     Value: 0x18
-  Param: OCH3_SYNCSET_ID     Value: 0xc
-  Param: INT_DISABLE         Value: 0x1
-  Param: RFU5                Value: 0x0
-  Param: RFU6                Value: 0x0
-  Param: RFU7                Value: 0x0
-  Param: INPUT_YUV_FORMAT    Value: 0x0
-  Param: RFU8                Value: 0x0
-  Param: DOUT_RGB_FORMAT     Value: 0x0
-  Param: RFU10               Value: 0x0
-OFFSET_ADD:56, layer name: post_0_1_resize_hwc
-  Param: raddr               Value: 0x80096000
-  Param: waddr               Value: 0x80177000
+  Param: waddr               Value: 0x800e1000
   Param: IMG_IWIDHT          Value: 0x280
   Param: IMG_IHEIGHT         Value: 0x1e0
   Param: IMG_ICH             Value: 0x3
@@ -52,9 +25,9 @@ OFFSET_ADD:56, layer name: post_0_1_resize_hwc
   Param: DATA_TYPE           Value: 0x0
   Param: RFU7                Value: 0x0
   Param: RFU8                Value: 0x0
-OFFSET_ADD:112, layer name: post_0_1_imagescaler
-  Param: raddr               Value: 0x80177000
-  Param: waddr               Value: 0x801f5c00
+OFFSET_ADD:56, layer name: post_0_0_imagescaler
+  Param: raddr               Value: 0x800e1000
+  Param: waddr               Value: 0x8015fc00
   Param: IMG_IWIDHT          Value: 0x1a0
   Param: IMG_IHEIGHT         Value: 0x1a0
   Param: IMG_ICH             Value: 0x3
@@ -75,15 +48,15 @@ OFFSET_ADD:112, layer name: post_0_1_imagescaler
   Param: RFU3                Value: 0x0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
-  Param: ADD_ADDR            Value: 0x869d6d80
-  Param: MUL_ADDR            Value: 0x869d6d88
+  Param: ADD_ADDR            Value: 0x86902780
+  Param: MUL_ADDR            Value: 0x86902788
   Param: DIN_FORMAT          Value: 0x0
   Param: DOUT_RGB_ORDER      Value: 0x1
   Param: RFU6                Value: 0x0
   Param: RFU7                Value: 0x0
-OFFSET_ADD:176, layer name: /module_list.85/upsample_85/Resize_output_0
-  Param: raddr               Value: 0x85c91000
-  Param: waddr               Value: 0x85ca6200
+OFFSET_ADD:120, layer name: /module_list.85/upsample_85/Resize_output_0
+  Param: raddr               Value: 0x85bfb000
+  Param: waddr               Value: 0x85c10200
   Param: IMG_IWIDHT          Value: 0xd
   Param: IMG_IHEIGHT         Value: 0xd
   Param: IMG_ICH             Value: 0x100
@@ -108,9 +81,9 @@ OFFSET_ADD:176, layer name: /module_list.85/upsample_85/Resize_output_0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:232, layer name: /module_list.97/upsample_97/Resize_output_0
-  Param: raddr               Value: 0x8609c200
-  Param: waddr               Value: 0x860c6600
+OFFSET_ADD:176, layer name: /module_list.97/upsample_97/Resize_output_0
+  Param: raddr               Value: 0x86006200
+  Param: waddr               Value: 0x86030600
   Param: IMG_IWIDHT          Value: 0x1a
   Param: IMG_IHEIGHT         Value: 0x1a
   Param: IMG_ICH             Value: 0x80
@@ -135,17 +108,17 @@ OFFSET_ADD:232, layer name: /module_list.97/upsample_97/Resize_output_0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:288, layer name: post_0_0_transpose
-  Param: raddr               Value: 0x868b2600
-  Param: waddr               Value: 0x868e65cc
+OFFSET_ADD:232, layer name: post_0_0_transpose
+  Param: raddr               Value: 0x8681c600
+  Param: waddr               Value: 0x86840c44
   Param: IMG_IWIDHT          Value: 0xd
   Param: IMG_IHEIGHT         Value: 0xd
-  Param: IMG_ICH             Value: 0x1e
-  Param: IMG_ICH_ORG         Value: 0x1e
+  Param: IMG_ICH             Value: 0x15
+  Param: IMG_ICH_ORG         Value: 0x15
   Param: IMG_OWIDTH          Value: 0xd
   Param: IMG_OHEIGHT         Value: 0xd
-  Param: IMG_OCH             Value: 0x1e
-  Param: IMG_OCH_ORG         Value: 0x1e
+  Param: IMG_OCH             Value: 0x15
+  Param: IMG_OCH_ORG         Value: 0x15
   Param: OCH0_SYNCSET_DT     Value: 0x1
   Param: OCH0_SYNCSET_ID     Value: 0xc
   Param: OCH1_SYNCSET_DT     Value: 0x2
@@ -162,16 +135,16 @@ OFFSET_ADD:288, layer name: post_0_0_transpose
   Param: IS_CHW2HWC          Value: 0x0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
-OFFSET_ADD:344, layer name: post_0_1_cast_fp16_fp32
-  Param: raddr               Value: 0x868e65cc
-  Param: waddr               Value: 0x8691a5c0
+OFFSET_ADD:288, layer name: post_0_1_cast_fp16_fp32
+  Param: raddr               Value: 0x86840c44
+  Param: waddr               Value: 0x868652c0
   Param: IMG_IWIDHT          Value: 0xd
   Param: IMG_IHEIGHT         Value: 0xd
-  Param: IMG_ICH             Value: 0x1e
+  Param: IMG_ICH             Value: 0x15
   Param: RFU1                Value: 0x0
   Param: IMG_OWIDTH          Value: 0xd
   Param: IMG_OHEIGHT         Value: 0xd
-  Param: IMG_OCH             Value: 0x1e
+  Param: IMG_OCH             Value: 0x15
   Param: RFU2                Value: 0x0
   Param: OCH0_SYNCSET_DT     Value: 0x1
   Param: OCH0_SYNCSET_ID     Value: 0xc
@@ -189,17 +162,17 @@ OFFSET_ADD:344, layer name: post_0_1_cast_fp16_fp32
   Param: RFU1                Value: 0x0
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
-OFFSET_ADD:400, layer name: post_1_0_transpose
-  Param: raddr               Value: 0x868b4d9c
-  Param: waddr               Value: 0x868e8d68
+OFFSET_ADD:344, layer name: post_1_0_transpose
+  Param: raddr               Value: 0x8681e1bc
+  Param: waddr               Value: 0x86842800
   Param: IMG_IWIDHT          Value: 0x1a
   Param: IMG_IHEIGHT         Value: 0x1a
-  Param: IMG_ICH             Value: 0x1e
-  Param: IMG_ICH_ORG         Value: 0x1e
+  Param: IMG_ICH             Value: 0x15
+  Param: IMG_ICH_ORG         Value: 0x15
   Param: IMG_OWIDTH          Value: 0x1a
   Param: IMG_OHEIGHT         Value: 0x1a
-  Param: IMG_OCH             Value: 0x1e
-  Param: IMG_OCH_ORG         Value: 0x1e
+  Param: IMG_OCH             Value: 0x15
+  Param: IMG_OCH_ORG         Value: 0x15
   Param: OCH0_SYNCSET_DT     Value: 0x1
   Param: OCH0_SYNCSET_ID     Value: 0xc
   Param: OCH1_SYNCSET_DT     Value: 0x2
@@ -216,16 +189,16 @@ OFFSET_ADD:400, layer name: post_1_0_transpose
   Param: IS_CHW2HWC          Value: 0x0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
-OFFSET_ADD:456, layer name: post_1_1_cast_fp16_fp32
-  Param: raddr               Value: 0x868e8d68
-  Param: waddr               Value: 0x8691f4f8
+OFFSET_ADD:400, layer name: post_1_1_cast_fp16_fp32
+  Param: raddr               Value: 0x86842800
+  Param: waddr               Value: 0x86868a34
   Param: IMG_IWIDHT          Value: 0x1a
   Param: IMG_IHEIGHT         Value: 0x1a
-  Param: IMG_ICH             Value: 0x1e
+  Param: IMG_ICH             Value: 0x15
   Param: RFU1                Value: 0x0
   Param: IMG_OWIDTH          Value: 0x1a
   Param: IMG_OHEIGHT         Value: 0x1a
-  Param: IMG_OCH             Value: 0x1e
+  Param: IMG_OCH             Value: 0x15
   Param: RFU2                Value: 0x0
   Param: OCH0_SYNCSET_DT     Value: 0x1
   Param: OCH0_SYNCSET_ID     Value: 0xc
@@ -243,17 +216,17 @@ OFFSET_ADD:456, layer name: post_1_1_cast_fp16_fp32
   Param: RFU1                Value: 0x0
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
-OFFSET_ADD:512, layer name: post_2_0_transpose
-  Param: raddr               Value: 0x868bec0c
-  Param: waddr               Value: 0x868f2bd8
+OFFSET_ADD:456, layer name: post_2_0_transpose
+  Param: raddr               Value: 0x868250a4
+  Param: waddr               Value: 0x868496e8
   Param: IMG_IWIDHT          Value: 0x34
   Param: IMG_IHEIGHT         Value: 0x34
-  Param: IMG_ICH             Value: 0x1e
-  Param: IMG_ICH_ORG         Value: 0x1e
+  Param: IMG_ICH             Value: 0x15
+  Param: IMG_ICH_ORG         Value: 0x15
   Param: IMG_OWIDTH          Value: 0x34
   Param: IMG_OHEIGHT         Value: 0x34
-  Param: IMG_OCH             Value: 0x1e
-  Param: IMG_OCH_ORG         Value: 0x1e
+  Param: IMG_OCH             Value: 0x15
+  Param: IMG_OCH_ORG         Value: 0x15
   Param: OCH0_SYNCSET_DT     Value: 0x1
   Param: OCH0_SYNCSET_ID     Value: 0xc
   Param: OCH1_SYNCSET_DT     Value: 0x2
@@ -270,16 +243,16 @@ OFFSET_ADD:512, layer name: post_2_0_transpose
   Param: IS_CHW2HWC          Value: 0x0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
-OFFSET_ADD:568, layer name: post_2_1_cast_fp16_fp32
-  Param: raddr               Value: 0x868f2bd8
-  Param: waddr               Value: 0x869331d8
+OFFSET_ADD:512, layer name: post_2_1_cast_fp16_fp32
+  Param: raddr               Value: 0x868496e8
+  Param: waddr               Value: 0x86876804
   Param: IMG_IWIDHT          Value: 0x34
   Param: IMG_IHEIGHT         Value: 0x34
-  Param: IMG_ICH             Value: 0x1e
+  Param: IMG_ICH             Value: 0x15
   Param: RFU1                Value: 0x0
   Param: IMG_OWIDTH          Value: 0x34
   Param: IMG_OHEIGHT         Value: 0x34
-  Param: IMG_OCH             Value: 0x1e
+  Param: IMG_OCH             Value: 0x15
   Param: RFU2                Value: 0x0
   Param: OCH0_SYNCSET_DT     Value: 0x1
   Param: OCH0_SYNCSET_ID     Value: 0xc
