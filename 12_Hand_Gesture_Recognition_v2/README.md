@@ -19,7 +19,7 @@ No additional restrictions — You may not apply legal terms or technological me
 This application showcases the capability of deep neural networks to predict different hand gestures.
 Hand gesture recognition application is available now with better usability. 
 
-sample video on YouTube -[Hand gesture recognition demo video](https://youtu.be/jqCSphkcyik)
+sample video on YouTube -[Hand gesture recognition demo video](https://youtu.be/JQY189TYdNY)
 
 ## Hand Gesture Recognition Application details
 ```

@@ -6,7 +6,7 @@ Hand gesture recognition application is used to recognize the hand signs i.e,(on
 
 > Refer [08_Hand_Gesture_Recognition/Hand_Gesture_Recognition_usbcam/src/sample_gesture_prediction.cpp](08_hand_gesture_detection/src/sample_gesture_prediction.cpp) for an example usage
 
-sample video on YouTube - [hand gesture detection video](https://youtu.be/hP-Gr_Sq8a8)
+sample video on YouTube - [hand gesture detection video](https://youtu.be/HodMvkLqELc)
 
 ## Application details
 
