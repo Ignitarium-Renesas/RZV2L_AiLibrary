@@ -20,7 +20,7 @@ SRC = \
 all: src/sample_app_hrnet_pre-tinyyolov2_cam.cpp
 	${CXX} -std=c++14 ${SRC} \
 	${OPENCV_LINK} ${BSP_SDK_FLAG} \
-	-lpthread -O2 -ldl ${LDFLAGS} -o exe/Elderly_fall_detection_cam_app
+	-lpthread -O2 -ldl ${LDFLAGS} -o exe/elderly_fall_detection_cam_app
 
 clean:
-	rm -rf exe/Elderly_fall_detection_cam_app
+	rm -rf exe/elderly_fall_detection_cam_app

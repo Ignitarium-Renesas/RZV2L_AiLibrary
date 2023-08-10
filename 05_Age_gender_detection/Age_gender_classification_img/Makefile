@@ -1,4 +1,4 @@
-all: 02_head_count_cam \
+all: 05_age_gender_img \
 
 OPENCV_LINK = -isystem ${SDKTARGETSYSROOT}/usr/include/opencv4 \
 	-lopencv_imgcodecs -lopencv_imgproc -lopencv_core -lopencv_highgui
@@ -13,29 +13,26 @@ BSP_SDK_FLAG = \
 	-lmount -lresolv -lexpat -lpangoft2-1.0 -lblkid \
 
 # List all the files
-SRC_HC_CAM = examples/head_count_cam_example.cpp \
+SRC_HC_IMG=examples/age_example.cpp \
+	src/sample_app_age_gender_img.h \
+	src/sample_app_age_gender_img.cpp \
         src/ascii.cpp \
         src/ascii.h \
-        src/box.cpp \
-        src/box.h \
         src/image.cpp \
         src/image.h \
         src/define.h \
-        src/camera.cpp \
-        src/camera.h \
-        src/wayland.cpp \
-        src/wayland.h \
-        src/sample_app_yolov3_cam.cpp \
-        src/sample_app_yolov3_cam.h \
 
-INC_DIR_HC_CAM = -I src/
-CFLAGS_HC_CAM = ${INC_DIR_HC_CAM}
 
-02_head_count_cam: ${SRC_HC_CAM}
-	${CXX} -std=c++14 $(filter %.cpp,${SRC_HC_CAM}) ${CFLAGS_HC_CAM} \
+INC_DIR_HC_IMG = -I src/
+CFLAGS_HC_IMG = ${INC_DIR_HC_IMG}
+
+
+
+05_age_gender_img: ${SRC_HC_IMG}
+	${CXX} -std=c++14 $(filter %.cpp,${SRC_HC_IMG}) ${CFLAGS_HC_IMG} \
 	${OPENCV_LINK} ${BSP_SDK_FLAG} \
 	-lpthread -O2 -ldl ${LDFLAGS} \
-	-o exe/head_count_usbcam_app
+	-o exe/age_gender_classification_img_app
 
 clean:
-	rm -rf exe/head_count_usbcam_app
+	rm -rf exe/age_gender_classification_img_app
