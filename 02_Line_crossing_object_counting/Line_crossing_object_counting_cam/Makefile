@@ -1,5 +1,5 @@
 OPENCV_LINK = -isystem ${SDKTARGETSYSROOT}/usr/include/opencv4 \
-              -lopencv_imgcodecs -lopencv_imgproc -lopencv_core -lopencv_highgui
+			  -lopencv_imgcodecs -lopencv_imgproc -lopencv_core -lopencv_highgui -lopencv_videoio 
 
 BSP_SDK_FLAG = \
 			  -ljpeg -lwebp -ltiff -lz -ltbb -lgtk-3 -lpng16 -lgdk-3 -lcairo  \
@@ -10,17 +10,11 @@ BSP_SDK_FLAG = \
 			  -latk-1.0 -lgio-2.0 -lpango-1.0 -lfreetype -lpixman-1 -luuid -lpcre \
 			  -lmount -lresolv -lexpat -lpangoft2-1.0 -lblkid \
 
-SRC = \
-	src/sample_app_hrnet_pre-tinyyolov2_cam.cpp \
-	src/camera.cpp \
-	src/image.cpp \
-	src/wayland.cpp \
-	src/box.cpp \
 
-all: src/sample_app_hrnet_pre-tinyyolov2_cam.cpp
-	${CXX} -std=c++14 ${SRC} \
+all: src/sample_app_tinyyolov3_cam.cpp
+	${CXX} -std=c++14 src/sample_app_tinyyolov3_cam.cpp src/camera.cpp src/image.cpp src/wayland.cpp src/ascii.cpp src/box.cpp src/kalman_filter.cpp src/matrix.cpp src/munkres.cpp src/track.cpp src/tracker.cpp \
 	${OPENCV_LINK} ${BSP_SDK_FLAG} \
-	-lpthread -O2 -ldl ${LDFLAGS} -o exe/elderly_fall_detection_usbcam_app
+	-lpthread -O2 -ldl ${LDFLAGS} -o exe/line_crossing_object_counting_cam_app
 
 clean:
-	rm -rf exe/elderly_fall_detection_usbcam_app
+	rm -rf *.o exe/line_crossing_object_counting_cam_app

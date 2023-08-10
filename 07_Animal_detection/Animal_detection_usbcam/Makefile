@@ -1,4 +1,4 @@
-all: 02_head_count_cam \
+all: 07_Animal_detection_usbcam_app \
 
 OPENCV_LINK = -isystem ${SDKTARGETSYSROOT}/usr/include/opencv4 \
 	-lopencv_imgcodecs -lopencv_imgproc -lopencv_core -lopencv_highgui
@@ -13,7 +13,7 @@ BSP_SDK_FLAG = \
 	-lmount -lresolv -lexpat -lpangoft2-1.0 -lblkid \
 
 # List all the files
-SRC_HC_CAM = examples/head_count_cam_example.cpp \
+SRC_AD_CAM = examples/animal_detect_usbcam_example.cpp \
         src/ascii.cpp \
         src/ascii.h \
         src/box.cpp \
@@ -28,14 +28,14 @@ SRC_HC_CAM = examples/head_count_cam_example.cpp \
         src/sample_app_yolov3_cam.cpp \
         src/sample_app_yolov3_cam.h \
 
-INC_DIR_HC_CAM = -I src/
-CFLAGS_HC_CAM = ${INC_DIR_HC_CAM}
+INC_DIR_AD_CAM = -I src/
+CFLAGS_AD_CAM = ${INC_DIR_AD_CAM}
 
-02_head_count_cam: ${SRC_HC_CAM}
-	${CXX} -std=c++14 $(filter %.cpp,${SRC_HC_CAM}) ${CFLAGS_HC_CAM} \
+07_Animal_detection_usbcam_app: ${SRC_AD_CAM}
+	${CXX} -std=c++14 $(filter %.cpp,${SRC_AD_CAM}) ${CFLAGS_AD_CAM} \
 	${OPENCV_LINK} ${BSP_SDK_FLAG} \
 	-lpthread -O2 -ldl ${LDFLAGS} \
-	-o exe/head_count_usbcam_app
+	-o exe/animal_detection_usbcam_app
 
 clean:
-	rm -rf exe/head_count_usbcam_app
+	rm -rf exe/animal_detection_usbcam_app

@@ -10,17 +10,11 @@ BSP_SDK_FLAG = \
 			  -latk-1.0 -lgio-2.0 -lpango-1.0 -lfreetype -lpixman-1 -luuid -lpcre \
 			  -lmount -lresolv -lexpat -lpangoft2-1.0 -lblkid \
 
-SRC = \
-	src/sample_app_hrnet_pre-tinyyolov2_cam.cpp \
-	src/camera.cpp \
-	src/image.cpp \
-	src/wayland.cpp \
-	src/box.cpp \
 
-all: src/sample_app_hrnet_pre-tinyyolov2_cam.cpp
-	${CXX} -std=c++14 ${SRC} \
+all: src/sample_app_resnet-18_tinyyolov2_cam.cpp
+	${CXX} -std=c++14 src/sample_app_resnet-18_tinyyolov2_cam.cpp src/camera.cpp src/image.cpp src/wayland.cpp src/box.cpp \
 	${OPENCV_LINK} ${BSP_SDK_FLAG} \
-	-lpthread -O2 -ldl ${LDFLAGS} -o exe/elderly_fall_detection_usbcam_app
+	-lpthread -O2 -ldl ${LDFLAGS} -o exe/human_gaze_detection_cam_app
 
 clean:
-	rm -rf exe/elderly_fall_detection_usbcam_app
+	rm -rf exe/*.o exe/human_gaze_detection_cam_app
