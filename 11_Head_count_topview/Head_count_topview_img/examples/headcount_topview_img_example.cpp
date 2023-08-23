@@ -10,17 +10,18 @@ using namespace cv;
 class HCDemo
 {
     public:
-        void start(void);
+        void start(string img_path, int width, int height);
 };
 
 /* This method invokes the API */
-void HCDemo::start(void)
+void HCDemo::start(string img_path, int width, int height)
 {
     /* Initialize the HeadCount class */
     HeadCountTop HC = HeadCountTop();
 
-    /* Obtain the relative image path of the input image */
-    HC.get_image_path();
+    HC.img_path = img_path;
+    HC.width = width;
+    HC.height = height;
 
     /* read image */
     Mat image = imread(HC.img_path.c_str());
@@ -31,6 +32,13 @@ void HCDemo::start(void)
         return;
     }
 
+    if(HC.width != image.size().width ||
+       HC.height != image.size().height)
+    {
+        HC.width = image.size().width;
+        HC.height = image.size().height;
+    }
+
     /* Get inference */
     HC.PRET_HC(image.data, HC.width, HC.height);
     
@@ -39,11 +47,26 @@ void HCDemo::start(void)
 
 int32_t main(int32_t argc, char * argv[])
 {
+    if(argc != 2 && argc != 4)
+    {
+        printf("Usage :\n");
+        printf("\t%s [image_path]\n", argv[0]);
+        printf("\t%s [image_path] [width] [height]\n\n", argv[0]);
+        printf("Note : width and height are optional\n");
+    }
+
     /* Initialize the demo object*/
     HCDemo demo = HCDemo();
 
     /* Start the demo */
-    demo.start();
+    if(argc == 2)
+    {
+        demo.start(argv[1], 0, 0);
+    }
+    else if(argc == 4)
+    {
+        demo.start(argv[1], atoi(argv[2]), atoi(argv[3]));
+    }
     
     return 0;
 }
