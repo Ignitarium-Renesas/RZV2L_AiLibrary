@@ -465,10 +465,12 @@ void print_box(detection d, int32_t i)
 * Description   : Process CPU post-processing for YOLO (drawing bounding boxes) and print the result on console.
 * Arguments     : floatarr = float DRP-AI output data
 *                 img = image to draw the detection result
+*                 width = original image width
+*                 height = original image height
 * Return value  : 0 if succeeded
 *                 not 0 otherwise
 ******************************************/
-int8_t print_result_yolo(float* floatarr, Image * img)
+int8_t print_result_yolo(float* floatarr, Mat * img, uint32_t width, uint32_t height)
 {
     /* Following variables are required for correct_yolo/region_boxes in Darknet implementation*/
     /* Note: This implementation refers to the "darknet detector test" */
@@ -548,10 +550,10 @@ int8_t print_result_yolo(float* floatarr, Image * img)
                     box_w *= (float) (MODEL_IN_W / new_w);
                     box_h *= (float) (MODEL_IN_H / new_h);
 
-                    center_x = round(center_x * DRPAI_IN_WIDTH);
-                    center_y = round(center_y * DRPAI_IN_HEIGHT);
-                    box_w = round(box_w * DRPAI_IN_WIDTH);
-                    box_h = round(box_h * DRPAI_IN_HEIGHT);
+                    center_x = round(center_x * width);
+                    center_y = round(center_y * height);
+                    box_w = round(box_w * width);
+                    box_h = round(box_h * height);
 
                     objectness = sigmoid(tc);
 
@@ -606,13 +608,23 @@ int8_t print_result_yolo(float* floatarr, Image * img)
         print_box(det[i], n);
 
         /* Draw the bounding box on the image */
-        stringstream stream;
-        stream << fixed << setprecision(2) << det[i].prob;
-        string result_str = label_file_map[det[i].c]+ " "+ stream.str();
-        img->draw_rect((int32_t) det[i].bbox.x, (int32_t)det[i].bbox.y,
-            (int32_t)det[i].bbox.w, (int32_t)det[i].bbox.h, result_str.c_str());
+        int32_t x_min = det[i].bbox.x - round(det[i].bbox.w / 2.);
+        int32_t y_min = det[i].bbox.y - round(det[i].bbox.h / 2.);
+        int32_t x_max = det[i].bbox.x + round(det[i].bbox.w / 2.) - 1;
+        int32_t y_max = det[i].bbox.y + round(det[i].bbox.h / 2.) - 1;
+        /* Check the bounding box is in the image range */
+        x_min = x_min < 1 ? 1 : x_min;
+        x_max = ((img->size().width - 2) < x_max) ? (img->size().width - 2) : x_max;
+        y_min = y_min < 1 ? 1 : y_min;
+        y_max = ((img->size().height - 2) < y_max) ? (img->size().height - 2) : y_max;
+        Point p1(x_min, y_min);
+        Point p2(x_max, y_max);
+        rectangle(*img, p1, p2, Scalar(0, 0, 255, 255), LINE_8);
+        putText(*img, label_file_map[det[i].c].c_str(), Point(x_min, y_min), FONT_HERSHEY_SIMPLEX, 1, Scalar(0, 255, 0, 255), 1);
     }
     
+    /* Save predictions */
+    imwrite("prediction.bmp", *img);
     /* Print head count */
     printf("\nHead Count: %d\n", n); 
 
@@ -837,7 +849,7 @@ int32_t get_head_count(uint8_t* in_img_addr, uint32_t width, uint32_t height)
     }
 
     /* Compute the result, draw the result on img. ret value contains the head count */
-    ret = print_result_yolo(drpai_output_buf, &img);
+    ret = print_result_yolo(drpai_output_buf, &original_img, width, height);
     if (-1 == ret)
     {
         fprintf(stderr, "[ERROR] Failed to run CPU Post Processing.\n");
