@@ -94,7 +94,7 @@ Please follow the below steps once the desired changes are made in the source co
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
-cd RZV2L_AiLibrary/08_Hand_Gesture_Recognition/Hand_Gesture_Recognition_<cam/usbcam>/exe 
+cd RZV2L_AiLibrary/08_Hand_Gesture_Recognition/Hand_Gesture_Recognition_<cam/usbcam> 
 make
 ```
 

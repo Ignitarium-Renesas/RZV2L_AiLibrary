@@ -164,7 +164,7 @@ cd 06_Face_recognition_spoof_detection/Face_registration_<cam/usbcam>/exe/
 3. Choose whether to capture image, append or write database.
     1. for capturing new face
         1. Enter the name of the image to be saved.
-        2. The face must be inside the square box.
+        2. The face must be inside the circular region.
         3. Enter c (c+Enter) to capture.
 
 ```
@@ -194,7 +194,7 @@ After above command, a window will appear on the screen.
 
     2. for creating new face register or for adding new face to register.
         1. Enter the number of samples to be embdded.
-        2. Enter person name and path to his/her image.
+        2. Enter person's name and path to his/her image.
         
         
 
@@ -208,9 +208,9 @@ Choose any one option from below
 Enter the number of samples to be embedded 
 5
 Enter the person name 
-Christo
+Chris
 Enter the image path 
-/home/root/06_Face_recognition_spoof_detection_backup/Capture_face/captures/Chris.bmp
+/home/root/06_Face_recognition_spoof_detection/Chris.bmp
 Loading : arcface_bmp/drp_desc.bin
 Loading : arcface_bmp/resnet50_bmp_drpcfg.mem
 Loading : arcface_bmp/drp_param.bin
@@ -219,7 +219,7 @@ Loading : arcface_bmp/resnet50_bmp_weight.dat
 Inference -----------------------------------------------
 [START] DRP-AI
 [END] DRP-AI
-Input: /home/root/06_Face_recognition_spoof_detection_backup/Capture_face/captures/Chris.bmp
+Input: /home/root/06_Face_recognition_spoof_detection/Chris.bmp
 ```
 
 6. The face embedding database - `database/face_features.csv` would get updated.
