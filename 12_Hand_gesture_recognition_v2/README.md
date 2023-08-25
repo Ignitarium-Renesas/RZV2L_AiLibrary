@@ -75,6 +75,8 @@ cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
 cd RZV2L_AiLibrary/12_Hand_Gesture_Recognition_v2/Hand_Gesture_Recognition_v2_<cam/usbcam>
 make
+```
+Now application's executable file (exe) is built.
 
 ### Running the sample application
 
@@ -86,13 +88,8 @@ cd /home/root/RZV2L_AiLibrary
 cd 12_Hand_Gesture_Recognition_v2/Hand_Gesture_Recognition_v2_<cam/usbcam>/exe
 ./hand_gesture_recognition_v2_<cam/usbcam>_app
 ```
+Live video feed will be visible on the screen.
 
-#### Example:
-```
-cd /home/root/RZV2L_AiLibrary 
-cd 12_Hand_Gesture_Recognition_v2/Hand_Gesture_Recognition_v2_usbcam/exe
-./hand_gesture_recognition_v2_usbcam_app
-```
 ## Limitation
 1. The prediction works best when the distance between camera and hand is in between 0.5 - 1.0 metre.
 2. The accuracy improves with minimum background noise or movement. 
