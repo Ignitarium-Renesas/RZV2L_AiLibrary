@@ -51,7 +51,7 @@ sample video on YouTube -[Safety helmet & vest detection demo video](https://you
 
 A commonly known object detection model, YoloV3 is used in this application as object detector model. official link [YoloV3](https://pjreddie.com/darknet/yolo/).
 Yolov3 is trained on a open source dataset.
-You can find the [dataset](https://github.com/MinhNKB/helmet-safety-vest-detection) and [Kaggle dataset](https://www.kaggle.com/datasets/andrewmvd/hard-hat-detection) here.
+You can find the [dataset](https://github.com/MinhNKB/helmet-safety-vest-detection) and [Kaggle dataset](https://www.kaggle.com/datasets/muhammetzahitaydn/hardhat-vest-dataset-v3) here.
 
 ### Application with image input
 - The user should pass the path to the image as an argument, optionally it's width and height.
@@ -74,7 +74,7 @@ make
 ```
 
 ## Running the application
-1. Download the `yolov3_Helmet_vest_detection_weight.dat` weights file from the [release v1.2.2](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.2). 
+1. Download the `yolov3_Helmet_vest_detection_weight.dat` weights file from the [release v1.2.2](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.2). Precise file link : [yolov3_Helmet_vest_detection_weight.dat]( https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v1.2.2/yolov3_Helmet_vest_detection_weight.dat)
 2. Place `yolov3_Helmet_vest_detection_weights.dat` file at the location `04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_cam/exe/yolov3/` or `04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_img/exe/yolov3/` or `04_Safety_Helmet_Vest_Detection/Safety_helmet_vest_usbcam/exe/yolov3/` according to to the application that needs to be run.
 3. Now, copy the `RZV2L_AiLibrary` directory to the board (/home/root/).
 4. Please follow these steps:
