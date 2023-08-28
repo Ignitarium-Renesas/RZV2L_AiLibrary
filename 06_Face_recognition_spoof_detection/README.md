@@ -210,7 +210,7 @@ Enter the number of samples to be embedded
 Enter the person name 
 Chris
 Enter the image path 
-/home/root/06_Face_recognition_spoof_detection/Chris.bmp
+/home/root/06_Face_recognition_spoof_detection/captures/Chris.bmp
 Loading : arcface_bmp/drp_desc.bin
 Loading : arcface_bmp/resnet50_bmp_drpcfg.mem
 Loading : arcface_bmp/drp_param.bin
@@ -219,7 +219,7 @@ Loading : arcface_bmp/resnet50_bmp_weight.dat
 Inference -----------------------------------------------
 [START] DRP-AI
 [END] DRP-AI
-Input: /home/root/06_Face_recognition_spoof_detection/Chris.bmp
+Input: /home/root/06_Face_recognition_spoof_detection/captures/Chris.bmp
 ```
 
 6. The face embedding database - `database/face_features.csv` would get updated.
