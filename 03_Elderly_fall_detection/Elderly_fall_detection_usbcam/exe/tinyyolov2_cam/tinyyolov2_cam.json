@@ -284,7 +284,7 @@
         }
     },
     "3_o0_k0_i0": {
-        "name": "input.4_o0_k0_i0",
+        "name": "/module_list.0/conv_0/Conv_output_0_o0_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -348,8 +348,8 @@
         "Addr": {
             "din": "input1",
             "din_offset": 0,
-            "param": "input.4_o0_k0_i0_param",
-            "dout": "onnx::MaxPool_55",
+            "param": "/module_list.0/conv_0/Conv_output_0_o0_k0_i0_param",
+            "dout": "/module_list.0/leaky_0/LeakyRelu_output_0",
             "dout_offset": 0,
             "add1": "",
             "add1_offset": 0,
@@ -444,7 +444,7 @@
         "Param": {}
     },
     "4_o0_k0_i0": {
-        "name": "input.8",
+        "name": "/module_list.1/maxpool_1/MaxPool_output_0",
         "opexp": "MaxPool",
         "Calc": {
             "name": "MaxPool",
@@ -506,10 +506,10 @@
             "dout_w": 208
         },
         "Addr": {
-            "din": "onnx::MaxPool_55",
+            "din": "/module_list.0/leaky_0/LeakyRelu_output_0",
             "din_offset": 0,
             "param": "",
-            "dout": "input.8",
+            "dout": "/module_list.1/maxpool_1/MaxPool_output_0",
             "dout_offset": 0,
             "add1": "",
             "add1_offset": 0,
@@ -534,7 +534,7 @@
         "Param": {}
     },
     "5_o0_k0_i0": {
-        "name": "input.16_o0_k0_i0",
+        "name": "/module_list.2/conv_2/Conv_output_0_o0_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -596,10 +596,10 @@
             "dout_w": 208
         },
         "Addr": {
-            "din": "input.8",
+            "din": "/module_list.1/maxpool_1/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.16_o0_k0_i0_param",
-            "dout": "onnx::MaxPool_59",
+            "param": "/module_list.2/conv_2/Conv_output_0_o0_k0_i0_param",
+            "dout": "/module_list.2/leaky_2/LeakyRelu_output_0",
             "dout_offset": 0,
             "add1": "",
             "add1_offset": 0,
@@ -694,7 +694,7 @@
         "Param": {}
     },
     "6_o0_k0_i0": {
-        "name": "input.20",
+        "name": "/module_list.3/maxpool_3/MaxPool_output_0",
         "opexp": "MaxPool",
         "Calc": {
             "name": "MaxPool",
@@ -756,10 +756,10 @@
             "dout_w": 104
         },
         "Addr": {
-            "din": "onnx::MaxPool_59",
+            "din": "/module_list.2/leaky_2/LeakyRelu_output_0",
             "din_offset": 0,
             "param": "",
-            "dout": "input.20",
+            "dout": "/module_list.3/maxpool_3/MaxPool_output_0",
             "dout_offset": 0,
             "add1": "",
             "add1_offset": 0,
@@ -784,7 +784,7 @@
         "Param": {}
     },
     "7_o0_k0_i0": {
-        "name": "input.28_o0_k0_i0",
+        "name": "/module_list.4/conv_4/Conv_output_0_o0_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -846,10 +846,10 @@
             "dout_w": 104
         },
         "Addr": {
-            "din": "input.20",
+            "din": "/module_list.3/maxpool_3/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.28_o0_k0_i0_param",
-            "dout": "onnx::MaxPool_63",
+            "param": "/module_list.4/conv_4/Conv_output_0_o0_k0_i0_param",
+            "dout": "/module_list.4/leaky_4/LeakyRelu_output_0",
             "dout_offset": 0,
             "add1": "",
             "add1_offset": 0,
@@ -944,7 +944,7 @@
         "Param": {}
     },
     "8_o0_k0_i0": {
-        "name": "input.32",
+        "name": "/module_list.5/maxpool_5/MaxPool_output_0",
         "opexp": "MaxPool",
         "Calc": {
             "name": "MaxPool",
@@ -1006,10 +1006,10 @@
             "dout_w": 52
         },
         "Addr": {
-            "din": "onnx::MaxPool_63",
+            "din": "/module_list.4/leaky_4/LeakyRelu_output_0",
             "din_offset": 0,
             "param": "",
-            "dout": "input.32",
+            "dout": "/module_list.5/maxpool_5/MaxPool_output_0",
             "dout_offset": 0,
             "add1": "",
             "add1_offset": 0,
@@ -1034,7 +1034,7 @@
         "Param": {}
     },
     "9_o0_k0_i0": {
-        "name": "input.40_o0_k0_i0",
+        "name": "/module_list.6/conv_6/Conv_output_0_o0_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -1096,10 +1096,10 @@
             "dout_w": 52
         },
         "Addr": {
-            "din": "input.32",
+            "din": "/module_list.5/maxpool_5/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.40_o0_k0_i0_param",
-            "dout": "onnx::MaxPool_67",
+            "param": "/module_list.6/conv_6/Conv_output_0_o0_k0_i0_param",
+            "dout": "/module_list.6/leaky_6/LeakyRelu_output_0",
             "dout_offset": 0,
             "add1": "",
             "add1_offset": 0,
@@ -1194,7 +1194,7 @@
         "Param": {}
     },
     "9_o1_k0_i0": {
-        "name": "input.40_o1_k0_i0",
+        "name": "/module_list.6/conv_6/Conv_output_0_o1_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -1256,10 +1256,10 @@
             "dout_w": 52
         },
         "Addr": {
-            "din": "input.32",
+            "din": "/module_list.5/maxpool_5/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.40_o1_k0_i0_param",
-            "dout": "onnx::MaxPool_67",
+            "param": "/module_list.6/conv_6/Conv_output_0_o1_k0_i0_param",
+            "dout": "/module_list.6/leaky_6/LeakyRelu_output_0",
             "dout_offset": 64,
             "add1": "",
             "add1_offset": 0,
@@ -1354,7 +1354,7 @@
         "Param": {}
     },
     "10_o0_k0_i0": {
-        "name": "input.44",
+        "name": "/module_list.7/maxpool_7/MaxPool_output_0",
         "opexp": "MaxPool",
         "Calc": {
             "name": "MaxPool",
@@ -1416,10 +1416,10 @@
             "dout_w": 26
         },
         "Addr": {
-            "din": "onnx::MaxPool_67",
+            "din": "/module_list.6/leaky_6/LeakyRelu_output_0",
             "din_offset": 0,
             "param": "",
-            "dout": "input.44",
+            "dout": "/module_list.7/maxpool_7/MaxPool_output_0",
             "dout_offset": 0,
             "add1": "",
             "add1_offset": 0,
@@ -1444,7 +1444,7 @@
         "Param": {}
     },
     "11_o0_k0_i0": {
-        "name": "input.52_o0_k0_i0",
+        "name": "/module_list.8/conv_8/Conv_output_0_o0_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -1506,10 +1506,10 @@
             "dout_w": 26
         },
         "Addr": {
-            "din": "input.44",
+            "din": "/module_list.7/maxpool_7/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.52_o0_k0_i0_param",
-            "dout": "onnx::MaxPool_71",
+            "param": "/module_list.8/conv_8/Conv_output_0_o0_k0_i0_param",
+            "dout": "/module_list.8/leaky_8/LeakyRelu_output_0",
             "dout_offset": 0,
             "add1": "",
             "add1_offset": 0,
@@ -1604,7 +1604,7 @@
         "Param": {}
     },
     "11_o1_k0_i0": {
-        "name": "input.52_o1_k0_i0",
+        "name": "/module_list.8/conv_8/Conv_output_0_o1_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -1666,10 +1666,10 @@
             "dout_w": 26
         },
         "Addr": {
-            "din": "input.44",
+            "din": "/module_list.7/maxpool_7/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.52_o1_k0_i0_param",
-            "dout": "onnx::MaxPool_71",
+            "param": "/module_list.8/conv_8/Conv_output_0_o1_k0_i0_param",
+            "dout": "/module_list.8/leaky_8/LeakyRelu_output_0",
             "dout_offset": 64,
             "add1": "",
             "add1_offset": 0,
@@ -1764,7 +1764,7 @@
         "Param": {}
     },
     "11_o2_k0_i0": {
-        "name": "input.52_o2_k0_i0",
+        "name": "/module_list.8/conv_8/Conv_output_0_o2_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -1826,10 +1826,10 @@
             "dout_w": 26
         },
         "Addr": {
-            "din": "input.44",
+            "din": "/module_list.7/maxpool_7/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.52_o2_k0_i0_param",
-            "dout": "onnx::MaxPool_71",
+            "param": "/module_list.8/conv_8/Conv_output_0_o2_k0_i0_param",
+            "dout": "/module_list.8/leaky_8/LeakyRelu_output_0",
             "dout_offset": 128,
             "add1": "",
             "add1_offset": 0,
@@ -1924,7 +1924,7 @@
         "Param": {}
     },
     "11_o3_k0_i0": {
-        "name": "input.52_o3_k0_i0",
+        "name": "/module_list.8/conv_8/Conv_output_0_o3_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -1986,10 +1986,10 @@
             "dout_w": 26
         },
         "Addr": {
-            "din": "input.44",
+            "din": "/module_list.7/maxpool_7/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.52_o3_k0_i0_param",
-            "dout": "onnx::MaxPool_71",
+            "param": "/module_list.8/conv_8/Conv_output_0_o3_k0_i0_param",
+            "dout": "/module_list.8/leaky_8/LeakyRelu_output_0",
             "dout_offset": 192,
             "add1": "",
             "add1_offset": 0,
@@ -2084,7 +2084,7 @@
         "Param": {}
     },
     "12_o0_k0_i0": {
-        "name": "input.56",
+        "name": "/module_list.9/maxpool_9/MaxPool_output_0",
         "opexp": "MaxPool",
         "Calc": {
             "name": "MaxPool",
@@ -2146,10 +2146,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "onnx::MaxPool_71",
+            "din": "/module_list.8/leaky_8/LeakyRelu_output_0",
             "din_offset": 0,
             "param": "",
-            "dout": "input.56",
+            "dout": "/module_list.9/maxpool_9/MaxPool_output_0",
             "dout_offset": 0,
             "add1": "",
             "add1_offset": 0,
@@ -2174,7 +2174,7 @@
         "Param": {}
     },
     "13_o0_k0_i0": {
-        "name": "input.64_o0_k0_i0",
+        "name": "/module_list.10/conv_10/Conv_output_0_o0_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -2236,10 +2236,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.56",
+            "din": "/module_list.9/maxpool_9/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.64_o0_k0_i0_param",
-            "dout": "onnx::Pad_75",
+            "param": "/module_list.10/conv_10/Conv_output_0_o0_k0_i0_param",
+            "dout": "/module_list.10/leaky_10/LeakyRelu_output_0",
             "dout_offset": 0,
             "add1": "",
             "add1_offset": 0,
@@ -2334,7 +2334,7 @@
         "Param": {}
     },
     "13_o1_k0_i0": {
-        "name": "input.64_o1_k0_i0",
+        "name": "/module_list.10/conv_10/Conv_output_0_o1_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -2396,10 +2396,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.56",
+            "din": "/module_list.9/maxpool_9/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.64_o1_k0_i0_param",
-            "dout": "onnx::Pad_75",
+            "param": "/module_list.10/conv_10/Conv_output_0_o1_k0_i0_param",
+            "dout": "/module_list.10/leaky_10/LeakyRelu_output_0",
             "dout_offset": 64,
             "add1": "",
             "add1_offset": 0,
@@ -2494,7 +2494,7 @@
         "Param": {}
     },
     "13_o2_k0_i0": {
-        "name": "input.64_o2_k0_i0",
+        "name": "/module_list.10/conv_10/Conv_output_0_o2_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -2556,10 +2556,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.56",
+            "din": "/module_list.9/maxpool_9/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.64_o2_k0_i0_param",
-            "dout": "onnx::Pad_75",
+            "param": "/module_list.10/conv_10/Conv_output_0_o2_k0_i0_param",
+            "dout": "/module_list.10/leaky_10/LeakyRelu_output_0",
             "dout_offset": 128,
             "add1": "",
             "add1_offset": 0,
@@ -2654,7 +2654,7 @@
         "Param": {}
     },
     "13_o3_k0_i0": {
-        "name": "input.64_o3_k0_i0",
+        "name": "/module_list.10/conv_10/Conv_output_0_o3_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -2716,10 +2716,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.56",
+            "din": "/module_list.9/maxpool_9/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.64_o3_k0_i0_param",
-            "dout": "onnx::Pad_75",
+            "param": "/module_list.10/conv_10/Conv_output_0_o3_k0_i0_param",
+            "dout": "/module_list.10/leaky_10/LeakyRelu_output_0",
             "dout_offset": 192,
             "add1": "",
             "add1_offset": 0,
@@ -2814,7 +2814,7 @@
         "Param": {}
     },
     "13_o4_k0_i0": {
-        "name": "input.64_o4_k0_i0",
+        "name": "/module_list.10/conv_10/Conv_output_0_o4_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -2876,10 +2876,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.56",
+            "din": "/module_list.9/maxpool_9/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.64_o4_k0_i0_param",
-            "dout": "onnx::Pad_75",
+            "param": "/module_list.10/conv_10/Conv_output_0_o4_k0_i0_param",
+            "dout": "/module_list.10/leaky_10/LeakyRelu_output_0",
             "dout_offset": 256,
             "add1": "",
             "add1_offset": 0,
@@ -2974,7 +2974,7 @@
         "Param": {}
     },
     "13_o5_k0_i0": {
-        "name": "input.64_o5_k0_i0",
+        "name": "/module_list.10/conv_10/Conv_output_0_o5_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -3036,10 +3036,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.56",
+            "din": "/module_list.9/maxpool_9/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.64_o5_k0_i0_param",
-            "dout": "onnx::Pad_75",
+            "param": "/module_list.10/conv_10/Conv_output_0_o5_k0_i0_param",
+            "dout": "/module_list.10/leaky_10/LeakyRelu_output_0",
             "dout_offset": 320,
             "add1": "",
             "add1_offset": 0,
@@ -3134,7 +3134,7 @@
         "Param": {}
     },
     "13_o6_k0_i0": {
-        "name": "input.64_o6_k0_i0",
+        "name": "/module_list.10/conv_10/Conv_output_0_o6_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -3196,10 +3196,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.56",
+            "din": "/module_list.9/maxpool_9/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.64_o6_k0_i0_param",
-            "dout": "onnx::Pad_75",
+            "param": "/module_list.10/conv_10/Conv_output_0_o6_k0_i0_param",
+            "dout": "/module_list.10/leaky_10/LeakyRelu_output_0",
             "dout_offset": 384,
             "add1": "",
             "add1_offset": 0,
@@ -3294,7 +3294,7 @@
         "Param": {}
     },
     "13_o7_k0_i0": {
-        "name": "input.64_o7_k0_i0",
+        "name": "/module_list.10/conv_10/Conv_output_0_o7_k0_i0",
         "opexp": "Conv>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -3356,10 +3356,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.56",
+            "din": "/module_list.9/maxpool_9/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.64_o7_k0_i0_param",
-            "dout": "onnx::Pad_75",
+            "param": "/module_list.10/conv_10/Conv_output_0_o7_k0_i0_param",
+            "dout": "/module_list.10/leaky_10/LeakyRelu_output_0",
             "dout_offset": 448,
             "add1": "",
             "add1_offset": 0,
@@ -3454,7 +3454,7 @@
         "Param": {}
     },
     "14_o0_k0_i0": {
-        "name": "input.68",
+        "name": "/module_list.11/maxpool_11/MaxPool_output_0",
         "opexp": "MaxPool",
         "Calc": {
             "name": "MaxPool",
@@ -3516,10 +3516,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "onnx::Pad_75",
+            "din": "/module_list.10/leaky_10/LeakyRelu_output_0",
             "din_offset": 0,
             "param": "",
-            "dout": "input.68",
+            "dout": "/module_list.11/maxpool_11/MaxPool_output_0",
             "dout_offset": 0,
             "add1": "",
             "add1_offset": 0,
@@ -3544,7 +3544,7 @@
         "Param": {}
     },
     "15_o0_k0_i0": {
-        "name": "input.76_o0_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o0_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -3606,9 +3606,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o0_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o0_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -3704,7 +3704,7 @@
         "Param": {}
     },
     "15_o0_k0_i1": {
-        "name": "input.76_o0_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o0_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -3766,10 +3766,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o0_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o0_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 0,
             "add1": "zero",
             "add1_offset": 0,
@@ -3864,7 +3864,7 @@
         "Param": {}
     },
     "15_o1_k0_i0": {
-        "name": "input.76_o1_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o1_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -3926,9 +3926,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o1_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o1_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -4024,7 +4024,7 @@
         "Param": {}
     },
     "15_o1_k0_i1": {
-        "name": "input.76_o1_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o1_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -4086,10 +4086,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o1_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o1_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 64,
             "add1": "zero",
             "add1_offset": 0,
@@ -4184,7 +4184,7 @@
         "Param": {}
     },
     "15_o2_k0_i0": {
-        "name": "input.76_o2_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o2_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -4246,9 +4246,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o2_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o2_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -4344,7 +4344,7 @@
         "Param": {}
     },
     "15_o2_k0_i1": {
-        "name": "input.76_o2_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o2_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -4406,10 +4406,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o2_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o2_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 128,
             "add1": "zero",
             "add1_offset": 0,
@@ -4504,7 +4504,7 @@
         "Param": {}
     },
     "15_o3_k0_i0": {
-        "name": "input.76_o3_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o3_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -4566,9 +4566,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o3_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o3_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -4664,7 +4664,7 @@
         "Param": {}
     },
     "15_o3_k0_i1": {
-        "name": "input.76_o3_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o3_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -4726,10 +4726,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o3_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o3_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 192,
             "add1": "zero",
             "add1_offset": 0,
@@ -4824,7 +4824,7 @@
         "Param": {}
     },
     "15_o4_k0_i0": {
-        "name": "input.76_o4_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o4_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -4886,9 +4886,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o4_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o4_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -4984,7 +4984,7 @@
         "Param": {}
     },
     "15_o4_k0_i1": {
-        "name": "input.76_o4_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o4_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -5046,10 +5046,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o4_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o4_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 256,
             "add1": "zero",
             "add1_offset": 0,
@@ -5144,7 +5144,7 @@
         "Param": {}
     },
     "15_o5_k0_i0": {
-        "name": "input.76_o5_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o5_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -5206,9 +5206,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o5_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o5_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -5304,7 +5304,7 @@
         "Param": {}
     },
     "15_o5_k0_i1": {
-        "name": "input.76_o5_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o5_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -5366,10 +5366,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o5_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o5_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 320,
             "add1": "zero",
             "add1_offset": 0,
@@ -5464,7 +5464,7 @@
         "Param": {}
     },
     "15_o6_k0_i0": {
-        "name": "input.76_o6_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o6_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -5526,9 +5526,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o6_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o6_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -5624,7 +5624,7 @@
         "Param": {}
     },
     "15_o6_k0_i1": {
-        "name": "input.76_o6_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o6_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -5686,10 +5686,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o6_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o6_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 384,
             "add1": "zero",
             "add1_offset": 0,
@@ -5784,7 +5784,7 @@
         "Param": {}
     },
     "15_o7_k0_i0": {
-        "name": "input.76_o7_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o7_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -5846,9 +5846,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o7_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o7_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -5944,7 +5944,7 @@
         "Param": {}
     },
     "15_o7_k0_i1": {
-        "name": "input.76_o7_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o7_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -6006,10 +6006,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o7_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o7_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 448,
             "add1": "zero",
             "add1_offset": 0,
@@ -6104,7 +6104,7 @@
         "Param": {}
     },
     "15_o8_k0_i0": {
-        "name": "input.76_o8_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o8_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -6166,9 +6166,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o8_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o8_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -6264,7 +6264,7 @@
         "Param": {}
     },
     "15_o8_k0_i1": {
-        "name": "input.76_o8_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o8_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -6326,10 +6326,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o8_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o8_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 512,
             "add1": "zero",
             "add1_offset": 0,
@@ -6424,7 +6424,7 @@
         "Param": {}
     },
     "15_o9_k0_i0": {
-        "name": "input.76_o9_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o9_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -6486,9 +6486,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o9_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o9_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -6584,7 +6584,7 @@
         "Param": {}
     },
     "15_o9_k0_i1": {
-        "name": "input.76_o9_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o9_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -6646,10 +6646,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o9_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o9_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 576,
             "add1": "zero",
             "add1_offset": 0,
@@ -6744,7 +6744,7 @@
         "Param": {}
     },
     "15_o10_k0_i0": {
-        "name": "input.76_o10_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o10_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -6806,9 +6806,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o10_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o10_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -6904,7 +6904,7 @@
         "Param": {}
     },
     "15_o10_k0_i1": {
-        "name": "input.76_o10_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o10_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -6966,10 +6966,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o10_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o10_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 640,
             "add1": "zero",
             "add1_offset": 0,
@@ -7064,7 +7064,7 @@
         "Param": {}
     },
     "15_o11_k0_i0": {
-        "name": "input.76_o11_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o11_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -7126,9 +7126,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o11_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o11_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -7224,7 +7224,7 @@
         "Param": {}
     },
     "15_o11_k0_i1": {
-        "name": "input.76_o11_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o11_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -7286,10 +7286,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o11_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o11_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 704,
             "add1": "zero",
             "add1_offset": 0,
@@ -7384,7 +7384,7 @@
         "Param": {}
     },
     "15_o12_k0_i0": {
-        "name": "input.76_o12_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o12_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -7446,9 +7446,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o12_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o12_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -7544,7 +7544,7 @@
         "Param": {}
     },
     "15_o12_k0_i1": {
-        "name": "input.76_o12_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o12_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -7606,10 +7606,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o12_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o12_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 768,
             "add1": "zero",
             "add1_offset": 0,
@@ -7704,7 +7704,7 @@
         "Param": {}
     },
     "15_o13_k0_i0": {
-        "name": "input.76_o13_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o13_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -7766,9 +7766,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o13_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o13_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -7864,7 +7864,7 @@
         "Param": {}
     },
     "15_o13_k0_i1": {
-        "name": "input.76_o13_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o13_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -7926,10 +7926,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o13_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o13_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 832,
             "add1": "zero",
             "add1_offset": 0,
@@ -8024,7 +8024,7 @@
         "Param": {}
     },
     "15_o14_k0_i0": {
-        "name": "input.76_o14_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o14_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -8086,9 +8086,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o14_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o14_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -8184,7 +8184,7 @@
         "Param": {}
     },
     "15_o14_k0_i1": {
-        "name": "input.76_o14_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o14_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -8246,10 +8246,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o14_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o14_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 896,
             "add1": "zero",
             "add1_offset": 0,
@@ -8344,7 +8344,7 @@
         "Param": {}
     },
     "15_o15_k0_i0": {
-        "name": "input.76_o15_k0_i0",
+        "name": "/module_list.12/conv_12/Conv_output_0_o15_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -8406,9 +8406,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 0,
-            "param": "input.76_o15_k0_i0_param",
+            "param": "/module_list.12/conv_12/Conv_output_0_o15_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -8504,7 +8504,7 @@
         "Param": {}
     },
     "15_o15_k0_i1": {
-        "name": "input.76_o15_k0_i1",
+        "name": "/module_list.12/conv_12/Conv_output_0_o15_k0_i1",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -8566,10 +8566,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.68",
+            "din": "/module_list.11/maxpool_11/MaxPool_output_0",
             "din_offset": 256,
-            "param": "input.76_o15_k0_i1_param",
-            "dout": "input.80",
+            "param": "/module_list.12/conv_12/Conv_output_0_o15_k0_i1_param",
+            "dout": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "dout_offset": 960,
             "add1": "zero",
             "add1_offset": 0,
@@ -8664,7 +8664,7 @@
         "Param": {}
     },
     "16_o0_k0_i0": {
-        "name": "input.88_o0_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o0_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -8726,9 +8726,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o0_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o0_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -8824,7 +8824,7 @@
         "Param": {}
     },
     "16_o0_k0_i1": {
-        "name": "input.88_o0_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o0_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -8886,9 +8886,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o0_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o0_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -8984,7 +8984,7 @@
         "Param": {}
     },
     "16_o0_k0_i2": {
-        "name": "input.88_o0_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o0_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -9046,9 +9046,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o0_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o0_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -9144,7 +9144,7 @@
         "Param": {}
     },
     "16_o0_k0_i3": {
-        "name": "input.88_o0_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o0_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -9206,10 +9206,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o0_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o0_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 0,
             "add1": "zero",
             "add1_offset": 0,
@@ -9304,7 +9304,7 @@
         "Param": {}
     },
     "16_o1_k0_i0": {
-        "name": "input.88_o1_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o1_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -9366,9 +9366,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o1_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o1_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -9464,7 +9464,7 @@
         "Param": {}
     },
     "16_o1_k0_i1": {
-        "name": "input.88_o1_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o1_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -9526,9 +9526,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o1_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o1_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -9624,7 +9624,7 @@
         "Param": {}
     },
     "16_o1_k0_i2": {
-        "name": "input.88_o1_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o1_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -9686,9 +9686,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o1_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o1_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -9784,7 +9784,7 @@
         "Param": {}
     },
     "16_o1_k0_i3": {
-        "name": "input.88_o1_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o1_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -9846,10 +9846,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o1_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o1_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 64,
             "add1": "zero",
             "add1_offset": 0,
@@ -9944,7 +9944,7 @@
         "Param": {}
     },
     "16_o2_k0_i0": {
-        "name": "input.88_o2_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o2_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -10006,9 +10006,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o2_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o2_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -10104,7 +10104,7 @@
         "Param": {}
     },
     "16_o2_k0_i1": {
-        "name": "input.88_o2_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o2_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -10166,9 +10166,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o2_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o2_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -10264,7 +10264,7 @@
         "Param": {}
     },
     "16_o2_k0_i2": {
-        "name": "input.88_o2_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o2_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -10326,9 +10326,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o2_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o2_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -10424,7 +10424,7 @@
         "Param": {}
     },
     "16_o2_k0_i3": {
-        "name": "input.88_o2_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o2_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -10486,10 +10486,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o2_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o2_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 128,
             "add1": "zero",
             "add1_offset": 0,
@@ -10584,7 +10584,7 @@
         "Param": {}
     },
     "16_o3_k0_i0": {
-        "name": "input.88_o3_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o3_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -10646,9 +10646,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o3_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o3_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -10744,7 +10744,7 @@
         "Param": {}
     },
     "16_o3_k0_i1": {
-        "name": "input.88_o3_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o3_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -10806,9 +10806,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o3_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o3_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -10904,7 +10904,7 @@
         "Param": {}
     },
     "16_o3_k0_i2": {
-        "name": "input.88_o3_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o3_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -10966,9 +10966,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o3_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o3_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -11064,7 +11064,7 @@
         "Param": {}
     },
     "16_o3_k0_i3": {
-        "name": "input.88_o3_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o3_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -11126,10 +11126,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o3_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o3_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 192,
             "add1": "zero",
             "add1_offset": 0,
@@ -11224,7 +11224,7 @@
         "Param": {}
     },
     "16_o4_k0_i0": {
-        "name": "input.88_o4_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o4_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -11286,9 +11286,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o4_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o4_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -11384,7 +11384,7 @@
         "Param": {}
     },
     "16_o4_k0_i1": {
-        "name": "input.88_o4_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o4_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -11446,9 +11446,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o4_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o4_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -11544,7 +11544,7 @@
         "Param": {}
     },
     "16_o4_k0_i2": {
-        "name": "input.88_o4_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o4_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -11606,9 +11606,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o4_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o4_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -11704,7 +11704,7 @@
         "Param": {}
     },
     "16_o4_k0_i3": {
-        "name": "input.88_o4_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o4_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -11766,10 +11766,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o4_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o4_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 256,
             "add1": "zero",
             "add1_offset": 0,
@@ -11864,7 +11864,7 @@
         "Param": {}
     },
     "16_o5_k0_i0": {
-        "name": "input.88_o5_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o5_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -11926,9 +11926,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o5_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o5_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -12024,7 +12024,7 @@
         "Param": {}
     },
     "16_o5_k0_i1": {
-        "name": "input.88_o5_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o5_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -12086,9 +12086,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o5_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o5_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -12184,7 +12184,7 @@
         "Param": {}
     },
     "16_o5_k0_i2": {
-        "name": "input.88_o5_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o5_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -12246,9 +12246,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o5_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o5_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -12344,7 +12344,7 @@
         "Param": {}
     },
     "16_o5_k0_i3": {
-        "name": "input.88_o5_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o5_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -12406,10 +12406,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o5_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o5_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 320,
             "add1": "zero",
             "add1_offset": 0,
@@ -12504,7 +12504,7 @@
         "Param": {}
     },
     "16_o6_k0_i0": {
-        "name": "input.88_o6_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o6_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -12566,9 +12566,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o6_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o6_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -12664,7 +12664,7 @@
         "Param": {}
     },
     "16_o6_k0_i1": {
-        "name": "input.88_o6_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o6_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -12726,9 +12726,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o6_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o6_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -12824,7 +12824,7 @@
         "Param": {}
     },
     "16_o6_k0_i2": {
-        "name": "input.88_o6_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o6_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -12886,9 +12886,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o6_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o6_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -12984,7 +12984,7 @@
         "Param": {}
     },
     "16_o6_k0_i3": {
-        "name": "input.88_o6_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o6_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -13046,10 +13046,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o6_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o6_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 384,
             "add1": "zero",
             "add1_offset": 0,
@@ -13144,7 +13144,7 @@
         "Param": {}
     },
     "16_o7_k0_i0": {
-        "name": "input.88_o7_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o7_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -13206,9 +13206,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o7_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o7_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -13304,7 +13304,7 @@
         "Param": {}
     },
     "16_o7_k0_i1": {
-        "name": "input.88_o7_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o7_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -13366,9 +13366,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o7_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o7_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -13464,7 +13464,7 @@
         "Param": {}
     },
     "16_o7_k0_i2": {
-        "name": "input.88_o7_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o7_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -13526,9 +13526,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o7_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o7_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -13624,7 +13624,7 @@
         "Param": {}
     },
     "16_o7_k0_i3": {
-        "name": "input.88_o7_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o7_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -13686,10 +13686,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o7_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o7_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 448,
             "add1": "zero",
             "add1_offset": 0,
@@ -13784,7 +13784,7 @@
         "Param": {}
     },
     "16_o8_k0_i0": {
-        "name": "input.88_o8_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o8_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -13846,9 +13846,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o8_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o8_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -13944,7 +13944,7 @@
         "Param": {}
     },
     "16_o8_k0_i1": {
-        "name": "input.88_o8_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o8_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -14006,9 +14006,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o8_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o8_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -14104,7 +14104,7 @@
         "Param": {}
     },
     "16_o8_k0_i2": {
-        "name": "input.88_o8_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o8_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -14166,9 +14166,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o8_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o8_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -14264,7 +14264,7 @@
         "Param": {}
     },
     "16_o8_k0_i3": {
-        "name": "input.88_o8_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o8_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -14326,10 +14326,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o8_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o8_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 512,
             "add1": "zero",
             "add1_offset": 0,
@@ -14424,7 +14424,7 @@
         "Param": {}
     },
     "16_o9_k0_i0": {
-        "name": "input.88_o9_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o9_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -14486,9 +14486,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o9_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o9_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -14584,7 +14584,7 @@
         "Param": {}
     },
     "16_o9_k0_i1": {
-        "name": "input.88_o9_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o9_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -14646,9 +14646,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o9_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o9_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -14744,7 +14744,7 @@
         "Param": {}
     },
     "16_o9_k0_i2": {
-        "name": "input.88_o9_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o9_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -14806,9 +14806,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o9_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o9_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -14904,7 +14904,7 @@
         "Param": {}
     },
     "16_o9_k0_i3": {
-        "name": "input.88_o9_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o9_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -14966,10 +14966,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o9_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o9_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 576,
             "add1": "zero",
             "add1_offset": 0,
@@ -15064,7 +15064,7 @@
         "Param": {}
     },
     "16_o10_k0_i0": {
-        "name": "input.88_o10_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o10_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -15126,9 +15126,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o10_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o10_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -15224,7 +15224,7 @@
         "Param": {}
     },
     "16_o10_k0_i1": {
-        "name": "input.88_o10_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o10_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -15286,9 +15286,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o10_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o10_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -15384,7 +15384,7 @@
         "Param": {}
     },
     "16_o10_k0_i2": {
-        "name": "input.88_o10_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o10_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -15446,9 +15446,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o10_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o10_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -15544,7 +15544,7 @@
         "Param": {}
     },
     "16_o10_k0_i3": {
-        "name": "input.88_o10_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o10_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -15606,10 +15606,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o10_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o10_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 640,
             "add1": "zero",
             "add1_offset": 0,
@@ -15704,7 +15704,7 @@
         "Param": {}
     },
     "16_o11_k0_i0": {
-        "name": "input.88_o11_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o11_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -15766,9 +15766,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o11_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o11_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -15864,7 +15864,7 @@
         "Param": {}
     },
     "16_o11_k0_i1": {
-        "name": "input.88_o11_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o11_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -15926,9 +15926,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o11_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o11_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -16024,7 +16024,7 @@
         "Param": {}
     },
     "16_o11_k0_i2": {
-        "name": "input.88_o11_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o11_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -16086,9 +16086,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o11_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o11_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -16184,7 +16184,7 @@
         "Param": {}
     },
     "16_o11_k0_i3": {
-        "name": "input.88_o11_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o11_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -16246,10 +16246,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o11_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o11_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 704,
             "add1": "zero",
             "add1_offset": 0,
@@ -16344,7 +16344,7 @@
         "Param": {}
     },
     "16_o12_k0_i0": {
-        "name": "input.88_o12_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o12_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -16406,9 +16406,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o12_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o12_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -16504,7 +16504,7 @@
         "Param": {}
     },
     "16_o12_k0_i1": {
-        "name": "input.88_o12_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o12_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -16566,9 +16566,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o12_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o12_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -16664,7 +16664,7 @@
         "Param": {}
     },
     "16_o12_k0_i2": {
-        "name": "input.88_o12_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o12_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -16726,9 +16726,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o12_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o12_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -16824,7 +16824,7 @@
         "Param": {}
     },
     "16_o12_k0_i3": {
-        "name": "input.88_o12_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o12_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -16886,10 +16886,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o12_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o12_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 768,
             "add1": "zero",
             "add1_offset": 0,
@@ -16984,7 +16984,7 @@
         "Param": {}
     },
     "16_o13_k0_i0": {
-        "name": "input.88_o13_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o13_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -17046,9 +17046,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o13_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o13_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -17144,7 +17144,7 @@
         "Param": {}
     },
     "16_o13_k0_i1": {
-        "name": "input.88_o13_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o13_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -17206,9 +17206,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o13_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o13_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -17304,7 +17304,7 @@
         "Param": {}
     },
     "16_o13_k0_i2": {
-        "name": "input.88_o13_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o13_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -17366,9 +17366,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o13_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o13_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -17464,7 +17464,7 @@
         "Param": {}
     },
     "16_o13_k0_i3": {
-        "name": "input.88_o13_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o13_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -17526,10 +17526,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o13_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o13_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 832,
             "add1": "zero",
             "add1_offset": 0,
@@ -17624,7 +17624,7 @@
         "Param": {}
     },
     "16_o14_k0_i0": {
-        "name": "input.88_o14_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o14_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -17686,9 +17686,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o14_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o14_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -17784,7 +17784,7 @@
         "Param": {}
     },
     "16_o14_k0_i1": {
-        "name": "input.88_o14_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o14_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -17846,9 +17846,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o14_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o14_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -17944,7 +17944,7 @@
         "Param": {}
     },
     "16_o14_k0_i2": {
-        "name": "input.88_o14_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o14_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -18006,9 +18006,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o14_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o14_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -18104,7 +18104,7 @@
         "Param": {}
     },
     "16_o14_k0_i3": {
-        "name": "input.88_o14_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o14_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -18166,10 +18166,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o14_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o14_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 896,
             "add1": "zero",
             "add1_offset": 0,
@@ -18264,7 +18264,7 @@
         "Param": {}
     },
     "16_o15_k0_i0": {
-        "name": "input.88_o15_k0_i0",
+        "name": "/module_list.13/conv_13/Conv_output_0_o15_k0_i0",
         "opexp": "Conv",
         "Calc": {
             "name": "Conv",
@@ -18326,9 +18326,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 0,
-            "param": "input.88_o15_k0_i0_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o15_k0_i0_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "",
@@ -18424,7 +18424,7 @@
         "Param": {}
     },
     "16_o15_k0_i1": {
-        "name": "input.88_o15_k0_i1",
+        "name": "/module_list.13/conv_13/Conv_output_0_o15_k0_i1",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -18486,9 +18486,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 256,
-            "param": "input.88_o15_k0_i1_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o15_k0_i1_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -18584,7 +18584,7 @@
         "Param": {}
     },
     "16_o15_k0_i2": {
-        "name": "input.88_o15_k0_i2",
+        "name": "/module_list.13/conv_13/Conv_output_0_o15_k0_i2",
         "opexp": "Conv>Add",
         "Calc": {
             "name": "Conv",
@@ -18646,9 +18646,9 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 512,
-            "param": "input.88_o15_k0_i2_param",
+            "param": "/module_list.13/conv_13/Conv_output_0_o15_k0_i2_param",
             "dout": "zero",
             "dout_offset": 0,
             "add1": "zero",
@@ -18744,7 +18744,7 @@
         "Param": {}
     },
     "16_o15_k0_i3": {
-        "name": "input.88_o15_k0_i3",
+        "name": "/module_list.13/conv_13/Conv_output_0_o15_k0_i3",
         "opexp": "Conv>Add>LeakyRelu",
         "Calc": {
             "name": "Conv",
@@ -18806,10 +18806,10 @@
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.80",
+            "din": "/module_list.12/leaky_12/LeakyRelu_output_0",
             "din_offset": 768,
-            "param": "input.88_o15_k0_i3_param",
-            "dout": "input.92",
+            "param": "/module_list.13/conv_13/Conv_output_0_o15_k0_i3_param",
+            "dout": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "dout_offset": 960,
             "add1": "zero",
             "add1_offset": 0,
@@ -18946,12 +18946,12 @@
             }
         },
         "Parallel": {
-            "och": 2,
+            "och": 1,
             "col": 1,
-            "row": 4
+            "row": 8
         },
         "ParaUser": {
-            "och": 2,
+            "och": 1,
             "col": 1,
             "row": 4
         },
@@ -18960,13 +18960,13 @@
             "ich": 512,
             "din_h": 13,
             "din_w": 13,
-            "och_org": 125,
-            "och": 125,
+            "och_org": 30,
+            "och": 30,
             "dout_h": 13,
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.92",
+            "din": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "din_offset": 0,
             "param": "output1_o0_k0_i0_param",
             "dout": "zero",
@@ -18980,7 +18980,7 @@
             "is_work_dout": true
         },
         "Hw": {
-            "pram_depth_mag": 4,
+            "pram_depth_mag": 9,
             "tbl_mac_to_ker_y": [
                 0,
                 0,
@@ -18994,13 +18994,13 @@
             ],
             "tbl_mac_to_para_och": [
                 0,
-                1,
                 0,
-                1,
                 0,
-                1,
                 0,
-                1,
+                0,
+                0,
+                0,
+                0,
                 -1
             ],
             "tbl_mac_to_para_col": [
@@ -19016,24 +19016,24 @@
             ],
             "tbl_mac_to_para_row": [
                 0,
-                0,
-                1,
                 1,
                 2,
-                2,
                 3,
-                3,
+                4,
+                5,
+                6,
+                7,
                 -1
             ],
             "tbl_mac_to_ch_din": [
                 0,
-                0,
-                1,
                 1,
                 2,
-                2,
                 3,
-                3,
+                4,
+                5,
+                6,
+                7,
                 -1
             ],
             "tbl_mac_to_ch_din_intm": [
@@ -19049,17 +19049,17 @@
             ],
             "tbl_mac_to_ch_dout": [
                 0,
-                0,
-                1,
                 1,
                 2,
-                2,
                 3,
-                3,
+                4,
+                5,
+                6,
+                7,
                 -1
             ],
             "mode_din_intm": "Para",
-            "mode_dout": "DST_och_2"
+            "mode_dout": "Para"
         },
         "Param": {}
     },
@@ -19106,7 +19106,7 @@
             }
         },
         "Parallel": {
-            "och": 2,
+            "och": 1,
             "col": 1,
             "row": 4
         },
@@ -19120,13 +19120,13 @@
             "ich": 512,
             "din_h": 13,
             "din_w": 13,
-            "och_org": 125,
-            "och": 125,
+            "och_org": 30,
+            "och": 30,
             "dout_h": 13,
             "dout_w": 13
         },
         "Addr": {
-            "din": "input.92",
+            "din": "/module_list.13/leaky_13/LeakyRelu_output_0",
             "din_offset": 512,
             "param": "output1_o0_k0_i1_param",
             "dout": "output1",
@@ -19140,27 +19140,27 @@
             "is_work_dout": false
         },
         "Hw": {
-            "pram_depth_mag": 4,
+            "pram_depth_mag": 9,
             "tbl_mac_to_ker_y": [
                 0,
                 0,
                 0,
                 0,
-                0,
-                0,
-                0,
-                0,
+                -1,
+                -1,
+                -1,
+                -1,
                 -1
             ],
             "tbl_mac_to_para_och": [
                 0,
-                1,
                 0,
-                1,
                 0,
-                1,
                 0,
-                1,
+                -1,
+                -1,
+                -1,
+                -1,
                 -1
             ],
             "tbl_mac_to_para_col": [
@@ -19168,58 +19168,58 @@
                 0,
                 0,
                 0,
-                0,
-                0,
-                0,
-                0,
+                -1,
+                -1,
+                -1,
+                -1,
                 -1
             ],
             "tbl_mac_to_para_row": [
                 0,
-                0,
-                1,
                 1,
                 2,
-                2,
                 3,
-                3,
+                -1,
+                -1,
+                -1,
+                -1,
                 -1
             ],
             "tbl_mac_to_ch_din": [
                 0,
-                0,
-                1,
                 1,
                 2,
-                2,
                 3,
-                3,
+                -1,
+                -1,
+                -1,
+                -1,
                 -1
             ],
             "tbl_mac_to_ch_din_intm": [
                 4,
-                4,
-                5,
                 5,
                 6,
-                6,
                 7,
-                7,
+                -1,
+                -1,
+                -1,
+                -1,
                 -1
             ],
             "tbl_mac_to_ch_dout": [
                 0,
-                0,
-                1,
                 1,
                 2,
-                2,
                 3,
-                3,
+                -1,
+                -1,
+                -1,
+                -1,
                 -1
             ],
-            "mode_din_intm": "DST_och_2",
-            "mode_dout": "Serial_och_2"
+            "mode_din_intm": "Para",
+            "mode_dout": "Para"
         },
         "Param": {}
     },
@@ -19276,12 +19276,12 @@
             "row": -1
         },
         "Data": {
-            "ich_org": 125,
-            "ich": 125,
+            "ich_org": 30,
+            "ich": 30,
             "din_h": 13,
             "din_w": 13,
-            "och_org": 125,
-            "och": 125,
+            "och_org": 30,
+            "och": 30,
             "dout_h": 13,
             "dout_w": 13
         },
@@ -19369,12 +19369,12 @@
             "row": -1
         },
         "Data": {
-            "ich_org": 125,
-            "ich": 125,
+            "ich_org": 30,
+            "ich": 30,
             "din_h": 13,
             "din_w": 13,
-            "och_org": 125,
-            "och": 125,
+            "och_org": 30,
+            "och": 30,
             "dout_h": 13,
             "dout_w": 13
         },

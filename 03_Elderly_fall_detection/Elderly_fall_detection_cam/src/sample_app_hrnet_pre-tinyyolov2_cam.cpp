@@ -61,9 +61,9 @@ static uint64_t udmabuf_address = 0;
 static Image img;
 static int8_t DIRECTION = 1; /* 1 for down 0 for up*/
 static int line_x1, line_y1, line_x2, line_y2;
-static bool start_flag[NUM_MAX_PERSON] = {false}; /* to track starting position of persons */
+static int8_t flag = 0;
 static uint8_t fall_frame_count[NUM_MAX_PERSON] = {0}; /* to track consistancy of falling */
-static bool fall_flag[NUM_MAX_PERSON] = {false}; /* to indicate fall */
+
 
 
 /*AI Inference for DRPAI*/
@@ -592,7 +592,7 @@ static void R_Post_Proc(float* floatarr, std::vector<detection>& det, uint32_t* 
 
                 /* Store the result into the list if the probability is more than the threshold */
                 probability = max_pred * objectness;
-                if ( (probability > TH_PROB) && (pred_class == PERSON_LABEL_NUM) )    //person = 14
+                if ( (probability > TH_PROB) && (pred_class == PERSON_LABEL_NUM) )    //person = 0
                 {
                     d = {bb, pred_class, probability};
                     det.push_back(d);
@@ -757,7 +757,6 @@ static void R_Post_Proc_HRNet(float* floatarr, uint8_t n_pers)
         /*transform_preds*/
         scale[0] *= 200;
         scale[1] *= 200;
-        //udp (Unbiased Data Processing) = False
         scale_x = scale[0] / (NUM_OUTPUT_W);
         scale_y = scale[1] / (NUM_OUTPUT_H);
         coords_x = hrnet_preds[b][0];
@@ -909,50 +908,60 @@ static void draw_skeleton(void)
     uint8_t v;
     uint8_t i, j=0;
     uint8_t upper_body_points = 6;
+    int16_t x_diff = 0;
+    int16_t y_diff = 0;
     
-    img.draw_line(line_x1, line_y1, line_x2, line_y2, BLUE_DATA);
     if(ppl_count > 0)
     {
         for(i=0; i < ppl_count; i++)
         {    
+            
+            // img.draw_rect(cropx[i], cropy[i], cropw[i], croph[i], YELLOW_DATA);
             /*Check If All Key Points Were Detected: If Over Threshold, It will Draw Complete Skeleton*/
             if (lowest_kpt_score[i] > TH_KPT)
             {
-                int8_t flag = 0;
+                x_diff = abs(id_x[0][i] - id_x[16][i]) ;
+                y_diff = abs(id_y[0][i] - id_y[16][i]);
+ 
 
                 /*Draw Rectangle As Key Points*/
                 for(v = 0; v < NUM_OUTPUT_C; v++)
                 {
-                    /*Draw Rectangles On Each Skeleton Key Points*/
+                /*Draw Rectangles On Each Skeleton Key Points*/
                     img.draw_rect(id_x[v][i], id_y[v][i], KEY_POINT_SIZE, KEY_POINT_SIZE, RED_DATA);
-                    if (upper_body_points == v)
-                        break;
+
                 }
-                for(v = 0; v < upper_body_points; v++)
-                {
-                    if(DIRECTION == get_direction(id_x[v][i], id_y[v][i]))
-                        flag++;
+                if(x_diff > y_diff){
+                    flag = 1;
+                    if((fall_frame_count[j] <= 5))
+                        {
+                            fall_frame_count[j]++;
+                        }
                 }
-                if(flag != upper_body_points)
-                {
-                    fall_frame_count[j] = 0;
-                    fall_flag[j] = false;
-                    start_flag[j] = true;
-                }
-                else
-                {
-                    if((fall_frame_count[j] <= 5) && start_flag[j] == true)
-                        fall_frame_count[j]++;
-                }
-                j++;
+
+
             }
+            else if ((cropw[i]/croph[i])>0.5)
+            {
+                flag = 1;
+                if((fall_frame_count[j] <= 5))
+                       { 
+                        fall_frame_count[j]++;
+                       }
+            }
+            else{
+                fall_frame_count[j] = 0;
+                flag = 0;
+            }
+             
+
+            j++;
         }
     }
-    else
-        for(i=0; i < NUM_MAX_PERSON; i++)
-        {
-            start_flag[i] = false;
-        }
+    else{
+        fall_frame_count[j] = 0;
+        flag = 0;
+    }
     return;
 }
 
@@ -966,11 +975,14 @@ static void draw_skeleton(void)
 static int8_t print_result(Image* img)
 {
     int j = 0;
+    int sec = 0;
     int32_t result_cnt = 0;
     std::stringstream stream;
+    int32_t fps=0;
     std::string str0 = "";
     std::string str1 = "";
     std::string str2 = "";
+    std::string str3 = "";
     uint32_t ai_inf_prev = 0;
     uint32_t yolotime_prev = 0;
     /* Draw Total Inference Time Result on RGB image.*/
@@ -978,8 +990,16 @@ static int8_t print_result(Image* img)
     {
         ai_inf_prev = (uint32_t) total_time;
         stream.str("");
-        stream << "Total Inferenc Time: " <<std::setw(3) << ai_inf_prev << "msec";
+        fps = 1000/total_time;
+        stream << "Total Time: " <<std::setw(3) << ai_inf_prev << "msec";
         str0 = stream.str();
+    }
+    if (total_time > 0)
+    {
+        stream.str("");
+        fps = 1000/total_time;
+        stream << "FPS: "<<std::setw(3)<<fps;
+        str3 = stream.str();
     }
 
     /* Draw Preprocessing Time Result on RGB image.*/
@@ -987,30 +1007,36 @@ static int8_t print_result(Image* img)
     {
         yolotime_prev = (uint32_t) yolo_time;
         stream.str("");
-        stream << "TinyYOLOv2 Time: " <<std::setw(3) << yolotime_prev << "msec";
+        stream << "TinyYOLOv2: " <<std::setw(3) << yolotime_prev << "msec";
         str1 = stream.str();
     }
-    img->write_string_rgb(str0, TEXT_WIDTH_OFFSET, LINE_HEIGHT, CHAR_SCALE_SMALL, WHITE_DATA);
-    img->write_string_rgb(str1, TEXT_WIDTH_OFFSET, LINE_HEIGHT*2, CHAR_SCALE_SMALL, WHITE_DATA);
-
+    // img->write_string_rgb(str0, TEXT_WIDTH_OFFSET, LINE_HEIGHT, CHAR_SCALE_SMALL, WHITE_DATA);
+    // img->write_string_rgb(str1, TEXT_WIDTH_OFFSET, LINE_HEIGHT*2, CHAR_SCALE_SMALL, WHITE_DATA);
+    img->write_string_rgb(str0, DRPAI_IN_WIDTH * RESIZE_SCALE + TEXT_WIDTH_OFFSET, LINE_HEIGHT, CHAR_SCALE_LARGE, WHITE_DATA);
+    img->write_string_rgb(str1,DRPAI_IN_WIDTH * RESIZE_SCALE + TEXT_WIDTH_OFFSET, LINE_HEIGHT*3, CHAR_SCALE_LARGE, WHITE_DATA);
+    img->write_string_rgb(str3, DRPAI_IN_WIDTH * RESIZE_SCALE + TEXT_WIDTH_OFFSET, LINE_HEIGHT*2, CHAR_SCALE_LARGE, WHITE_DATA);
     if( ppl_count > 0 )
     {
         stream.str("");
-        stream << "HRNET(" << ppl_count << "person) Time: " << std::setw(3) << ai_time << "msec";
+        stream << "HRNET Time: " << std::setw(3) << ai_time << "msec";
         str2 = stream.str();
-        img->write_string_rgb(str2, TEXT_WIDTH_OFFSET, LINE_HEIGHT*3, CHAR_SCALE_SMALL, WHITE_DATA);
+        img->write_string_rgb(str2, DRPAI_IN_WIDTH * RESIZE_SCALE + TEXT_WIDTH_OFFSET, LINE_HEIGHT*4, CHAR_SCALE_LARGE, WHITE_DATA);
 
         for(int8_t i = 0; i < ppl_count; i++)
         {
-            if((fall_frame_count[i]==5) && (!fall_flag[i]))
+            if((fall_frame_count[i] >= 5 )&&(flag == 1))
             {
-		stream.str("");
-		stream << "The person " << j+1 << " has fallen..!!!";
-		std::cout << "The person " << j+1 << " has fallen..!!!" << std::endl;
-		str0 = stream.str();
-		img->write_string_rgb(str0, TEXT_WIDTH_OFFSET, LINE_HEIGHT*4+LINE_HEIGHT*j, CHAR_SCALE_SMALL, RED_DATA);
-		fall_flag[i] = true;
-		j++;
+                stream.str("");
+                if (sec <5 )
+                {
+                    sec++;
+                    stream << "The person has fallen";
+                }
+                
+                
+                str0 = stream.str();
+                img->write_string_rgb(str0, DRPAI_IN_WIDTH * RESIZE_SCALE + TEXT_WIDTH_OFFSET, LINE_HEIGHT*5, CHAR_SCALE_LARGE, WHITE_DATA);
+                j++;
             }
         }
     }
@@ -1384,7 +1410,7 @@ void *R_Inf_Thread(void *threadid)
                                         }
                                         break;
                                     }
-                                    else //inf_status != 0
+                                    else 
                                     {
                                             fprintf(stderr, "[ERROR] DRPAI Internal Error: errno=%d\n", errno);
                                             goto err;
@@ -1574,6 +1600,9 @@ void *R_Display_Thread(void *threadid)
 
             /* Convert YUYV image to BGRA format. */
             img.convert_format();
+
+            /* Scale up the image data. */
+            img.convert_size();
             
             /*displays AI Inference Results on display.*/
             print_result(&img);
@@ -1718,43 +1747,8 @@ main_proc_end:
 }
 
 
-/*****************************************
-* Function Name : set_all_line_params
-* Description   : sets all parameters for 3 lines
-* Arguments     : x1,y1,x2,y2 args for the main line crossing
-******************************************/
-void set_all_line_params(int x1, int y1,int x2, int y2)
+int32_t main()
 {
-    line_x1 = x1;
-    line_y1 = y1;
-    line_x2 = x2;
-    line_y2 = y2;
-}
-
-/*
-command line arguments
-filename,class_name,x1,y1,x2,y2,direction
-direction by default = 0
-*/
-
-int32_t main(int32_t argc, char * argv[])
-{
-    /* Set the argument parameters */
-    if(argc >= 5)
-    {
-        set_all_line_params(std::atoi(argv[1]), std::atoi(argv[2]), std::atoi(argv[3]), std::atoi(argv[4]));
-
-        if(argc == 6)
-        {
-            DIRECTION = std::atoi(argv[5]);
-        }
-
-    }
-    else{
-        std::cout<<"Give all command line args\n";
-        return -1;
-    }
-
     int8_t main_proc = 0;
     int8_t ret = 0;
     int8_t ret_main = 0;
@@ -1791,7 +1785,7 @@ int32_t main(int32_t argc, char * argv[])
 
     printf("RZ/V2L DRP-AI Sample Application\n");
     printf("Model : MMPose HRNet with TinyYOLOv2 | hrnet_cam, tinyyolov2_cam\n");
-    printf("Input : Coral Camera\n");
+    printf("Input : USB Camera\n");
 
     /*DRP-AI Driver Open*/
     /*For TinyYOLOv2*/

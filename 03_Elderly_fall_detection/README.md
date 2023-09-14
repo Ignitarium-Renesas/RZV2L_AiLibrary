@@ -8,7 +8,6 @@ sample video on YouTube -[Fall detection demo](https://youtu.be/4ALde_vP1lo)
 
 ## Application details
 
-
 ```
 ├── Elderly_fall_detection_cam # Elderly fall detection application on CORAL camera input
 │   ├── etc/ # address map and pre/post process configuration of both hrnet and tiny-yolov2
@@ -51,8 +50,8 @@ sample video on YouTube -[Fall detection demo](https://youtu.be/4ALde_vP1lo)
 - The user has to input the co-ordinates of the line differentiating the bed or ground and normal standing position. This is required depending on camera's mounting height.
 - Camera input is fed to object detector (tiny yolov2) to detect multiple people.
 - Pose estimation is done on the detected people. 
-- 6 upper body keypoints (Head, sholders etc.) are used to detect the fall. Sudden fall or slower falls, both are detected.
-- Fall detection message will be printed on the screen as well as in the console.
+- Keypoints & Bounding box ratios are used to detect the fall. Sudden fall or slower falls, both are detected.
+- Fall detection message will be printed on the screen.
 
 ## Running the application
 
@@ -67,7 +66,7 @@ Please follow the below steps for image application once the desired changes in 
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
-cd RZV2L_AiLibrary/03_Elderly_fall_detection/Elderly_fall_detection_usbcam
+cd RZV2L_AiLibrary/03_Elderly_fall_detection/Elderly_fall_detection_cam
 make
 ```
 
@@ -78,22 +77,16 @@ make
 
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 03_Elderly_fall_detection/Elderly_fall_detection_usbcam/exe/
-./Elderly_fall_detection_usbcam <x1> <y1> <x2> <y2> <direction>
+cd 03_Elderly_fall_detection/Elderly_fall_detection_cam/exe/
+./Elderly_fall_detection_cam_app
 ```
-3. Argument description;
-    - <x1> - xmin of line of separation (int)
-    - <y1> - ymin of line of separation (int)
-    - <x2> - xmax of line of separation (int)
-    - <y2> - ymax of line of separation (int)
-    - <direction> - 0/1 (to recognize region of fall with respect to line of separation. Typically it's 0 for horizontal line. but user need to change it if camera orientation is changed.)
 
 ### Example:
 
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 03_Elderly_fall_detection/Elderly_fall_detection_usbcam/exe/
-./Elderly_fall_detection_usbcam 0 240 640 240 0
+cd 03_Elderly_fall_detection/Elderly_fall_detection_cam/exe/
+./Elderly_fall_detection_cam_app
 ```
 
 ## Limitations
