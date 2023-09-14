@@ -53,10 +53,7 @@ int flag =0;
 TRACKER tracker;
 std::vector<cv::Rect> boxes;
 static std::map<int,vector<float>> Area_MAP;
-static std::map<int,vector<int>> Box_MAP;
 static std::map<int,float> Avg_Area_MAP;
-static std::map<int,int> Moving_MAP;
-
 static std::set<int>DONE_IDS;   
 
 /*****************************************
@@ -653,7 +650,8 @@ int8_t print_result_yolo(float* floatarr, Mat * img)
             /*Current average area*/
             float avg_areas = std::accumulate(Areas.begin(), Areas.end(), 0.0)/Areas.size(); 
 
-            if ((avg_areas <(0.90*Avg_Area_MAP[I_ID])) && (flag == 0))flag=1;
+            if ((avg_areas <(0.90*Avg_Area_MAP[I_ID])) && (flag == 0))
+                flag=1;
             if(flag==1)
             {
             

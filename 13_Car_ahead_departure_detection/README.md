@@ -107,4 +107,5 @@ cd 13_Car_ahead_departure_detection/Car_ahead_departure_detection_usbcam/exe/
 
 ## Known issues:
 - [ERROR] Failed to initialize Coral Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
-- permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.
+- permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.  
+

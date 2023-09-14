@@ -63,7 +63,7 @@ static float drpai_output_buf[num_inf_out];
 static uint32_t capture_address;
 static uint64_t udmabuf_address = 0;
 static Image img;
-int flag = 0;
+
 
 
 /*Tracker Variables*/
