@@ -185,7 +185,7 @@ const static std::string drpai_file_path[5] =
     drpai_prefix+"/"+drpai_prefix+"_drpcfg.mem",
     drpai_prefix+"/drp_param.bin",
     drpai_prefix+"/aimac_desc.bin",
-    drpai_prefix+"/"+drpai_prefix+"_weight.dat",
+    drpai_prefix+"/yolov3_Head_counting_weights.dat",
 };
 
 /*****************************************
