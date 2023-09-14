@@ -153,8 +153,11 @@ uint8_t Image::init(uint32_t w, uint32_t h, uint32_t c,
 * Return Value  : -
 ******************************************/
 void Image::write_string_rgb(std::string str, uint32_t x, uint32_t y, float scale, uint32_t color)
+
 {
     uint8_t thickness = CHAR_THICKNESS;
+    int fontface = cv::FONT_HERSHEY_DUPLEX;
+    int baseline = 1;
     /*Extract RGB information*/
     uint8_t r = (color >> 16) & 0x0000FF;
     uint8_t g = (color >>  8) & 0x0000FF;
@@ -162,9 +165,25 @@ void Image::write_string_rgb(std::string str, uint32_t x, uint32_t y, float scal
     /*OpenCV image data is in BGRA */
     cv::Mat bgra_image(out_h, out_w, CV_8UC4, img_buffer[buf_id]);
     /*Color must be in BGR order*/
-    cv::putText(bgra_image, str.c_str(), cv::Point(x, y), cv::FONT_HERSHEY_SIMPLEX, scale, cv::Scalar(b^0xFF, g^0xFF, r^0xFF), thickness+4);
-    cv::putText(bgra_image, str.c_str(), cv::Point(x, y), cv::FONT_HERSHEY_SIMPLEX, scale, cv::Scalar(b, g, r), thickness);
+    // cv::putText(bgra_image, str.c_str(), cv::Point(x, y), cv::FONT_HERSHEY_DUPLEX, scale, cv::Scalar(b^0xFF, g^0xFF, r^0xFF), thickness+4);
+    cv::Size text = cv::getTextSize(str.c_str(), fontface, scale, thickness, &baseline);
+    cv::rectangle(bgra_image, cv::Point(x, y) + cv::Point(-baseline, baseline), cv::Point(x, y) + cv::Point(text.width+baseline, -text.height-baseline), cv::Scalar(0, 0, 0, 255), cv::FILLED);
+    cv::putText(bgra_image, str.c_str(), cv::Point(x, y), cv::FONT_HERSHEY_DUPLEX, scale, cv::Scalar(b, g, r), thickness);
+
 }
+// void Image::write_string_rgb(std::string str, uint32_t x, uint32_t y, float scale, uint32_t color)
+// {
+//     uint8_t thickness = CHAR_THICKNESS;
+//     /*Extract RGB information*/
+//     uint8_t r = (color >> 16) & 0x0000FF;
+//     uint8_t g = (color >>  8) & 0x0000FF;
+//     uint8_t b = color & 0x0000FF;
+//     /*OpenCV image data is in BGRA */
+//     cv::Mat bgra_image(out_h, out_w, CV_8UC4, img_buffer[buf_id]);
+//     /*Color must be in BGR order*/
+//     cv::putText(bgra_image, str.c_str(), cv::Point(x, y), cv::FONT_HERSHEY_DUPLEX, scale, cv::Scalar(b^0xFF, g^0xFF, r^0xFF), thickness+4);
+//     cv::putText(bgra_image, str.c_str(), cv::Point(x, y), cv::FONT_HERSHEY_DUPLEX, scale, cv::Scalar(b, g, r), thickness);
+// }
 
 /*****************************************
 * Function Name : draw_point_yuyv

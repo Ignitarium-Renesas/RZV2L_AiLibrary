@@ -21,13 +21,13 @@ output_from_body:
   shape:
   - 13
   - 13
-  - 125
+  - 30
   order: HWC
   type: fp16
 output_from_post:
 - name: post_out
   shape:
-  - 125
+  - 30
   - 13
   - 13
   order: CHW
@@ -148,7 +148,7 @@ postprocess:
   shape_in:
   - - 13
     - 13
-    - 125
+    - 30
   dtype_in:
   - fp16
   dorder_in:
@@ -156,7 +156,7 @@ postprocess:
   dest:
   - post_out
   shape_out:
-  - - 125
+  - - 30
     - 13
     - 13
   dtype_out:
@@ -168,13 +168,13 @@ postprocess:
     shape_in:
     - - 13
       - 13
-      - 125
+      - 30
     dtype_in:
     - fp16
     dorder_in:
     - HWC
     shape_out:
-    - - 125
+    - - 30
       - 13
       - 13
     dtype_out:
@@ -186,7 +186,7 @@ postprocess:
       IS_CHW2HWC: 0
   - op: cast_fp16_fp32
     shape_in:
-    - - 125
+    - - 30
       - 13
       - 13
     dtype_in:
@@ -194,7 +194,7 @@ postprocess:
     dorder_in:
     - CHW
     shape_out:
-    - - 125
+    - - 30
       - 13
       - 13
     dtype_out:

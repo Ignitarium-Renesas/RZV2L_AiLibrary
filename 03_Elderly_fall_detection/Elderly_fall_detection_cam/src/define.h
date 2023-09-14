@@ -88,7 +88,7 @@ const static double anchors[] =
     9.42,   5.11,
     16.62,  10.52
 };
-const static std::string label_list = "coco-labels-2014_2017.txt";
+const static std::string label_list = {"person"};
 
 /*****************************************
 * Macro for MMPose HRNet pre TinyYOLOV2
@@ -149,25 +149,28 @@ const static std::string label_list = "coco-labels-2014_2017.txt";
 #define MEM_PAGE_SIZE             (4096)
 
 /* TinyYOLOv2 class = person */
-#define PERSON_LABEL_NUM          (14)
+#define PERSON_LABEL_NUM          (0)
 
 /*****************************************
 * Macro for Tiny YOLOv2
 ******************************************/
 /* Number of class to be detected */
-#define NUM_CLASS                   (20)
+#define NUM_CLASS                   (1)
 /* Number of grids in the image */
 #define NUM_GRID_X                  (13)
 #define NUM_GRID_Y                  (13)
 /* Number for [region] layer num parameter */
 #define NUM_BB                      (5)
 /* Thresholds */
-#define TH_PROB                     (0.4f)
-#define TH_NMS                      (0.5f)
+#define TH_PROB                     (0.6f)
+#define TH_NMS                      (0.6f)
+const static uint8_t num_grids[] = { 13 };
+/* Number of DRP-AI output */
+const static uint32_t num_inf_out =  (NUM_CLASS + 5)* NUM_BB * num_grids[0] * num_grids[0];
 /* Size of input image to the model */
 #define MODEL_IN_W                  (416)
 #define MODEL_IN_H                  (416)
-#define INF_OUT_SIZE_TINYYOLOV2     (84500)
+#define INF_OUT_SIZE_TINYYOLOV2     (num_inf_out)
 
 /*****************************************
 * Macro for Application
@@ -201,8 +204,8 @@ const static std::string label_list = "coco-labels-2014_2017.txt";
 #define DRPAI_IN_CHANNEL_YUY2       (CAM_IMAGE_CHANNEL_YUY2)
 
 /*Wayland:: Wayland Information */
-#define IMAGE_OUTPUT_WIDTH          (640)
-#define IMAGE_OUTPUT_HEIGHT         (480)
+#define IMAGE_OUTPUT_WIDTH          (1280)
+#define IMAGE_OUTPUT_HEIGHT         (720)
 #define IMAGE_CHANNEL_BGRA          (4)
 #define WL_BUF_NUM                  (2)
 

@@ -1,7 +1,7 @@
-conv_yuv2rgb.mem                  1163030368     179492
-resize_hwc.mem                    1163209872     201900
-imagescaler.mem                   1163411776     173836
-maxpooling_k2_st2.mem             1163585616     107184
-maxpooling_k2_st1.mem             1163692800     125668
-transpose.mem                     1163818480     143052
-cast_fp16_fp32.mem                1163961536     101648
+conv_yuv2rgb.mem                  1162852928     179492
+resize_hwc.mem                    1163032432     201900
+imagescaler.mem                   1163234336     173836
+maxpooling_k2_st2.mem             1163408176     107184
+maxpooling_k2_st1.mem             1163515360     125668
+transpose.mem                     1163641040     143052
+cast_fp16_fp32.mem                1163784096     101648
