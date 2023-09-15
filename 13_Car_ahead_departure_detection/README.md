@@ -4,7 +4,7 @@
 Car ahead departure detection is a sample application that detects the movement of a car in the front away from a reference point.
 Application uses a deep learning based object detector tinyYoloV3 to detect the vehicles and a SORT based tracker to track the objects. 
 
-sample video on YouTube -[Car ahead departure detection demo](https://youtu.be/D-CIsxR5cac)
+sample video on YouTube -[Car ahead departure detection demo]https://youtu.be/t-owFwsRWTI
 
 ## Application details
 ```
