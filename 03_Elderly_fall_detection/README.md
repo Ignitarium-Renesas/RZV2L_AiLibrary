@@ -4,7 +4,7 @@
 
 Falling while standing is one of the major accident that occurs with elderly people causing severe injuries. Therefore, fall detection systems are becoming increasingly important  at old age homes, hospitals and even normal residence. Fall detection systems enabled with vision based Ai examine human movement and perform activity recognition to detect falling events in input videos from camera.
 
-sample video on YouTube -[Fall detection demo](https://youtu.be/4ALde_vP1lo)
+sample video on YouTube - https://youtu.be/kXZFmK02VQk
 
 ## Application details
 
