@@ -16,6 +16,7 @@ This Library has API functions for leveraging AI applications that will run on R
 10. Driver Monitoring System
 11. Head Count Top View
 12. Hand Gesture Recognition V2
+13. Car Ahead Departure Detection
 
 ## Prerequisites
 ### 1. Board bring up sequence
