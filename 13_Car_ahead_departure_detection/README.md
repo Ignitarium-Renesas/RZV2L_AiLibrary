@@ -4,7 +4,7 @@
 Car ahead departure detection is a sample application that detects the movement of a car in the front away from a reference point.
 Application uses a deep learning based object detector tinyYoloV3 to detect the vehicles and a SORT based tracker to track the objects. 
 
-sample video on YouTube -[Car ahead departure detection demo](https://youtu.be/D-CIsxR5cac)
+sample video on YouTube -https://youtu.be/t-owFwsRWTI
 
 ## Application details
 ```
@@ -73,23 +73,30 @@ make
 ## Running the application
 The generated executable file from laptop needs to be transfered on the RZv2L board along with other files.
 
+### Syntax
+**./<application_name> <audio_interface>**
+1. Applicaiton name :- car_ahead_departure_detection_<cam/usbcam/video>_app
+2. Audio Interface:- 0/1 (0 for audio jack/ 1 for HDMI) (int dtype)
+
+### Sample commands
+
 - MIPI Cam
 ~~~ 
 cd /home/root/RZV2L_AiLibrary 
 cd 13_Car_ahead_departure_detection/Car_ahead_departure_detection_cam/exe/
-./car_ahead_departure_detection_cam_app 
+./car_ahead_departure_detection_cam_app 0
 ~~~
 - USB Cam
 ~~~ 
 cd /home/root/RZV2L_AiLibrary 
 cd 13_Car_ahead_departure_detection/Car_ahead_departure_detection_video/exe/
-./car_ahead_departure_detection_usbcam_app 
+./car_ahead_departure_detection_usbcam_app 0
 ~~~
 - Video
 ~~~ 
 cd /home/root/RZV2L_AiLibrary 
 cd 13_Car_ahead_departure_detection/Car_ahead_departure_detection_usbcam/exe/
-./car_ahead_departure_detection_video_app 
+./car_ahead_departure_detection_video_app 0
 ~~~
  
  ## Limitations

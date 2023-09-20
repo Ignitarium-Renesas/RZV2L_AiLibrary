@@ -75,6 +75,9 @@ static std::map<int,float> Avg_Area_MAP;
 static std::set<int>DONE_IDS;   /*ids that have moved */
 static std::set<int>MOVE_IDS; 
 
+/*Audio selection*/
+int sel_aud;
+
 /*AI Inference for DRPAI*/
 static st_addr_t drpai_address;
 static int8_t drpai_fd = -1;
@@ -701,9 +704,17 @@ void draw_bounding_box()
                     DONE_IDS.insert(I_ID);
                     while (count < 2)
                     {
-                        if(system("/usr/bin/aplay alert.wav &>/dev/null &") == -1)
+                        if (sel_aud == 0){
+                            if(system("/usr/bin/aplay -D default:CARD=rzssidaiwm8978h alert.wav &>/dev/null &") == -1)
                             std::cout << "Unable to play alert.wav" << std::endl;
                         count++;
+                        }
+                        if (sel_aud == 1){
+                            if(system("/usr/bin/aplay -D default:CARD=soundcard alert.wav &>/dev/null &") == -1)
+                                std::cout << "Unable to play alert.wav" << std::endl;
+                             count++;   
+                        }
+                        
                     }
                 }
             }
@@ -1179,7 +1190,7 @@ main_proc_end:
 }
 
 
-int32_t main()
+int32_t main(int32_t argc, char * argv[])
 {
     int8_t main_proc = 0;
     int8_t ret = 0;
@@ -1190,6 +1201,16 @@ int32_t main()
     int32_t create_thread_capture = -1;
     int32_t sem_create = -1;
     Camera* capture = NULL;
+
+    /* Checking the of arguments passed*/
+    if(argc>=1)
+    {
+       sel_aud  = std::atoi(argv[1]);
+      }
+    else{
+        std::cout<<"Give all command line args\n";
+        return EXIT_SUCCESS;
+    }
 
     /* Obtain udmabuf memory area starting address */
     int8_t fd = 0;

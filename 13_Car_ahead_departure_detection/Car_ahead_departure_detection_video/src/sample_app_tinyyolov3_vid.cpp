@@ -56,6 +56,9 @@ static std::map<int,vector<float>> Area_MAP;
 static std::map<int,float> Avg_Area_MAP;
 static std::set<int>DONE_IDS;   
 
+/*Audio selection*/
+int sel_aud;
+
 /*****************************************
 * DRP-AI Inference
 ******************************************/
@@ -661,9 +664,16 @@ int8_t print_result_yolo(float* floatarr, Mat * img)
                     DONE_IDS.insert(I_ID);
                     while (count < 10)
                     {
-                        if(system("/usr/bin/aplay alert.wav &>/dev/null &") == -1)
-                            std::cout << "Unable to play alert.wav" << std::endl;
-                        count++;
+                        if (sel_aud == 0){
+                            if(system("/usr/bin/aplay -D default:CARD=rzssidaiwm8978h alert.wav &>/dev/null &") == -1)
+                                std::cout << "Unable to play alert.wav" << std::endl;
+                               count++;
+                        }
+                        if (sel_aud == 1){
+                            if(system("/usr/bin/aplay -D default:CARD=soundcard alert.wav &>/dev/null &") == -1)
+                                std::cout << "Unable to play alert.wav" << std::endl;
+                             count++;   
+                        }
                     }
                 }
                 putText(*img, oss.str(), Point(x_min, y_min), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0, 255), 1.5);
@@ -912,6 +922,16 @@ int32_t main(int32_t argc, char * argv[])
     cout << "Opened video file successfully." << endl;
 
     load_drpai();
+
+    /* Checking the of arguments passed*/
+    if(argc>=1)
+    {
+       sel_aud  = std::atoi(argv[1]);
+      }
+    else{
+        std::cout<<"Give all command line args\n";
+        return EXIT_SUCCESS;
+    }
 
     /*Load Label from label_list file*/
     label_file_map = load_label_file(label_list);
