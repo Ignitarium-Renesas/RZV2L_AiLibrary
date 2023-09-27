@@ -51,6 +51,7 @@ int flag =0;
 
 /*Tracker Variables*/
 TRACKER tracker;
+std::string result_str;
 std::vector<cv::Rect> boxes;
 static std::map<int,vector<float>> Area_MAP;
 static std::map<int,float> Avg_Area_MAP;
@@ -456,153 +457,7 @@ int32_t yolo_offset(uint8_t n, int32_t b, int32_t y, int32_t x)
     return prev_layer_num + b *(NUM_CLASS + 5)* num * num + y * num + x;
 }
 
-/*****************************************
-* Function Name : print_result_yolo
-* Description   : Process CPU post-processing for YOLO (drawing bounding boxes) and print the result on console.
-* Arguments     : floatarr = float DRP-AI output data
-*                 img = image to draw the detection result
-* Return value  : 0 if succeeded
-*                 not 0 otherwise
-******************************************/
-int8_t print_result_yolo(float* floatarr, Mat * img)
-{
-    /* Following variables are required for correct_yolo/region_boxes in Darknet implementation*/
-    /* Note: This implementation refers to the "darknet detector test" */
-    float new_w, new_h;
-    float correct_w = 1.;
-    float correct_h = 1.;
-    if ((float) (MODEL_IN_W / correct_w) < (float) (MODEL_IN_H/correct_h) )
-    {
-        new_w = (float) MODEL_IN_W;
-        new_h = correct_h * MODEL_IN_W / correct_w;
-    }
-    else
-    {
-        new_w = correct_w * MODEL_IN_H / correct_h;
-        new_h = MODEL_IN_H;
-    }
-
-    int32_t n = 0;
-    int32_t b = 0;
-    int32_t y = 0;
-    int32_t x = 0;
-    int32_t offs = 0;
-    int32_t i = 0;
-    float tx = 0;
-    float ty = 0;
-    float tw = 0;
-    float th = 0;
-    float tc = 0;
-    float center_x = 0;
-    float center_y = 0;
-    float box_w = 0;
-    float box_h = 0;
-    float objectness = 0;
-    uint8_t num_grid = 0;
-    uint8_t anchor_offset = 0;
-    float classes[NUM_CLASS];
-    float max_pred = 0;
-    int32_t pred_class = -1;
-    float probability = 0;
-    detection d;
-    std::string result_str;
-    /* Clear the detected result list */
-    det.clear();
-
-    for (n = 0; n<NUM_INF_OUT_LAYER; n++)
-    {
-        num_grid = num_grids[n];
-        anchor_offset = 2 * NUM_BB * (NUM_INF_OUT_LAYER - (n + 1));
-
-        for (b = 0;b<NUM_BB;b++)
-        {
-            for (y = 0;y<num_grid;y++)
-            {
-                for (x = 0;x<num_grid;x++)
-                {
-                    offs = yolo_offset(n, b, y, x);
-                    tx = floatarr[offs];
-                    ty = floatarr[yolo_index(n, offs, 1)];
-                    tw = floatarr[yolo_index(n, offs, 2)];
-                    th = floatarr[yolo_index(n, offs, 3)];
-                    tc = floatarr[yolo_index(n, offs, 4)];
-
-                    /* Compute the bounding box */
-                    /*get_yolo_box/get_region_box in paper implementation*/
-                    center_x = ((float) x + sigmoid(tx)) / (float) num_grid;
-                    center_y = ((float) y + sigmoid(ty)) / (float) num_grid;
-                    box_w = (float) exp(tw) * anchors[anchor_offset+2*b+0] / (float) MODEL_IN_W;
-                    box_h = (float) exp(th) * anchors[anchor_offset+2*b+1] / (float) MODEL_IN_W;
-                    /* Adjustment for VGA size */
-                    /* correct_yolo/region_boxes */
-                    center_x = (center_x - (MODEL_IN_W - new_w) / 2. / MODEL_IN_W) / ((float) new_w / MODEL_IN_W);
-                    center_y = (center_y - (MODEL_IN_H - new_h) / 2. / MODEL_IN_H) / ((float) new_h / MODEL_IN_H);
-                    box_w *= (float) (MODEL_IN_W / new_w);
-                    box_h *= (float) (MODEL_IN_H / new_h);
-
-                    center_x = round(center_x * DRPAI_IN_WIDTH);
-                    center_y = round(center_y * DRPAI_IN_HEIGHT);
-                    box_w = round(box_w * DRPAI_IN_WIDTH);
-                    box_h = round(box_h * DRPAI_IN_HEIGHT);
-
-                    objectness = sigmoid(tc);
-
-                    Box bb = {center_x, center_y, box_w, box_h};
-                    /* Get the class prediction */
-                    for (i = 0;i < NUM_CLASS;i++)
-                    {
-                        classes[i] = sigmoid(floatarr[yolo_index(n, offs, 5+i)]);
-                    }
-
-                    max_pred = 0;
-                    pred_class = -1;
-                    for (i = 0; i < NUM_CLASS; i++)
-                    {
-                        if (classes[i] > max_pred)
-                        {
-                            pred_class = i;
-                            max_pred = classes[i];
-                        }
-                    }
-
-                    /* Store the result into the list if the probability is more than the threshold */
-                    probability = max_pred * objectness;
-                    if((probability > TH_PROB) && ((pred_class == 2)||(pred_class == 5)||(pred_class == 6)))
-                    {
-                        d = {bb, pred_class, probability};
-                        det.push_back(d);
-                    }
-                }
-            }
-        }
-    }
-    /* Non-Maximum Supression filter */
-    filter_boxes_nms(det, det.size(), TH_NMS);
-    boxes.clear();
-    float close_point = -1;
-    int selected = -1;
-    /* Render boxes on image and print their details */
-    n = 1;
-    for (i = 0;i < det.size(); i++)
-    {
-        /* Skip the overlapped bounding boxes */
-        if (det[i].prob == 0) continue;
-
-        /* Virtual lines inside which detection takes place*/
-        if ((det[i].bbox.x >= 220) && ( det[i].bbox.x <= 440)){
-            if ((det[i].bbox.y+det[i].bbox.h/2) > close_point){
-                close_point = (det[i].bbox.y+det[i].bbox.h/2);
-                selected = i;
-            }   
-        }
-    }
-    if (selected != -1){
-        /* Clear string stream for bounding box labels */
-        result_str = label_file_map[det[selected].c];
-        boxes.push_back({(int)det[selected].bbox.x, (int)det[selected].bbox.y, (int)det[selected].bbox.w, (int)det[selected].bbox.h});
-    }
-   
-
+int8_t trackers(Mat * img){
     tracker.Run(boxes);
     const auto tracks = tracker.GetTracks();
     for (auto &trk : tracks) {
@@ -686,18 +541,159 @@ int8_t print_result_yolo(float* floatarr, Mat * img)
     return 0;
 }
 
+/*****************************************
+* Function Name : print_result_yolo
+* Description   : Process CPU post-processing for YOLO (drawing bounding boxes) and print the result on console.
+* Arguments     : floatarr = float DRP-AI output data
+*                 img = image to draw the detection result
+* Return value  : 0 if succeeded
+*                 not 0 otherwise
+******************************************/
+int8_t print_result_yolo(float* floatarr, Mat *img)
+{
+    /* Following variables are required for correct_yolo/region_boxes in Darknet implementation*/
+    /* Note: This implementation refers to the "darknet detector test" */
+    float new_w, new_h;
+    float correct_w = 1.;
+    float correct_h = 1.;
+    if ((float) (MODEL_IN_W / correct_w) < (float) (MODEL_IN_H/correct_h) )
+    {
+        new_w = (float) MODEL_IN_W;
+        new_h = correct_h * MODEL_IN_W / correct_w;
+    }
+    else
+    {
+        new_w = correct_w * MODEL_IN_H / correct_h;
+        new_h = MODEL_IN_H;
+    }
+
+    int32_t n = 0;
+    int32_t b = 0;
+    int32_t y = 0;
+    int32_t x = 0;
+    int32_t offs = 0;
+    int32_t i = 0;
+    float tx = 0;
+    float ty = 0;
+    float tw = 0;
+    float th = 0;
+    float tc = 0;
+    float center_x = 0;
+    float center_y = 0;
+    float box_w = 0;
+    float box_h = 0;
+    float objectness = 0;
+    uint8_t num_grid = 0;
+    uint8_t anchor_offset = 0;
+    float classes[NUM_CLASS];
+    float max_pred = 0;
+    int32_t pred_class = -1;
+    float probability = 0;
+    detection d;
+    /* Clear the detected result list */
+    det.clear();
+
+    for (n = 0; n<NUM_INF_OUT_LAYER; n++)
+    {
+        num_grid = num_grids[n];
+        anchor_offset = 2 * NUM_BB * (NUM_INF_OUT_LAYER - (n + 1));
+
+        for (b = 0;b<NUM_BB;b++)
+        {
+            for (y = 0;y<num_grid;y++)
+            {
+                for (x = 0;x<num_grid;x++)
+                {
+                    offs = yolo_offset(n, b, y, x);
+                    tx = floatarr[offs];
+                    ty = floatarr[yolo_index(n, offs, 1)];
+                    tw = floatarr[yolo_index(n, offs, 2)];
+                    th = floatarr[yolo_index(n, offs, 3)];
+                    tc = floatarr[yolo_index(n, offs, 4)];
+
+                    /* Compute the bounding box */
+                    /*get_yolo_box/get_region_box in paper implementation*/
+                    center_x = ((float) x + sigmoid(tx)) / (float) num_grid;
+                    center_y = ((float) y + sigmoid(ty)) / (float) num_grid;
+                    box_w = (float) exp(tw) * anchors[anchor_offset+2*b+0] / (float) MODEL_IN_W;
+                    box_h = (float) exp(th) * anchors[anchor_offset+2*b+1] / (float) MODEL_IN_W;
+                    /* Adjustment for VGA size */
+                    /* correct_yolo/region_boxes */
+                    center_x = (center_x - (MODEL_IN_W - new_w) / 2. / MODEL_IN_W) / ((float) new_w / MODEL_IN_W);
+                    center_y = (center_y - (MODEL_IN_H - new_h) / 2. / MODEL_IN_H) / ((float) new_h / MODEL_IN_H);
+                    box_w *= (float) (MODEL_IN_W / new_w);
+                    box_h *= (float) (MODEL_IN_H / new_h);
+
+                    center_x = round(center_x * DRPAI_IN_WIDTH);
+                    center_y = round(center_y * DRPAI_IN_HEIGHT);
+                    box_w = round(box_w * DRPAI_IN_WIDTH);
+                    box_h = round(box_h * DRPAI_IN_HEIGHT);
+
+                    objectness = sigmoid(tc);
+
+                    Box bb = {center_x, center_y, box_w, box_h};
+                    /* Get the class prediction */
+                    for (i = 0;i < NUM_CLASS;i++)
+                    {
+                        classes[i] = sigmoid(floatarr[yolo_index(n, offs, 5+i)]);
+                    }
+
+                    max_pred = 0;
+                    pred_class = -1;
+                    for (i = 0; i < NUM_CLASS; i++)
+                    {
+                        if (classes[i] > max_pred)
+                        {
+                            pred_class = i;
+                            max_pred = classes[i];
+                        }
+                    }
+
+                    /* Store the result into the list if the probability is more than the threshold */
+                    probability = max_pred * objectness;
+                    if((probability > TH_PROB) && ((pred_class == 2)||(pred_class == 5)||(pred_class == 6)))
+                    {
+                        d = {bb, pred_class, probability};
+                        det.push_back(d);
+                    }
+                }
+            }
+        }
+    }
+    
+    /* Non-Maximum Supression filter */
+    filter_boxes_nms(det, det.size(), TH_NMS);
+    boxes.clear();
+    float close_point = -1;
+    int selected = -1;
+    /* Render boxes on image and print their details */
+    n = 1;
+    for (i = 0;i < det.size(); i++)
+    {
+        /* Skip the overlapped bounding boxes */
+        if (det[i].prob == 0) continue;
+
+        /* Virtual lines inside which detection takes place*/
+        if ((det[i].bbox.x >= 220) && ( det[i].bbox.x <= 440)){
+            if ((det[i].bbox.y+det[i].bbox.h/2) > close_point){
+                close_point = (det[i].bbox.y+det[i].bbox.h/2);
+                selected = i;
+            }   
+        }
+    }
+    if (selected != -1){
+        /* Clear string stream for bounding box labels */
+        result_str = label_file_map[det[selected].c];
+        boxes.push_back({(int)det[selected].bbox.x, (int)det[selected].bbox.y, (int)det[selected].bbox.w, (int)det[selected].bbox.h});
+    }
+   return 0;
+}
+
+
 
 int32_t load_drpai(void)
 {
     int32_t ret = 0;
-
-    /* Read DRP-AI Object files address and size */
-    ret = read_addrmap_txt(drpai_address_file);
-    if (0 != ret)
-    {
-        fprintf(stderr, "[ERROR] Failed to read addressmap text file: %s\n", drpai_address_file.c_str());
-        ret = -1;
-    }
 
     /* Open DRP-AI Driver */
     errno = 0;
@@ -721,45 +717,6 @@ int32_t load_drpai(void)
             ret = -1;
         }
     }
-
-    /* Obtain udmabuf memory area starting address */
-    int8_t fd = 0;
-    char addr[1024];
-    int32_t read_ret = 0;
-    errno = 0;
-    fd = open("/sys/class/u-dma-buf/udmabuf0/phys_addr", O_RDONLY);
-    if (0 > fd)
-    {
-        fprintf(stderr, "[ERROR] Failed to open udmabuf0/phys_addr : errno=%d\n", errno);
-        return -1;
-    }
-    read_ret = read(fd, addr, 1024);
-    if (0 > read_ret)
-    {
-        fprintf(stderr, "[ERROR] Failed to read udmabuf0/phys_addr : errno=%d\n", errno);
-        close(fd);
-        return -1;
-    }
-    sscanf(addr, "%lx", &udmabuf_address);
-    close(fd);
-    /* Filter the bit higher than 32 bit */
-    udmabuf_address &=0xFFFFFFFF;
-
-    /* Set DRP-AI Driver Input (DRP-AI Object files address and size)*/
-    proc[DRPAI_INDEX_INPUT].address       = drpai_address.data_in_addr;
-    proc[DRPAI_INDEX_INPUT].size          = drpai_address.data_in_size;
-    proc[DRPAI_INDEX_DRP_CFG].address     = drpai_address.drp_config_addr;
-    proc[DRPAI_INDEX_DRP_CFG].size        = drpai_address.drp_config_size;
-    proc[DRPAI_INDEX_DRP_PARAM].address   = drpai_address.drp_param_addr;
-    proc[DRPAI_INDEX_DRP_PARAM].size      = drpai_address.drp_param_size;
-    proc[DRPAI_INDEX_AIMAC_DESC].address  = drpai_address.desc_aimac_addr;
-    proc[DRPAI_INDEX_AIMAC_DESC].size     = drpai_address.desc_aimac_size;
-    proc[DRPAI_INDEX_DRP_DESC].address    = drpai_address.desc_drp_addr;
-    proc[DRPAI_INDEX_DRP_DESC].size       = drpai_address.desc_drp_size;
-    proc[DRPAI_INDEX_WEIGHT].address      = drpai_address.weight_addr;
-    proc[DRPAI_INDEX_WEIGHT].size         = drpai_address.weight_size;
-    proc[DRPAI_INDEX_OUTPUT].address      = drpai_address.data_out_addr;
-    proc[DRPAI_INDEX_OUTPUT].size         = drpai_address.data_out_size;
 
     return ret;
 }
@@ -887,6 +844,14 @@ int32_t get_video_inf(Mat &frame)
         goto end_munmap_udmabuf;
     }
 
+ ret = trackers(&frame);
+    if (0 != ret)
+    {
+        fprintf(stderr, "Failed to track.\n");
+        ret = -1;
+        goto end_munmap_udmabuf;
+    }
+
     /* Terminating process */
 end_munmap_udmabuf:
     munmap(img_buffer, drpai_address.data_in_size);
@@ -913,6 +878,9 @@ end_main:
 int32_t main(int32_t argc, char * argv[])
 {
     int val =0;
+    int8_t fd = 0;
+    char addr[1024];
+    int32_t read_ret = 0;
     
     if(!cap.isOpened()){
         cout << "Error opening video file" << endl;
@@ -921,9 +889,8 @@ int32_t main(int32_t argc, char * argv[])
 
     cout << "Opened video file successfully." << endl;
 
-    load_drpai();
 
-    /* Checking the of arguments passed*/
+     /* Checking the of arguments passed*/
     if(argc>=1)
     {
        sel_aud  = std::atoi(argv[1]);
@@ -933,6 +900,35 @@ int32_t main(int32_t argc, char * argv[])
         return EXIT_SUCCESS;
     }
 
+    /* Obtain udmabuf memory area starting address */
+    errno = 0;
+    fd = open("/sys/class/u-dma-buf/udmabuf0/phys_addr", O_RDONLY);
+    if (0 > fd)
+    {
+        fprintf(stderr, "[ERROR] Failed to open udmabuf0/phys_addr : errno=%d\n", errno);
+        return -1;
+    }
+    read_ret = read(fd, addr, 1024);
+    if (0 > read_ret)
+    {
+        fprintf(stderr, "[ERROR] Failed to read udmabuf0/phys_addr : errno=%d\n", errno);
+        close(fd);
+        return -1;
+    }
+    sscanf(addr, "%lx", &udmabuf_address);
+    close(fd);
+    /* Filter the bit higher than 32 bit */
+    udmabuf_address &=0xFFFFFFFF;
+    /* Read DRP-AI Object files address and size */
+    read_ret = read_addrmap_txt(drpai_address_file);
+    if (0 != read_ret)
+    {
+        fprintf(stderr, "[ERROR] Failed to read addressmap text file: %s\n", drpai_address_file.c_str());
+        return -1;
+    }
+    
+    load_drpai();
+
     /*Load Label from label_list file*/
     label_file_map = load_label_file(label_list);
     if (label_file_map.empty())
@@ -940,6 +936,22 @@ int32_t main(int32_t argc, char * argv[])
         fprintf(stderr,"[ERROR] Failed to load label file: %s\n", label_list.c_str());
         return -1;
     }
+
+    /* Set DRP-AI Driver Input (DRP-AI Object files address and size)*/
+    proc[DRPAI_INDEX_INPUT].address       = drpai_address.data_in_addr;
+    proc[DRPAI_INDEX_INPUT].size          = drpai_address.data_in_size;
+    proc[DRPAI_INDEX_DRP_CFG].address     = drpai_address.drp_config_addr;
+    proc[DRPAI_INDEX_DRP_CFG].size        = drpai_address.drp_config_size;
+    proc[DRPAI_INDEX_DRP_PARAM].address   = drpai_address.drp_param_addr;
+    proc[DRPAI_INDEX_DRP_PARAM].size      = drpai_address.drp_param_size;
+    proc[DRPAI_INDEX_AIMAC_DESC].address  = drpai_address.desc_aimac_addr;
+    proc[DRPAI_INDEX_AIMAC_DESC].size     = drpai_address.desc_aimac_size;
+    proc[DRPAI_INDEX_DRP_DESC].address    = drpai_address.desc_drp_addr;
+    proc[DRPAI_INDEX_DRP_DESC].size       = drpai_address.desc_drp_size;
+    proc[DRPAI_INDEX_WEIGHT].address      = drpai_address.weight_addr;
+    proc[DRPAI_INDEX_WEIGHT].size         = drpai_address.weight_size;
+    proc[DRPAI_INDEX_OUTPUT].address      = drpai_address.data_out_addr;
+    proc[DRPAI_INDEX_OUTPUT].size         = drpai_address.data_out_size;
 
     while(1){
 
@@ -953,12 +965,16 @@ int32_t main(int32_t argc, char * argv[])
         break;
     
         /* Display the resulting frame */
-        load_drpai();
-    	get_video_inf(frame);
-    	cv::putText(frame, label.c_str(), cv::Point(50, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
-    	label = " ";
-    	video.write(frame);
+        if (val %2 !=0 ){ 
+            load_drpai();
+            get_video_inf(frame);
+        }
+        else{
+        trackers (&frame);
+        }
+        video.write(frame);
         imshow( "Frame", frame );
+        
         /* Press  ESC on keyboard to exit*/
         char c=(char)waitKey(25);
         if(c==27)
