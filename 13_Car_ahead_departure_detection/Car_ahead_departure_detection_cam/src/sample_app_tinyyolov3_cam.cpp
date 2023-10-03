@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : sample_app_tinyyolov3_cam.cpp
 * Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for Car Ahead Departure Detectionusing Darknet-PyTorch  Tiny YOLOv3 USB Camera version
+* Description  : RZ/V2L DRP-AI Sample Application for Car Ahead Departure Detectionusing Darknet-PyTorch  Tiny YOLOv3 MIPI Camera version
 ***********************************************************************************************************************/
 
 /*****************************************
@@ -29,7 +29,7 @@
 #include <linux/drpai.h>
 /*Definition of Macros & other variables*/
 #include "define.h"
-/*USB camera control*/
+/*MIPI camera control*/
 #include "camera.h"
 /*Image control*/
 #include "image.h"
@@ -999,7 +999,7 @@ void *R_Capture_Thread(void *threadid)
             goto capture_end;
         }
 
-        /* Capture USB camera image and stop updating the capture buffer */
+        /* Capture MIPI camera image and stop updating the capture buffer */
         capture_addr = (uint32_t)capture->capture_image(udmabuf_address);
         if (capture_addr == 0)
         {
@@ -1237,7 +1237,7 @@ int32_t main(int32_t argc, char * argv[])
 
     printf("RZ/V2L DRP-AI Sample Application\n");
     printf("Model : Darknet Tiny YOLOv3 | %s\n", drpai_prefix.c_str());
-    printf("Input : USB Camera\n");
+    printf("Input : CORAL Camera\n");
 
     /* Read DRP-AI Object files address and size */
     ret = read_addrmap_txt(drpai_address_file);
@@ -1272,7 +1272,7 @@ int32_t main(int32_t argc, char * argv[])
     ret = capture->start_camera();
     if (0 != ret)
     {
-        fprintf(stderr, "[ERROR] Failed to initialize USB Camera.\n");
+        fprintf(stderr, "[ERROR] Failed to initialize CORAL Camera.\n");
         delete capture;
         ret_main = ret;
         goto end_close_drpai;
@@ -1384,11 +1384,11 @@ end_threads:
     goto end_close_camera;
 
 end_close_camera:
-    /*Close USB Camera.*/
+    /*Close MIPI Camera.*/
     ret = capture->close_camera();
     if (0 != ret)
     {
-        fprintf(stderr, "[ERROR] Failed to close USB Camera.\n");
+        fprintf(stderr, "[ERROR] Failed to close CORAL Camera.\n");
         ret_main = -1;
     }
     delete capture;
