@@ -1785,7 +1785,7 @@ int32_t main()
 
     printf("RZ/V2L DRP-AI Sample Application\n");
     printf("Model : MMPose HRNet with TinyYOLOv2 | hrnet_cam, tinyyolov2_cam\n");
-    printf("Input : USB Camera\n");
+    printf("Input : CORAL Camera\n");
 
     /*DRP-AI Driver Open*/
     /*For TinyYOLOv2*/
