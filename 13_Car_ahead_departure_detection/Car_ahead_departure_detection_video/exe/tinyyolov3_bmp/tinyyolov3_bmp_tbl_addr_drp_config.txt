@@ -1,7 +1,0 @@
-resize_hwc.mem                    1092207776     201900
-imagescaler.mem                   1092409680     173836
-maxpooling_k2_st2.mem             1092583520     107184
-maxpooling_k2_st1.mem             1092690704     125668
-resize_onnx.mem                   1092816384     167632
-transpose.mem                     1092984016     143052
-cast_fp16_fp32.mem                1093127072     101648

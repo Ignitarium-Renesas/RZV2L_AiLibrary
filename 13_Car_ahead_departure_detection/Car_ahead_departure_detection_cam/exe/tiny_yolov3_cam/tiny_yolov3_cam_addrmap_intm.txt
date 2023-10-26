@@ -1,9 +1,0 @@
-data_in 80000000 96000
-data 80096000 116bbd0
-data_out 81201c00 d26cc
-work 812d4300 16c00
-weight 812eaf00 10e3a0e
-drp_config 823ce940 24a280
-drp_param 82618bc0 320
-desc_aimac 82618f00 10f10
-desc_drp 82629e40 3f0
