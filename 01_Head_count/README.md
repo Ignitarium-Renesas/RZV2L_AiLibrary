@@ -56,8 +56,8 @@ make -j$(nproc) head_count_app
 ```
 ### Running the sample application
 
-Before running the application, download the weights from [deploy.so](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/tvm_v1.0.0/01_head_count.zip)
-extract deploy.so file and place it side `exe/yolov3_onnx/`
+Before running the application, download the weights from [deploy.so](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/tvm_v1.0.0/01_head_count.zip).
+extract deploy.so file and place it in to `exe/yolov3_onnx/`
 
 #### Application with image input
 ```
