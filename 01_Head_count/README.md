@@ -60,7 +60,7 @@ make -j$(nproc) head_count_app
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/exe/
-./01_head_count_app IMAGES ../test_images/elevator_google_0007_640_480.bmp
+./01_head_count_app IMAGE ../test_images/elevator_google_0007_640_480.bmp
 ```
 Optionally the user can pass width and height as arguments.
 

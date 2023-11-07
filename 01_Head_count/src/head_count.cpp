@@ -64,7 +64,8 @@ VideoCapture cap;
 std::map<std::string, int> input_source_map ={    
     {"IMAGE", 1},
     {"MIPI", 2},
-    {"USB", 3}  } ;
+    {"USB", 3}
+    } ;
 
 
 /*****************************************
@@ -565,24 +566,20 @@ int main(int argc, char *argv[])
     if (argc>3)
     {
         std::cerr << "Wrong number Arguments are passed \n";
-        return 1;
+        return -1;
     }
 
   
     /*Load Label from label_list file*/
     label_file_map = load_label_file(label_list);
-
     /*Load model_dir structure and its weight to runtime object */
     drpaimem_addr_start = get_drpai_start_addr();
-
     if (drpaimem_addr_start == (uint64_t)NULL)
     {
         /* Error notifications are output from function get_drpai_start_addr(). */
 	    fprintf(stderr, "[ERROR] Failed to get DRP-AI memory area start address. \n");
         return -1;
     }
-
-   
     runtime_status = runtime.LoadModel(model_dir, drpaimem_addr_start + DRPAI_MEM_OFFSET);
     
     if(!runtime_status)
@@ -594,7 +591,6 @@ int main(int argc, char *argv[])
     std::cout << "[INFO] loaded runtime model :" << model_dir << "\n\n";
     /* Get input Source IMAGE/VIDEO/CAMERA */
     std::string input_source = argv[1];
-
     switch (input_source_map[input_source])
     {
         /* Input Source : IMAGE*/
@@ -660,7 +656,8 @@ int main(int argc, char *argv[])
             capture_frame(gstreamer_pipeline);
         }
         break;
-
+        default:
+            std::cout<<"Choose the correct option."<<std::endl;
     }
     /* Exit the program */
     return 0;
