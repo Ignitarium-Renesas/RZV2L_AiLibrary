@@ -58,6 +58,7 @@ cmake -DCMAKE_TOOLCHAIN_FILE=./toolchain/runtime.cmake ..
 make -j$(nproc) head_count_topview_app
 ```
 ### Running the sample application
+Before running the application, download the weights from [deploy.so](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/tvm_v1.0.0/11_head_count_topview.zip). extract deploy.so file and place it in to `exe/topview_headcount_yolov3/`
 
 #### Application with image input
 ```

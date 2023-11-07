@@ -73,13 +73,13 @@ make -j$(nproc)
 ```
 
 ### Running the sample application
-Praparation on laptop:
-1. Download the weights file `deploy.so` from the release [release v1.2.3](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.3) depending on which application is being used.Precise file links: [animal_yolov3_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v1.2.3/animal_yolov3_weight.dat) 
-2. Place the weight files at location proper location `07_Animal_detection/exe/animal_yolov3_onnx/`.
-3. Now, copy the `RZV2L_AiLibrary` directory to the RZV2L board (/home/root/).
-4. Please follow these steps:
+
+1. Before running the application, download the weights from [deploy.so](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/tvm_v1.0.0/07_animal_detection.zip).
+extract deploy.so file and place it in to `07_Animal_detection/exe/animal_yolov3_onnx/`.
+2. Now, copy the `RZV2L_AiLibrary` directory to the RZV2L board (/home/root/).
+3. Please follow these steps:
 For image input continue with steps 5 to 7.
-5. The user should pass the path to the image as an argument.
+4. The user should pass the path to the image as an argument.
 
 #### Application with image input
 ```
