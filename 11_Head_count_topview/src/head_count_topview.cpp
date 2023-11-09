@@ -565,7 +565,7 @@ int main(int argc, char *argv[])
     if (argc>3)
     {
         std::cerr << "Wrong number Arguments are passed \n";
-        return 1;
+        return -1;
     }
 
   
@@ -660,7 +660,8 @@ int main(int argc, char *argv[])
             capture_frame(gstreamer_pipeline);
         }
         break;
-
+        default:
+        std::cout<<"Choose the correct option."<<std::endl;
     }
     /* Exit the program */
     return 0;

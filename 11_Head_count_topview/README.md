@@ -10,12 +10,12 @@ It can utilize the API, "*PRET_HC()*" provided in this library. Input to this AP
 
 ## Application details
 ```
-|-- 01_Head_Count_topview/ # Head count topview application
+|-- 11_Head_Count_topview/ # Head count topview application
 |   |-- test images/ # test images directory
-|   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- exe/
-|   |   |-- head_count_app # the executable
-|   |   `-- yolov3_onnx # DRP-AI files of yolov3
+|   |   |-- head_count_topview_app # the executable
+|   |   |-- labels.txt
+|   |   `-- topview_headcount_yolov3 # DRP-AI files of yolov3
 |   `-- src/ # source code directory
 `-- README.md
 ```
@@ -58,27 +58,24 @@ cmake -DCMAKE_TOOLCHAIN_FILE=./toolchain/runtime.cmake ..
 make -j$(nproc) head_count_topview_app
 ```
 ### Running the sample application
-Before running the application, download the weights from [deploy.so](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/tvm_v1.0.0/11_head_count_topview.zip). extract deploy.so file and place it in to `exe/topview_headcount_yolov3/`
 
 #### Application with image input
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 01_Head_count/exe/
-./head_count_topview_app IMAGES IMAGE ../test_images/01.bmp
+cd 11_Head_count_topview/exe/
+./head_count_topview_app IMAGE ../test_images/01.bmp
 ```
-Optionally the user can pass width and height as arguments.
-
 #### Application with Coral camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 01_Head_count/exe/
+cd 11_Head_count_topview/exe/
 ./head_count_topview_app MIPI
 ```
 
 #### Application with USB camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 01_Head_count/exe/
+cd 11_Head_count_topview/exe/
 ./head_count_topview_app USB
 ```
 
@@ -88,4 +85,5 @@ cd 01_Head_count/exe/
 3. Improper output : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is smaller than the actual image dimensions, then improper or unexpected outputs will be observed.
 4. [ERROR] Failed to initialize Coral Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
 5. permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.
-6. [ERROR] Failed to open: <prefix>/<prefix>_weight.dat error=2. [ERROR] Failed to load data from memory: <prefix>/<prefix>_weight.dat Failed to load DRP-AI object files - This error suggests that the weight file is not availbale in the `exe` folder. Download the weight file from the release in github and place it properly in the `exe/subfolder`.
+6. Choose the correct option - only options available are : IMAGE <path>, USB, MIPI.
+7. Check failed: (lib_handle_ != nullptr) is false: Failed to load dynamic shared library animal_yolov3_onnx/deploy.so animal_yolov3_onnx/deploy.so: cannot open shared object file: No such file or directory- This error suggests that the weight file is not availbale in the exe folder. Download the deploy.so from the release in github and place it properly in the 11_Head_count_topview/exe/head_count_topview_app/.
