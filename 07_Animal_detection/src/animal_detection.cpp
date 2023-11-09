@@ -554,10 +554,10 @@ int main(int argc, char *argv[])
 {
     std::cout << "Starting Animal Detection" << std::endl;
     
-    if (argc>3)
+    if ((argc>3) && (argc < 2))
     {
         std::cerr << "Wrong number Arguments are passed \n";
-        return 1;
+        return -1;
     }
 
   
@@ -652,6 +652,10 @@ int main(int argc, char *argv[])
             capture_frame(gstreamer_pipeline);
         }
         break;
+        default:{
+            std::cout << "Choose the correct option \n";
+            return -1;
+        }
 
     }
     /* Exit the program */

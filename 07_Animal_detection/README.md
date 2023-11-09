@@ -24,6 +24,7 @@ sample video on YouTube -[Animal Detection demo](https://youtu.be/o-3oeOCRHws)
 ```
 |-- 07_Animal_detection/ # Animal detection application
 |   |-- exe/
+|   |   |-- labels.txt #labels
 |   |   |-- animal_detection_app # the executable
 |   |   `-- animal_yolov3_onnx # DRP-AI files of yolov3
 |   `-- src/ # source code directory
@@ -66,7 +67,7 @@ git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary
 ```
 To create the executable
 ```
-cd RZV2L_AiLibrary/01_Head_count/src
+cd RZV2L_AiLibrary/07_Animal_detection/src
 mkdir -p build && cd build
 cmake -DCMAKE_TOOLCHAIN_FILE=./toolchain/runtime.cmake ..
 make -j$(nproc)
@@ -85,29 +86,29 @@ For image input continue with steps 5 to 7.
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 07_Animal_detection/exe/
-./07_animal_detection_app IMAGE ../test_images/raccoon.bmp 
+./animal_detection_app IMAGE ../test_images/raccoon.bmp 
 ```
 
 #### Application with coral camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 07_Animal_detection/exe/
-./07_animal_detection_app MIPI
+./animal_detection_app MIPI
 ```
 
 #### Application with usb camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 07_Animal_detection/Animal_detection_usbcam/exe/
-./07_animal_detection_app USB
+./animal_detection_app USB
 ```
 
 
 ### Known issues:
-1. [ERROR] Image buffer address is NULL : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.
+1. Failed to load image! : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.
 2. Segmentation fault : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is larger than the actual image dimensions, then a segmentation fault will occur.
 3. Improper output : If you are running the application in image mode, beware of the image dimensions entered. If entered image width or height is smaller than the actual image dimensions, then improper or unexpected outputs will be observed.
 4. [ERROR] Failed to initialize Coral Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
 5. permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.
-6. [ERROR] Failed to open: <prefix>/<prefix>_weight.dat error=2. [ERROR] Failed to load data from memory: <prefix>/<prefix>_weight.dat Failed to load DRP-AI object files - This error suggests that the weight file is not availbale in the `exe` folder. Download the weight file from the release in github and place it properly in the `exe/subfolder`.
-
+6. Choose the correct option - only options available are : `IMAGE <path>, USB, MIPI`.
+7. Check failed: (lib_handle_ != nullptr) is false: Failed to load dynamic shared library animal_yolov3_onnx/deploy.so animal_yolov3_onnx/deploy.so: cannot open shared object file: No such file or directory- This error suggests that the weight file is not availbale in the `exe` folder. Download the `deploy.so` from the release in github and place it properly in the `07_Animal_detection/exe/animal_yolov3_onnx/`.
