@@ -55,7 +55,6 @@ In this application YOLOv3 is used for head detection.
 *[HollywoodHeads](https://www.di.ens.fr/willow/research/headdetection/)
 *[Head_data](https://www.kaggle.com/datasets/houssad/head-data)
 *[RGBD_Indoor_Dataset](https://drive.google.com/file/d/1fOub9LcNqfDlr-mEcdnenAJWw-rqWGmG/view)
-*[SCUT Dataset](https://github.com/HCIILAB/SCUT-HEAD-Dataset-Release)
 
 ### Application with image input
 - The user should input the relative path to the image,it's width and height.
