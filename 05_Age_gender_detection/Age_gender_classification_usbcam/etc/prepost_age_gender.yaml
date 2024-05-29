@@ -11,10 +11,10 @@ input_to_pre:
 
 input_to_body:
   -
-    name: "input_4"          # must match ONNX's input name
+    name: "input"          # must match ONNX's input name
     format: "RGB"
     order: "HWC"          # Inference part can handle only HWC order
-    shape: [200, 200, 3]  # must match ONNX's input shape
+    shape: [224, 224, 3]  # must match ONNX's input shape
     type: "fp16"          # Inference part can handle only FP16 data
 
 #######################################
@@ -22,28 +22,17 @@ input_to_body:
 #######################################
 output_from_body:
   -
-    name: "age_out"
-    shape: [5]
-    order: "C"
-    type: "fp16"
-  -
-    name: "gender_out"
-    shape: [2]
+    name: "output"
+    shape: [18]
     order: "C"
     type: "fp16"
 
 output_from_post:
   -
-    name: "post_out1"
-    shape: [5]
+    name: "post_out"
+    shape: [18]
     order: "C"
     type: "fp32"
-  -
-    name: "post_out2"
-    shape: [2]
-    order: "C"
-    type: "fp32"
-
 
 #######################################
 # Preprocess
@@ -52,7 +41,7 @@ preprocess:
   -
     src      : ["yuv_data"]
 
-    dest     : ["input_4"]
+    dest     : ["input"]
 
     operations:
     -
@@ -66,13 +55,13 @@ preprocess:
         CROP_POS_Y : 0
         DATA_TYPE : 0
         DATA_FORMAT: 0 # 0 : HWC, 1 : CHW
-        shape_out: [200, 200] # [H, W]
+        shape_out: [480, 640] # [H, W]
     -
       op: resize_hwc
       param:
         RESIZE_ALG: 1 # "Bilinear"
         DATA_TYPE: 0  # "uint8"
-        shape_out: [200, 200]
+        shape_out: [224, 224]
 
     -
       op: cast_any_to_fp16
@@ -91,20 +80,9 @@ preprocess:
 #######################################
 postprocess:
   -
-    src: ["age_out"]
+    src: ["output"]
 
-    dest: ["post_out1"]
-
-    operations:
-    -
-      op : cast_fp16_fp32
-      param:
-        CAST_MODE: 0 # FP16 to FP32
-
-  -
-    src: ["gender_out"]
-
-    dest: ["post_out2"]
+    dest: ["post_out"]
 
     operations:
     -
