@@ -36,7 +36,7 @@ sample video on YouTube -[Gaze detection demo](https://youtu.be/X_eH5UcThrc)
 
 - Model - [ResNet-18](https://arxiv.org/pdf/1512.03385.pdf)
 - Repository - [pytorch_mpiigaze](https://github.com/hysts/pytorch_mpiigaze)
-- Dataset - [ETH-XGaze](https://www.mpi-inf.mpg.de/departments/computer-vision-and-machine-learning/research/gaze-based-human-computer-interaction/appearance-based-gaze-estimation-in-the-wild)
+- Dataset - [ETH-XGaze](https://ait.ethz.ch/xgaze)
 - In this application ResNet-18 is used for gaze detection.
 
 #### Tiny Yolov2
