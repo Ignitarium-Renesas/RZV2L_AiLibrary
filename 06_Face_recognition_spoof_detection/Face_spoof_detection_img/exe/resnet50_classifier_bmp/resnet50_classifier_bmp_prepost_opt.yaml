@@ -1,11 +1,11 @@
 input_to_pre:
-- name: bgr_data
+- name: yuv_data
   shape:
-  - 224
-  - 224
-  - 3
+  - 480
+  - 640
+  - 2
   order: HWC
-  format: BGR
+  format: YUY2
   type: uint8
 input_to_body:
 - name: input
@@ -30,11 +30,11 @@ output_from_post:
   type: fp32
 preprocess:
 - src:
-  - bgr_data
+  - yuv_data
   shape_in:
-  - - 224
-    - 224
-    - 3
+  - - 480
+    - 640
+    - 2
   dtype_in:
   - uint8
   dorder_in:
@@ -50,6 +50,50 @@ preprocess:
   dorder_out:
   - HWC
   operations:
+  - op: conv_yuv2rgb
+    shape_in:
+    - - 480
+      - 640
+      - 2
+    dtype_in:
+    - uint8
+    dorder_in:
+    - HWC
+    shape_out:
+    - - 480
+      - 640
+      - 3
+    dtype_out:
+    - uint8
+    dorder_out:
+    - HWC
+    param:
+      DOUT_RGB_FORMAT: 0
+  - op: crop
+    shape_in:
+    - - 480
+      - 640
+      - 3
+    dtype_in:
+    - uint8
+    dorder_in:
+    - HWC
+    shape_out:
+    - - 224
+      - 224
+      - 3
+    dtype_out:
+    - uint8
+    dorder_out:
+    - HWC
+    param:
+      CROP_POS_X: 208
+      CROP_POS_Y: 128
+      DATA_TYPE: 0
+      DATA_FORMAT: 0
+      shape_out:
+      - 224
+      - 224
   - op: cast_any_to_fp16
     shape_in:
     - - 224
@@ -87,7 +131,7 @@ preprocess:
     dorder_out:
     - HWC
     param:
-      DOUT_RGB_ORDER: 1
+      DOUT_RGB_ORDER: 0
       cof_add:
       - -123.675
       - -116.28

@@ -121,14 +121,14 @@ Classifies the given camera frame to genuine or spoofed.
 
 ## Running the application
 
-Weight files for this application are availbale in [release 1.2.4](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.4).
-Kindly paste the file [arcface_bmp_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v1.2.4/arcface_bmp_weight.dat) in below folders 
+Weight files for this application are availbale in [release 5.00](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v5.00).
+Kindly paste the file [arcface_bmp_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/arcface_bmp_weight.dat) in below folders 
 ```
 06_Face_recognition_spoof_detection/Face_recognition_img/exe/arcface_bmp/
 06_Face_recognition_spoof_detection/Face_registration_usbcam/exe/arcface_bmp/
 06_Face_recognition_spoof_detection/Face_registration_cam/exe/arcface_bmp/
 ```
-and [arcface_cam_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v1.2.4/arcface_cam_weight.dat) file in below folders.
+and [arcface_cam_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/arcface_cam_weight.dat) file in below folders.
 ```
 06_Face_recognition_spoof_detection/Face_recognition_cam/exe/arcface_cam/
 06_Face_recognition_spoof_detection/Face_recognition_usbcam/exe/arcface_cam/

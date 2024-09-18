@@ -81,7 +81,7 @@ OFFSET_ADD:112, layer name: post_0_1_imagescaler
   Param: DOUT_RGB_ORDER      Value: 0x1
   Param: RFU6                Value: 0x0
   Param: RFU7                Value: 0x0
-OFFSET_ADD:176, layer name: /module_list.85/upsample_85/Resize_output_0
+OFFSET_ADD:176, layer name: 651
   Param: raddr               Value: 0x85c91000
   Param: waddr               Value: 0x85ca6200
   Param: IMG_IWIDHT          Value: 0xd
@@ -108,7 +108,7 @@ OFFSET_ADD:176, layer name: /module_list.85/upsample_85/Resize_output_0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:232, layer name: /module_list.97/upsample_97/Resize_output_0
+OFFSET_ADD:232, layer name: 680
   Param: raddr               Value: 0x8609c200
   Param: waddr               Value: 0x860c6600
   Param: IMG_IWIDHT          Value: 0x1a

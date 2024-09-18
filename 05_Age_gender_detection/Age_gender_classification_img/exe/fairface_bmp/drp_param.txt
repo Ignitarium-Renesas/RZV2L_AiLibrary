@@ -104,17 +104,17 @@ OFFSET_ADD:176, layer name: /avgpool/GlobalAveragePool_output_0
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RFU4                Value: 0x0
-OFFSET_ADD:224, layer name: post_0_0_cast_fp16_fp32
+OFFSET_ADD:224, layer name: post_0_0_softmax
   Param: raddr               Value: 0x80b74800
   Param: waddr               Value: 0x80b74840
   Param: IMG_IWIDHT          Value: 0x1
   Param: IMG_IHEIGHT         Value: 0x1
   Param: IMG_ICH             Value: 0x12
-  Param: RFU1                Value: 0x0
+  Param: IMG_ICH_ORG         Value: 0x12
   Param: IMG_OWIDTH          Value: 0x1
   Param: IMG_OHEIGHT         Value: 0x1
   Param: IMG_OCH             Value: 0x12
-  Param: RFU2                Value: 0x0
+  Param: IMG_OCH_ORG         Value: 0x12
   Param: OCH0_SYNCSET_DT     Value: 0x1
   Param: OCH0_SYNCSET_ID     Value: 0xc
   Param: OCH1_SYNCSET_DT     Value: 0x2
@@ -127,7 +127,7 @@ OFFSET_ADD:224, layer name: post_0_0_cast_fp16_fp32
   Param: RFU1                Value: 0x0
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
-  Param: CAST_MODE           Value: 0x0
-  Param: RFU1                Value: 0x0
-  Param: RFU2                Value: 0x0
-  Param: RFU3                Value: 0x0
+  Param: DOUT_FORMAT         Value: 0x1
+  Param: RFU4                Value: 0x0
+  Param: RFU5                Value: 0x0
+  Param: RFU6                Value: 0x0

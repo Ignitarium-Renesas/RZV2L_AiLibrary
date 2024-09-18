@@ -137,7 +137,7 @@ postprocess:
   dorder_out:
   - C
   operations:
-  - op: cast_fp16_fp32
+  - op: softmax
     shape_in:
     - - 18
     dtype_in:
@@ -151,4 +151,4 @@ postprocess:
     dorder_out:
     - C
     param:
-      CAST_MODE: 0
+      DOUT_FORMAT: 1

@@ -29972,10 +29972,10 @@
         "Param": {}
     },
     "57_o0_k0_i0": {
-        "name": "post_0_0_cast_fp16_fp32",
-        "opexp": "cast_fp16_fp32",
+        "name": "post_0_0_softmax",
+        "opexp": "softmax",
         "Calc": {
-            "name": "cast_fp16_fp32",
+            "name": "softmax",
             "mode": "FP",
             "is_drp": true,
             "is_op": true,
@@ -30060,7 +30060,7 @@
             "mode_dout": ""
         },
         "Param": {
-            "CAST_MODE": 0
+            "DOUT_FORMAT": 1
         }
     }
 }

@@ -23,8 +23,8 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
 ### Application with image input
 
 
-1)Enter the relative path for the test_image with respect to the directory of the executable when prompted </br>
-2)Along with the test_image path pass the test_image dimension in the order width X height </br>
+1)Enter the relative path for the test_image with respect to the directory of the executable when prompted
+2)Along with the test_image path pass the test_image dimension in the order width X height 
 3)For sample test images the image dimensions are provided in the 'test_images_dimensions.txt'
 
 ## Running the application
@@ -32,7 +32,6 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
 
 Please follow the below steps:
 
-```
 ├── 05_Age_Gender_Detection
 ├── Age_Gender_Classification_cam
 |   ├── etc # address map and pre/post process configuration of both age_gender and tiny-yolov2
@@ -61,6 +60,7 @@ Please follow the below steps:
 |   ├── Makefile
 |   ├── README.md
     └── src # source code directory
+```
 ```
 
 ### Running the sample application

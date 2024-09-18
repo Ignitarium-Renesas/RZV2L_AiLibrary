@@ -80,7 +80,7 @@ make
 
 ### Running the sample application
 Praparation on laptop:
-1. Download the weights files (*.dat) from the release(https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.5).
+1. Download the weights files (*.dat) from the release(https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v5.00).
 2. Place the weight files at location proper location `11_Head_count_topview/Head_count_topview_img/exe/yolov3_headcount_topview_img` or `11_Head_count_topview/Head_count_topview_usbcam/exe/yolov3_headcount_topview_cam` or `11_Head_count_topview/Head_count_topview_cam/exe/yolov3_headcount_topview_cam` . 
 3. Now, copy the `RZV2L_AiLibrary` directory to the RZV2L board (/home/root/).
 4. Please follow these steps:
@@ -90,7 +90,7 @@ Praparation on laptop:
 cd /home/root/RZV2L_AiLibrary 
 cd 11_Head_detection_from_top/Head_count_topview_img/exe/
 ./headcount_topview_img_app
-../test_images/01.bmp
+../test_images/03.bmp
 ```
 
 #### Application with camera input

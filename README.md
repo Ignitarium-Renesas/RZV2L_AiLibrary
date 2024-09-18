@@ -238,17 +238,17 @@ cd $WORK/build
 
 In the Installer, specify the SDK installation directory and press the enter key.
 
-Example below installs the SDK to default directory, “/opt/poky/3.1.14”.
+Example below installs the SDK to default directory, “/opt/poky/3.1.31”.
 
 Note:
-“/opt/poky/3.1.14” will be replaced with your SDK installed path.
+“/opt/poky/3.1.31” will be replaced with your SDK installed path.
 
 Confirm that following directories and files are generated under the specified directory.
 
 ```
 |-opt
      |-poky
-          |-3.1.14
+          |-3.1.31
                |- sysroots
                |- environment-setup-aarch64-poky-linux
                |- environment-setup-armv7vet2hf-neon-vfpv4-pokymllib32-linux-gnueabi
@@ -261,7 +261,7 @@ Confirm that following directories and files are generated under the specified d
 To use the SDK run the bellow command
 
 ```
-source /opt/poky/3.1.14/environment-setup-aarch64-poky-linux
+source /opt/poky/3.1.31/environment-setup-aarch64-poky-linux
 ```
 
 Once the source is done, it can be used as SDK for the RZV2L board.
@@ -269,7 +269,7 @@ Once the source is done, it can be used as SDK for the RZV2L board.
 #### Sample command to use SDK and build the executable application
 
 ~~~
-source /opt/poky/3.1.14/environment-setup-aarch64-poky-linux
+source /opt/poky/3.1.31/environment-setup-aarch64-poky-linux
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary
 cd RZV2L_AiLibrary/<application_name>
 make

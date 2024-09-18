@@ -895,6 +895,6 @@ pre_fc1_o0_k0_i92_param           1160955272
 pre_fc1_o0_k0_i93_param           1161089416
 pre_fc1_o0_k0_i94_param           1161223560
 pre_fc1_o0_k0_i95_param           1161357704
-imagescaler.mem                   1161460128     173836
-actfunc.mem                       1161633968     174860
-cast_fp16_fp32.mem                1161808832     101648
+imagescaler.mem                   1161460128     157036
+actfunc.mem                       1161617168     174860
+cast_fp16_fp32.mem                1161792032     101648

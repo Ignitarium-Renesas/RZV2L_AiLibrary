@@ -1,5 +1,5 @@
-resize_hwc.mem                    1190287840     201900
-imagescaler.mem                   1190489744     173836
-resize_onnx.mem                   1190663584     167632
-transpose.mem                     1190831216     143052
-cast_fp16_fp32.mem                1190974272     101648
+resize_hwc.mem                    1190287840     183000
+imagescaler.mem                   1190470848     157036
+resize_onnx.mem                   1190627888     167632
+transpose.mem                     1190795520     134128
+cast_fp16_fp32.mem                1190929648     101648
