@@ -85,7 +85,7 @@ Praparation on laptop:
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/Head_count_img/exe/
-./01_head_count_img_app ../test_images/elevator_google_0007_640_480.bmp
+./head_count_img_app ../test_images/elevator_google_0007_640_480.bmp
 ```
 Optionally the user can pass width and height as arguments.
 
@@ -93,14 +93,14 @@ Optionally the user can pass width and height as arguments.
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/Head_count_cam/exe/
-./01_head_count_cam_app
+./head_count_cam_app
 ```
 
 #### Application with USB camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/Head_count_usbcam/exe/
-./01_head_count_usbcam_app
+./head_count_usbcam_app
 ```
 
 ### Known issues:

@@ -199,7 +199,7 @@ After above command, a window will appear on the screen.
         
 
 ```
-root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration_cam/exe# ./face_registration_cam 
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration_cam/exe# ./face_registration_cam_app 
 Choose any one option from below
 [0] for capturing new face
 [1] for adding new face to register [Add new values to existing register]

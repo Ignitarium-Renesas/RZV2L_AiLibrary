@@ -88,7 +88,7 @@ Praparation on laptop:
 #### Application with image input
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 11_Head_detection_from_top/Head_count_topview_img/exe/
+cd 11_Head_count_topview/Head_count_topview_img/exe/
 ./headcount_topview_img_app
 ../test_images/03.bmp
 ```

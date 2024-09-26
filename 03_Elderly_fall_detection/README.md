@@ -78,7 +78,7 @@ make
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 03_Elderly_fall_detection/Elderly_fall_detection_cam/exe/
-./Elderly_fall_detection_cam_app
+./elderly_fall_detection_cam_app
 ```
 
 ### Example:
@@ -86,7 +86,7 @@ cd 03_Elderly_fall_detection/Elderly_fall_detection_cam/exe/
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 03_Elderly_fall_detection/Elderly_fall_detection_cam/exe/
-./Elderly_fall_detection_cam_app
+./elderly_fall_detection_cam_app
 ```
 
 ## Limitations

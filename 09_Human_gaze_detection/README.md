@@ -63,7 +63,7 @@ Please follow the below steps for image application once the desired changes in 
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary
-cd RZV2L_AiLibrary/09_Human_Gaze_detection/Human_Gaze_detection_usbcam/
+cd RZV2L_AiLibrary/09_Human_gaze_detection/Human_gaze_detection_usbcam/
 make
 ```
 
@@ -74,16 +74,16 @@ make
 
 ```
 cd /home/root/RZV2L_AiLibrary
-cd 09_Human_Gaze_detection/Human_Gaze_detection_usbcam/exe/
-./09_Human_Gaze_detection_usbcam_app
+cd 09_Human_gaze_detection/Human_gaze_detection_usbcam/exe/
+./human_gaze_detection_usbcam_app
 ```
 
 ### Example:
 
 ```
 cd /home/root/RZV2L_AiLibrary
-cd 09_Human_Gaze_detection/Human_Gaze_detection_usbcam/exe/
-./09_Human_Gaze_detection_usbcam_app
+cd 09_Human_gaze_detection/Human_gaze_detection_usbcam/exe/
+./human_gaze_detection_usbcam_app
 ```
 
 ## Limitations

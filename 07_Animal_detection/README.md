@@ -98,7 +98,7 @@ make
 ### Running the sample application
 Praparation on laptop:
 1. Download the weights file `animal_yolov3_weight.dat` or `animal_yolov3_weight_img.dat` from the release [release v5.00](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v5.00) depending on which application is being used.Precise file links: [animal_yolov3_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/animal_yolov3_weight.dat) and [animal_yolov3_weight_img.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/animal_yolov3_weight_img.dat)
-2. Place the weight files at location proper location `07_Animal_detection/Animal_detection_img/exe/yolov3_bmp/` or `07_Animal_detection/Animal_detection_cam/exe/yolov3_cam/`
+2. Place the weight files at location proper location `07_Animal_detection/Animal_detection_img/exe/animal_yolov3` or `07_Animal_detection/Animal_detection_cam/exe/animal_yolov3`
 3. Now, copy the `RZV2L_AiLibrary` directory to the RZV2L board (/home/root/).
 4. Please follow these steps:
 For image input continue with steps 5 to 7.
@@ -110,7 +110,7 @@ For image input continue with steps 5 to 7.
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 07_Animal_detection/Animal_detection_img/exe/
-root@smarc-rzv2l:~/RZV2L_AiLibrary/07_Animal_detection/Animal_detection_img/exe# ./07_animal_detect_img_app ../test_images/dog.bmp 
+root@smarc-rzv2l:~/RZV2L_AiLibrary/07_Animal_detection/Animal_detection_img/exe# ./animal_detection_img_app ../test_images/dog.bmp 
 ----------------------------------------
 Running Animal detection demo
 ----------------------------------------
@@ -155,14 +155,14 @@ Probability     : 99.1 %
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 07_Animal_detection/Animal_detection_cam/exe/
-./07_animal_detection_cam_app
+./animal_detection_cam_app
 ```
 
 #### Application with usb camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 07_Animal_detection/Animal_detection_usbcam/exe/
-./07_animal_detection_usbcam_app
+./animal_detection_usbcam_app
 ```
 
 
