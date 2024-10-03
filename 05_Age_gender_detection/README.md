@@ -83,7 +83,7 @@ make
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 05_Age_gender_detection/Age_gender_classification_<cam/usbcam>/exe
-./age_gender_classification_cam_app
+./age_gender_classification_<cam/usbcam>_app
 ```
 
 #### Running the image application

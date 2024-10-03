@@ -83,7 +83,7 @@ make
 
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 04_Safety_helmet_vest_detection/Safety_helmet_vest_cam/exe
+cd 04_Safety_helmet_vest_detection/Safety_helmet_vest_<cam/usbcam>/exe
 ./safety_helmet_vest_<cam/usbcam>_app
 ```
 ### Application with image input
@@ -93,7 +93,7 @@ The user should pass the path to the image as an argument, optionally it's width
 #### Example:
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd cd 04_Safety_helmet_vest_detection/Safety_helmet_vest_img/exe
+cd 04_Safety_helmet_vest_detection/Safety_helmet_vest_img/exe
 ./safety_helmet_vest_img_app ../test_images/1.jpg
 ```
 ### Known issues:
