@@ -159,7 +159,7 @@ make
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 06_Face_recognition_spoof_detection/Face_registration_<cam/usbcam>/exe/
-./face_registration_cam
+./face_registration_<cam/usbcam>
 ```
 3. Choose whether to capture image, append or write database.
     1. for capturing new face
@@ -206,7 +206,7 @@ Choose any one option from below
 [2] for creating new face register [Erasing previous register]
 1
 Enter the number of samples to be embedded 
-5
+1
 Enter the person name 
 Chris
 Enter the image path 
@@ -250,7 +250,7 @@ Inference -----------------------------------------------
 [END] DRP-AI
 Input: sample.bmp
 
-Recognized person is Paul
+Recognized person is sahal
 ```
 
 #### Face Recognition Camera

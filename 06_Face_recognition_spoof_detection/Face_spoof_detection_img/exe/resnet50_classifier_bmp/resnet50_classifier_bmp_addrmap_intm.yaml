@@ -1,14 +1,14 @@
 -
   name: ALL
   addr: 0x8000_0000
-  size:  0x539_2ac0
+  size:  0x518_92c0
   lst_elemsp:
-    - { name: data_in,          addr: 0x8000_0000, size:    0x9_6000 }
-    - { name: data,             addr: 0x8009_6000, size:  0x216_c004 }
-    - { name: data_out,         addr: 0x8220_2040, size:         0x8 }
-    - { name: work,             addr: 0x8220_2080, size:   0x31_0000 }
-    - { name: weight,           addr: 0x8251_2080, size:  0x2cc_f414 }
-    - { name: drp_config,       addr: 0x851e_14c0, size:   0x1b_15e0 }
-    - { name: drp_param,        addr: 0x8539_2ac0, size:       0x150 }
-    - { name: desc_aimac,       addr: 0x8539_2c40, size:    0x4_0b80 }
-    - { name: desc_drp,         addr: 0x853d_37c0, size:       0x1f0 }
+    - { name: data_in,          addr: 0x8000_0000, size:    0x2_4c00 }
+    - { name: data,             addr: 0x8002_4c00, size:  0x206_6404 }
+    - { name: data_out,         addr: 0x8208_b040, size:         0x8 }
+    - { name: work,             addr: 0x8208_b080, size:   0x31_0000 }
+    - { name: weight,           addr: 0x8239_b080, size:  0x2cc_f414 }
+    - { name: drp_config,       addr: 0x8506_a4c0, size:   0x11_ede0 }
+    - { name: drp_param,        addr: 0x8518_92c0, size:        0xe0 }
+    - { name: desc_aimac,       addr: 0x8518_93c0, size:    0x4_0b40 }
+    - { name: desc_drp,         addr: 0x851c_9f00, size:       0x150 }

@@ -1,6 +1,4 @@
-conv_yuv2rgb.mem                  1116670560     179492
-crop.mem                          1116850064     120524
-imagescaler.mem                   1116970592     157036
-maxpooling_k3_st2.mem             1117127632     131864
-gap.mem                           1117259504     141508
-softmax.mem                       1117401024     157068
+imagescaler.mem                   1115902560     157036
+maxpooling_k3_st2.mem             1116059600     131864
+gap.mem                           1116191472     141508
+softmax.mem                       1116332992     157068
