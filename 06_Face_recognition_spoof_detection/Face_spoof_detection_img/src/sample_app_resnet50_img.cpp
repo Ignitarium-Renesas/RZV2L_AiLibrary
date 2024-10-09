@@ -324,17 +324,10 @@ int8_t get_result(int8_t drpai_fd, uint32_t output_addr, uint32_t output_size)
 ******************************************/
 int8_t print_result(float* floatarr)
 {
-    // /* Post-processing */
+    /* Post-processing */
 
-    // (floatarr[0] >= floatarr[1]) ? printf("\nGenuine Face Detected\n") : printf("\nSpoofed Face Detected...!!!\n");
+    (floatarr[0] >= floatarr[1]) ? printf("\nGenuine Face Detected\n") : printf("\nSpoofed Face Detected...!!!\n");
 
-    // return 0;
-    float threshold = 0.1f; 
-    if (floatarr[0] - floatarr[1] > threshold) {
-        std::cout << "\nGenuine Face Detected\n";
-    } else {
-        std::cout << "\nSpoofed Face Detected...!!!\n";
-    }
     return 0;
 }
 
