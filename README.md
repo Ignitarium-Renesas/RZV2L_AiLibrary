@@ -11,7 +11,6 @@ This Library has API functions for leveraging AI applications that will run on R
 5. Human Age and Gender Detection
 6. Face Recognition and Spoof Detection
 7. Animal Detection
-8. Hand Gesture Recognition
 9. Human Gaze Recognition
 10. Driver Monitoring System
 11. Head Count Top View
