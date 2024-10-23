@@ -4,18 +4,18 @@
 
 This Library has API functions for leveraging AI applications that will run on Renesas RZ/V2L Board. Currently this library has following sample applications: 
 
-1. Human Head Counter
-2. Line Crossing Object Counter
-3. Elderly People Fall Detection
-4. Safety Helmet and Vest Detection
-5. Human Age and Gender Detection
-6. Face Recognition and Spoof Detection
-7. Animal Detection
-8. Human Gaze Recognition
-9. Driver Monitoring System
-10. Head Count Top View
-11. Hand Gesture Recognition V2
-12. Car Ahead Departure Detection
+1.Human Head Counter \
+2.Line Crossing Object Counter \
+3.Elderly People Fall Detection \
+4.Safety Helmet and Vest Detection \
+5.Human Age and Gender Detection \
+6.Face Recognition and Spoof Detection \
+7.Animal Detection \
+9.Human Gaze Recognition \
+10.Driver Monitoring System \
+11.Head Count Top View \
+12.Hand Gesture Recognition V2 \
+13.Car Ahead Departure Detection
 
 ## Prerequisites
 ### 1. Board bring up sequence
