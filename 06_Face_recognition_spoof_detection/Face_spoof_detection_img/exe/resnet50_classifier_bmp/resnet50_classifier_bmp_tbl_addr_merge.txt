@@ -270,7 +270,7 @@ output_o0_k0_i0_param             1115898440
 output_o0_k0_i1_param             1115899466
 output_o0_k0_i2_param             1115900490
 output_o0_k0_i3_param             1115901514
-imagescaler.mem                   1115902560     173836
-maxpooling_k3_st2.mem             1116076400     131864
-gap.mem                           1116208272     141508
-softmax.mem                       1116349792     151892
+imagescaler.mem                   1115902560     157036
+maxpooling_k3_st2.mem             1116059600     131864
+gap.mem                           1116191472     141508
+softmax.mem                       1116332992     157068

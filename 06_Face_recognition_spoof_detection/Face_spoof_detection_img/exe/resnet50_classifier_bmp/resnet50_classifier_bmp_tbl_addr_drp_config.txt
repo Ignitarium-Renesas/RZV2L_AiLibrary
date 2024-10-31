@@ -1,4 +1,4 @@
-imagescaler.mem                   1115902560     173836
-maxpooling_k3_st2.mem             1116076400     131864
-gap.mem                           1116208272     141508
-softmax.mem                       1116349792     151892
+imagescaler.mem                   1115902560     157036
+maxpooling_k3_st2.mem             1116059600     131864
+gap.mem                           1116191472     141508
+softmax.mem                       1116332992     157068

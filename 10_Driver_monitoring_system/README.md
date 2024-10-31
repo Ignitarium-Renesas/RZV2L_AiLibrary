@@ -71,7 +71,7 @@ Please follow the below steps for image application once the desired changes in 
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary
-cd RZV2L_AiLibrary/10_Driver_monitoring_system/Driver_Monitoring_System_<usbcam/cam>
+cd RZV2L_AiLibrary/10_Driver_monitoring_system/Driver_monitoring_system_<usbcam/cam>
 make
 ```
 
@@ -82,7 +82,7 @@ make
 
 ```
 cd /home/root/RZV2L_AiLibrary
-cd 10_Driver_monitoring_system/Driver_Monitoring_System_<usbcam/cam>/exe/
+cd 10_Driver_monitoring_system/Driver_monitoring_system_usbcam/exe/
 ./driver_monitoring_system_<usbcam/cam>_app
 ```
 
@@ -90,7 +90,7 @@ cd 10_Driver_monitoring_system/Driver_Monitoring_System_<usbcam/cam>/exe/
 
 ```
 cd /home/root/RZV2L_AiLibrary
-cd 10_Driver_monitoring_system/Driver_Monitoring_System_usbcam/exe/
+cd 10_Driver_monitoring_system/Driver_monitoring_system_usbcam/exe/
 ./driver_monitoring_system_usbcam_app
 ```
 

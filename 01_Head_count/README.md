@@ -76,7 +76,7 @@ make
 
 ### Running the sample application
 Praparation on laptop:
-1. Download the weight file `yolov3_Head_counting_weights.dat` from the [release v1.2.2](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.2). Precise file link: [yolov3_Head_counting_weights.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v1.2.2/yolov3_Head_counting_weights.dat)
+1. Download the weight file `yolov3_Head_counting_weights.dat` from the [release v5.00](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v5.00). Precise file link: [yolov3_Head_counting_weights.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/yolov3_Head_counting_weights.dat)
 2. Place the weight files at location proper location `01_Head_count/Head_count_img/exe/yolov3_bmp/`, `01_Head_count/Head_count_cam/exe/yolov3_cam/` or `01_Head_count/Head_count_usbcam/exe/yolov3_cam/`
 3. Now, copy the `RZV2L_AiLibrary` directory to the RZV2L board (/home/root/).
 4. Please follow these steps:
@@ -85,7 +85,7 @@ Praparation on laptop:
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/Head_count_img/exe/
-./01_head_count_img_app ../test_images/elevator_google_0007_640_480.bmp
+./head_count_img_app ../test_images/elevator_google_0007_640_480.bmp
 ```
 Optionally the user can pass width and height as arguments.
 
@@ -93,14 +93,14 @@ Optionally the user can pass width and height as arguments.
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/Head_count_cam/exe/
-./01_head_count_cam_app
+./head_count_cam_app
 ```
 
 #### Application with USB camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/Head_count_usbcam/exe/
-./01_head_count_usbcam_app
+./head_count_usbcam_app
 ```
 
 ### Known issues:

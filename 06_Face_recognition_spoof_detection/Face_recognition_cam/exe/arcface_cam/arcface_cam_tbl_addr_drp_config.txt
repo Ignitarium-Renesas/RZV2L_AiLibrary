@@ -1,6 +1,6 @@
 conv_yuv2rgb.mem                  1162303392     179492
 crop.mem                          1162482896     120524
-resize_hwc.mem                    1162603424     201900
-imagescaler.mem                   1162805328     173836
-actfunc.mem                       1162979168     174860
-cast_fp16_fp32.mem                1163154032     101648
+resize_hwc.mem                    1162603424     183000
+imagescaler.mem                   1162786432     157036
+actfunc.mem                       1162943472     174860
+cast_fp16_fp32.mem                1163118336     101648

@@ -21,10 +21,10 @@ Start:112[Byte],Size:4[Byte],Param:raddr,Value:0x80177000
 Start:116[Byte],Size:4[Byte],Param:waddr,Value:0x8019bc00
 Start:160[Byte],Size:4[Byte],Param:ADD_ADDR,Value:0x82512080
 Start:164[Byte],Size:4[Byte],Param:MUL_ADDR,Value:0x82512088
-maxpooling_k3_st2[/maxpool/MaxPool_output_0]
+maxpooling_k3_st2[324]
 Start:176[Byte],Size:4[Byte],Param:raddr,Value:0x801e5400
 Start:180[Byte],Size:4[Byte],Param:waddr,Value:0x8036d400
-gap[/avgpool/GlobalAveragePool_output_0]
+gap[493]
 Start:232[Byte],Size:4[Byte],Param:raddr,Value:0x821d0000
 Start:236[Byte],Size:4[Byte],Param:waddr,Value:0x82201000
 softmax[post_0_0_softmax]

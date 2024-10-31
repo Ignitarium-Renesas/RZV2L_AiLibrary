@@ -73,7 +73,7 @@ Please follow the below steps:
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
-cd RZV2L_AiLibrary/12_Hand_Gesture_Recognition_v2/Hand_Gesture_Recognition_v2_<cam/usbcam>
+cd RZV2L_AiLibrary/12_Hand_gesture_recognition_v2/Hand_gesture_recognition_v2_<cam/usbcam>
 make
 ```
 Now application's executable file (exe) is built.
@@ -85,7 +85,7 @@ Now application's executable file (exe) is built.
 
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 12_Hand_Gesture_Recognition_v2/Hand_Gesture_Recognition_v2_<cam/usbcam>/exe
+cd 12_Hand_gesture_recognition_v2/Hand_gesture_recognition_v2_<cam/usbcam>/exe
 ./hand_gesture_recognition_v2_<cam/usbcam>_app
 ```
 Live video feed will be visible on the screen.

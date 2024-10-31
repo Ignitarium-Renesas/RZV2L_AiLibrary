@@ -40,7 +40,7 @@ sample video on YouTube - https://youtu.be/kXZFmK02VQk
 #### Tiny Yolov2
 
 - Official paper - [YOLO9000: Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242.pdf)
-- Dataset - [PASCAL VOC](http://host.robots.ox.ac.uk/pascal/VOC/)
+- Dataset - [E-FPDS or FPDS_v2 Dataset](https://gram.web.uah.es/data/datasets/fpds/index.html#:~:text=E%2DFPDS%20dataset%20is%20divided,except%20the%20provided%20test%20images.%E2%80%8B)
 - In this application Tiny Yolov2 is used for detecting person.
 
 > Note: No transfer learning on custom data was performed for this application.
@@ -78,7 +78,7 @@ make
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 03_Elderly_fall_detection/Elderly_fall_detection_cam/exe/
-./Elderly_fall_detection_cam_app
+./elderly_fall_detection_cam_app
 ```
 
 ### Example:
@@ -86,7 +86,7 @@ cd 03_Elderly_fall_detection/Elderly_fall_detection_cam/exe/
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 03_Elderly_fall_detection/Elderly_fall_detection_cam/exe/
-./Elderly_fall_detection_cam_app
+./elderly_fall_detection_cam_app
 ```
 
 ## Limitations

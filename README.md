@@ -4,19 +4,18 @@
 
 This Library has API functions for leveraging AI applications that will run on Renesas RZ/V2L Board. Currently this library has following sample applications: 
 
-1. Human Head Counter
-2. Line Crossing Object Counter
-3. Elderly People Fall Detection
-4. Safety Helmet and Vest Detection
-5. Human Age and Gender Detection
-6. Face Recognition and Spoof Detection
-7. Animal Detection
-8. Hand Gesture Recognition
-9. Human Gaze Recognition
-10. Driver Monitoring System
-11. Head Count Top View
-12. Hand Gesture Recognition V2
-13. Car Ahead Departure Detection
+1.Human Head Counter \
+2.Line Crossing Object Counter \
+3.Elderly People Fall Detection \
+4.Safety Helmet and Vest Detection \
+5.Human Age and Gender Detection \
+6.Face Recognition and Spoof Detection \
+7.Animal Detection \
+9.Human Gaze Recognition \
+10.Driver Monitoring System \
+11.Head Count Top View \
+12.Hand Gesture Recognition V2 \
+13.Car Ahead Departure Detection
 
 ## Prerequisites
 ### 1. Board bring up sequence
@@ -238,17 +237,17 @@ cd $WORK/build
 
 In the Installer, specify the SDK installation directory and press the enter key.
 
-Example below installs the SDK to default directory, “/opt/poky/3.1.14”.
+Example below installs the SDK to default directory, “/opt/poky/3.1.31”.
 
 Note:
-“/opt/poky/3.1.14” will be replaced with your SDK installed path.
+“/opt/poky/3.1.31” will be replaced with your SDK installed path.
 
 Confirm that following directories and files are generated under the specified directory.
 
 ```
 |-opt
      |-poky
-          |-3.1.14
+          |-3.1.31
                |- sysroots
                |- environment-setup-aarch64-poky-linux
                |- environment-setup-armv7vet2hf-neon-vfpv4-pokymllib32-linux-gnueabi
@@ -261,7 +260,7 @@ Confirm that following directories and files are generated under the specified d
 To use the SDK run the bellow command
 
 ```
-source /opt/poky/3.1.14/environment-setup-aarch64-poky-linux
+source /opt/poky/3.1.31/environment-setup-aarch64-poky-linux
 ```
 
 Once the source is done, it can be used as SDK for the RZV2L board.
@@ -269,7 +268,7 @@ Once the source is done, it can be used as SDK for the RZV2L board.
 #### Sample command to use SDK and build the executable application
 
 ~~~
-source /opt/poky/3.1.14/environment-setup-aarch64-poky-linux
+source /opt/poky/3.1.31/environment-setup-aarch64-poky-linux
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary
 cd RZV2L_AiLibrary/<application_name>
 make

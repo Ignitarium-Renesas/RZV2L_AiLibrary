@@ -97,8 +97,13 @@ make
 
 ### Running the sample application
 Praparation on laptop:
-1. Download the weights file `animal_yolov3_weight.dat` or `animal_yolov3_weight_img.dat` from the release [release v1.2.3](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v1.2.3) depending on which application is being used.Precise file links: [animal_yolov3_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v1.2.3/animal_yolov3_weight.dat) and [animal_yolov3_weight_img.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v1.2.3/animal_yolov3_weight_img.dat)
-2. Place the weight files at location proper location `07_Animal_detection/Animal_detection_img/exe/yolov3_bmp/` or `07_Animal_detection/Animal_detection_cam/exe/yolov3_cam/`
+1. Download the weights file `animal_yolov3_weight.dat` or `animal_yolov3_weight_img.dat` from the release [release v5.00](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v5.00) depending on which application is being used.Precise file links: [animal_yolov3_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/animal_yolov3_weight.dat) and [animal_yolov3_weight_img.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/animal_yolov3_weight_img.dat)
+2. Place the weight files at location proper location.<br>
+- For camera input <br>
+Put [animal_yolov3_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/animal_yolov3_weight.dat) in `07_Animal_detection/Animal_detection_<cam/usbcam>/exe/animal_yolov3`.
+
+- For image input <br>
+Change  [animal_yolov3_weight_img.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/animal_yolov3_weight_img.dat) into animal_yolov3_weight.dat and put it in `07_Animal_detection/Animal_detection_img/exe/animal_yolov3`.
 3. Now, copy the `RZV2L_AiLibrary` directory to the RZV2L board (/home/root/).
 4. Please follow these steps:
 For image input continue with steps 5 to 7.
@@ -110,7 +115,7 @@ For image input continue with steps 5 to 7.
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 07_Animal_detection/Animal_detection_img/exe/
-root@smarc-rzv2l:~/RZV2L_AiLibrary/07_Animal_detection/Animal_detection_img/exe# ./07_animal_detect_img_app ../test_images/raccoon.bmp 
+root@smarc-rzv2l:~/RZV2L_AiLibrary/07_Animal_detection/Animal_detection_img/exe# ./animal_detection_img_app ../test_images/dog.bmp 
 ----------------------------------------
 Running Animal detection demo
 ----------------------------------------
@@ -130,9 +135,9 @@ Dog
 Cat
 ----------------------------------------
 
-Raccoon
+Dog
 
-Enter alarm threshold in closed range[0,1]: 0.5
+Enter alarm threshold in closed range[0,1]: 0.4
 RZ/V2L DRP-AI Sample Application
 Model : Darknet YOLO      | animal_yolov3
 Loading : animal_yolov3/drp_desc.bin
@@ -143,21 +148,11 @@ Loading : animal_yolov3/animal_yolov3_weight.dat
 Inference -----------------------------------------------
 [START] DRP-AI
 [END] DRP-AI
-DRP-AI Time: 290.367432 msec
-Result 4 -----------------------------------------*
-Class           : Raccoon
-(X, Y, W, H)    : (50, 107, 33, 38)
-Probability     : 82.0 %
-
-Result 20 -----------------------------------------*
-Class           : Raccoon
-(X, Y, W, H)    : (394, 474, 482, 2060)
-Probability     : 72.4 %
-
-Result 21 -----------------------------------------*
-Class           : Raccoon
-(X, Y, W, H)    : (492, 456, 354, 756)
-Probability     : 56.9 %
+DRP-AI Time: 262.254700 msec
+Result 1 -----------------------------------------*
+Class           : Dog
+(X, Y, W, H)    : (227, 379, 173, 338)
+Probability     : 99.1 %
 
 ```
 
@@ -165,14 +160,14 @@ Probability     : 56.9 %
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 07_Animal_detection/Animal_detection_cam/exe/
-./07_animal_detection_cam_app
+./animal_detection_cam_app
 ```
 
 #### Application with usb camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 07_Animal_detection/Animal_detection_usbcam/exe/
-./07_animal_detection_usbcam_app
+./animal_detection_usbcam_app
 ```
 
 
@@ -183,4 +178,5 @@ cd 07_Animal_detection/Animal_detection_usbcam/exe/
 4. [ERROR] Failed to initialize Coral Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
 5. permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.
 6. [ERROR] Failed to open: <prefix>/<prefix>_weight.dat error=2. [ERROR] Failed to load data from memory: <prefix>/<prefix>_weight.dat Failed to load DRP-AI object files - This error suggests that the weight file is not availbale in the `exe` folder. Download the weight file from the release in github and place it properly in the `exe/subfolder`.
+
 

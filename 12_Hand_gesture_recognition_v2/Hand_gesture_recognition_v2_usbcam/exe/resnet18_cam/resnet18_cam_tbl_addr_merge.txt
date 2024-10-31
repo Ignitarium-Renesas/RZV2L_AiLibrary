@@ -130,8 +130,8 @@ onnx::Add_249_o7_k0_i0_param      1090663208
 onnx::Add_249_o7_k0_i1_param      1090810856
 output_o0_k0_i0_param             1090958312
 conv_yuv2rgb.mem                  1090967552     179492
-resize_hwc.mem                    1091147056     201900
-imagescaler.mem                   1091348960     173836
-maxpooling_k3_st2.mem             1091522800     131864
-gap.mem                           1091654672     141508
-softmax.mem                       1091796192     151892
+resize_hwc.mem                    1091147056     183000
+imagescaler.mem                   1091330064     157036
+maxpooling_k3_st2.mem             1091487104     131864
+gap.mem                           1091618976     141508
+softmax.mem                       1091760496     157068

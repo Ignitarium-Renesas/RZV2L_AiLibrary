@@ -22,10 +22,10 @@ Start:56[Byte],Size:4[Byte],Param:raddr,Value:0x800e1000
 Start:60[Byte],Size:4[Byte],Param:waddr,Value:0x8015fc00
 Start:104[Byte],Size:4[Byte],Param:ADD_ADDR,Value:0x86902780
 Start:108[Byte],Size:4[Byte],Param:MUL_ADDR,Value:0x86902788
-resize_onnx[/module_list.85/upsample_85/Resize_output_0]
+resize_onnx[651]
 Start:120[Byte],Size:4[Byte],Param:raddr,Value:0x85bfb000
 Start:124[Byte],Size:4[Byte],Param:waddr,Value:0x85c10200
-resize_onnx[/module_list.97/upsample_97/Resize_output_0]
+resize_onnx[680]
 Start:176[Byte],Size:4[Byte],Param:raddr,Value:0x86006200
 Start:180[Byte],Size:4[Byte],Param:waddr,Value:0x86030600
 transpose[post_0_0_transpose]

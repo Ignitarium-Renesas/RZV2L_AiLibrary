@@ -70,7 +70,7 @@ Please follow the below steps:
 ```
 cd $work_dir
 git clone https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary 
-cd RZV2L_AiLibrary/05_Age_Gender_Detection/Age_Gender_Classification_<img/cam/usbcam>
+cd RZV2L_AiLibrary/05_Age_gender_detection/Age_gender_classification_<img/cam/usbcam>
 make
 ```
 
@@ -82,8 +82,8 @@ make
 #### Running the camera application
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 05_Age_Gender_Detection/Age_Gender_Classification_<cam/usbcam>/exe
-./Age_gender_classification_<cam/usbcam>_app
+cd 05_Age_gender_detection/Age_gender_classification_<cam/usbcam>/exe
+./age_gender_classification_<cam/usbcam>_app
 ```
 
 #### Running the image application
@@ -92,8 +92,8 @@ The user should pass the path to the image as an argument, optionally it's width
 
 ```
 cd /home/root/RZV2L_AiLibrary 
-cd 05_Age_Gender_Detection/Age_Gender_Classification_img/exe
-./Age_gender_classification_img_app ../test_files/21-40_02.bmp
+cd 05_Age_gender_detection/Age_gender_classification_img/exe
+./age_gender_classification_img_app ../test_files/21-40_02.bmp
 ```
 
 ## Limitation

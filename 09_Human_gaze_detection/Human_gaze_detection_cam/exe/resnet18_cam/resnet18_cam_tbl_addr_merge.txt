@@ -132,8 +132,8 @@ post_0_2_imagescaler_cof_mul      1080239684
 output_o0_k0_i0_param             1091419080
 conv_yuv2rgb.mem                  1091420128     179492
 crop.mem                          1091599632     120524
-resize_hwc.mem                    1091720160     201900
-imagescaler.mem                   1091922064     173836
-maxpooling_k3_st2.mem             1092095904     131864
-gap.mem                           1092227776     141508
-cast_fp16_fp32.mem                1092369296     101648
+resize_hwc.mem                    1091720160     183000
+imagescaler.mem                   1091903168     157036
+maxpooling_k3_st2.mem             1092060208     131864
+gap.mem                           1092192080     141508
+cast_fp16_fp32.mem                1092333600     101648

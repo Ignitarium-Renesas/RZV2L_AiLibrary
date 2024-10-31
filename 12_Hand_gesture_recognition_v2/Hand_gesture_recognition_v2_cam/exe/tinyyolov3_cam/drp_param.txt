@@ -81,7 +81,7 @@ OFFSET_ADD:112, layer name: post_0_1_imagescaler
   Param: DOUT_RGB_ORDER      Value: 0x0
   Param: RFU6                Value: 0x0
   Param: RFU7                Value: 0x0
-OFFSET_ADD:176, layer name: /module_list.1/maxpool_1/MaxPool_output_0
+OFFSET_ADD:176, layer name: 78
   Param: raddr               Value: 0x87e0d400
   Param: waddr               Value: 0x88355400
   Param: IMG_IWIDHT          Value: 0x1a0
@@ -108,7 +108,7 @@ OFFSET_ADD:176, layer name: /module_list.1/maxpool_1/MaxPool_output_0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:232, layer name: /module_list.3/maxpool_3/MaxPool_output_0
+OFFSET_ADD:232, layer name: 82
   Param: raddr               Value: 0x884a7400
   Param: waddr               Value: 0x8874b400
   Param: IMG_IWIDHT          Value: 0xd0
@@ -135,7 +135,7 @@ OFFSET_ADD:232, layer name: /module_list.3/maxpool_3/MaxPool_output_0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:288, layer name: /module_list.5/maxpool_5/MaxPool_output_0
+OFFSET_ADD:288, layer name: 86
   Param: raddr               Value: 0x887f4400
   Param: waddr               Value: 0x88946400
   Param: IMG_IWIDHT          Value: 0x68
@@ -162,7 +162,7 @@ OFFSET_ADD:288, layer name: /module_list.5/maxpool_5/MaxPool_output_0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:344, layer name: /module_list.7/maxpool_7/MaxPool_output_0
+OFFSET_ADD:344, layer name: 90
   Param: raddr               Value: 0x8899ac00
   Param: waddr               Value: 0x88a43c00
   Param: IMG_IWIDHT          Value: 0x34
@@ -189,7 +189,7 @@ OFFSET_ADD:344, layer name: /module_list.7/maxpool_7/MaxPool_output_0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:400, layer name: /module_list.9/maxpool_9/MaxPool_output_0
+OFFSET_ADD:400, layer name: 94
   Param: raddr               Value: 0x88b76200
   Param: waddr               Value: 0x88a6e000
   Param: IMG_IWIDHT          Value: 0x1a
@@ -216,7 +216,7 @@ OFFSET_ADD:400, layer name: /module_list.9/maxpool_9/MaxPool_output_0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:456, layer name: /module_list.11/maxpool_11/MaxPool_output_0
+OFFSET_ADD:456, layer name: 121
   Param: raddr               Value: 0x88a83200
   Param: waddr               Value: 0x88aad600
   Param: IMG_IWIDHT          Value: 0xd
@@ -243,7 +243,7 @@ OFFSET_ADD:456, layer name: /module_list.11/maxpool_11/MaxPool_output_0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:512, layer name: /module_list.19/upsample_19/Resize_output_0
+OFFSET_ADD:512, layer name: 140
   Param: raddr               Value: 0x88b6b800
   Param: waddr               Value: 0x88b76100
   Param: IMG_IWIDHT          Value: 0xd
