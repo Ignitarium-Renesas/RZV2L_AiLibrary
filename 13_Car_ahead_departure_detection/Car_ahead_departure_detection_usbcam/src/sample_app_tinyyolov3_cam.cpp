@@ -27,6 +27,7 @@
 ******************************************/
 /*DRPAI Driver Header*/
 #include <linux/drpai.h>
+#include <iostream>
 /*Definition of Macros & other variables*/
 #include "define.h"
 /*USB camera control*/
@@ -38,10 +39,7 @@
 /*box drawing*/
 #include "box.h"
 #include <algorithm>
-
-/*tracker */
-#include "tracker.h"
-#include "utils.h"
+#include "sort.h"
 #include <set>
 
 using namespace std;
@@ -67,13 +65,13 @@ static Image img;
 
 
 /*Tracker Variables*/
-TRACKER tracker;
-std::vector<cv::Rect> boxes;
 static std::map<int,vector<float>> Area_MAP;
 static std::map<int,float> Avg_Area_MAP;
-
-static std::set<int>DONE_IDS;   /*ids that have moved */
 static std::set<int>MOVE_IDS; 
+static std::set<int>DONE_IDS;
+static cv::Mat trackerbbox = cv::Mat(0, 6, CV_32F);
+sort::Sort::Ptr mot = std::make_shared<sort::Sort>(1, 3, 0.3f);
+
 
 /*Audio selection*/
 int sel_aud;
@@ -612,7 +610,7 @@ void R_Post_Proc(float* floatarr)
                     /* Store the result into the list if the probability is more than the threshold */
                     probability = max_pred * objectness;
                     /*printf("probability : %f", probability);*/
-                   if((probability > TH_PROB) && ((pred_class == 2)||(pred_class == 5)||(pred_class == 6)))
+                   if((probability > TH_PROB) && (pred_class == 2))
                     {
                         d = {bb, pred_class, probability};
                         det.push_back(d);
@@ -640,22 +638,23 @@ void draw_bounding_box()
     std::string result_str;
     float close_point =-1;
     int selected = -1;
-    boxes.clear();
-    /* Draw bounding box on RGB image. */
     int32_t i = 0;
+    int tracker_id;
+    trackerbbox = cv::Mat(0, 6, CV_32F);
     std::vector<string> label_file_map = load_label_file(label_list);
     if (label_file_map.empty())
     {
         fprintf(stderr,"[ERROR] Failed to load label file: %s\n", label_list.c_str());
         return;
     }
-
     for (i = 0; i < det.size(); i++)
     {
         /* Skip the overlapped bounding boxes */
-        if (det[i].prob == 0) continue;
-        
-       if ((det[i].bbox.x >= 220) && ( det[i].bbox.x <= 400)){
+        if (det[i].prob == 0)
+        {
+            continue;
+        } 
+        if ((det[i].bbox.x >= 220) && ( det[i].bbox.x <= 400)){
             if ((det[i].bbox.y+det[i].bbox.h/2) > close_point){
                 close_point = (det[i].bbox.y+det[i].bbox.h/2);
                 selected = i;
@@ -663,68 +662,64 @@ void draw_bounding_box()
         }
         
     }
-    if (selected != -1){
-        /* Clear string stream for bounding box labels */
-        result_str = label_file_map[det[selected].c];
-        boxes.push_back({(int)det[selected].bbox.x, (int)det[selected].bbox.y, (int)det[selected].bbox.w, (int)det[selected].bbox.h});
+    if (selected != -1)
+    {
+    result_str = label_file_map[det[selected].c];
+    cv::Mat bbox = (cv::Mat_<float>(1, 6) << det[selected].bbox.x, det[selected].bbox.y, det[selected].bbox.w, det[selected].bbox.h, det[selected].prob, det[selected].c);
+    cv::vconcat(trackerbbox, bbox, trackerbbox);
     }
-    
-    tracker.Run(boxes);
-    const auto tracks = tracker.GetTracks();
-    for (auto &trk : tracks) {
-        const auto &box_trk = trk.second.GetStateAsBbox();
-        std::string ID = std::to_string(trk.first);
-        float x = box_trk.tl().x;
-        float y = box_trk.tl().y;
-        int I_ID = std::atoi(ID.c_str());
-        if (trk.second.coast_cycles_ < kMaxCoastCycles&& trk.second.hit_streak_ >= kMinHits)
+
+    cv::Mat tracks = mot->update(trackerbbox);
+
+    for (int i = 0; i < tracks.rows; ++i)
+    {
+        bbox_t dat;
+        tracker_id = int(tracks.at<float>(i, 8));
+        dat.X = tracks.at<float>(i, 0);
+        dat.Y = tracks.at<float>(i, 1);
+        dat.W = tracks.at<float>(i, 2);
+        dat.H = tracks.at<float>(i, 3);
+        float area = dat.W * dat.H;
+        std::vector<float> Areas;
+        /*Takes the area of bounding box for three frames*/
+        while(Area_MAP[tracker_id].size() < 3)
         {
-                
-            float area = box_trk.width * box_trk.width;
-            std::vector<float> Areas;
-            /*Takes the area of bounding box for three frames*/
-            while(Area_MAP[I_ID].size() <= 3){
-                Area_MAP[I_ID].push_back(area);
-            }
-            /*Calculates the average area of bounding box for three frames*/
-            if(Avg_Area_MAP.find(I_ID)==Avg_Area_MAP.end()){
-                float avg_area = std::accumulate( Area_MAP[I_ID].begin(), Area_MAP[I_ID].end(), 0.0)/Area_MAP[I_ID].size();   
-                Avg_Area_MAP.insert({I_ID, avg_area});
-            }
-            while(Areas.size() <= 3){
-                Areas.push_back(area);
-            }
-            /*Current average area*/
-            float avg_areas = std::accumulate(Areas.begin(), Areas.end(), 0.0)/Areas.size(); 
-            
-            if (avg_areas <= (0.8*Avg_Area_MAP[I_ID])){
-                MOVE_IDS.insert(I_ID);
-                if (DONE_IDS.find(I_ID) == DONE_IDS.end()){
-                    int count = 0;
-                    DONE_IDS.insert(I_ID);
-                    while (count < 2)
-                    {
-                        if (sel_aud == 0){
-                            if(system("/usr/bin/aplay -D default:CARD=rzssidaiwm8978h alert.wav &>/dev/null &") == -1)
-                            std::cout << "Unable to play alert.wav" << std::endl;
-                        count++;
-                        }
-                        if (sel_aud == 1){
-                            if(system("/usr/bin/aplay -D default:CARD=soundcard alert.wav &>/dev/null &") == -1)
-                                std::cout << "Unable to play alert.wav" << std::endl;
-                             count++;   
-                        }
-                        
+            Area_MAP[tracker_id].push_back(area);
+        }
+        /*Calculates the average area of bounding box for three frames*/
+        if(Avg_Area_MAP.find(tracker_id)==Avg_Area_MAP.end())
+        {
+            float avg_area = std::accumulate( Area_MAP[tracker_id].begin(), Area_MAP[tracker_id].end(), 0.0)/Area_MAP[tracker_id].size();   
+            Avg_Area_MAP.insert({tracker_id, avg_area});
+        }
+        while(Areas.size() <3)
+        {
+            Areas.push_back(area);
+        }
+        /*Current average area*/
+        float avg_areas = std::accumulate(Areas.begin(), Areas.end(), 0.0)/Areas.size();           
+        if (avg_areas <= (0.8*Avg_Area_MAP[tracker_id])){
+            MOVE_IDS.insert(tracker_id);
+            if (DONE_IDS.find(tracker_id) == DONE_IDS.end()){
+                int count = 0;
+                DONE_IDS.insert(tracker_id);
+                while (count < 2)
+                {
+                    if (sel_aud == 0){
+                        if(system("/usr/bin/aplay -D default:CARD=rzssidaiwm8978h alert.wav &>/dev/null &") == -1)
+                        std::cout << "Unable to play alert.wav" << std::endl;
+                    count++;
                     }
+                    if (sel_aud == 1){
+                        if(system("/usr/bin/aplay -D default:CARD=soundcard alert.wav &>/dev/null &") == -1)
+                            std::cout << "Unable to play alert.wav" << std::endl;
+                            count++;   
+                    }
+                    
                 }
             }
-            Areas.erase(Areas.begin());
-            Areas.push_back(area);
-            img.draw_rect(box_trk.tl().x, box_trk.tl().y,box_trk.width, box_trk.height, result_str.c_str());
-            
-        } 
-        
-      
+        }
+        img.draw_rect(dat.X, dat.Y,dat.W, dat.H, result_str.c_str()); 
     }
     return;
   
@@ -1203,10 +1198,10 @@ int32_t main(int32_t argc, char * argv[])
     Camera* capture = NULL;
 
     /* Checking the of arguments passed*/
-    if(argc>=1)
+    if(argc>1)
     {
        sel_aud  = std::atoi(argv[1]);
-      }
+    }
     else{
         std::cout<<"Give all command line args\n";
         return EXIT_SUCCESS;

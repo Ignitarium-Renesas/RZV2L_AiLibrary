@@ -1,5 +1,5 @@
 OPENCV_LINK = -isystem ${SDKTARGETSYSROOT}/usr/include/opencv4 \
-			  -lopencv_imgcodecs -lopencv_imgproc -lopencv_core -lopencv_highgui -lopencv_videoio 
+			  -lopencv_imgcodecs -lopencv_imgproc -lopencv_core -lopencv_highgui -lopencv_videoio -lopencv_video
 
 BSP_SDK_FLAG = \
 			  -ljpeg -lwebp -ltiff -lz -ltbb -lgtk-3 -lpng16 -lgdk-3 -lcairo  \
@@ -14,7 +14,7 @@ ALSA_LINK = -isystem ${SDKTARGETSYSROOT}/usr/include/alsa \
 	-lasound
 
 all: src/sample_app_tinyyolov3_cam.cpp
-	${CXX} -std=c++14 src/sample_app_tinyyolov3_cam.cpp src/camera.cpp src/image.cpp src/wayland.cpp src/ascii.cpp src/box.cpp src/kalman_filter.cpp src/matrix.cpp src/munkres.cpp src/track.cpp src/tracker.cpp \
+	${CXX} -std=c++17 src/sample_app_tinyyolov3_cam.cpp src/camera.cpp src/image.cpp src/wayland.cpp src/ascii.cpp src/box.cpp src/kalman_box_tracker.cpp src/kuhn_munkres.cpp src/sort.cpp \
 	${OPENCV_LINK} ${ALSA_LINK} ${BSP_SDK_FLAG} \
 	-lpthread -O2 -ldl ${LDFLAGS} -o exe/car_ahead_departure_detection_usbcam_app
 
