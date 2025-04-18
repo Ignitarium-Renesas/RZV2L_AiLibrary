@@ -29,7 +29,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-
+#include <string>
 /*****************************************
 * Box : Bounding box coordinates and its size
 ******************************************/
@@ -47,6 +47,15 @@ typedef struct detection
     int32_t c;
     float prob;
 } detection;
+struct bbox_t
+{
+    std::string name;
+    int32_t X;
+    int32_t Y;
+    int32_t W;
+    int32_t H;
+    float pred;
+};
 
 /*****************************************
 * Functions

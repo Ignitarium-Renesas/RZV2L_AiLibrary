@@ -27,6 +27,7 @@
 ******************************************/
 /*DRPAI Driver Header*/
 #include <linux/drpai.h>
+#include <iostream>
 /*Definition of Macros & other variables*/
 #include "define.h"
 /*MIPI camera control*/
@@ -37,10 +38,8 @@
 #include "wayland.h"
 /*box drawing*/
 #include "box.h"
-
-/*tracker */
-#include "tracker.h"
-#include "utils.h"
+#include <algorithm>
+#include "sort.h"
 #include <set>
 
 using namespace std;
@@ -64,14 +63,14 @@ static uint64_t udmabuf_address = 0;
 static Image img;
 
 /*Tracker Variables*/
-TRACKER tracker;
-std::vector<cv::Rect> boxes;
 static std::string class_name = "person";
-static int COUNT = 0;                   /* line cross count*/
-static std::map<int,int> ID_MAP;/*id map to check the first point of an specific id*/
-static std::set<int>DONE_IDS;   /*ids that have crossed line*/
-static int DIRECTION = 1; /* 1 for down 0 for up*/
-static int line_x1,line_y1,line_x2,line_y2;
+static int COUNT = 0;   /* line cross count*/
+static int DIRECTION=1;
+int line_x1,line_y1,line_x2,line_y2 =0;
+static std::vector<bbox_t> bbox;
+static cv::Mat trackerbbox = cv::Mat(0, 6, CV_32F);
+sort::Sort::Ptr mot = std::make_shared<sort::Sort>(1, 3, 0.3f);
+std::map<int, int> location_history;
 
 /*AI Inference for DRPAI*/
 static st_addr_t drpai_address;
@@ -79,16 +78,6 @@ static int8_t drpai_fd = -1;
 static float ai_time = 0;
 static Wayland wayland;
 static std::vector<detection> det;
-
-/*Line equations*/
-static float main_line_slope;
-static float main_line_intercept;
-
-static float top_line_slope;
-static float top_line_intercept;
-
-static float bottom_line_slope;
-static float bottom_line_intercept;
 
 
 
@@ -631,7 +620,23 @@ void R_Post_Proc(float* floatarr)
 
     return;
 }
-
+/*****************************************
+* Function Name : check_above_or_below
+* Description   : check the given point is above or below the line,
+*                 added a small value of 1e-8 to avoid division by zero
+* Arguments     : x = x coordinate of the point
+*                 y = y coordinate of the point
+* Return value  : int location of the point w.r.t the line
+******************************************/
+int check_above_or_below(int x, int y)
+{
+    double m = (line_y2 - line_y1) / ((line_x2 - line_x1) + 0.00000006);
+    double yline = m * (x - line_x1) + line_y1;
+    if (y > yline)
+        return 1;
+    else
+        return 0;
+}
 /*****************************************
 * Function Name : draw_bounding_box
 * Description   : Draw bounding box on image.
@@ -643,8 +648,7 @@ void draw_bounding_box(void)
 {
     std::stringstream stream;
     std::string result_str;
-    boxes.clear();
-    /* Draw bounding box on RGB image. */
+    int tracker_id;
     int32_t i = 0;
     std::vector<string> label_file_map = load_label_file(label_list);
     if (label_file_map.empty())
@@ -653,89 +657,63 @@ void draw_bounding_box(void)
         return;
     }
     img.draw_line(line_x1,line_y1,line_x2,line_y2,WHITE_DATA);
-
-    /* top line */ 
-    int top_y1 = top_line_slope * 0 + top_line_intercept;
-    int top_x2 = (int)(-top_line_intercept/top_line_slope);
-
-    /* bottom line */  
-    int bottom_y1 = bottom_line_slope * 0 + bottom_line_intercept; 
-    int bottom_x2 = (int)(-bottom_line_intercept/bottom_line_slope);
-    
+    trackerbbox = cv::Mat(0, 6, CV_32F);
     for (i = 0; i < det.size(); i++)
     {
         /* Skip the overlapped bounding boxes */
-        if (det[i].prob == 0) continue;
-        
+        if (det[i].prob == 0)
+        {
+            continue;
+        }                
         result_str = label_file_map[det[i].c];
         /* checks for required class name*/
         if (strcmp(result_str.c_str(),class_name.c_str())!=0)  
+        {
             continue;
+        }
+        cv::Mat bbox = (cv::Mat_<float>(1, 6) << det[i].bbox.x, det[i].bbox.y, det[i].bbox.w, det[i].bbox.h, det[i].prob, det[i].c);
+        cv::vconcat(trackerbbox, bbox, trackerbbox);
         /* Clear string stream for bounding box labels */
         stream.str("");
         /* Draw the bounding box on the image */
         stream << std::fixed << std::setprecision(2) << det[i].prob;
         result_str = label_file_map[det[i].c]+ " "+ stream.str();
         img.draw_rect((int)det[i].bbox.x, (int)det[i].bbox.y, (int)det[i].bbox.w, (int)det[i].bbox.h, result_str.c_str());
-        boxes.push_back({(int)det[i].bbox.x, (int)det[i].bbox.y, (int)det[i].bbox.w, (int)det[i].bbox.h});
     }
-    tracker.Run(boxes);
-    const auto tracks = tracker.GetTracks();
-    for (auto &trk : tracks) {
-        const auto &box_trk = trk.second.GetStateAsBbox();
-        std::string ID = std::to_string(trk.first);
-        float x = box_trk.tl().x;
-        float y = box_trk.tl().y;
-        if (trk.second.coast_cycles_ < kMaxCoastCycles&& trk.second.hit_streak_ >= kMinHits)
+    cv::Mat tracks = mot->update(trackerbbox);
+    for (i = 0; i < tracks.rows; ++i)
+    {
+        bbox_t dat;
+        tracker_id = int(tracks.at<float>(i, 8));
+        dat.X = tracks.at<float>(i, 0);
+        dat.Y = tracks.at<float>(i, 1);
+        dat.W = tracks.at<float>(i, 2);
+        dat.H = tracks.at<float>(i, 3);
+
+        int s = check_above_or_below((int)(dat.X ), (int)(dat.Y + dat.H/ 2));
+
+        if (location_history.find(tracker_id) == location_history.end())
         {
-            img.draw_rect(box_trk.tl().x, box_trk.tl().y, 0, 0, ID.c_str());
+            location_history[tracker_id] = s; // First time seeing this tracker
         } 
-        int I_ID = std::atoi(ID.c_str());
-        if(DIRECTION==1)
+        else 
         {
-            if(ID_MAP.find(I_ID)!=ID_MAP.end()){
-                /* check if it was previously present in the alternate roi area. */
-                if (DONE_IDS.find(I_ID)==DONE_IDS.end())
-                /* checks if the id was not present in the id set. */
-                {
-                    /* condition check for
-                    1. It is in ROI
-                    2. bottom to the top line
-                    3. top to the bottom line
-                    4. Was present in the other ROI*/
-                    if((((x - line_x1) * (line_y2 - line_y1)) - ((y - line_y1) * (line_x2 - line_x1)) <= 0) && (ID_MAP[I_ID] == 0))
-                    {
-                        COUNT++;
-                        DONE_IDS.insert(I_ID);
-                    }
-                }
+            int prev_s = location_history[tracker_id];
+            
+            if (DIRECTION == 0 && prev_s == 1 && s == 0) 
+            {
+                // Moving from below to above (left to right)
+                COUNT++;
+                
+            } 
+            else if (DIRECTION == 1 && prev_s == 0 && s == 1) 
+            {
+                // Moving from above to below (right to left)
+                COUNT++;
             }
-            else{
-                if((((x - line_x1) * (line_y2 - line_y1)) - ((y - line_y1) * (line_x2 - line_x1)) >= 0)) ID_MAP.insert({I_ID,0}); /*set id was present in the other ROI*/
-                else if (x < 10 || y < 10) {} /* passes the outliers from the tracker  */
-                else ID_MAP.insert({I_ID,1}); /* set id was not present in the other ROI */
-            }
+            location_history[tracker_id] = s; // Update the tracker’s position
         }
-        else{
-            if(ID_MAP.find(I_ID)!=ID_MAP.end()){
-                /* check if it was previously present in the alternate roi area. */
-                if (DONE_IDS.find(I_ID)==DONE_IDS.end())
-                /* checks if the id was not present in the id set. */
-                {
-                    if((((x - line_x1) * (line_y2 - line_y1)) - ((y - line_y1) * (line_x2 - line_x1)) >= 0) && (ID_MAP[I_ID] == 1))
-                    {
-                        COUNT++;
-                        DONE_IDS.insert(I_ID);
-                    }
-                }
-            }
-            else{
-                if((((x - line_x1) * (line_y2 - line_y1)) - ((y - line_y1) * (line_x2 - line_x1)) <= 0)) ID_MAP.insert({I_ID,1}); /*set id was present in the other ROI*/
-                else if (x < 10 || y < 10) {}
-                else ID_MAP.insert({I_ID,0});
-            }
-        }
-    }
+    }    
     return;
 }
 
@@ -1194,43 +1172,6 @@ main_proc_end:
     return main_ret;
 }
 
-/*****************************************
-* Function Name : set_all_line_params
-* Description   : sets all parameters for 3 lines
-* Arguments     : x1,y1,x2,y2 args for the main line crossing
-******************************************/
-void set_all_line_params(int x1, int y1,int x2, int y2)
-{
-    line_x1 = x1;
-    line_y1 = y1;
-    line_x2 = x2;
-    line_y2 = y2;
-    main_line_slope = (y2-y1)/(x2-x1);
-    main_line_intercept = y1-main_line_slope*x1;
-
-    top_line_slope = -1/main_line_slope;
-    bottom_line_slope = -1/main_line_slope;
-
-    int top_x,top_y,bottom_x ,bottom_y;
-
-    if(y1<y2)
-    {
-        top_x = x1;
-        top_y = y1;
-        bottom_x = x2;
-        bottom_y = y2;
-    }
-    else{
-        top_x = x2;
-        top_y = y2;
-        bottom_x = x1;
-        bottom_y = y1;
-    }
-    top_line_intercept = top_y - top_line_slope*top_x;
-    bottom_line_intercept = bottom_y - bottom_line_slope*bottom_x;
-
-}
-
 /****************************************
 command line arguments
 filename,class_name,x1,y1,x2,y2,direction
@@ -1248,12 +1189,16 @@ int32_t main(int32_t argc, char * argv[])
     int32_t sem_create = -1;
     Camera* capture = NULL;
 
-    if(argc>=5)
+    if(argc>5)
     {
         class_name = argv[1];
 
-        set_all_line_params(std::atoi(argv[2]),std::atoi(argv[3]),std::atoi(argv[4]),std::atoi(argv[5]));
-        if(argc>=6)
+        line_x1=std::atoi(argv[2]);
+        line_y1=std::atoi(argv[3]);
+        line_x2=std::atoi(argv[4]);
+        line_y2=std::atoi(argv[5]);
+
+        if(argc>6)
         {
             DIRECTION = std::atoi(argv[6]);
         }
