@@ -25,10 +25,10 @@ Start:168[Byte],Size:4[Byte],Param:raddr,Value:0x80258000
 Start:172[Byte],Size:4[Byte],Param:waddr,Value:0x8027cc00
 Start:216[Byte],Size:4[Byte],Param:ADD_ADDR,Value:0x80c64c80
 Start:220[Byte],Size:4[Byte],Param:MUL_ADDR,Value:0x80c64c88
-maxpooling_k3_st2[/maxpool/MaxPool_output_0]
+maxpooling_k3_st2[126]
 Start:232[Byte],Size:4[Byte],Param:raddr,Value:0x802c6400
 Start:236[Byte],Size:4[Byte],Param:waddr,Value:0x8044e400
-gap[/global_pool/pool/GlobalAveragePool_output_0]
+gap[189]
 Start:288[Byte],Size:4[Byte],Param:raddr,Value:0x80948400
 Start:292[Byte],Size:4[Byte],Param:waddr,Value:0x80954800
 cast_fp16_fp32[post_0_0_cast_fp16_fp32]
