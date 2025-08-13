@@ -11,8 +11,8 @@ BSP_SDK_FLAG = \
 			  -lmount -lresolv -lexpat -lpangoft2-1.0 -lblkid \
 
 
-all: src/sample_app_resnet-18_tinyyolov2_cam.cpp
-	${CXX} -std=c++14 src/sample_app_resnet-18_tinyyolov2_cam.cpp src/camera.cpp src/image.cpp src/wayland.cpp src/box.cpp \
+all: src/sample_app_resnet-18_tinyyolov3_cam.cpp
+	${CXX} -std=c++14 src/sample_app_resnet-18_tinyyolov3_cam.cpp src/camera.cpp src/image.cpp src/wayland.cpp src/box.cpp \
 	${OPENCV_LINK} ${BSP_SDK_FLAG} \
 	-lpthread -O2 -ldl ${LDFLAGS} -o exe/human_gaze_detection_cam_app
 
