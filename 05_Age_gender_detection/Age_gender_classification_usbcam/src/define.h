@@ -50,25 +50,27 @@
 #include <float.h>
 
 /*****************************************
-* Static Variables for TinyYOLOv2
+* Static Variables for TinyYOLOv3
 * Following variables need to be changed in order to custormize the AI model
 *  - input_img = input image to DRP-AI (size and format are determined in DRP-AI Translator)
 *  - drpai_prefix = directory name of DRP-AI Object files (DRP-AI Translator output)
 ******************************************/
+/* Anchor box information */
 const static double anchors[] =
 {
-    1.08,   1.19,
-    3.42,   4.41,
-    6.63,   11.38,
-    9.42,   5.11,
-    16.62,  10.52
+    10, 14,
+    23, 27,
+    37, 58,
+    81, 82,
+    135, 169,
+    344, 319
 };
 
 /*****************************************
-* Macro for MMPose Resnet34 pre TinyYOLOV2
+* Macro for MMPose Resnet34 pre TinyYOLOV3
 ******************************************/
 /*Inference Related Parameters*/
-#define AI0_DESC_NAME               "tinyyolov2_cam"
+#define AI0_DESC_NAME               "tinyyolov3_cam"
 #define AI_DESC_NAME                "fairface_cam"
 
 /*Age_gender Related*/
@@ -85,11 +87,6 @@ const static double anchors[] =
 #define INDEX_A                   (3)
 #define INDEX_W                   (4)
 #define NUM_OUT_LAYER 3
-
-/* Number of grids in the image */
-#define NUM_GRID_1 13
-#define NUM_GRID_2 26
-#define NUM_GRID_3 52
 
 /*CAMERA & ISP Settings Related*/
 #define MIPI_WIDTH                (960)
@@ -118,22 +115,26 @@ const static double anchors[] =
 #define MEM_PAGE_SIZE             (4096)
 
 /*****************************************
-* Macro for Tiny YOLOv2
+* Macro for Tiny YOLOv3
 ******************************************/
 /* Number of class to be detected */
 #define NUM_CLASS                   (1)
-/* Number of grids in the image */
-#define NUM_GRID_X                  (13)
-#define NUM_GRID_Y                  (13)
 /* Number for [region] layer num parameter */
-#define NUM_BB                      (5)
+#define NUM_BB                      (3)
+/* Number of output layers. This value MUST match with the length of num_grids[] below */
+#define NUM_INF_OUT_LAYER   (2)
+/* Number of grids in the image. The length of this array MUST match with the NUM_INF_OUT_LAYER */
+const static uint8_t num_grids[] = { 13, 26};
+/* Number of DRP-AI output */
+const static uint32_t INF_OUT_SIZE_TINYYOLOV3 =  (NUM_CLASS + 5) * NUM_BB * num_grids[0] * num_grids[0]
+                                + (NUM_CLASS + 5) * NUM_BB * num_grids[1] * num_grids[1];
 /* Thresholds */
-#define TH_PROB                     (0.6f)
-#define TH_NMS                      (0.5f)
+#define TH_PROB                     (0.4f)
+#define TH_NMS                      (0.2f)
 /* Size of input image to the model */
 #define MODEL_IN_W                  (416)
 #define MODEL_IN_H                  (416)
-#define INF_OUT_SIZE_TINYYOLOV2     (84500)
+
 
 /*****************************************
 * Macro for Application
@@ -147,7 +148,7 @@ const static double anchors[] =
 /*Frame threshold to execute inference in every loop
  *This value must be determined by DRP-AI processing time and capture processing time.
  *For your information Resnet34 takes around 60 msec and capture takes around 35 msec. */
-#define INF_FRAME_NUM               (3)
+#define INF_FRAME_NUM               (2)
 
 /*Camera:: Capture Image Information*/
 #define CAM_IMAGE_WIDTH             (640)
