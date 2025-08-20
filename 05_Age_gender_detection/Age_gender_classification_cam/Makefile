@@ -11,8 +11,8 @@ BSP_SDK_FLAG = \
 			  -lmount -lresolv -lexpat -lpangoft2-1.0 -lblkid \
 
 
-all: src/sample_app_age_gender_tinyyolov2_cam.cpp
-	${CXX} -std=c++14 src/sample_app_age_gender_tinyyolov2_cam.cpp src/camera.cpp src/image.cpp src/wayland.cpp src/box.cpp \
+all: src/sample_app_age_gender_tinyyolov3_cam.cpp
+	${CXX} -std=c++14 src/sample_app_age_gender_tinyyolov3_cam.cpp src/camera.cpp src/image.cpp src/wayland.cpp src/box.cpp \
 	${OPENCV_LINK} ${BSP_SDK_FLAG} \
 	-lpthread -O2 -ldl ${LDFLAGS} -o exe/age_gender_classification_cam_app
 
