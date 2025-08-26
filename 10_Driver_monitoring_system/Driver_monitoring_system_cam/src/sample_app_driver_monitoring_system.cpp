@@ -17,9 +17,9 @@
 * Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
-* File Name    : sample_app_deeppose_pre-tinyyolov2_cam.cpp
+* File Name    : sample_app_deeppose_pre-tinyyolov3_cam.cpp
 * Version      : 7.20
-* Description  : RZ/V2L DRP-AI Driver Monitoring Sample application using DeepPose with TinyYOLOv2 MIPI Camera version
+* Description  : RZ/V2L DRP-AI Driver Monitoring Sample application using DeepPose with TinyYOLOv3 MIPI Camera version
 ***********************************************************************************************************************/
 
 /*****************************************
@@ -35,7 +35,7 @@
 #include "image.h"
 /*Wayland control*/
 #include "wayland.h"
-/*TinyYOLOv2 Post-Processing*/
+/*TinyYOLOv3 Post-Processing*/
 #include "box.h"
 
 /*****************************************
@@ -54,7 +54,7 @@ static std::atomic<uint8_t> img_obj_ready   (0);
 
 /*Global Variables*/
 static float drpai_output_buf[INF_OUT_SIZE];
-static float drpai_output_buf0[INF_OUT_SIZE_TINYYOLOV2];
+static float drpai_output_buf0[INF_OUT_SIZE_TINYYOLOV3];
 static uint32_t capture_address;
 static uint64_t udmabuf_address = 0;
 static Image img;
@@ -84,7 +84,7 @@ static int16_t cropy[NUM_MAX_FACE];
 static int16_t croph[NUM_MAX_FACE];
 static int16_t cropw[NUM_MAX_FACE];
 
-/*TinyYOLOv2*/
+/*TinyYOLOv3*/
 static uint32_t bcount = 0;
 static uint32_t face_count_local = 0; /*To be used only in Inference Threads*/
 static uint32_t face_count = 0;
@@ -196,34 +196,6 @@ static int8_t get_result(int8_t drpai_fd, uint32_t output_addr, uint32_t output_
         memcpy(&drpai_output_buf0[(drpai_data.size - (drpai_data.size%BUF_SIZE))/sizeof(float)], drpai_buf, (drpai_data.size % BUF_SIZE));
     }
     return 0;
-}
-/*****************************************
-* Function Name : softmax
-* Description   : Helper function for YOLO Post Processing
-* Arguments     : val[] = array to be computed softmax
-* Return value  : -
-******************************************/
-static void softmax(float val[NUM_CLASS])
-{
-    float max_num = -FLT_MAX;
-    float sum = 0;
-    int32_t i;
-    for ( i = 0 ; i<NUM_CLASS ; i++ )
-    {
-        max_num = std::max(max_num, val[i]);
-    }
-
-    for ( i = 0 ; i<NUM_CLASS ; i++ )
-    {
-        val[i]= (float) exp(val[i] - max_num);
-        sum+= val[i];
-    }
-
-    for ( i = 0 ; i<NUM_CLASS ; i++ )
-    {
-        val[i]= val[i]/sum;
-    }
-    return;
 }
 
 /*****************************************
@@ -458,34 +430,45 @@ static int8_t load_drpai_data(int8_t drpai_fd, st_addr_t address_drp)
 }
 
 /*****************************************
-* Function Name : index
-* Description   : Get the index of the bounding box attributes based on the input offset
-* Arguments     : offs = offset to access the bounding box attributes
+* Function Name : yolo_index
+* Description   : Get the index of the bounding box attributes based on the input offset.
+* Arguments     : n = output layer number.
+*                 offs = offset to access the bounding box attributesd.
 *                 channel = channel to access each bounding box attribute.
 * Return value  : index to access the bounding box attribute.
 ******************************************/
-static int32_t index(int32_t offs, int32_t channel)
+int32_t yolo_index(uint8_t n, int32_t offs, int32_t channel)
 {
-    return offs + channel * NUM_GRID_X * NUM_GRID_Y;
+    uint8_t num_grid = num_grids[n];
+    return offs + channel * num_grid * num_grid;
 }
 
 /*****************************************
-* Function Name : offset_yolo
-* Description   : Get the offset number to access the bounding box attributes
-*                 To get the actual value of bounding box attributes, use index() after this function.
-* Arguments     : b = Number to indicate which bounding box in the region [0~4]
+* Function Name : yolo_offset
+* Description   : Get the offset nuber to access the bounding box attributes
+*                 To get the actual value of bounding box attributes, use yolo_index() after this function.
+* Arguments     : n = output layer number [0~2].
+*                 b = Number to indicate which bounding box in the region [0~2]
 *                 y = Number to indicate which region [0~13]
 *                 x = Number to indicate which region [0~13]
 * Return value  : offset to access the bounding box attributes.
-*******************************************/
-static int offset_yolo(int b, int y, int x)
+******************************************/
+int32_t yolo_offset(uint8_t n, int32_t b, int32_t y, int32_t x)
 {
-    return b *(NUM_CLASS + 5)* NUM_GRID_X * NUM_GRID_Y + y * NUM_GRID_X + x;
+    uint8_t num = num_grids[n];
+    uint32_t prev_layer_num = 0;
+    int32_t i = 0;
+
+    for (i = 0 ; i < n; i++)
+    {
+        prev_layer_num += NUM_BB *(NUM_CLASS + 5)* num_grids[i] * num_grids[i];
+    }
+    return prev_layer_num + b *(NUM_CLASS + 5)* num * num + y * num + x;
 }
 
 /*****************************************
 * Function Name : R_Post_Proc
-* Description   : Process CPU post-processing for TinyYOLOv2
+* Description   : Process CPU post-processing for TinyYOLOv3
 * Arguments     : address = drpai output address
 *                 det = detected boxes details
 *                 box_count = total number of boxes
@@ -494,8 +477,7 @@ static int offset_yolo(int b, int y, int x)
 static void R_Post_Proc(float* floatarr, std::vector<detection>& det, uint32_t* box_count)
 {
     uint32_t count = 0;
-    /*Memory Access*/
-    /* Following variables are required for correct_yolo_boxes in Darknet implementation*/
+    /* Following variables are required for correct_yolo/region_boxes in Darknet implementation*/
     /* Note: This implementation refers to the "darknet detector test" */
     float new_w, new_h;
     float correct_w = 1.;
@@ -511,6 +493,7 @@ static void R_Post_Proc(float* floatarr, std::vector<detection>& det, uint32_t* 
         new_h = MODEL_IN_H;
     }
 
+    int32_t n = 0;
     int32_t b = 0;
     int32_t y = 0;
     int32_t x = 0;
@@ -526,79 +509,82 @@ static void R_Post_Proc(float* floatarr, std::vector<detection>& det, uint32_t* 
     float box_w = 0;
     float box_h = 0;
     float objectness = 0;
-    Box bb;
+    uint8_t num_grid = 0;
+    uint8_t anchor_offset = 0;
     float classes[NUM_CLASS];
     float max_pred = 0;
     int32_t pred_class = -1;
-    float max_bbox_area = 0;
-
     float probability = 0;
     detection d;
     /* Clear the detected result list */
     det.clear();
 
-    /*Post Processing Start*/
-    for(b = 0; b < NUM_BB; b++)
+    for (n = 0; n<NUM_INF_OUT_LAYER; n++)
     {
-        for(y = 0; y < NUM_GRID_Y; y++)
+        num_grid = num_grids[n];
+        anchor_offset = 2 * NUM_BB * (NUM_INF_OUT_LAYER - (n + 1));
+
+        for (b = 0;b<NUM_BB;b++)
         {
-            for(x = 0; x < NUM_GRID_X; x++)
+            for (y = 0;y<num_grid;y++)
             {
-                offs = offset_yolo(b, y, x);
-                tx = floatarr[offs];
-                ty = floatarr[index(offs, 1)];
-                tw = floatarr[index(offs, 2)];
-                th = floatarr[index(offs, 3)];
-                tc = floatarr[index(offs, 4)];
-
-                /* Compute the bounding box */
-                /*get_region_box*/
-                center_x = ((float) x + sigmoid(tx)) / (float) NUM_GRID_X;
-                center_y = ((float) y + sigmoid(ty)) / (float) NUM_GRID_Y;
-                box_w = (float) exp(tw) * anchors[2*b+0] / (float) NUM_GRID_X;
-                box_h = (float) exp(th) * anchors[2*b+1] / (float) NUM_GRID_Y;
-
-                /* Adjustment for VGA size */
-                /* correct_region_boxes */
-                center_x = (center_x - (MODEL_IN_W - new_w) / 2. / MODEL_IN_W) / ((float) new_w / MODEL_IN_W);
-                center_y = (center_y - (MODEL_IN_H - new_h) / 2. / MODEL_IN_H) / ((float) new_h / MODEL_IN_H);
-                box_w *= (float) (MODEL_IN_W / new_w);
-                box_h *= (float) (MODEL_IN_H / new_h);
-
-                center_x = round(center_x * DRPAI_IN_WIDTH);
-                center_y = round(center_y * DRPAI_IN_HEIGHT);
-                box_w = round(box_w * DRPAI_IN_WIDTH);
-                box_h = round(box_h * DRPAI_IN_HEIGHT);
-
-                objectness = sigmoid(tc);
-
-                bb = {center_x, center_y, box_w, box_h};
-                float bbox_area = 0;
-                bbox_area = box_w * box_h;
-                /* Get the class prediction */
-                for (i = 0; i < NUM_CLASS; i++)
+                for (x = 0;x<num_grid;x++)
                 {
-                    classes[i] = floatarr[index(offs, 5+i)];
-                }
-                softmax(classes);
-                max_pred = 0;
-                pred_class = -1;
-                for (i = 0; i < NUM_CLASS; i++)
-                {
-                    if (classes[i] > max_pred)
+                    offs = yolo_offset(n, b, y, x);
+                    tx = floatarr[offs];
+                    ty = floatarr[yolo_index(n, offs, 1)];
+                    tw = floatarr[yolo_index(n, offs, 2)];
+                    th = floatarr[yolo_index(n, offs, 3)];
+                    tc = floatarr[yolo_index(n, offs, 4)];
+
+                    /* Compute the bounding box */
+                    /*get_yolo_box/get_region_box in paper implementation*/
+                    center_x = ((float) x + sigmoid(tx)) / (float) num_grid;
+                    center_y = ((float) y + sigmoid(ty)) / (float) num_grid;
+                    box_w = (float) exp(tw) * anchors[anchor_offset+2*b+0] / (float) MODEL_IN_W;
+                    box_h = (float) exp(th) * anchors[anchor_offset+2*b+1] / (float) MODEL_IN_W;
+
+                    /* Adjustment for VGA size */
+                    /* correct_yolo/region_boxes */
+                    center_x = (center_x - (MODEL_IN_W - new_w) / 2. / MODEL_IN_W) / ((float) new_w / MODEL_IN_W);
+                    center_y = (center_y - (MODEL_IN_H - new_h) / 2. / MODEL_IN_H) / ((float) new_h / MODEL_IN_H);
+                    box_w *= (float) (MODEL_IN_W / new_w);
+                    box_h *= (float) (MODEL_IN_H / new_h);
+
+                    center_x = round(center_x * DRPAI_IN_WIDTH);
+                    center_y = round(center_y * DRPAI_IN_HEIGHT);
+                    box_w = round(box_w * DRPAI_IN_WIDTH);
+                    box_h = round(box_h * DRPAI_IN_HEIGHT);
+
+                    objectness = sigmoid(tc);
+
+                    Box bb = {center_x, center_y, box_w, box_h};
+                    /* Get the class prediction */
+                    for (i = 0;i < NUM_CLASS;i++)
                     {
-                        pred_class = i;
-                        max_pred = classes[i];
+                        classes[i] = sigmoid(floatarr[yolo_index(n, offs, 5+i)]);
                     }
-                }
 
-                /* Store the result into the list if the probability is more than the threshold */
-                probability = max_pred * objectness;
-                if ((probability > TH_PROB))    //face = 14
-                {
-                    d = {bb, pred_class, probability};
-                    det.push_back(d);
-                    count++;
+                    max_pred = 0;
+                    pred_class = -1;
+                    for (i = 0; i < NUM_CLASS; i++)
+                    {
+                        if (classes[i] > max_pred)
+                        {
+                            pred_class = i;
+                            max_pred = classes[i];
+                        }
+                    }
+
+                    /* Store the result into the list if the probability is more than the threshold */
+                    probability = max_pred * objectness;
+                    /*printf("probability : %f", probability);*/
+                    if (probability >= TH_PROB)
+                    {
+                        d = {bb, pred_class, probability};
+                        det.push_back(d);
+                        count++;
+                    }
                 }
             }
         }
@@ -953,7 +939,7 @@ void *R_Inf_Thread(void *threadid)
     proc[DRPAI_INDEX_WEIGHT].size = drpai_address.weight_size;
     proc[DRPAI_INDEX_OUTPUT].address = drpai_address.data_out_addr;
     proc[DRPAI_INDEX_OUTPUT].size = drpai_address.data_out_size;
-    /*TinyYOLOv2*/
+    /*TinyYOLOv3*/
     proc0[DRPAI_INDEX_INPUT].address = drpai_address0.data_in_addr;
     proc0[DRPAI_INDEX_INPUT].size = drpai_address0.data_in_size;
     proc0[DRPAI_INDEX_DRP_CFG].address = drpai_address0.drp_config_addr;
@@ -973,7 +959,7 @@ void *R_Inf_Thread(void *threadid)
     /*DeepPose*/
     drpai_data.address = drpai_address.data_out_addr;
     drpai_data.size = drpai_address.data_out_size;
-    /*TinyYOLOv2*/
+    /*TinyYOLOv3*/
     drpai_data0.address = drpai_address0.data_out_addr;
     drpai_data0.size = drpai_address0.data_out_size;
 
@@ -1637,11 +1623,11 @@ int32_t main(int32_t argc, char * argv[])
     udmabuf_address &=0xFFFFFFFF;
 
     printf("RZ/V2L DRP-AI Sample Application\n");
-    printf("Model : Driver Monitoring System with Deeppose and Tinyyolov2 | deeppose_cam, tinyyolov2_cam\n");
+    printf("Model : Driver Monitoring System with Deeppose and Tinyyolov3 | deeppose_cam, tinyyolov3_cam\n");
     printf("Input : Coral Camera\n");
 
     /*DRP-AI Driver Open*/
-    /*For TinyYOLOv2*/
+    /*For TinyYOLOv3*/
     errno = 0;
     drpai_fd0 = open("/dev/drpai0", O_RDWR);
     if (0 > drpai_fd0)
@@ -1659,7 +1645,7 @@ int32_t main(int32_t argc, char * argv[])
     }
 
     /* Load DRP-AI Data from Filesystem to Memory via DRP-AI Driver */
-    /* TinyYOLOv2 */
+    /* TinyYOLOv3 */
     prefix = AI0_DESC_NAME;
     dir = prefix + "/";
     address_file = dir + prefix + "_addrmap_intm.txt";
