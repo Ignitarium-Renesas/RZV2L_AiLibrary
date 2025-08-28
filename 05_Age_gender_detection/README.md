@@ -20,7 +20,7 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
 |   ├── README.md
     └── src # source code directory
 ├── Age_Gender_Classification_usbcam
-|   ├── etc # address map and pre/post process configuration of both age_gender and tiny-yolov2
+|   ├── etc # address map and pre/post process configuration of both age_gender and tiny-yolov3
     ├── exe
 │       ├── fairface_cam # DRP-AI files of age_gender
 │       ├── Age_gender_classification_usbcam_app # The executable
