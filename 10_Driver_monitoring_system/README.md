@@ -19,32 +19,33 @@ It is recommended to setup the camera as shown in the image below. This applicat
 ```
 |-- Driver_Monitoring_System_cam # Application with CORAL camera input
 |   |-- Makefile
-|   |-- etc # address map and pre/post process configuration of both deeppose and tiny-yolov2
+|   |-- etc # address map and pre/post process configuration of both deeppose and tiny-yolov3
 |   |-- exe
 |   |   |-- rf_gaze_dir.xml 
 |   |   |-- driver_monitoring_system_cam_app # The executable
 |   |   |-- deeppose_cam # DRP-AI files of deeppose
-|   |   `-- tinyyolov2_cam # DRP-AI files of tiny-yolov2
+|   |   `-- tinyyolov3_cam # DRP-AI files of tiny-yolov3
 |   `-- src # source code directory
 |-- Driver_Monitoring_System_usbcam # Application with USB camera input
 |   |-- Makefile
-|   |-- etc # address map and pre/post process configuration of both deeppose and tiny-yolov2
+|   |-- etc # address map and pre/post process configuration of both deeppose and tiny-yolov3
 |   |-- exe
 |   |   |-- rf_gaze_dir.xml 
 |   |   |-- driver_monitoring_system_usbcam_app # The executable
 |   |   |-- deeppose_cam # DRP-AI files of deeppose
-|   |   `-- tinyyolov2_cam # DRP-AI files of tiny-yolov2
+|   |   `-- tinyyolov3_cam # DRP-AI files of tiny-yolov3
 |   `-- src # source code directory
 `-- README.md
 ```
 
 ### Model details
 
-#### TinyYolov2
+#### TinyYolov3
 
-- Official paper - [YOLO9000: Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242.pdf)
-- Dataset - [WIDERFACE](http://shuoyang1213.me/WIDERFACE/)
-- In this application Tiny Yolov2 is used for detecting faces.
+- TinyYoloV3 is a state of the art neural network model. It belongs to well known Yolo family of object detectors. It requires less parameters to get  trained properly. 
+- official link : [ Official Yolo website](https://pjreddie.com/darknet/yolo/)
+- Dataset: [HollywoodHeads](https://www.di.ens.fr/willow/research/headdetection/)
+- In this application Tiny Yolov3 is used for detecting faces.
 
 #### DeepPose
 
@@ -54,7 +55,7 @@ It is recommended to setup the camera as shown in the image below. This applicat
 
 ### Application with camera input
 
-- Camera input is fed to object detector (TinyYolov2) to detect faces.
+- Camera input is fed to object detector (TinyYolov3) to detect faces.
 - Face landmarks are extracted from the detected faces.
 - The face landmarks are used to classify the gaze directions (`CENTER`, `UP`, `DOWN`, `LEFT` & `RIGHT`) using a Random Forest algorithm.
 

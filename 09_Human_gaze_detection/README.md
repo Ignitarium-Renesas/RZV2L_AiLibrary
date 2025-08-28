@@ -13,20 +13,20 @@ sample video on YouTube -[Gaze detection demo](https://youtu.be/X_eH5UcThrc)
 |-- Human_Gaze_Detection_cam
 |  |-- Makefile
 |  |-- README.md
-|  |-- etc # address map and pre/post process configuration of both eth-xgaze and tiny-yolov2
+|  |-- etc # address map and pre/post process configuration of both eth-xgaze and tiny-yolov3
 |  |-- exe
 |  |  |-- Human_Gaze_Detection_cam_app # The executable
 |  |  |-- resnet18_cam # DRP-AI files of resnet-18
-|  |  |-- tinyyolov2_cam # DRP-AI files of tinyyolov2
+|  |  |-- tinyyolov3_cam # DRP-AI files of tinyyolov3
 |  |-- src # source code directory
 |-- Human_Gaze_Detection_usbcam
 |  |-- Makefile
 |  |-- README.md
-|  |-- etc # address map and pre/post process configuration of both eth-xgaze and tiny-yolov2
+|  |-- etc # address map and pre/post process configuration of both eth-xgaze and tiny-yolov3
 |  |-- exe
 |  |  |-- Human_Gaze_Detection_usbcam_app # The executable
 |  |  |-- resnet18_cam # DRP-AI files of resnet-18
-|  |  |-- tinyyolov2_cam # DRP-AI files of tinyyolov2
+|  |  |-- tinyyolov3_cam # DRP-AI files of tinyyolov3
 |  |-- src # source code directory
 ```
 
@@ -34,20 +34,19 @@ sample video on YouTube -[Gaze detection demo](https://youtu.be/X_eH5UcThrc)
 
 #### ResNet-18
 
-- Model - [ResNet-18](https://arxiv.org/pdf/1512.03385.pdf)
-- Repository - [pytorch_mpiigaze](https://github.com/hysts/pytorch_mpiigaze)
-- Dataset - [ETH-XGaze](https://ait.ethz.ch/xgaze)
+- Model - [pytorch_mpiigaze](https://github.com/hysts/pytorch_mpiigaze_demo/releases/download/v0.2.2/eth-xgaze_resnet18.pth)
 - In this application ResNet-18 is used for gaze detection.
 
-#### Tiny Yolov2
+#### Tiny Yolov3
 
-- Official paper - [YOLO9000: Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242.pdf)
-- Dataset - [WIDERFACE](http://shuoyang1213.me/WIDERFACE/)
-- In this application Tiny Yolov2 is used for detecting faces.
+- TinyYoloV3 is a state of the art neural network model. It belongs to well known Yolo family of object detectors. It requires less parameters to get  trained properly. 
+- official link : [ Official Yolo website](https://pjreddie.com/darknet/yolo/)
+- Dataset: [HollywoodHeads](https://www.di.ens.fr/willow/research/headdetection/)
+- In this application Tiny Yolov3 is used for detecting faces.
 
 ### Application with camera input
 
-- Camera input is fed to object detector (tiny yolov2) to detect faces in first step.
+- Camera input is fed to object detector (tiny yolov3) to detect faces in first step.
 - The detected faces are fed for gaze estimation (resnet-18).
 
 ## Running the application

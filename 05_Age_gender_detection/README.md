@@ -11,11 +11,11 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
 ```
 ├── 05_Age_Gender_Detection
 ├── Age_Gender_Classification_cam
-|   ├── etc # address map and pre/post process configuration of both age_gender and tiny-yolov2
+|   ├── etc # address map and pre/post process configuration of both age_gender and tiny-yolov3
     ├── exe
 │       ├── fairface_cam # DRP-AI files of age_gender
 │       ├── Age_gender_classification_cam_app # The executable
-│       └── tinyyolov2_cam # DRP-AI files of tiny-yolov2
+│       └── tinyyolov3_cam # DRP-AI files of tiny-yolov3
 |   ├── Makefile
 |   ├── README.md
     └── src # source code directory
@@ -24,31 +24,32 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
     ├── exe
 │       ├── fairface_cam # DRP-AI files of age_gender
 │       ├── Age_gender_classification_usbcam_app # The executable
-│       └── tinyyolov2_cam # DRP-AI files of tiny-yolov2
+│       └── tinyyolov3_cam # DRP-AI files of tiny-yolov3
 |   ├── Makefile
 |   ├── README.md
     └── src # source code directory
 ├── Age_Gender_Classification_img
-|   ├── etc # address map and pre/post process configuration of both age_gender and tiny-yolov2
+|   ├── etc # address map and pre/post process configuration of both age_gender and tiny-yolov3
     ├── exe
 │       ├── fairface_cam # DRP-AI files of age_gender
 │       ├── Age_gender_classification_img_app # The executable
-│       └── tinyyolov2_cam # DRP-AI files of tiny-yolov2
+│       └── tinyyolov3_cam # DRP-AI files of tiny-yolov3
 |   ├── Makefile
 |   ├── README.md
     └── src # source code directory
 ```
 ### Model details
 
-#### Tiny Yolov2
+#### Tinyyolov3 model
 
-- Official paper - [YOLO9000: Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242.pdf)
-- Dataset - [WIDERFACE](http://shuoyang1213.me/WIDERFACE/)
-- In this application Tiny Yolov2 is used for detecting faces.
+TinyYoloV3 is a state of the art neural network model. It belongs to well known Yolo family of object detectors. It requires less parameters to get  trained properly. 
+- official link : [ Official Yolo website](https://pjreddie.com/darknet/yolo/)
+- Dataset: [HollywoodHeads](https://www.di.ens.fr/willow/research/headdetection/)
+- In this application Tiny Yolov3 is used for detecting faces.
 
 #### FairFace model
 - FairFace model is used to recognise the gender and age of a person. 
-- Pretrained model is obtained from this GitHub : https://github.com/dchen236/FairFace
+- Pretrained model is obtained from this link : https://drive.google.com/file/d/113QMzQzkBDmYMs9LwzvD-jxEZdBQ5J4X/view?usp=drive_link
 
 ### Application with image input
 
@@ -58,7 +59,7 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
 
 ### Application with camera input
 
-1)Camera input is fed to object detector (tiny yolov2) to detect faces.
+1)Camera input is fed to object detector (tiny yolov3) to detect faces.
 2)Facial features are extracted from the detected faces. 
 3)The facial features are used to determine the age & gender of the person.
 
@@ -97,7 +98,7 @@ cd 05_Age_gender_detection/Age_gender_classification_img/exe
 ```
 
 ## Limitation
-1. The classification is dependent on face detected by tiny yolov2.
+1. The classification is dependent on face detected by tiny yolov3.
 2. The age-group classification appears to lose its accuracy in camera application.
 
 ### Known issues:
