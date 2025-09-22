@@ -19,7 +19,6 @@ It is recommended to setup the camera as shown in the image below. This applicat
 ```
 |-- Driver_Monitoring_System_cam # Application with CORAL camera input
 |   |-- Makefile
-|   |-- etc # address map and pre/post process configuration of both deeppose and tiny-yolov3
 |   |-- exe
 |   |   |-- rf_gaze_dir.xml 
 |   |   |-- driver_monitoring_system_cam_app # The executable
@@ -28,7 +27,6 @@ It is recommended to setup the camera as shown in the image below. This applicat
 |   `-- src # source code directory
 |-- Driver_Monitoring_System_usbcam # Application with USB camera input
 |   |-- Makefile
-|   |-- etc # address map and pre/post process configuration of both deeppose and tiny-yolov3
 |   |-- exe
 |   |   |-- rf_gaze_dir.xml 
 |   |   |-- driver_monitoring_system_usbcam_app # The executable
