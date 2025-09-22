@@ -14,7 +14,7 @@ sample video on YouTube -[Gaze detection demo](https://youtu.be/X_eH5UcThrc)
 |  |-- Makefile
 |  |-- README.md
 |  |-- exe
-|  |  |-- human_Gaze_Detection_cam_app # The executable
+|  |  |-- human_gaze_detection_cam_app # The executable
 |  |  |-- resnet18_cam # DRP-AI files of resnet-18
 |  |  |-- tinyyolov3_cam # DRP-AI files of tinyyolov3
 |  |-- src # source code directory
@@ -22,7 +22,7 @@ sample video on YouTube -[Gaze detection demo](https://youtu.be/X_eH5UcThrc)
 |  |-- Makefile
 |  |-- README.md
 |  |-- exe
-|  |  |-- human_Gaze_Detection_usbcam_app # The executable
+|  |  |-- human_gaze_detection_usbcam_app # The executable
 |  |  |-- resnet18_cam # DRP-AI files of resnet-18
 |  |  |-- tinyyolov3_cam # DRP-AI files of tinyyolov3
 |  |-- src # source code directory
