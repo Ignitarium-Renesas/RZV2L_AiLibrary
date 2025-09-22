@@ -11,7 +11,6 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
 ```
 ├── 05_Age_Gender_Detection
 ├── Age_Gender_Classification_cam
-|   ├── etc # address map and pre/post process configuration of both age_gender and tiny-yolov3
     ├── exe
 │       ├── fairface_cam # DRP-AI files of age_gender
 │       ├── Age_gender_classification_cam_app # The executable
@@ -20,7 +19,6 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
 |   ├── README.md
     └── src # source code directory
 ├── Age_Gender_Classification_usbcam
-|   ├── etc # address map and pre/post process configuration of both age_gender and tiny-yolov3
     ├── exe
 │       ├── fairface_cam # DRP-AI files of age_gender
 │       ├── Age_gender_classification_usbcam_app # The executable
@@ -29,11 +27,9 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
 |   ├── README.md
     └── src # source code directory
 ├── Age_Gender_Classification_img
-|   ├── etc # address map and pre/post process configuration of both age_gender and tiny-yolov3
     ├── exe
-│       ├── fairface_cam # DRP-AI files of age_gender
+│       ├── fairface_bmp # DRP-AI files of age_gender
 │       ├── Age_gender_classification_img_app # The executable
-│       └── tinyyolov3_cam # DRP-AI files of tiny-yolov3
 |   ├── Makefile
 |   ├── README.md
     └── src # source code directory
