@@ -13,18 +13,16 @@ sample video on YouTube -[Gaze detection demo](https://youtu.be/X_eH5UcThrc)
 |-- Human_Gaze_Detection_cam
 |  |-- Makefile
 |  |-- README.md
-|  |-- etc # address map and pre/post process configuration of both eth-xgaze and tiny-yolov3
 |  |-- exe
-|  |  |-- Human_Gaze_Detection_cam_app # The executable
+|  |  |-- human_Gaze_Detection_cam_app # The executable
 |  |  |-- resnet18_cam # DRP-AI files of resnet-18
 |  |  |-- tinyyolov3_cam # DRP-AI files of tinyyolov3
 |  |-- src # source code directory
 |-- Human_Gaze_Detection_usbcam
 |  |-- Makefile
 |  |-- README.md
-|  |-- etc # address map and pre/post process configuration of both eth-xgaze and tiny-yolov3
 |  |-- exe
-|  |  |-- Human_Gaze_Detection_usbcam_app # The executable
+|  |  |-- human_Gaze_Detection_usbcam_app # The executable
 |  |  |-- resnet18_cam # DRP-AI files of resnet-18
 |  |  |-- tinyyolov3_cam # DRP-AI files of tinyyolov3
 |  |-- src # source code directory
