@@ -14,11 +14,11 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : image.h
-* Version      : 7.20
+* Version      : 7.00
 * Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLO Image version
 ***********************************************************************************************************************/
 
@@ -27,6 +27,16 @@
 
 #include "define.h"
 #include "ascii.h"
+/* This block of code is only accessible from C code. */
+#ifdef __cplusplus
+extern "C" {
+#endif
+#include "mmngr_user_public.h"
+#include "mmngr_buf_user_public.h"
+#ifdef __cplusplus
+}
+#endif
+#include <cstdint>
 
 class Image
 {
@@ -34,7 +44,21 @@ class Image
         Image();
         ~Image();
 
+        struct image_dma_buffer
+        {
+         /* The index of the buffer. */
+         uint32_t idx;
+         /* The size of the buffer in bytes. */
+         uint32_t size;
+         /* The physical  memory for the buffer. */
+         uint32_t phy_addr;
+         /* The pointer to the memory for the buffer. */
+         void *mem;
+         
+        };
+        struct image_dma_buffer* image_buf;
         uint8_t * img_buffer;
+        int32_t image_buf_ret;
         int32_t get_H();
         int32_t get_W();
         int32_t get_C();
@@ -44,16 +68,15 @@ class Image
         void set(int32_t a, uint8_t val);
         void set_image_buffer(uint8_t* in_img_addr);
 
-        uint8_t init(uint32_t w, uint32_t h, uint32_t c);
-        uint8_t read_bmp(std::string filename);
-        uint8_t save_bmp(std::string filename);
+        int8_t init(uint32_t w, uint32_t h, uint32_t c);
+        int8_t read_bmp(std::string filename);
+        int8_t save_bmp(std::string filename);
         void draw_rect(int32_t x, int32_t y, int32_t w, int32_t h, const char * str);
-        
+        int Image_buffer_flush_dmabuf(uint32_t idx, uint32_t size);
 
     private:
         uint8_t header_size = FILEHEADERSIZE+INFOHEADERSIZE_W_V3;
         uint8_t bmp_header[FILEHEADERSIZE+INFOHEADERSIZE_W_V3];
-        uint8_t udmabuf_fd;
         int32_t img_h;
         int32_t img_w;
         int32_t img_c;
@@ -67,6 +90,8 @@ class Image
         void draw_line(int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t color);
         void write_char(const uint8_t code, int32_t x, int32_t y, int32_t color, int32_t backcolor);
         void write_string(const char *pcode, int32_t x, int32_t y, int32_t color, int32_t backcolor);
+        int8_t Image_buffer_alloc_dmabuf(struct image_dma_buffer *buffer, int32_t lenght);
+        void Image_buffer_free_dmabuf(struct image_dma_buffer *buffer);
 
 };
 
