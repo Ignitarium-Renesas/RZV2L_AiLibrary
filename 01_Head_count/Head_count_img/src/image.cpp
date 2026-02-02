@@ -14,11 +14,11 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : image.cpp
-* Version      : 7.20
+* Version      : 7.00
 * Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLO Image version
 ***********************************************************************************************************************/
 
@@ -29,13 +29,18 @@
 
 Image::Image()
 {
+    image_buf = NULL;
+    image_buf_ret = -1;
 }
 
 
 Image::~Image()
 {
-    munmap(img_buffer, size);
-    close(udmabuf_fd);
+    if (0 == image_buf_ret)
+    {
+        Image_buffer_free_dmabuf(image_buf);
+    }
+    free(image_buf);
 }
 
 /*****************************************
@@ -99,7 +104,7 @@ void Image::set_W(int32_t w)
 /*****************************************
 * Function Name : init
 * Description   : Function to initialize img_buffer in Image class
-*                 This application uses udmabuf in order to
+*                 This application uses mmngr in order to
 *                 continuous memory area for DRP-AI input data
 * Arguments     : w = image width
 *                 h = image height
@@ -107,33 +112,30 @@ void Image::set_W(int32_t w)
 * Return value  : 0 if succeeded
 *                 not 0 otherwise
 ******************************************/
-uint8_t Image::init(uint32_t w, uint32_t h, uint32_t c)
+int8_t Image::init(uint32_t w, uint32_t h, uint32_t c)
 {
     int32_t i = 0;
     img_w = w;
     img_h = h;
     img_c = c;
     size = w * h * c;
-    udmabuf_fd = open("/dev/udmabuf0", O_RDWR );
-    if (udmabuf_fd < 0)
-    {
-        return -1;
-    }
-    img_buffer =(uint8_t*) mmap(NULL, size ,PROT_READ|PROT_WRITE, MAP_SHARED,  udmabuf_fd, 0);
 
-    if (img_buffer == MAP_FAILED)
+    image_buf = (image_dma_buffer*)malloc(sizeof(image_dma_buffer));
+    if (NULL == image_buf)
     {
+        fprintf(stderr, "[ERROR] Failed to malloc the image_buf\n");
         return -1;
     }
-    /* Write once to allocate physical memory to u-dma-buf virtual space.
-    * Note: Do not use memset() for this.
-    *       Because it does not work as expected. */
+     
+    image_buf_ret = Image_buffer_alloc_dmabuf(image_buf, size);
+    if (-1 == image_buf_ret)
     {
-        for (i = 0 ; i < size; i++)
-        {
-            img_buffer[i] = 0;
-        }
+        fprintf(stderr, "[ERROR] Failed to Allocate DMA buffer for the image_buf\n");
+        return -1;
     }
+
+    img_buffer =(uint8_t*) image_buf->mem;
+
     return 0;
 }
 
@@ -146,7 +148,7 @@ uint8_t Image::init(uint32_t w, uint32_t h, uint32_t c)
 * Return value  : 0 if succeeded
 *                 not 0 otherwise
 ******************************************/
-uint8_t Image::read_bmp(std::string filename)
+int8_t Image::read_bmp(std::string filename)
 {
     uint32_t width = img_w;
     uint32_t height = img_h;
@@ -209,7 +211,7 @@ uint8_t Image::read_bmp(std::string filename)
 * Return value  : 0 if suceeded
 *                 not 0 otherwise
 ******************************************/
-uint8_t Image::save_bmp(std::string filename)
+int8_t Image::save_bmp(std::string filename)
 {
     int32_t i = 0;
     FILE * fp = NULL;
@@ -448,6 +450,62 @@ void Image::draw_rect(int32_t x, int32_t y, int32_t w, int32_t h, const char * s
     return;
 }
 
+/*****************************************
+* Function Name : Image_buffer_alloc_dmabuf
+* Description   : Allocate a DMA buffer for the image
+* Arguments     : buffer = pointer to the image_dma_buffer struct
+*                 buf_size = size of the allocation
+* Return value  : 0 if succeeded
+*                 not 0 otherwise
+******************************************/
+int8_t Image::Image_buffer_alloc_dmabuf(struct image_dma_buffer *buffer, int buf_size)
+{
+    MMNGR_ID id;
+    uint32_t phard_addr;
+    void *puser_virt_addr;
+    buffer->size = buf_size; 
+    mmngr_alloc_in_user_ext(&id, buffer->size, &phard_addr, &puser_virt_addr, MMNGR_VA_SUPPORT_CACHED, NULL);
+    memset((void*)puser_virt_addr, 0, buffer->size);
+    buffer->idx = id;
+    buffer->mem = (void*)puser_virt_addr;
+    buffer->phy_addr = phard_addr;
+    if (!buffer->mem)
+    {
+        return -1;
+    }
+    return 0;
+}
+
+/*****************************************
+* Function Name : Image_buffer_free_dmabuf
+* Description   : free a DMA buffer for the image
+* Arguments     : buffer = pointer to the Image_dma_buffer struct
+* Return value  : -
+******************************************/
+void Image::Image_buffer_free_dmabuf(struct image_dma_buffer *buffer)
+{
+    mmngr_free_in_user_ext(buffer->idx);
+    return;
+}
+
+/*****************************************
+* Function Name : Image_buffer_flush_dmabuf
+* Description   : flush a DMA buffer in continuous memory area
+*                 MUST be called when writing data to DMA buffer
+* Arguments     : idx = id of the buffer to be flushed.
+*                 size = size to be flushed.
+* Return value  : 0 if succeeded
+*                 not 0 otherwise
+******************************************/
+int Image::Image_buffer_flush_dmabuf(uint32_t idx, uint32_t size)
+{
+    int mm_ret = 0;
+    
+    /* Flush image area cache */
+    mm_ret = mmngr_flush(idx, 0, size);
+    
+    return mm_ret;
+}
 
 /*****************************************
 * Function Name : at

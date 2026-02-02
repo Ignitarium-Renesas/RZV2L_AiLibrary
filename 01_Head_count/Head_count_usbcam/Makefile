@@ -1,16 +1,22 @@
 all: 02_head_count_cam \
 
+XDG_SHELL_LINK = -isystem ${SDKTARGETSYSROOT}/usr/src/debug/gstreamer1.0-plugins-base/1.22.12/gst-libs/gst/gl \
+		 -lwayland-cursor -lwayland-egl -lwayland-client
+
 OPENCV_LINK = -isystem ${SDKTARGETSYSROOT}/usr/include/opencv4 \
 	-lopencv_imgcodecs -lopencv_imgproc -lopencv_core -lopencv_highgui
+
+MMNGR_LINK =  -isystem ${SDKTARGETSYSROOT}/usr/local/include \
+			  -lmmngr -lmmngrbuf
 
 BSP_SDK_FLAG = \
 	-ljpeg -lwebp -ltiff -lz -ltbb -lgtk-3 -lpng16 -lgdk-3 -lcairo  \
 	-llzma -lrt -lcairo-gobject \
-	-lxkbcommon -lwayland-cursor -lwayland-egl -lwayland-client -lepoxy \
+	-lxkbcommon -lepoxy \
 	-lfribidi -lharfbuzz -lfontconfig \
 	-lglib-2.0 -lgobject-2.0 -lgdk_pixbuf-2.0 -lgmodule-2.0 -lpangocairo-1.0 \
 	-latk-1.0 -lgio-2.0 -lpango-1.0 -lfreetype -lpixman-1 -luuid -lpcre \
-	-lmount -lresolv -lexpat -lpangoft2-1.0 -lblkid \
+	-lmount -lresolv -lexpat -lpangoft2-1.0 -lblkid -lGLESv2 -lEGL
 
 # List all the files
 SRC_HC_CAM = examples/head_count_cam_example.cpp \
@@ -33,7 +39,7 @@ CFLAGS_HC_CAM = ${INC_DIR_HC_CAM}
 
 02_head_count_cam: ${SRC_HC_CAM}
 	${CXX} -std=c++14 $(filter %.cpp,${SRC_HC_CAM}) ${CFLAGS_HC_CAM} \
-	${OPENCV_LINK} ${BSP_SDK_FLAG} \
+	${XDG_SHELL_LINK} ${OPENCV_LINK} ${MMNGR_LINK} ${BSP_SDK_FLAG} \
 	-lpthread -O2 -ldl ${LDFLAGS} \
 	-o exe/head_count_usbcam_app
 
