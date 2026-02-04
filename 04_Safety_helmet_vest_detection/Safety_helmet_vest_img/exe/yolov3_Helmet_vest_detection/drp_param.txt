@@ -78,10 +78,14 @@ OFFSET_ADD:120, layer name: 651
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:176, layer name: 680
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:184, layer name: 680
   Param: raddr               Value: 0x86006200
   Param: waddr               Value: 0x86030600
   Param: IMG_IWIDHT          Value: 0x1a
@@ -105,10 +109,14 @@ OFFSET_ADD:176, layer name: 680
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:232, layer name: post_0_0_transpose
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:248, layer name: post_0_0_transpose
   Param: raddr               Value: 0x8681c600
   Param: waddr               Value: 0x86840c44
   Param: IMG_IWIDHT          Value: 0xd
@@ -135,7 +143,7 @@ OFFSET_ADD:232, layer name: post_0_0_transpose
   Param: IS_CHW2HWC          Value: 0x0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
-OFFSET_ADD:288, layer name: post_0_1_cast_fp16_fp32
+OFFSET_ADD:304, layer name: post_0_1_cast_fp16_fp32
   Param: raddr               Value: 0x86840c44
   Param: waddr               Value: 0x868652c0
   Param: IMG_IWIDHT          Value: 0xd
@@ -162,7 +170,7 @@ OFFSET_ADD:288, layer name: post_0_1_cast_fp16_fp32
   Param: RFU1                Value: 0x0
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
-OFFSET_ADD:344, layer name: post_1_0_transpose
+OFFSET_ADD:360, layer name: post_1_0_transpose
   Param: raddr               Value: 0x8681e1bc
   Param: waddr               Value: 0x86842800
   Param: IMG_IWIDHT          Value: 0x1a
@@ -189,7 +197,7 @@ OFFSET_ADD:344, layer name: post_1_0_transpose
   Param: IS_CHW2HWC          Value: 0x0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
-OFFSET_ADD:400, layer name: post_1_1_cast_fp16_fp32
+OFFSET_ADD:416, layer name: post_1_1_cast_fp16_fp32
   Param: raddr               Value: 0x86842800
   Param: waddr               Value: 0x86868a34
   Param: IMG_IWIDHT          Value: 0x1a
@@ -216,7 +224,7 @@ OFFSET_ADD:400, layer name: post_1_1_cast_fp16_fp32
   Param: RFU1                Value: 0x0
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
-OFFSET_ADD:456, layer name: post_2_0_transpose
+OFFSET_ADD:472, layer name: post_2_0_transpose
   Param: raddr               Value: 0x868250a4
   Param: waddr               Value: 0x868496e8
   Param: IMG_IWIDHT          Value: 0x34
@@ -243,7 +251,7 @@ OFFSET_ADD:456, layer name: post_2_0_transpose
   Param: IS_CHW2HWC          Value: 0x0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
-OFFSET_ADD:512, layer name: post_2_1_cast_fp16_fp32
+OFFSET_ADD:528, layer name: post_2_1_cast_fp16_fp32
   Param: raddr               Value: 0x868496e8
   Param: waddr               Value: 0x86876804
   Param: IMG_IWIDHT          Value: 0x34

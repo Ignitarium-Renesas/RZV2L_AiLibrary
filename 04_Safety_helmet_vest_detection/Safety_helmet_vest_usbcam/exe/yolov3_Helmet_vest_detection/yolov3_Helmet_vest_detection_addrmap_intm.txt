@@ -3,7 +3,7 @@ data 80096000 6865288
 data_out 868fb2c0 48c84
 work 86943f80 54800
 weight 86998780 7560352
-drp_config 8def8b00 1c2aa0
-drp_param 8e0bb5c0 270
-desc_aimac 8e0bb840 7f200
-desc_drp 8e13aa40 360
+drp_config 8def8b00 1c81c0
+drp_param 8e0c0cc0 280
+desc_aimac 8e0c0f40 7f200
+desc_drp 8e140140 360
