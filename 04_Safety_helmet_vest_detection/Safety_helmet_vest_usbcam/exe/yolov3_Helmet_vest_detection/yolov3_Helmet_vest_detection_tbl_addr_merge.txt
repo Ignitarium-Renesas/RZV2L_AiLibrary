@@ -579,8 +579,8 @@ output2_o0_k0_i0_param            1189591870
 914_o3_k0_i0_param                1190563732
 output3_o0_k0_i0_param            1190637652
 conv_yuv2rgb.mem                  1190643072     179492
-resize_hwc.mem                    1190822576     183000
-imagescaler.mem                   1191005584     157036
-resize_onnx.mem                   1191162624     167632
-transpose.mem                     1191330256     134128
-cast_fp16_fp32.mem                1191464384     101648
+resize_hwc.mem                    1190822576     178780
+imagescaler.mem                   1191001360     157036
+resize_onnx.mem                   1191158400     182996
+transpose.mem                     1191341408     134128
+cast_fp16_fp32.mem                1191475536     101648
