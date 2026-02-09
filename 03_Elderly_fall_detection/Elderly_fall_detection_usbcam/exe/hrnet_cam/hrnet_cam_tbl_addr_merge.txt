@@ -947,8 +947,8 @@ post_0_2_imagescaler_cof_mul      1108300292
 output1_o0_k0_i0_param            1136857256
 conv_yuv2rgb.mem                  1136857824     179492
 crop.mem                          1137037328     120524
-resize_hwc.mem                    1137157856     183000
-imagescaler.mem                   1137340864     157036
-resize_onnx.mem                   1137497904     167632
-transpose.mem                     1137665536     134128
-cast_fp16_fp32.mem                1137799664     101648
+resize_hwc.mem                    1137157856     178780
+imagescaler.mem                   1137336640     157036
+resize_onnx.mem                   1137493680     182996
+transpose.mem                     1137676688     134128
+cast_fp16_fp32.mem                1137810816     101648

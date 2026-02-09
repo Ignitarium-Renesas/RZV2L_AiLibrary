@@ -14,12 +14,12 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : camera.cpp
-* Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for MMPose HRNet with TinyYOLOv2 MIPI Camera version
+* Version      : 7.00
+* Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLOv3 MIPI Camera version
 ***********************************************************************************************************************/
 
 /*****************************************
@@ -51,19 +51,24 @@ int8_t Camera::start_camera()
     int8_t ret = 0;
     int32_t i = 0;
     int32_t n = 0;
-    uint8_t* word_ptr;
-    
+    int8_t wayland_buf_ret = -1;
+    int8_t drpai_buf_ret = -1;
+    int8_t dma_buf_ret[CAP_BUF_NUM];
+
 #ifdef INPUT_CORAL
-    const char* commands[4] =
+    const char* commands[7] =
     {
         "media-ctl -d /dev/media0 -r",
+        "media-ctl -d /dev/media0 -l \"\'csi-10830400.csi2\':1 -> \'cru-ip-10830000.video\':0 [1]\"",
+        "media-ctl -d /dev/media0 -l \"\'cru-ip-10830000.video\':1 -> \'CRU output\':0 [1]\"",
+        "media-ctl -d /dev/media0 -V \"\'csi-10830400.csi2\':1 [fmt:UYVY8_2X8/640x480 field:none]\"",
         "media-ctl -d /dev/media0 -V \"\'ov5645 0-003c\':0 [fmt:UYVY8_2X8/640x480 field:none]\"",
-        "media-ctl -d /dev/media0 -l \"\'rzg2l_csi2 10830400.csi2\':1 -> \'CRU output\':0 [1]\"",
-        "media-ctl -d /dev/media0 -V \"\'rzg2l_csi2 10830400.csi2\':1 [fmt:UYVY8_2X8/640x480 field:none]\""
+        "media-ctl -d /dev/media0 -V \"\'cru-ip-10830000.video\':0 [fmt:UYVY8_2X8/640x480 field:none]\"",
+        "media-ctl -d /dev/media0 -V \"\'cru-ip-10830000.video\':1 [fmt:UYVY8_2X8/640x480 field:none]\""  
     };
 
     /* media-ctl command */
-    for (i=0; i<4; i++)
+    for (i=0; i<7; i++)
     {
         printf("%s\n", commands[i]);
         ret = system(commands[i]);
@@ -71,65 +76,145 @@ int8_t Camera::start_camera()
         if (ret<0)
         {
             printf("%s: failed media-ctl commands. index = %d\n", __func__, i);
-            return -1;
+            ret = -1;
+            goto end;
         }
     }
 #endif /* INPUT_CORAL */
 
     ret = open_camera_device();
-    if (0 != ret) return ret;
+    if (0 != ret)
+    {
+        ret = -1;
+        goto end;
+    }
 
     ret = init_camera_fmt();
-    if (0 != ret) return ret;
+    if (0 != ret)
+    {
+        ret = -1;
+        goto end;
+    }
 
     ret = init_buffer();
-    if (0 != ret) return ret;
-
-    udmabuf_file = open("/dev/udmabuf0", O_RDWR);
-    if (0 > udmabuf_file)
+    if (0 != ret)
     {
-        return -1;
+        ret = -1;
+        goto end;
+    }
+
+    /* Initialize buffer */
+    wayland_buf = NULL;
+    drpai_buf = NULL;
+    for (i = 0; i < CAP_BUF_NUM; i++)
+    {
+        dma_buf[i] = NULL;
+        dma_buf_ret[i] = -1;
+    }
+
+    wayland_buf = (camera_dma_buffer*)malloc(sizeof(wayland_buf));
+    if (NULL == wayland_buf)
+    {
+        fprintf(stderr, "[ERROR] Failed to malloc the wayland_buf\n");
+        goto err_end;
+    }
+    
+    wayland_buf_ret = video_buffer_alloc_dmabuf(wayland_buf,WAYLANDBUF);
+    if (-1 == wayland_buf_ret)
+        {
+        fprintf(stderr, "[ERROR] Failed to Allocate DMA buffer for the wayland_buf\n");
+        goto err_end;
+    }
+
+    drpai_buf = (camera_dma_buffer*)malloc(sizeof(camera_dma_buffer));
+    if (NULL == drpai_buf)
+    {
+        fprintf(stderr, "[ERROR] Failed to malloc the drpai_buf\n");
+        goto err_end;
+    }
+    
+    drpai_buf_ret = video_buffer_alloc_dmabuf(drpai_buf,CAPTUREBUF);
+    if (-1 == drpai_buf_ret)
+    {
+        fprintf(stderr, "[ERROR] Failed to Allocate DMA buffer for the drpai_buf\n");
+        goto err_end;
     }
 
     for (n =0; n < CAP_BUF_NUM; n++)
     {
-        buffer[n] =(uint8_t *) mmap(NULL, imageLength ,PROT_READ|PROT_WRITE, MAP_SHARED,  udmabuf_file, n*imageLength);
-
-        if (MAP_FAILED == buffer[n])
+        dma_buf[n] = (camera_dma_buffer*)malloc(sizeof(camera_dma_buffer[n]));
+        if (NULL == dma_buf[n])
         {
-            return -1;
+            fprintf(stderr, "[ERROR] Failed to malloc the dma_buf\n");
+            goto err_end;
         }
-
-        /* Write once to allocate physical memory to u-dma-buf virtual space.
-        * Note: Do not use memset() for this.
-        *       Because it does not work as expected. */
+        dma_buf_ret[n] = video_buffer_alloc_dmabuf(dma_buf[n],CAPTUREBUF);
+        if (-1 == dma_buf_ret[n])
         {
-            word_ptr = buffer[n];
-            for(i = 0 ; i < imageLength; i++)
-            {
-                word_ptr[i] = 0;
-            }
+            fprintf(stderr, "[ERROR] Failed to Allocate DMA buffer for the dma_buf\n");
+            goto err_end;
         }
-
         memset(&buf_capture, 0, sizeof(buf_capture));
         buf_capture.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-        buf_capture.memory = V4L2_MEMORY_USERPTR;
+        buf_capture.memory = V4L2_MEMORY_DMABUF;
         buf_capture.index = n;
-        /* buffer[n] must be casted to unsigned long type in order to assign it to V4L2 buffer */
-        buf_capture.m.userptr =reinterpret_cast<unsigned long>(buffer[n]);
-        buf_capture.length = imageLength;
+        buf_capture.m.fd = (unsigned long) dma_buf[n]->dbuf_fd;
+        buf_capture.length = dma_buf[n]->size;
         ret = xioctl(m_fd, VIDIOC_QBUF, &buf_capture);
         if (-1 == ret)
         {
-            return -1;
+            goto err_end;
         }
-    }
+    }    
 
     ret = start_capture();
-    if (0 != ret) return ret;
+    if (0 != ret)
+    {
+        goto err_end;
+    }
 
-    return 0;
+    ret = 0;
+    goto end;
+    
+err_end:
+    /* free buffer */
+    if (0 == wayland_buf_ret)
+    {
+        video_buffer_free_dmabuf(wayland_buf);
+    }
+
+    if (0 == drpai_buf_ret)
+    {
+        video_buffer_free_dmabuf(drpai_buf);
+    }
+    
+    for (n = 0; n < CAP_BUF_NUM; n++)
+    {
+        if (0 == dma_buf_ret[n])
+        {
+            video_buffer_free_dmabuf(dma_buf[n]);
+        }
+    }
+    
+    free(wayland_buf);
+    wayland_buf = NULL;
+
+    free(drpai_buf);
+    drpai_buf = NULL;
+
+    for (n = 0; n < CAP_BUF_NUM; n++)
+    {
+        free(dma_buf[n]);
+        dma_buf[n] = NULL;
+    }
+    
+    close(m_fd);
+    ret = -1;
+    goto end;
+end:
+    return ret;
 }
+
 
 
 /*****************************************
@@ -147,15 +232,23 @@ int8_t Camera::close_camera()
     ret = stop_capture();
     if (0 != ret) return ret;
 
-    for (i = 0; i < CAP_BUF_NUM; i++)
+    video_buffer_free_dmabuf(wayland_buf);
+    free(wayland_buf);
+    wayland_buf = NULL;
+
+    video_buffer_free_dmabuf(drpai_buf);
+    free(drpai_buf);
+    drpai_buf = NULL;
+
+    for (i = 0;i<CAP_BUF_NUM;i++)
     {
-        munmap(buffer[i], imageLength);
+        video_buffer_free_dmabuf(dma_buf[i]);
+        free(dma_buf[i]);
+        dma_buf[i] = NULL;
     }
-    close(udmabuf_file);
     close(m_fd);
     return 0;
 }
-
 
 /*****************************************
 * Function Name : xioctl
@@ -221,10 +314,10 @@ int8_t Camera::capture_qbuf()
 * Function Name : capture_image
 * Description   : Function to capture image and return the physical memory address where the captured image stored.
 *                 Must call capture_qbuf after calling this function.
-* Arguments     : udmabuf_address = Start address of udmabuf area.
+* Arguments     : -
 * Return value  : the physical memory address where the captured image stored.
 ******************************************/
-uint64_t Camera::capture_image(uint64_t udmabuf_address)
+uint64_t Camera::capture_image()
 {
     int8_t ret = 0;
     fd_set fds;
@@ -252,8 +345,9 @@ uint64_t Camera::capture_image(uint64_t udmabuf_address)
         return 0;
     }
 
-    return udmabuf_address + buf_capture.index * imageLength;
+    return  dma_buf[buf_capture.index]->phy_addr;
 }
+
 
 /*****************************************
 * Function Name : stop_capture
@@ -269,7 +363,7 @@ int8_t Camera::stop_capture()
     memset(&buf, 0, sizeof(buf));
 
     buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-    buf.memory = V4L2_MEMORY_USERPTR;
+    buf.memory = V4L2_MEMORY_DMABUF ;
 
     ret = xioctl(m_fd, VIDIOC_STREAMOFF, &buf.type);
     if (-1 == ret)
@@ -377,7 +471,7 @@ int8_t Camera::init_buffer()
     memset(&req, 0, sizeof(req));
     req.count = CAP_BUF_NUM;
     req.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-    req.memory = V4L2_MEMORY_USERPTR;
+    req.memory = V4L2_MEMORY_DMABUF;
 
     /*Request a buffer that will be kept in the device*/
     ret = xioctl(m_fd, VIDIOC_REQBUFS, &req);
@@ -391,7 +485,7 @@ int8_t Camera::init_buffer()
     {
         memset(&buf, 0, sizeof(buf));
         buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-        buf.memory = V4L2_MEMORY_USERPTR;
+        buf.memory = V4L2_MEMORY_DMABUF;
         buf.index = i;
 
         /* Extract buffer information */
@@ -402,7 +496,6 @@ int8_t Camera::init_buffer()
         }
 
     }
-    imageLength = buf.length;
 
     return 0;
 }
@@ -425,7 +518,7 @@ int8_t Camera::save_bin(std::string filename)
     }
 
     /* Get data from buffer and write to binary file */
-    ret = fwrite(buffer[buf_capture.index], sizeof(uint8_t), imageLength, fp);
+    ret = fwrite((uint8_t *)dma_buf[buf_capture.index]->mem, sizeof(uint8_t), dma_buf[buf_capture.index]->size, fp);
     if (!ret)
     {
         fclose(fp);
@@ -438,6 +531,67 @@ int8_t Camera::save_bin(std::string filename)
 
 
 /*****************************************
+* Function Name : video_buffer_alloc_dmabuf
+* Description   : Allocate a DMA buffer for the camera
+* Arguments     : buffer = pointer to the camera_dma_buffer struct
+*                 buf_size = size of the allocation
+* Return value  : 0 if succeeded
+*                 not 0 otherwise
+******************************************/
+int8_t Camera::video_buffer_alloc_dmabuf(struct camera_dma_buffer *buffer,int buf_size)
+{
+    MMNGR_ID id;
+    uint32_t phard_addr;
+    void *puser_virt_addr;
+    int m_dma_fd;
+
+    buffer->size = buf_size;
+    mmngr_alloc_in_user_ext(&id, buffer->size, &phard_addr, &puser_virt_addr, MMNGR_VA_SUPPORT_CACHED, NULL);
+    memset((void*)puser_virt_addr, 0, buffer->size);
+    buffer->idx = id;
+    buffer->mem = (void *)puser_virt_addr;
+    buffer->phy_addr = phard_addr;
+    if (!buffer->mem)
+    {
+        return -1;
+    }
+    mmngr_export_start_in_user_ext(&id, buffer->size, phard_addr, &m_dma_fd, NULL);
+    buffer->dbuf_fd = m_dma_fd;
+    return 0;
+}
+
+/*****************************************
+* Function Name : video_buffer_free_dmabuf
+* Description   : free a DMA buffer for the camera
+* Arguments     : buffer = pointer to the camera_dma_buffer struct
+* Return value  : -
+******************************************/
+void Camera::video_buffer_free_dmabuf(struct camera_dma_buffer *buffer)
+{
+    mmngr_free_in_user_ext(buffer->idx);
+    return;
+}
+
+/*****************************************
+* Function Name : video_buffer_flush_dmabuf
+* Description   : flush a DMA buffer in continuous memory area
+*                 MUST be called when writing data to DMA buffer
+* Arguments     : idx = id of the buffer to be flushed.
+*                 size = size to be flushed.
+* Return value  : 0 if succeeded
+*                 not 0 otherwise
+******************************************/
+int Camera::video_buffer_flush_dmabuf(uint32_t idx, uint32_t size)
+{
+    int mm_ret = 0;
+    
+    /* Flush capture image area cache */
+    mm_ret = mmngr_flush(idx, 0, size);
+    
+    return mm_ret;
+}
+
+/*****************************************
 * Function Name : get_img
 * Description   : Function to return the camera buffer
 * Arguments     : -
@@ -445,7 +599,7 @@ int8_t Camera::save_bin(std::string filename)
 ******************************************/
 uint8_t * Camera::get_img()
 {
-    return buffer[buf_capture.index];
+    return (uint8_t *)dma_buf[buf_capture.index]->mem;
 }
 
 
@@ -457,7 +611,7 @@ uint8_t * Camera::get_img()
 ******************************************/
 int32_t Camera::get_size()
 {
-    return imageLength;
+    return dma_buf[buf_capture.index]->size;
 }
 
 /*****************************************
