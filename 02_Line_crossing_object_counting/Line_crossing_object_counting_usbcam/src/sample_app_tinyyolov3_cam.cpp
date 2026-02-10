@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : sample_app_tinyyolov3_cam.cpp
 * Version      : 7.00
-* Description  : RZ/V2L DRP-AI Sample Application for line crossing using Darknet-PyTorch  Tiny YOLOv3 USB Camera version
+* Description  : RZ/V2L DRP-AI Sample Application for line crossing using Darknet-PyTorch  Tiny YOLOv3 Camera version
 ***********************************************************************************************************************/
 
 /*****************************************
@@ -30,7 +30,7 @@
 #include <iostream>
 /*Definition of Macros & other variables*/
 #include "define.h"
-/*USB camera control*/
+/*camera control*/
 #include "camera.h"
 /*Image control*/
 #include "image.h"
@@ -981,7 +981,7 @@ void *R_Capture_Thread(void *threadid)
             goto capture_end;
         }
 
-        /* Capture USB camera image and stop updating the capture buffer */
+        /* Capture camera image and stop updating the capture buffer */
         capture_addr = (uint32_t)capture->capture_image();
         if (capture_addr == 0)
         {
@@ -1364,7 +1364,7 @@ end_threads:
     goto end_close_camera;
 
 end_close_camera:
-    /*Close USB Camera.*/
+    /*Close Camera.*/
     ret = capture->close_camera();
     if (0 != ret)
     {

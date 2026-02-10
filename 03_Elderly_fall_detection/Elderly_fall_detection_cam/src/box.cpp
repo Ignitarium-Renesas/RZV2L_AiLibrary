@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : box.cpp
 * Version      : 7.00
-* Description  : RZ/V2L DRP-AI Sample Application for MMPose HRNet with TinyYOLOv2 MIPI Camera version
+* Description  : RZ/V2L DRP-AI Sample Application for MMPose HRNet with TinyYOLOv2 Camera version
 ***********************************************************************************************************************/
 
 /*****************************************
