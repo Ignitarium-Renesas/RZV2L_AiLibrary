@@ -14,11 +14,11 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : sample_app_age_gender_img.cpp
-* Version      : 7.20
+* Version      : 7.00
 * Description  : RZ/V2L DRP-AI Sample Application for PyTorch Resnet34 Image version
 ***********************************************************************************************************************/
 
@@ -228,10 +228,10 @@ int8_t read_addrmap_txt(string addr_file)
 int8_t load_data_to_mem(string data, int8_t drpai_fd, uint32_t from, uint32_t size)
 {
     int8_t ret_load_data = 0;
-    int8_t obj_fd;
+    int obj_fd;
     uint8_t drpai_buf[BUF_SIZE];
     drpai_data_t drpai_data;
-    size_t ret = 0;
+    ssize_t ret = 0;
     int32_t i = 0;
 
     printf("Loading : %s\n", data.c_str());
@@ -401,7 +401,7 @@ int8_t get_result(int8_t drpai_fd, uint32_t output_addr, uint32_t output_size)
     drpai_data.address = output_addr;
     drpai_data.size = output_size;
     int32_t i = 0;
-    int8_t ret = 0;
+    ssize_t ret = 0;
 
     errno = 0;
     /* Assign the memory address and size to be read */
@@ -503,34 +503,10 @@ int32_t predict_age_gender(uint8_t* in_img_addr, uint32_t width, uint32_t height
     /* Initialize the Image object to which the user input image buffer data will be copied*/
     Image img;
 
-    /* Obtain udmabuf memory area starting address */
-    uint64_t udmabuf_address = 0;
-    int8_t fd = 0;
-    char addr[1024];
-    int32_t read_ret = 0;
-    errno = 0;
-    fd = open("/sys/class/u-dma-buf/udmabuf0/phys_addr", O_RDONLY);
-    if (0 > fd)
-    {
-        fprintf(stderr, "[ERROR] Failed to open udmabuf0/phys_addr : errno=%d\n", errno);
-        return -1;
-    }
-    read_ret = read(fd, addr, 1024);
-    if (0 > read_ret)
-    {
-        fprintf(stderr, "[ERROR] Failed to read udmabuf0/phys_addr : errno=%d\n", errno);
-        close(fd);
-        return -1;
-    }
-    sscanf(addr, "%lx", &udmabuf_address);
-    close(fd);
-    /* Filter the bit higher than 32 bit */
-    udmabuf_address &=0xFFFFFFFF;
-
     /**********************************************************************/
     /* Inference preparation                                              */
     /**********************************************************************/
-    int8_t drpai_fd;
+    int drpai_fd;
     fd_set rfds;
     struct timeval tv;
     int8_t ret_drpai;
@@ -565,8 +541,16 @@ int32_t predict_age_gender(uint8_t* in_img_addr, uint32_t width, uint32_t height
         goto end_close_drpai;
     }
 
+
+    /* Initialize image buffer */
+    ret = img.init(DRPAI_IN_WIDTH, DRPAI_IN_HEIGHT, DRPAI_IN_CHANNEL_BGR);
+    if(0 > ret)
+    {
+        goto end_close_drpai;
+    }
+
     /* Set DRP-AI Driver Input (DRP-AI Object files address and size)*/
-    proc[DRPAI_INDEX_INPUT].address       = udmabuf_address;
+    proc[DRPAI_INDEX_INPUT].address       = (uint64_t)img.image_buf->phy_addr;
     proc[DRPAI_INDEX_INPUT].size          = drpai_address.data_in_size;
     proc[DRPAI_INDEX_DRP_CFG].address     = drpai_address.drp_config_addr;
     proc[DRPAI_INDEX_DRP_CFG].size        = drpai_address.drp_config_size;
@@ -593,9 +577,16 @@ int32_t predict_age_gender(uint8_t* in_img_addr, uint32_t width, uint32_t height
         fprintf(stderr, "[ERROR] resized image buffer address is NULL\n");
         return -1;
     }
-    img.init(DRPAI_IN_WIDTH, DRPAI_IN_HEIGHT, DRPAI_IN_CHANNEL_BGR);
     /* Copy the user input image buffer data to the Image object */
     img.set_image_buffer(resized_img.data);
+    /* Flush to the image buffer*/
+    ret = img.Image_buffer_flush_dmabuf(img.image_buf->idx, img.image_buf->size);
+    if (0 != ret )
+    {
+        fprintf(stderr, "[ERROR] Failed to flush DMA buffer for image_buf: errno=%d\n", errno);
+		ret = -1;
+        goto end_close_drpai;
+    }
 
     /**********************************************************************
     * START Inference
