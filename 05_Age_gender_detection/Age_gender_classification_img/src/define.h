@@ -14,11 +14,11 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : define.h
-* Version      : 7.20
+* Version      : 7.00
 * Description  : RZ/V2L DRP-AI Sample Application for PyTorch Resnet34 Image version
 ***********************************************************************************************************************/
 
@@ -41,6 +41,7 @@
 #include <fstream>
 #include <iomanip>
 #include <cstring>
+#include <cstdint>
 
 extern std::string age_path;
 /*****************************************
