@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : sample_app_tinyyolov2_cam.cpp
 * Version      : 7.00
-* Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLOv3 MIPI Camera version
+* Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLOv3 Camera version
 ***********************************************************************************************************************/
 
 /*****************************************
@@ -29,7 +29,7 @@
 #include <linux/drpai.h>
 /*Definition of Macros & other variables*/
 #include "define.h"
-/*MIPI camera control*/
+/*camera control*/
 #include "camera.h"
 /*Image control*/
 #include "image.h"
@@ -859,7 +859,7 @@ void *R_Capture_Thread(void *threadid)
             goto capture_end;
         }
 
-        /* Capture MIPI camera image and stop updating the capture buffer */
+        /* Capture camera image and stop updating the capture buffer */
         capture_addr = (uint32_t)capture->capture_image();
         if (capture_addr == 0)
         {
@@ -1227,7 +1227,7 @@ end_threads:
     goto end_close_camera;
 
 end_close_camera:
-    /*Close MIPI Camera.*/
+    /*Close Camera.*/
     ret = capture->close_camera();
     if (0 != ret)
     {

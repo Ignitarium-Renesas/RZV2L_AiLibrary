@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : define.h
 * Version      : 7.00
-* Description  : RZ/V2L DRP-AI Sample Application for Line Crossing using Tiny YOLOv3 USB Camera version
+* Description  : RZ/V2L DRP-AI Sample Application for Line Crossing using Tiny YOLOv3 Camera version
 ***********************************************************************************************************************/
 
 #ifndef DEFINE_MACRO_H

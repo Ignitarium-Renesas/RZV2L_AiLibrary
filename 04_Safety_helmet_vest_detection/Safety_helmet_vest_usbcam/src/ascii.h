@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : ascii.h
 * Version      : 7.00
-* Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLOv3 MIPI Camera version
+* Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLOv3 Camera version
 ***********************************************************************************************************************/
 
 /* Multiple inclusion prevention macro */

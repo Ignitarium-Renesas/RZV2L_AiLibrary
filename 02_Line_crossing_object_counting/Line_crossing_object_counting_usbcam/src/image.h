@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : image.h
 * Version      : 7.00
-* Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLOv3 USB Camera version
+* Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLOv3 Camera version
 ***********************************************************************************************************************/
 
 #ifndef IMAGE_H

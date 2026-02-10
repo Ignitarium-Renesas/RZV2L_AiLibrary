@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : camera.cpp
 * Version      : 7.00
-* Description  : RZ/V2L DRP-AI Sample Application for Line crossing tinyYOLOv3 USB Camera version
+* Description  : RZ/V2L DRP-AI Sample Application for Line crossing tinyYOLOv3 Camera version
 ***********************************************************************************************************************/
 
 /*****************************************

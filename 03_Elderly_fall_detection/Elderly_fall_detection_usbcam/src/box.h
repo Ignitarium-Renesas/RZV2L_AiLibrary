@@ -19,7 +19,7 @@
 /***********************************************************************************************************************
 * File Name    : box.h
 * Version      : 7.00
-* Description  : RZ/V2L DRP-AI Sample Application for MMPose HRNet with TinyYOLOv2 USB Camera version
+* Description  : RZ/V2L DRP-AI Sample Application for MMPose HRNet with TinyYOLOv2 Camera version
 ***********************************************************************************************************************/
 
 #ifndef BOX_H
