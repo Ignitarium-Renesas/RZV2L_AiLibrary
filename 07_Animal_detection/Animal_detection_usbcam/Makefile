@@ -1,16 +1,22 @@
-all: 07_Animal_detection_usbcam_app \
+all: 07_animal_detect_usbcam \
 
+XDG_SHELL_LINK = -isystem ${SDKTARGETSYSROOT}/usr/src/debug/gstreamer1.0-plugins-base/1.22.12/gst-libs/gst/gl \
+		 -lwayland-cursor -lwayland-egl -lwayland-client
+		 
 OPENCV_LINK = -isystem ${SDKTARGETSYSROOT}/usr/include/opencv4 \
 	-lopencv_imgcodecs -lopencv_imgproc -lopencv_core -lopencv_highgui
+
+MMNGR_LINK =  -isystem ${SDKTARGETSYSROOT}/usr/local/include \
+			  -lmmngr -lmmngrbuf
 
 BSP_SDK_FLAG = \
 	-ljpeg -lwebp -ltiff -lz -ltbb -lgtk-3 -lpng16 -lgdk-3 -lcairo  \
 	-llzma -lrt -lcairo-gobject \
-	-lxkbcommon -lwayland-cursor -lwayland-egl -lwayland-client -lepoxy \
+	-lxkbcommon -lepoxy \
 	-lfribidi -lharfbuzz -lfontconfig \
 	-lglib-2.0 -lgobject-2.0 -lgdk_pixbuf-2.0 -lgmodule-2.0 -lpangocairo-1.0 \
 	-latk-1.0 -lgio-2.0 -lpango-1.0 -lfreetype -lpixman-1 -luuid -lpcre \
-	-lmount -lresolv -lexpat -lpangoft2-1.0 -lblkid \
+	-lmount -lresolv -lexpat -lpangoft2-1.0 -lblkid -lGLESv2 -lEGL
 
 # List all the files
 SRC_AD_CAM = examples/animal_detect_usbcam_example.cpp \
@@ -31,9 +37,9 @@ SRC_AD_CAM = examples/animal_detect_usbcam_example.cpp \
 INC_DIR_AD_CAM = -I src/
 CFLAGS_AD_CAM = ${INC_DIR_AD_CAM}
 
-07_Animal_detection_usbcam_app: ${SRC_AD_CAM}
+07_animal_detect_usbcam: ${SRC_AD_CAM}
 	${CXX} -std=c++14 $(filter %.cpp,${SRC_AD_CAM}) ${CFLAGS_AD_CAM} \
-	${OPENCV_LINK} ${BSP_SDK_FLAG} \
+	${XDG_SHELL_LINK} ${OPENCV_LINK} ${MMNGR_LINK} ${BSP_SDK_FLAG} \
 	-lpthread -O2 -ldl ${LDFLAGS} \
 	-o exe/animal_detection_usbcam_app
 
