@@ -14,12 +14,12 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : define.h
-* Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLOv3 MIPI Camera version
+* Version      : 7.00
+* Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLOv3 Camera version
 ***********************************************************************************************************************/
 
 #ifndef DEFINE_MACRO_H
@@ -107,14 +107,6 @@ const static std::string drpai_file_path[5] =
 /*****************************************
 * Macro for Application
 ******************************************/
-#define INPUT_CORAL
-/*Camera:: Capture Information */
-#ifdef INPUT_CORAL
-#define CAP_BUF_NUM                 (6)
-#else /* INPUT_CORAL */
-#define CAP_BUF_NUM                 (3)
-#endif /* INPUT_CORAL */
-
 /*Maximum DRP-AI Timeout threshold*/
 #define DRPAI_TIMEOUT               (5)
 
@@ -128,6 +120,15 @@ const static std::string drpai_file_path[5] =
 #define USB_CAM_IMAGE_WIDTH         (640)
 #define USB_CAM_IMAGE_HEIGHT        (480)
 #define USB_CAM_IMAGE_CHANNEL_YUY2  (2)
+
+/*Camera Capture Information */
+#define INPUT_CORAL
+
+#ifdef INPUT_CORAL
+#define CAP_BUF_NUM                 (6)
+#else /* INPUT_CORAL */
+#define CAP_BUF_NUM                 (3)
+#endif /* INPUT_CORAL */
 
 /*DRP-AI Input image information*/
 #define DRPAI_IN_WIDTH              (USB_CAM_IMAGE_WIDTH)
@@ -150,9 +151,6 @@ const static std::string drpai_file_path[5] =
 #define IMAGE_CHANNEL_BGRA          (4)
 #define WL_BUF_NUM                  (2)
 
-/*udmabuf memory area Information*/
-#define UDMABUF_OFFSET              (CAM_IMAGE_WIDTH * CAM_IMAGE_HEIGHT * CAM_IMAGE_CHANNEL_YUY2 * CAP_BUF_NUM)
-#define UDMABUF_INFIMAGE_OFFSET     (IMAGE_OUTPUT_WIDTH * IMAGE_OUTPUT_HEIGHT * IMAGE_CHANNEL_BGRA * WL_BUF_NUM + UDMABUF_OFFSET)
 
 /*Image:: Text information to be drawn on image*/
 #define CHAR_SCALE_LARGE            (0.8)
