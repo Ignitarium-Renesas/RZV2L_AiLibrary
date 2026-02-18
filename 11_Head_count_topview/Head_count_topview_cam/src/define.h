@@ -117,9 +117,9 @@ const static std::string drpai_file_path[5] =
 
 
 /*Camera Capture Image Information*/
-#define USB_CAM_IMAGE_WIDTH         (640)
-#define USB_CAM_IMAGE_HEIGHT        (480)
-#define USB_CAM_IMAGE_CHANNEL_YUY2  (2)
+#define MIPI_CAM_IMAGE_WIDTH         (640)
+#define MIPI_CAM_IMAGE_HEIGHT        (480)
+#define MIPI_CAM_IMAGE_CHANNEL_YUY2  (2)
 
 /*Camera Capture Information */
 #define INPUT_CORAL
@@ -131,9 +131,9 @@ const static std::string drpai_file_path[5] =
 #endif /* INPUT_CORAL */
 
 /*DRP-AI Input image information*/
-#define DRPAI_IN_WIDTH              (USB_CAM_IMAGE_WIDTH)
-#define DRPAI_IN_HEIGHT             (USB_CAM_IMAGE_HEIGHT)
-#define DRPAI_IN_CHANNEL_YUY2       (USB_CAM_IMAGE_CHANNEL_YUY2)
+#define DRPAI_IN_WIDTH              (MIPI_CAM_IMAGE_WIDTH)
+#define DRPAI_IN_HEIGHT             (MIPI_CAM_IMAGE_HEIGHT)
+#define DRPAI_IN_CHANNEL_YUY2       (MIPI_CAM_IMAGE_CHANNEL_YUY2)
 
 /*Camera Capture Image Information*/
 #define CAM_IMAGE_WIDTH             (640)

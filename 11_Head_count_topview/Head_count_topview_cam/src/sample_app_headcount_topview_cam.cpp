@@ -1114,7 +1114,7 @@ int32_t get_head_count_cam(void)
 
     printf("RZ/V2L DRP-AI Sample Application\n");
     printf("Model : Darknet YOLOv3 | %s\n", drpai_prefix.c_str());
-    printf("Input : USB Camera\n");
+    printf("Input : CORAL Camera\n");
 
     /* Read DRP-AI Object files address and size */
     ret = read_addrmap_txt(drpai_address_file);
@@ -1149,7 +1149,7 @@ int32_t get_head_count_cam(void)
     ret = capture->start_camera();
     if (0 != ret)
     {
-        fprintf(stderr, "[ERROR] Failed to initialize USB Camera.\n");
+        fprintf(stderr, "[ERROR] Failed to initialize CORAL Camera.\n");
         delete capture;
         ret_main = ret;
         goto end_close_drpai;
@@ -1265,7 +1265,7 @@ end_close_camera:
     ret = capture->close_camera();
     if (0 != ret)
     {
-        fprintf(stderr, "[ERROR] Failed to close USB Camera.\n");
+        fprintf(stderr, "[ERROR] Failed to close CORAL Camera.\n");
         ret_main = -1;
     }
     delete capture;
