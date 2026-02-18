@@ -711,7 +711,7 @@ void draw_bounding_box()
                     count++;
                     }
                     if (sel_aud == 1){
-                        if(system("/usr/bin/aplay -D default:CARD=soundcard alert.wav &>/dev/null &") == -1)
+                        if(system("/usr/bin/aplay -D default:CARD=HDMIAudio alert.wav &>/dev/null &") == -1)
                             std::cout << "Unable to play alert.wav" << std::endl;
                             count++;   
                     }
