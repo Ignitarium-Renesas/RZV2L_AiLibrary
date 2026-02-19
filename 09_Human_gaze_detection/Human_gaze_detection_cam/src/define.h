@@ -14,12 +14,12 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : define.h
-* Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for  ResNet-18 with TinyYOLOv2 MIPI Camera version
+* Version      : 7.00
+* Description  : RZ/V2L DRP-AI Sample Application for  ResNet-18 with TinyYOLOv2 Camera version
 ***********************************************************************************************************************/
 
 #ifndef DEFINE_MACRO_H
@@ -83,9 +83,6 @@ const static double anchors[] =
 #define INDEX_W                   (4)
 
 /*CAMERA & ISP Settings Related*/
-#define MIPI_WIDTH                (960)
-#define MIPI_HEIGHT               (540)
-#define MIPI_BUFFER               (8)
 #define IMAGE_NUM                 (1)
 #define IMREAD_IMAGE_WIDTH        (640)
 #define IMREAD_IMAGE_HEIGHT       (480)
@@ -93,8 +90,6 @@ const static double anchors[] =
 #define IMREAD_IMAGE_SIZE         (IMREAD_IMAGE_WIDTH*IMREAD_IMAGE_HEIGHT*IMREAD_IMAGE_CHANNEL)
 
 /* Size of input image to the model */
-#define DISPLAY_WIDTH             (MIPI_WIDTH)
-#define DISPLAY_HEIGHT            (MIPI_HEIGHT)
 #define DISPLAY_TEXT_SIZE         (256)
 
 /*ResNet-18 Post Processing & Drawing Related*/
@@ -160,10 +155,6 @@ const static uint32_t INF_OUT_SIZE_TINYYOLOV3 =  (NUM_CLASS + 5) * NUM_BB * num_
 #define IMAGE_OUTPUT_HEIGHT         (480)
 #define IMAGE_CHANNEL_BGRA          (4)
 #define WL_BUF_NUM                  (2)
-
-/*udmabuf memory area Information*/
-#define UDMABUF_OFFSET              (CAM_IMAGE_WIDTH * CAM_IMAGE_HEIGHT * CAM_IMAGE_CHANNEL_YUY2 * CAP_BUF_NUM)
-#define UDMABUF_INFIMAGE_OFFSET     (IMAGE_OUTPUT_WIDTH * IMAGE_OUTPUT_HEIGHT * IMAGE_CHANNEL_BGRA * WL_BUF_NUM + UDMABUF_OFFSET)
 
 /*Image:: Text information to be drawn on image*/
 #define CHAR_SCALE_LARGE            (0.8)

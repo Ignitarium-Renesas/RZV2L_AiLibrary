@@ -14,12 +14,12 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : box.cpp
-* Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for  ResNet-18 with TinyYOLOv2 MIPI Camera version
+* Version      : 7.00
+* Description  : RZ/V2L DRP-AI Sample Application for  ResNet-18 with TinyYOLOv2  Camera version
 ***********************************************************************************************************************/
 
 /*****************************************
