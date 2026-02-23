@@ -1,8 +1,8 @@
 /***********************************************************************************************************************
 * DISCLAIMER
-* This software is suheadied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
+* This software is supplied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
 * other uses are authorized. This software is owned by Renesas Electronics Corporation and is protected under all
-* aheadicable laws, including copyright laws.
+* applicable laws, including copyright laws.
 * THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
 * THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAIMED. TO THE MAXIMUM
@@ -14,12 +14,12 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : image.cpp
-* Version      : 7.20
-* Description  : RZ/V2L DRP-AI Driver Monitoring Sample application using DeepPose with TinyYOLOv2 MIPI Camera version
+* Version      : 7.00
+* Description  : RZ/V2L DRP-AI Driver Monitoring Sample application using DeepPose with TinyYOLOv3 Camera version
 ***********************************************************************************************************************/
 
 /*****************************************
@@ -36,13 +36,7 @@ Image::Image()
 
 Image::~Image()
 {
-    int32_t i;
     
-    for (i = 0; i < WL_BUF_NUM; i++)
-    {
-        munmap(img_buffer[i], img_w * img_h * img_c);
-    }
-    close(udmabuf_fd);
 }
 
 void Image::flip()
@@ -90,11 +84,21 @@ uint32_t Image::get_C()
     return img_c;
 }
 
+/*****************************************
+* Function Name : get_img
+* Description   : Function to return the camera buffer
+* Arguments     : -
+* Return value  : camera buffer
+******************************************/
+uint8_t* Image::get_img(uint8_t id)
+{
+    return img_buffer[id];
+}
 
 /*****************************************
 * Function Name : init
 * Description   : Function to initialize img_buffer in Image class
-*                 This aheadication uses udmabuf in order to
+*                 This application uses udmabuf in order to
 *                 continuous memory area for DRP-AI input data
 * Arguments     : w = input image width in YUYV
 *                 h = input image height in YUYV
@@ -102,15 +106,16 @@ uint32_t Image::get_C()
 *                 ow = output image width in BGRA to be displayed via Wayland
 *                 oh = output image height in BGRA to be displayed via Wayland
 *                 oc = output image channel in BGRA to be displayed via Wayland
+*                 mem = pointer to the memory for the display buffer
 * Return value  : 0 if succeeded
 *                 not 0 otherwise
 ******************************************/
 uint8_t Image::init(uint32_t w, uint32_t h, uint32_t c,
-                    uint32_t ow, uint32_t oh, uint32_t oc)
+                    uint32_t ow, uint32_t oh, uint32_t oc, void *mem)
 {
     int32_t i;
     int32_t j;
-    
+
     /*Initialize input image information */
     img_w = w;
     img_h = h;
@@ -121,27 +126,9 @@ uint8_t Image::init(uint32_t w, uint32_t h, uint32_t c,
     out_c = oc;
 
     uint32_t out_size = out_w * out_h * out_c;
-    udmabuf_fd = open("/dev/udmabuf0", O_RDWR );
-    if (0 > udmabuf_fd)
-    {
-        return -1;
-    }
     for (i = 0; i < WL_BUF_NUM; i++)
     {
-        img_buffer[i] =(unsigned char*) mmap(NULL, out_size ,PROT_READ|PROT_WRITE, MAP_SHARED,  udmabuf_fd, UDMABUF_OFFSET + i*out_size);
-        if (MAP_FAILED == img_buffer[i])
-        {
-            return -1;
-        }
-        /* Write once to allocate physical memory to u-dma-buf virtual space.
-        * Note: Do not use memset() for this.
-        *       Because it does not work as expected. */
-        {
-            for(j = 0 ; j < out_size; j++)
-            {
-                img_buffer[i][j] = 0;
-            }
-        }
+        img_buffer[i] =(unsigned char*)mem+(i*out_size);
     }
     return 0;
 }
@@ -160,6 +147,7 @@ uint8_t Image::init(uint32_t w, uint32_t h, uint32_t c,
 * Return Value  : -
 ******************************************/
 void Image::write_string_rgb(std::string str, uint32_t x, uint32_t y, float scale, uint32_t color)
+
 {
     uint8_t thickness = CHAR_THICKNESS;
     /*Extract RGB information*/
@@ -171,6 +159,7 @@ void Image::write_string_rgb(std::string str, uint32_t x, uint32_t y, float scal
     /*Color must be in BGR order*/
     cv::putText(bgra_image, str.c_str(), cv::Point(x, y), cv::FONT_HERSHEY_SIMPLEX, scale, cv::Scalar(b^0xFF, g^0xFF, r^0xFF), thickness+4);
     cv::putText(bgra_image, str.c_str(), cv::Point(x, y), cv::FONT_HERSHEY_SIMPLEX, scale, cv::Scalar(b, g, r), thickness);
+
 }
 
 /*****************************************
