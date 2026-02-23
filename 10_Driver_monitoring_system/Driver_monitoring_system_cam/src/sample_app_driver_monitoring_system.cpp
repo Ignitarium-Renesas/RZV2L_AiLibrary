@@ -14,12 +14,12 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : sample_app_deeppose_pre-tinyyolov3_cam.cpp
-* Version      : 7.20
-* Description  : RZ/V2L DRP-AI Driver Monitoring Sample application using DeepPose with TinyYOLOv3 MIPI Camera version
+* Version      : 7.00
+* Description  : RZ/V2L DRP-AI Driver Monitoring Sample application using DeepPose with TinyYOLOv3 Camera version
 ***********************************************************************************************************************/
 
 /*****************************************
@@ -29,7 +29,7 @@
 #include <linux/drpai.h>
 /*Definition of Macros & other variables*/
 #include "define.h"
-/*MIPI camera control*/
+/*camera control*/
 #include "camera.h"
 /*Image control*/
 #include "image.h"
@@ -56,8 +56,9 @@ static std::atomic<uint8_t> img_obj_ready   (0);
 static float drpai_output_buf[INF_OUT_SIZE];
 static float drpai_output_buf0[INF_OUT_SIZE_TINYYOLOV3];
 static uint32_t capture_address;
-static uint64_t udmabuf_address = 0;
 static Image img;
+static Camera* capture = NULL;
+static uint8_t buf_id;
 uint8_t yawn_flag=0;
 uint8_t blink_flag=0;
 
@@ -67,8 +68,8 @@ static st_addr_t drpai_address;
 static st_addr_t drpai_address0;
 static std::string dir;
 static std::string address_file;
-static int8_t drpai_fd = -1;
-static int8_t drpai_fd0 = -1;
+static int drpai_fd = -1;
+static int drpai_fd0 = -1;
 static uint32_t ai_time = 0;
 static uint32_t total_time = 0;
 static uint32_t yolo_time = 0;
@@ -158,7 +159,7 @@ static int8_t get_result(int8_t drpai_fd, uint32_t output_addr, uint32_t output_
     drpai_data.address = output_addr;
     drpai_data.size = output_size;
     int32_t i = 0;
-    int8_t ret = 0;
+    ssize_t ret = 0;
 
     errno = 0;
     /* Assign the memory address and size to be read */
@@ -294,9 +295,9 @@ static int8_t read_addrmap_txt(std::string addr_file, st_addr_t* address_drp)
 static int8_t load_data_to_mem(std::string data, int8_t drpai_fd, uint32_t from, uint32_t size)
 {
     int8_t ret_load_data = 0;
-    int8_t obj_fd;
+    int obj_fd;
     drpai_data_t drpai_data;
-    size_t ret = 0;
+    ssize_t ret = 0;
     int32_t i = 0;
     uint8_t drpai_buf[BUF_SIZE];
 
@@ -1319,16 +1320,14 @@ void *R_Capture_Thread(void *threadid)
     int8_t ret = 0;
     int32_t counter = 0;
     uint8_t * img_buffer;
-    uint8_t * img_buffer0;
+    uint8_t * img_buffer0 = (unsigned char*)MAP_FAILED;
     const int32_t th_cnt = INF_FRAME_NUM;
-    uint8_t udmabuf_fd0;
     uint8_t capture_stabe_cnt = 8;  // Counter to wait for the camera to stabilize
 
     printf("Capture Thread Starting\n");
 
-    udmabuf_fd0 = open("/dev/udmabuf0", O_RDWR );
-    img_buffer0 = (unsigned char*) mmap(NULL, CAM_IMAGE_WIDTH * CAM_IMAGE_HEIGHT * CAM_IMAGE_CHANNEL_YUY2 ,PROT_READ|PROT_WRITE, MAP_SHARED,  udmabuf_fd0, UDMABUF_INFIMAGE_OFFSET);
-    capture_address = (uint32_t)udmabuf_address + UDMABUF_INFIMAGE_OFFSET;
+    img_buffer0 = (uint8_t *)capture->drpai_buf->mem;
+    capture_address = capture->drpai_buf->phy_addr;
 
     while(1)
     {
@@ -1347,8 +1346,8 @@ void *R_Capture_Thread(void *threadid)
             goto capture_end;
         }
 
-        /* Capture MIPI camera image and stop updating the capture buffer */
-        capture_addr = (uint32_t)capture->capture_image(udmabuf_address);
+        /* Capture camera image and stop updating the capture buffer */
+        capture_addr = (uint32_t)capture->capture_image();
         if (capture_addr == 0)
         {
             fprintf(stderr, "[ERROR] Failed to capture image from camera.\n");
@@ -1367,13 +1366,24 @@ void *R_Capture_Thread(void *threadid)
                 if (!inference_start.load())
                 {
                     /* Copy captured image to Image object. This will be used in Display Thread. */
-                    memcpy(img_buffer0, img_buffer, CAM_IMAGE_WIDTH * CAM_IMAGE_HEIGHT * CAM_IMAGE_CHANNEL_YUY2);
+                    memcpy(img_buffer0, img_buffer, capture->get_size());
+                    /* Flush capture image area cache */
+                    ret = capture->video_buffer_flush_dmabuf(capture->drpai_buf->idx, capture->drpai_buf->size);
+                    if (0 != ret)
+                    {
+                        goto err;
+                    }
                     inference_start.store(1); /* Flag for AI Inference Thread. */
                 }
 
                 if (!img_obj_ready.load())
                 {
                     img.camera_to_image(img_buffer, capture->get_size());
+                    ret = capture->video_buffer_flush_dmabuf(capture->wayland_buf->idx, capture->wayland_buf->size);
+                    if (0 != ret)
+                    {
+                        goto err;
+                    }
                     img_obj_ready.store(1); /* Flag for Display Thread. */
                 }
             }
@@ -1384,7 +1394,7 @@ void *R_Capture_Thread(void *threadid)
         if (0 != ret)
         {
             fprintf(stderr, "[ERROR] Failed to enqueue capture buffer.\n");
-            goto capture_end;
+            goto err;
         }
     } /*End of Loop*/
 
@@ -1411,11 +1421,15 @@ void *R_Display_Thread(void *threadid)
 {
     /*Semaphore Variable*/
     int32_t hdmi_sem_check = 0;
-    /*image buffer id*/
-    uint8_t img_buf_id;
     /*Variable for checking return value*/
     int8_t ret = 0;
-
+    /* Initialize waylad */
+    ret = wayland.init(IMAGE_OUTPUT_WIDTH, IMAGE_OUTPUT_HEIGHT, IMAGE_CHANNEL_BGRA);
+    if(0 != ret)
+    {
+        fprintf(stderr, "[ERROR] Failed to initialize Image for Wayland\n");
+        goto err;
+    }
     printf("Display Thread Starting\n");
 
     while(1)
@@ -1447,8 +1461,7 @@ void *R_Display_Thread(void *threadid)
             print_result(&img);
 
             /*Update Wayland*/
-            img_buf_id = img.get_buf_id();
-            wayland.commit(img_buf_id);
+            wayland.commit(img.get_img(buf_id), NULL);
             img_obj_ready.store(0);
         }
         usleep(WAIT_TIME); //wait 1 tick time
@@ -1597,30 +1610,6 @@ int32_t main(int32_t argc, char * argv[])
     int32_t create_thread_capture = -1;
     int32_t create_thread_hdmi = -1;
     int32_t sem_create = -1;
-    Camera* capture = NULL;
-
-    /* Obtain udmabuf memory area starting address */
-    int8_t fd = 0;
-    char addr[1024];
-    int32_t read_ret = 0;
-    errno = 0;
-    fd = open("/sys/class/u-dma-buf/udmabuf0/phys_addr", O_RDONLY);
-    if (0 > fd)
-    {
-        fprintf(stderr, "[ERROR] Failed to open udmabuf0/phys_addr : errno=%d\n", errno);
-        return -1;
-    }
-    read_ret = read(fd, addr, 1024);
-    if (0 > read_ret)
-    {
-        fprintf(stderr, "[ERROR] Failed to read udmabuf0/phys_addr : errno=%d\n", errno);
-        close(fd);
-        return -1;
-    }
-    sscanf(addr, "%lx", &udmabuf_address);
-    close(fd);
-    /* Filter the bit higher than 32 bit */
-    udmabuf_address &=0xFFFFFFFF;
 
     printf("RZ/V2L DRP-AI Sample Application\n");
     printf("Model : Driver Monitoring System with Deeppose and Tinyyolov3 | deeppose_cam, tinyyolov3_cam\n");
@@ -1695,20 +1684,11 @@ int32_t main(int32_t argc, char * argv[])
     }
 
     /*Initialize Image object.*/
-    ret = img.init(CAM_IMAGE_WIDTH, CAM_IMAGE_HEIGHT, CAM_IMAGE_CHANNEL_YUY2, IMAGE_OUTPUT_WIDTH, IMAGE_OUTPUT_HEIGHT, IMAGE_CHANNEL_BGRA);
+    ret = img.init(CAM_IMAGE_WIDTH, CAM_IMAGE_HEIGHT, CAM_IMAGE_CHANNEL_YUY2, IMAGE_OUTPUT_WIDTH, IMAGE_OUTPUT_HEIGHT, IMAGE_CHANNEL_BGRA, capture->wayland_buf->mem);    
     if (0 != ret)
     {
         fprintf(stderr, "[ERROR] Failed to initialize Image object.\n");
         ret_main = ret;
-        goto end_close_camera;
-    }
-
-    /* Initialize waylad */
-    ret = wayland.init(img.udmabuf_fd, IMAGE_OUTPUT_WIDTH, IMAGE_OUTPUT_HEIGHT, IMAGE_CHANNEL_BGRA);
-    if(0 != ret)
-    {
-        fprintf(stderr, "[ERROR] Failed to initialize Image for Wayland\n");
-        ret_main = -1;
         goto end_close_camera;
     }
 
@@ -1820,7 +1800,7 @@ end_threads:
     goto end_close_camera;
 
 end_close_camera:
-    /*Close MIPI Camera.*/
+    /*Close Camera.*/
     ret = capture->close_camera();
     if (0 != ret)
     {
