@@ -14,12 +14,12 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : define.h
-* Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for Resnet18 with TinyYOLOv3 USB Camera version
+* Version      : 7.00
+* Description  : RZ/V2L DRP-AI Sample Application for Resnet18 with TinyYOLOv3 Camera version
 ***********************************************************************************************************************/
 
 #ifndef DEFINE_MACRO_H
@@ -70,9 +70,6 @@ const static std::string label_list     = "hagrid_labels.txt";
 #define INDEX_W                   (4)
 
 /*CAMERA & ISP Settings Related*/
-#define MIPI_WIDTH                (960)
-#define MIPI_HEIGHT               (540)
-#define MIPI_BUFFER               (8)
 #define IMAGE_NUM                 (1)
 #define IMREAD_IMAGE_WIDTH        (640)
 #define IMREAD_IMAGE_HEIGHT       (480)
@@ -80,8 +77,6 @@ const static std::string label_list     = "hagrid_labels.txt";
 #define IMREAD_IMAGE_SIZE         (IMREAD_IMAGE_WIDTH*IMREAD_IMAGE_HEIGHT*IMREAD_IMAGE_CHANNEL)
 
 /* Size of input image to the model */
-#define DISPLAY_WIDTH             (MIPI_WIDTH)
-#define DISPLAY_HEIGHT            (MIPI_HEIGHT)
 #define DISPLAY_TEXT_SIZE         (256)
 #define INF_OUT_SIZE_YOLO         (0x373c8c)
 
@@ -162,10 +157,6 @@ const static double anchors[] =
 #define IMAGE_OUTPUT_HEIGHT         (480)
 #define IMAGE_CHANNEL_BGRA          (4)
 #define WL_BUF_NUM                  (2)
-
-/*udmabuf memory area Information*/
-#define UDMABUF_OFFSET              (CAM_IMAGE_WIDTH * CAM_IMAGE_HEIGHT * CAM_IMAGE_CHANNEL_YUY2 * CAP_BUF_NUM)
-#define UDMABUF_INFIMAGE_OFFSET     (IMAGE_OUTPUT_WIDTH * IMAGE_OUTPUT_HEIGHT * IMAGE_CHANNEL_BGRA * WL_BUF_NUM + UDMABUF_OFFSET)
 
 /*Image:: Text information to be drawn on image*/
 #define CHAR_SCALE_LARGE            (0.8)
