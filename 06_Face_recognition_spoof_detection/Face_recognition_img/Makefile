@@ -1,5 +1,9 @@
+MMNGR_LINK = -isystem ${SDKTARGETSYSROOT}/usr/local/include \
+             -lmmngr -lmmngrbuf \
+
 all: src/sample_app_arcface_img.cpp
 	${CXX} -std=c++14 src/sample_app_arcface_img.cpp \
+	${MMNGR_LINK} \
 	-lpthread -O2 -ldl ${LDFLAGS} -o exe/face_recognition_img_app
 
 clean:

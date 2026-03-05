@@ -14,12 +14,12 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : image.cpp
-* Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for PyTorch ResNet USB Camera version
+* Version      : 7.00
+* Description  : RZ/V2L DRP-AI Sample Application for PyTorch ResNet Camera version
 ***********************************************************************************************************************/
 
 /*****************************************
@@ -36,13 +36,7 @@ Image::Image()
 
 Image::~Image()
 {
-    int32_t i;
-    
-    for (i = 0; i<WL_BUF_NUM; i++)
-    {
-        munmap(img_buffer[i], img_w * img_h * img_c);
-    }
-    close(udmabuf_fd);
+
 }
 
 /*****************************************
@@ -83,6 +77,16 @@ uint32_t Image::get_C()
     return img_c;
 }
 
+/*****************************************
+* Function Name : get_img
+* Description   : Function to return the camera buffer
+* Arguments     : -
+* Return value  : camera buffer
+******************************************/
+uint8_t* Image::get_img(uint8_t id)
+{
+    return img_buffer[id];
+}
 
 /*****************************************
 * Function Name : init
@@ -95,15 +99,16 @@ uint32_t Image::get_C()
 *                 ow = output image width in BGRA to be displayed via Wayland
 *                 oh = output image height in BGRA to be displayed via Wayland
 *                 oc = output image channel in BGRA to be displayed via Wayland
+*                 mem = pointer to the memory for the display buffer
 * Return value  : 0 if succeeded
 *                 not 0 otherwise
 ******************************************/
 uint8_t Image::init(uint32_t w, uint32_t h, uint32_t c,
-                    uint32_t ow, uint32_t oh, uint32_t oc)
+                    uint32_t ow, uint32_t oh, uint32_t oc, void *mem)
 {
     int32_t i;
     int32_t j;
-    
+
     /*Initialize input image information */
     img_w = w;
     img_h = h;
@@ -114,31 +119,12 @@ uint8_t Image::init(uint32_t w, uint32_t h, uint32_t c,
     out_c = oc;
 
     uint32_t out_size = out_w * out_h * out_c;
-    udmabuf_fd = open("/dev/udmabuf0", O_RDWR );
-    if (0 > udmabuf_fd)
+    for (i = 0; i < WL_BUF_NUM; i++)
     {
-        return -1;
-    }
-    for (i = 0; i<WL_BUF_NUM; i++)
-    {
-        img_buffer[i] =(unsigned char*) mmap(NULL, out_size ,PROT_READ|PROT_WRITE, MAP_SHARED,  udmabuf_fd, UDMABUF_OFFSET + i*out_size);
-        if (MAP_FAILED == img_buffer[i])
-        {
-            return -1;
-        }
-        /* Write once to allocate physical memory to u-dma-buf virtual space.
-        * Note: Do not use memset() for this.
-        *       Because it does not work as expected. */
-        {
-            for(j = 0 ; j < out_size; j++)
-            {
-                img_buffer[i][j] = 0;
-            }
-        }
+        img_buffer[i] =(unsigned char*)mem+(i*out_size);
     }
     return 0;
 }
-
 
 /*****************************************
 * Function Name : write_string_rgb
@@ -162,7 +148,6 @@ void Image::write_string_rgb(std::string str, uint32_t x, uint32_t y, float scal
     /*Color must be in BGR order*/
     cv::putText(bgra_image, str.c_str(), cv::Point(x, y), cv::FONT_HERSHEY_SIMPLEX, scale, cv::Scalar(b, g, r), thickness);
 }
-
 
 /*****************************************
 * Function Name : convert_format
@@ -191,7 +176,6 @@ void Image::draw_detection_area()
     cv::Mat org_image(img_h, img_w, CV_8UC4, img_buffer[buf_id]);
     cv::circle(org_image, center, CROPPED_IMAGE_WIDTH/2, cv::Scalar(0, 0, 255, 255), 2);
 }
-
 
 /*****************************************
 * Function Name : convert_size
@@ -245,7 +229,6 @@ void Image::camera_to_image(const uint8_t* buffer, int32_t size)
     memcpy(img_buffer[buf_id], buffer, sizeof(uint8_t)*size);
 }
 
-
 /*****************************************
 * Function Name : at
 * Description   : Get the value of img_buffer at index a.
@@ -271,6 +254,7 @@ void Image::set(int32_t a, uint8_t val)
     img_buffer[buf_id][a] = val;
     return;
 }
+
 /*****************************************
 * Function Name : get_buf_id
 * Description   : Get the value of the buf_id.

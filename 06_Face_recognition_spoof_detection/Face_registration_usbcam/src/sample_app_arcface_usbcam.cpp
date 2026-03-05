@@ -14,11 +14,11 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : sample_app_arcface_img.cpp
-* Version      : 7.20
+* Version      : 7.00
 * Description  : RZ/V2L DRP-AI Sample Application for Image version
 ***********************************************************************************************************************/
 
@@ -38,11 +38,11 @@ using namespace std;
 ******************************************/
 st_addr_t drpai_address;
 float drpai_output_buf[NUM_FEATURES];
-unsigned char* img_buffer;
+Image_dma_buffer* image_buf;
 
 /*****************************************
 * Function Name : read_bmp
-* Description   : Function to load BMP file into img_buffer
+* Description   : Function to load BMP file into image_buf
 * NOTE          : This is just the simplest example to read Windows Bitmap v3 file.
 *                 This function does not have header check.
 * Arguments     : filename = name of BMP file to be read
@@ -100,7 +100,7 @@ int8_t read_bmp(string filename, uint32_t width, uint32_t height, uint32_t chann
             fprintf(stderr, "[ERROR] Failed to run fread(): errno=%d\n", errno);
             return -1;
         }
-        memcpy(img_buffer+i*width*channel, bmp_line_data, sizeof(uint8_t)*width*channel);
+        memcpy((uint8_t *)image_buf->mem +i*width*channel, bmp_line_data, sizeof(uint8_t)*width*channel);
     }
 
     free(bmp_line_data);
@@ -203,10 +203,10 @@ int8_t read_addrmap_txt(string addr_file)
 int8_t load_data_to_mem(string data, int8_t drpai_fd, uint32_t from, uint32_t size)
 {
     int8_t ret_load_data = 0;
-    int8_t obj_fd;
+    int obj_fd;
     uint8_t drpai_buf[BUF_SIZE];
     drpai_data_t drpai_data;
-    size_t ret = 0;
+    ssize_t ret = 0;
     int32_t i = 0;
 
     printf("Loading : %s\n", data.c_str());
@@ -344,7 +344,7 @@ int8_t get_result(int8_t drpai_fd, uint32_t output_addr, uint32_t output_size)
     drpai_data.address = output_addr;
     drpai_data.size = output_size;
     int32_t i = 0;
-    int8_t ret = 0;
+    ssize_t ret = 0;
 
     errno = 0;
     /* Assign the memory address and size to be read */
@@ -437,45 +437,78 @@ int8_t print_embedding(float* floatarr, int &choice, string name)
       
     return 0;
 }
+/*****************************************
+* Function Name : Image_buffer_alloc_dmabuf
+* Description   : Allocate a DMA buffer for the image
+* Arguments     : buffer = pointer to the image_dma_buffer struct
+*                 buf_size = size of the allocation
+* Return value  : 0 if succeeded
+*                 not 0 otherwise
+******************************************/
+int8_t Image_buffer_alloc_dmabuf(Image_dma_buffer *buffer, int buf_size)
+{
+    MMNGR_ID id;
+    uint32_t phard_addr;
+    void *puser_virt_addr;
+    buffer->size = buf_size; 
+    mmngr_alloc_in_user_ext(&id, buffer->size, &phard_addr, &puser_virt_addr, MMNGR_VA_SUPPORT_CACHED, NULL);
+    memset((void*)puser_virt_addr, 0, buffer->size);
+    buffer->idx = id;
+    buffer->mem = (void*)puser_virt_addr;
+    buffer->phy_addr =phard_addr;
+    if (!buffer->mem)
+    {
+        return -1;
+    }
+    return 0;
+}
+
+/*****************************************
+* Function Name : Image_buffer_flush_dmabuf
+* Description   : flush a DMA buffer in continuous memory area
+*                 MUST be called when writing data to DMA buffer
+* Arguments     : idx = id of the buffer to be flushed.
+*                 size = size to be flushed.
+* Return value  : 0 if succeeded
+*                 not 0 otherwise
+******************************************/
+int Image_buffer_flush_dmabuf(uint32_t idx, uint32_t size)
+{
+    int mm_ret = 0;
+    
+    /* Flush image area cache */
+    mm_ret = mmngr_flush(idx, 0, size);
+    
+    return mm_ret;
+}
+
+/*****************************************
+* Function Name : Image_buffer_free_dmabuf
+* Description   : free a DMA buffer for the Image
+* Arguments     : buffer = pointer to the Image_dma_buffer struct
+* Return value  : -
+******************************************/
+void Image_buffer_free_dmabuf(Image_dma_buffer *buffer)
+{
+    mmngr_free_in_user_ext(buffer->idx);
+    return;
+}
 
 static int32_t get_embeddings(string name, int &choice)
 {
     int32_t ret = 0;
-    int8_t udmabuf_fd;
-    int32_t i;
-    /* Obtain udmabuf memory area starting address */
-    uint64_t udmabuf_address = 0;
-    int8_t fd = 0;
-    char addr[1024];
-    int32_t read_ret = 0;
-    errno = 0;
-    fd = open("/sys/class/u-dma-buf/udmabuf0/phys_addr", O_RDONLY);
-    if (0 > fd)
-    {
-        fprintf(stderr, "[ERROR] Failed to open udmabuf0/phys_addr : errno=%d\n", errno);
-        return -1;
-    }
-    read_ret = read(fd, addr, 1024);
-    if (0 > read_ret)
-    {
-        fprintf(stderr, "[ERROR] Failed to read udmabuf0/phys_addr : errno=%d\n", errno);
-        close(fd);
-        return -1;
-    }
-    sscanf(addr, "%lx", &udmabuf_address);
-    close(fd);
-    /* Filter the bit higher than 32 bit */
-    udmabuf_address &=0xFFFFFFFF;
+    int32_t ret1 = -1;
 
     /**********************************************************************/
     /* Inference preparation                                              */
     /**********************************************************************/
-    int8_t drpai_fd;
+    int drpai_fd;
     fd_set rfds;
     struct timeval tv;
     int8_t ret_drpai;
     drpai_data_t proc[DRPAI_INDEX_NUM];
     drpai_status_t drpai_status;
+    image_buf = NULL;
 
     /* Read DRP-AI Object files address and size */
     ret = read_addrmap_txt(drpai_address_file);
@@ -505,8 +538,24 @@ static int32_t get_embeddings(string name, int &choice)
         goto end_close_drpai;
     }
 
+    image_buf = (Image_dma_buffer*)malloc(sizeof(Image_dma_buffer));
+    if(NULL == image_buf) 
+    {
+        fprintf(stderr, "[ERROR] Failed to malloc the image_buf\n");
+        ret = -1;
+        goto end_image_dmabuf;
+    }
+
+    ret1 = Image_buffer_alloc_dmabuf(image_buf, drpai_address.data_in_size);
+    if (0 > ret1)
+    {
+        fprintf(stderr, "[ERROR] Failed to Allocate DMA buffer for image_buf: errno=%d\n", errno);
+        ret1 = -1;
+        goto end_image_dmabuf;
+    }
+
     /* Set DRP-AI Driver Input (DRP-AI Object files address and size)*/
-    proc[DRPAI_INDEX_INPUT].address       = udmabuf_address;
+    proc[DRPAI_INDEX_INPUT].address       = (uint64_t)image_buf->phy_addr;
     proc[DRPAI_INDEX_INPUT].size          = drpai_address.data_in_size;
     proc[DRPAI_INDEX_DRP_CFG].address     = drpai_address.drp_config_addr;
     proc[DRPAI_INDEX_DRP_CFG].size        = drpai_address.drp_config_size;
@@ -523,40 +572,21 @@ static int32_t get_embeddings(string name, int &choice)
 
     printf("Inference -----------------------------------------------\n");
 
-    /* Allocate the img_buffer in udmabuf memory area */
-    errno = 0;
-    udmabuf_fd = open("/dev/udmabuf0", O_RDWR );
-    if (0 > udmabuf_fd)
-    {
-        fprintf(stderr, "[ERROR] Failed to open udmabuf: errno=%d\n", errno);
-        ret = -1;
-        goto end_close_drpai;
-    }
-    img_buffer =(uint8_t *) mmap(NULL, drpai_address.data_in_size ,PROT_READ|PROT_WRITE, MAP_SHARED,  udmabuf_fd, 0);
-
-    if (MAP_FAILED == img_buffer)
-    {
-        fprintf(stderr, "[ERROR] Failed to mmap udmabuf memory area: errno=%d\n", errno);
-        ret = -1;
-        goto end_close_udmabuf;
-    }
-    /* Write once to allocate physical memory to u-dma-buf virtual space.
-    * Note: Do not use memset() for this.
-    *       Because it does not work as expected. */
-    {
-        for (i = 0 ; i < drpai_address.data_in_size; i++)
-        {
-            img_buffer[i] = 0;
-        }
-    }
-
     /* Read image (Windows Bitmap v3) */
     ret = read_bmp(input_img.c_str(), DRPAI_IN_WIDTH, DRPAI_IN_HEIGHT, DRPAI_IN_CHANNEL_BGR);
     if (0 != ret )
     {
         fprintf(stderr, "[ERROR] Failed to read BMP file: %s\n", input_img.c_str());
         ret = -1;
-        goto end_munmap_udmabuf;
+        goto end_image_dmabuf;
+    }
+    /* Flush to the image buffer*/
+    ret = Image_buffer_flush_dmabuf(image_buf->idx, image_buf->size);
+    if (0 != ret)
+    {
+        fprintf(stderr, "[ERROR] Failed to flush DMA buffer for image_buf: errno=%d\n", errno);
+        ret = -1;
+        goto end_image_dmabuf;
     }
 
     /**********************************************************************
@@ -569,7 +599,7 @@ static int32_t get_embeddings(string name, int &choice)
     {
         fprintf(stderr, "[ERROR] Failed to run DRPAI_START: errno=%d\n", errno);
         ret = -1;
-        goto end_munmap_udmabuf;
+        goto end_image_dmabuf;
     }
 
     /**********************************************************************
@@ -585,7 +615,7 @@ static int32_t get_embeddings(string name, int &choice)
     {
         fprintf(stderr, "[ERROR] DRP-AI select() Timeout : errno=%d\n", errno);
         ret = -1;
-        goto end_munmap_udmabuf;
+        goto end_image_dmabuf;
     }
     else if (-1 == ret_drpai)
     {
@@ -596,7 +626,7 @@ static int32_t get_embeddings(string name, int &choice)
             fprintf(stderr, "[ERROR] Failed to run DRPAI_GET_STATUS : errno=%d\n", errno);
         }
         ret = -1;
-        goto end_munmap_udmabuf;
+        goto end_image_dmabuf;
     }
     else
     {
@@ -611,7 +641,7 @@ static int32_t get_embeddings(string name, int &choice)
         {
             fprintf(stderr, "[ERROR] Failed to run DRPAI_GET_STATUS : errno=%d\n", errno);
             ret = -1;
-            goto end_munmap_udmabuf;
+            goto end_image_dmabuf;
         }
         printf("[END] DRP-AI\n");
     }
@@ -628,7 +658,7 @@ static int32_t get_embeddings(string name, int &choice)
     {
         fprintf(stderr, "[ERROR] Failed to get result from memory.\n");
         ret = -1;
-        goto end_munmap_udmabuf;
+        goto end_image_dmabuf;
     }
 
     /* Compute the classification result and display it on console */
@@ -637,16 +667,16 @@ static int32_t get_embeddings(string name, int &choice)
     {
         fprintf(stderr, "[ERROR] Failed to run CPU Post Processing.\n");
         ret = -1;
-        goto end_munmap_udmabuf;
+        goto end_image_dmabuf;
     }
 
     /* Terminating process */
-end_munmap_udmabuf:
-    munmap(img_buffer, drpai_address.data_in_size);
-    goto end_close_udmabuf;
-
-end_close_udmabuf:
-    close(udmabuf_fd);
+end_image_dmabuf:
+    if (-1 != ret1)
+    {
+        Image_buffer_free_dmabuf(image_buf);
+    }
+    free(image_buf);
     goto end_close_drpai;
 
 end_close_drpai:
