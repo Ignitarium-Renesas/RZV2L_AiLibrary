@@ -14,11 +14,11 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : define.h
-* Version      : 7.20
+* Version      : 7.00
 * Description  : RZ/V2L DRP-AI Sample Application for PyTorch ResNet Image version
 ***********************************************************************************************************************/
 
@@ -43,7 +43,16 @@
 #include <cstring>
 #include <limits>
 #include <cmath>
-#include<opencv2/opencv.hpp>
+
+/* This block of code is only accessible from C code. */
+#ifdef __cplusplus
+extern "C" {
+#endif
+#include "mmngr_user_public.h"
+#include "mmngr_buf_user_public.h"
+#ifdef __cplusplus
+}
+#endif
 
 /*****************************************
 * Static Variables for ResNet50
@@ -126,4 +135,17 @@ typedef struct
     unsigned long weight_addr;
     unsigned long weight_size;
 } st_addr_t;
+/* For Image DMA buffer */
+typedef struct 
+{
+    /* The index of the buffer. */
+    uint32_t idx;
+    /* The size of the buffer in bytes. */
+    uint32_t size;
+    /* The physical  memory for the buffer. */
+    uint32_t phy_addr;
+    /* The pointer to the memory for the buffer. */
+    void *mem;
+
+} Image_dma_buffer;
 #endif
