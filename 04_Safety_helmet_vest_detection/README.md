@@ -74,8 +74,8 @@ make
 ```
 
 ## Running the application
-1. Download the `yolov3_Helmet_vest_detection_weight.dat` weights file from the [release v5.00](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v5.00). Precise file link : [yolov3_Helmet_vest_detection_weight.dat]( https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/yolov3_Helmet_vest_detection_weight.dat)
-2. Place `yolov3_Helmet_vest_detection_weights.dat` file at the location `04_Safety_helmet_vest_detection/Safety_helmet_vest_cam/exe/yolov3_Helmet_vest_detection` or `04_Safety_helmet_vest_detection/Safety_helmet_vest_img/exe/yolov3_Helmet_vest_detection` or `04_Safety_helmet_vest_detection/Safety_helmet_vest_usbcam/exe/yolov3_Helmet_vest_detection` according to to the application that needs to be run.
+1. Download the `yolov3_Helmet_vest_detection_weight.dat` weights file from the [release v7.10](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v7.10). Precise file link : [yolov3_Helmet_vest_detection_weight.dat]( https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v7.10/yolov3_Helmet_vest_detection_weight.dat)
+2. Place `yolov3_Helmet_vest_detection_weights.dat` file at the location `04_Safety_helmet_vest_detection/Safety_helmet_vest_cam/exe/yolov3_Helmet_vest_detection` or `04_Safety_helmet_vest_detection/Safety_helmet_vest_img/exe/yolov3_Helmet_vest_detection` or `04_Safety_helmet_vest_detection/Safety_helmet_vest_usbcam/exe/yolov3_Helmet_vest_detection` according to the application that needs to be run.
 3. Now, copy the `RZV2L_AiLibrary` directory to the board (/home/root/).
 4. Please follow these steps:
 

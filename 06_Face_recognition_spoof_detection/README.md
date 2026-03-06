@@ -121,14 +121,14 @@ Classifies the given camera frame to genuine or spoofed.
 
 ## Running the application
 
-Weight files for this application are availbale in [release 5.00](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v5.00).
-Kindly paste the file [arcface_bmp_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/arcface_bmp_weight.dat) in below folders 
+Weight files for this application are availbale in [release v7.10](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v7.10).
+Kindly paste the file [arcface_bmp_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v7.10/arcface_bmp_weight.dat) in below folders 
 ```
 06_Face_recognition_spoof_detection/Face_recognition_img/exe/arcface_bmp/
 06_Face_recognition_spoof_detection/Face_registration_usbcam/exe/arcface_bmp/
 06_Face_recognition_spoof_detection/Face_registration_cam/exe/arcface_bmp/
 ```
-and [arcface_cam_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/arcface_cam_weight.dat) file in below folders.
+and [arcface_cam_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v7.10/arcface_cam_weight.dat) file in below folders.
 ```
 06_Face_recognition_spoof_detection/Face_recognition_cam/exe/arcface_cam/
 06_Face_recognition_spoof_detection/Face_recognition_usbcam/exe/arcface_cam/
@@ -376,10 +376,3 @@ cd 06_Face_recognition_spoof_detection/Face_spoof_detection_<cam/webcam>/exe/
 4. [ERROR] Failed to initialize USB Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
 5. permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.
 6. [ERROR] Failed to open: <prefix>/<prefix>_weight.dat error=2. [ERROR] Failed to load data from memory: <prefix>/<prefix>_weight.dat Failed to load DRP-AI object files - This error suggests that the weight file is not availbale in the `exe` folder. Download the weight file from the release in github and place it properly in the `exe/subfolder`.
-7. When capturing a new face, USB camera is not detecting then edit `Face_registration/src/capture_face.cpp` and build new executable. Or you may be able to capture a new face with USB camera at connecting only USB camera.
-
-
-```
-    /* Create a VideoCapture object. Change the constructor argument based on the video feed (/dev/video1 is being captured below) */
-    VideoCapture cap(1);
-```
