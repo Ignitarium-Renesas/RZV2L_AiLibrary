@@ -82,7 +82,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 04_Safety_helmet_vest_detection/Safety_helmet_vest_<cam/usbcam>/exe
 su
 ./safety_helmet_vest_<cam/usbcam>_app
-exit
+exit # After pressing ENTER key to terminate the application.
 ```
 ### Application with image input
 
@@ -94,7 +94,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 04_Safety_helmet_vest_detection/Safety_helmet_vest_img/exe
 su
 ./safety_helmet_vest_img_app ../test_images/1.jpg
-exit
+exit # After running the application to terminate it.
 ```
 ### Known issues:
 1. [ERROR] Image buffer address is NULL : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.
