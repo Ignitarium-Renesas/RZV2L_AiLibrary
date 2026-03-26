@@ -155,7 +155,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 07_Animal_detection/Animal_detection_cam/exe/
 su
 ./animal_detection_cam_app
-exit # After running the application to terminate it.
+exit # After pressing ENTER key to terminate the application.
 ```
 
 #### Application with usb camera input
@@ -164,7 +164,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 07_Animal_detection/Animal_detection_usbcam/exe/
 su
 ./animal_detection_usbcam_app
-exit # After running the application to terminate it.
+exit # After pressing ENTER key to terminate the application.
 ```
 
 
