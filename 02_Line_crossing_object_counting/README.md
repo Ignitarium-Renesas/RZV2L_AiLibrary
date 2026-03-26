@@ -10,8 +10,6 @@ sample video on YouTube -[Line crossing object counting demo](https://youtu.be/D
 ```
 |-- Line_crossing_object_counting_cam/ # Line crossing application on Coral camera input
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of tiny yolov3
-|   |-- examples/
 |   |-- exe/
 |   |   |-- line_crossing_object_counting_cam_app # the executable
 |   |   |-- tinyyolov3_crossing # DRP-AI files of yolov3
@@ -19,8 +17,6 @@ sample video on YouTube -[Line crossing object counting demo](https://youtu.be/D
 |   `-- src/ # source code directory
 |-- Line_crossing_object_counting_usbcam/ # Line crossing application on USB camera input
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of tiny yolov3
-|   |-- examples/
 |   |-- exe/
 |   |   |-- line_crossing_object_counting_usbcam_app # the executable
 |   |   |-- tinyyolov3_crossing # DRP-AI files of yolov3
