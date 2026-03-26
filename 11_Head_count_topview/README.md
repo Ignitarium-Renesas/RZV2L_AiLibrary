@@ -12,7 +12,6 @@ sample video on YouTube -[Head counting from top demo](https://youtu.be/z2WW2yyL
 ## Application details
 ```
 ├── Head_count_topview_cam # Top view Head detection application on CORAL camera input
-│   ├── etc # address map and pre/post process configuration of yolov3
 │   ├── examples
 │   │   └── headcount_topview_cam_example.cpp #example inference code on camera input
 │   ├── exe
@@ -22,7 +21,6 @@ sample video on YouTube -[Head counting from top demo](https://youtu.be/z2WW2yyL
 │   ├── Makefile
 │   └── src # source code directory
 ├── Head_count_topview_img
-│   ├── etc # address map and pre/post process configuration of yolov3
 │   ├── examples
 │   │   └── headcount_topview_img_example.cpp # example inference code on image
 │   ├── exe
@@ -33,7 +31,6 @@ sample video on YouTube -[Head counting from top demo](https://youtu.be/z2WW2yyL
 │   ├── src # source code directory
 │   └── test_images # test images directory
 ├── Head_count_topview_usbcam # Top view Head detection application on USB camera input
-│   ├── etc # address map and pre/post process configuration of yolov3
 │   ├── examples
 │   │   └── headcount_topview_usbcam_example.cpp #example inference code on camera input
 │   ├── exe
@@ -89,15 +86,19 @@ Praparation on laptop:
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 11_Head_count_topview/Head_count_topview_img/exe/
+su
 ./headcount_topview_img_app
 ../test_images/03.bmp
+exit # After running the application to terminate it.
 ```
 
 #### Application with camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 11_Head_count_topview/Head_count_topview_<cam/usbcam>/exe/
+su
 ./headcount_topview_<cam/usbcam>_app
+exit # After pressing ENTER key to terminate the application.
 ```
 ### Known issues:
 1. [ERROR] Image buffer address is NULL : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.
