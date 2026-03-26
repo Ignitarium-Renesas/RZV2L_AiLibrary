@@ -8,21 +8,21 @@ sample video on YouTube -[Line crossing object counting demo](https://youtu.be/D
 
 ## Application details
 ```
-|-- 02_Line_crossing_object_counting_MIPI_cam/ # Line crossing application on Coral camera input
+|-- Line_crossing_object_counting_cam/ # Line crossing application on Coral camera input
 |   |-- Makefile
 |   |-- etc/ # address map and pre/post process configuration of tiny yolov3
 |   |-- examples/
 |   |-- exe/
-|   |   |-- 02_Line_crossing_object_counting # the executable
+|   |   |-- line_crossing_object_counting_cam_app # the executable
 |   |   |-- tinyyolov3_crossing # DRP-AI files of yolov3
 |   |   `-- labels.txt  # label file
 |   `-- src/ # source code directory
-|-- 02_Line_crossing_object_counting_USB_cam/ # Line crossing application on USB camera input
+|-- Line_crossing_object_counting_usbcam/ # Line crossing application on USB camera input
 |   |-- Makefile
 |   |-- etc/ # address map and pre/post process configuration of tiny yolov3
 |   |-- examples/
 |   |-- exe/
-|   |   |-- 02_Line_crossing_object_counting # the executable
+|   |   |-- line_crossing_object_counting_usbcam_app # the executable
 |   |   |-- tinyyolov3_crossing # DRP-AI files of yolov3
 |   |   `-- labels.txt  # label file
 |   `-- src/ # source code directory
@@ -97,7 +97,9 @@ make
 The generated executable file from laptop needs to be transfered on the RZv2L board along with other files.
 ~~~ 
 cd exe/
+su
 ./line_crossing_object_counting_usbcam_app person 150 0 350 450 1
+exit
 ~~~
 
 ### Sample image for the command entered above:
