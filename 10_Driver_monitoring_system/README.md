@@ -84,7 +84,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 10_Driver_monitoring_system/Driver_monitoring_system_usbcam/exe/
 su
 ./driver_monitoring_system_<usbcam/cam>_app
-exit
+exit # After pressing ENTER key to terminate the application.
 ```
 
 ### Example:
@@ -94,7 +94,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 10_Driver_monitoring_system/Driver_monitoring_system_usbcam/exe/
 su
 ./driver_monitoring_system_usbcam_app
-exit
+exit # After pressing ENTER key to terminate the application.
 ```
 
 ## Limitations
