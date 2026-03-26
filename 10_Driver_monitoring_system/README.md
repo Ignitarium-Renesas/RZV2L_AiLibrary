@@ -17,7 +17,7 @@ It is recommended to setup the camera as shown in the image below. This applicat
 ## Application detailsl
 
 ```
-|-- Driver_Monitoring_System_cam # Application with CORAL camera input
+|-- Driver_monitoring_system_cam # Application with CORAL camera input
 |   |-- Makefile
 |   |-- exe
 |   |   |-- rf_gaze_dir.xml 
@@ -25,7 +25,7 @@ It is recommended to setup the camera as shown in the image below. This applicat
 |   |   |-- deeppose_cam # DRP-AI files of deeppose
 |   |   `-- tinyyolov3_cam # DRP-AI files of tiny-yolov3
 |   `-- src # source code directory
-|-- Driver_Monitoring_System_usbcam # Application with USB camera input
+|-- Driver_monitoring_system_usbcam # Application with USB camera input
 |   |-- Makefile
 |   |-- exe
 |   |   |-- rf_gaze_dir.xml 
@@ -82,7 +82,9 @@ make
 ```
 cd /home/root/RZV2L_AiLibrary
 cd 10_Driver_monitoring_system/Driver_monitoring_system_usbcam/exe/
+su
 ./driver_monitoring_system_<usbcam/cam>_app
+exit
 ```
 
 ### Example:
@@ -90,7 +92,9 @@ cd 10_Driver_monitoring_system/Driver_monitoring_system_usbcam/exe/
 ```
 cd /home/root/RZV2L_AiLibrary
 cd 10_Driver_monitoring_system/Driver_monitoring_system_usbcam/exe/
+su
 ./driver_monitoring_system_usbcam_app
+exit
 ```
 
 ## Limitations
