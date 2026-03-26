@@ -14,12 +14,14 @@ sample video on YouTube -[Head counting demo](https://youtu.be/YNcCCiSx9YM)
 |-- 01_Head_count.mp4 # sample demo
 |-- Head_count_cam/ # Head count application on Coral camera input
 |   |-- Makefile
+|   |-- examples/
 |   |-- exe/
 |   |   |-- head_count_cam_app # the executable
 |   |   `-- yolov3_cam # DRP-AI files of yolov3
 |   `-- src/ # source code directory
 |-- Head_count_img # Head count application on image input
 |   |-- Makefile
+|   |-- examples/
 |   |-- exe/
 |   |   |-- head_count_img_app # the executable
 |   |   |-- labels.txt # label map
@@ -28,6 +30,7 @@ sample video on YouTube -[Head counting demo](https://youtu.be/YNcCCiSx9YM)
 |   `-- test_images # test images directory
 |-- Head_count_usbcam # Head count application on USB camera input
 |   |-- Makefile
+|   |-- examples/
 |   |-- exe/
 |   |   |-- head_count_usbcam_app # the executable
 |   |   `-- yolov3_cam # DRP-AI files of yolov3
