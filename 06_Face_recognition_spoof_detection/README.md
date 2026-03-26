@@ -361,7 +361,7 @@ cd 06_Face_recognition_spoof_detection/Face_spoof_detection_<cam/webcam>/exe/
 ```
 su
 ./face_spoof_detection_cam_app
-exit
+exit # After running the application to terminate it.
 ```
 
 ## Limitations
