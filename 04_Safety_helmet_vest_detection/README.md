@@ -14,33 +14,29 @@ sample video on YouTube -[Safety helmet & vest detection demo video](https://you
 |
 |-- Safety_helmet_vest_cam/ # Safety Helmet Vest Detection application on camera
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- examples/
 |   |   `-- Safety_helmet_vest_cam_example.cpp # example inference code on camera
 |   |-- exe/
 |   |   |-- safety_helmet_vest_cam_app # the executable
-|   |   `-- yolov3_cam # DRP-AI files of yolov3
+|   |   `-- yolov3_Helmet_vest_detection # DRP-AI files of yolov3
 |   `-- src/ # source code directory
 |-- Safety_helmet_vest_img # Safety Helmet Vest Detection application on images input
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- examples/
 |   |   `-- Safety_helmet_vest_example.cpp #example inference code on image input
 |   |-- exe/
 |   |   |-- safety_helmet_vest_img_app # the executable
 |   |   |-- labels.txt # label map
-|   |   `-- yolov3_bmp # DRP-AI files of yolov3
+|   |   `-- yolov3_Helmet_vest_detection # DRP-AI files of yolov3
 |   |-- src/ # source code directory
 |   `-- test_images # test images directory
 |-- Safety_helmet_vest_usbcam # Safety Helmet Vest Detection application on usb camera input
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- examples/
 |   |   `-- Safety_helmet_vest_example.cpp #example inference code on usb camera input
 |   |-- exe/
 |   |   |-- safety_helmet_vest_usbcam_app # the executable
-|   |   |-- labels.txt # label map
-|   |   `-- yolov3_bmp # DRP-AI files of yolov3
+|   |   `-- yolov3_Helmet_vest_detection # DRP-AI files of yolov3
 |   `-- src/ # source code directory
 `-- README.md
 ```
@@ -84,7 +80,9 @@ make
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 04_Safety_helmet_vest_detection/Safety_helmet_vest_<cam/usbcam>/exe
+su
 ./safety_helmet_vest_<cam/usbcam>_app
+exit
 ```
 ### Application with image input
 
@@ -94,7 +92,9 @@ The user should pass the path to the image as an argument, optionally it's width
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 04_Safety_helmet_vest_detection/Safety_helmet_vest_img/exe
+su
 ./safety_helmet_vest_img_app ../test_images/1.jpg
+exit
 ```
 ### Known issues:
 1. [ERROR] Image buffer address is NULL : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.
