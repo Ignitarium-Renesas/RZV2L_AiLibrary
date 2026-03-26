@@ -74,7 +74,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 09_Human_gaze_detection/Human_gaze_detection_usbcam/exe/
 su
 ./human_gaze_detection_usbcam_app
-exit
+exit # After pressing ENTER key to terminate the application.
 ```
 
 ### Example:
@@ -84,7 +84,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 09_Human_gaze_detection/Human_gaze_detection_usbcam/exe/
 su
 ./human_gaze_detection_usbcam_app
-exit
+exit # After pressing ENTER key to terminate the application.
 ```
 
 ## Limitations
