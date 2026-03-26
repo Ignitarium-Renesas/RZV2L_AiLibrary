@@ -95,7 +95,7 @@ The generated executable file from laptop needs to be transfered on the RZv2L bo
 cd exe/
 su
 ./line_crossing_object_counting_usbcam_app person 150 0 350 450 1
-exit
+exit # After pressing ENTER key to terminate the application.
 ~~~
 
 ### Sample image for the command entered above:
