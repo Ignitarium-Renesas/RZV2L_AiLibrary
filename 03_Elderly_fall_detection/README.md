@@ -78,7 +78,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 03_Elderly_fall_detection/Elderly_fall_detection_cam/exe/
 su
 ./elderly_fall_detection_cam_app
-exit
+exit # After pressing ENTER key to terminate the application.
 ```
 
 ### Example:
@@ -88,7 +88,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 03_Elderly_fall_detection/Elderly_fall_detection_cam/exe/
 su
 ./elderly_fall_detection_cam_app
-exit
+exit # After pressing ENTER key to terminate the application.
 ```
 
 ## Limitations
