@@ -18,7 +18,7 @@ sample video on YouTube -[Head counting demo](https://youtu.be/YNcCCiSx9YM)
 |   |-- examples/
 |   |   `-- head_count_cam_example.cpp # example inference code
 |   |-- exe/
-|   |   |-- 01_head_count_cam_app # the executable
+|   |   |-- head_count_cam_app # the executable
 |   |   `-- yolov3_cam # DRP-AI files of yolov3
 |   `-- src/ # source code directory
 |-- Head_count_img # Head count application on image input
@@ -27,7 +27,7 @@ sample video on YouTube -[Head counting demo](https://youtu.be/YNcCCiSx9YM)
 |   |-- examples/
 |   |   `-- head_count_example.cpp # example inference code
 |   |-- exe/
-|   |   |-- 01_head_count_img_app # the executable
+|   |   |-- head_count_img_app # the executable
 |   |   |-- labels.txt # label map
 |   |   `-- yolov3_bmp # DRP-AI files of yolov3
 |   |-- src/ # source code directory
@@ -38,7 +38,7 @@ sample video on YouTube -[Head counting demo](https://youtu.be/YNcCCiSx9YM)
 |   |-- examples/
 |   |   `-- head_count_cam_example.cpp # example inference code
 |   |-- exe/
-|   |   |-- 01_head_count_usbcam_app # the executable
+|   |   |-- head_count_usbcam_app # the executable
 |   |   `-- yolov3_cam # DRP-AI files of yolov3
 |   `-- src/ # source code directory
 `-- README.md
@@ -85,7 +85,9 @@ Praparation on laptop:
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/Head_count_img/exe/
+su
 ./head_count_img_app ../test_images/elevator_google_0007_640_480.bmp
+exit
 ```
 Optionally the user can pass width and height as arguments.
 
@@ -93,14 +95,18 @@ Optionally the user can pass width and height as arguments.
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/Head_count_cam/exe/
+su
 ./head_count_cam_app
+exit
 ```
 
 #### Application with USB camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/Head_count_usbcam/exe/
+su
 ./head_count_usbcam_app
+exit
 ```
 
 ### Known issues:
