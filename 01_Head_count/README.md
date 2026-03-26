@@ -78,7 +78,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 01_Head_count/Head_count_img/exe/
 su
 ./head_count_img_app ../test_images/elevator_google_0007_640_480.bmp
-exit
+exit # After running the application to terminate it.
 ```
 Optionally the user can pass width and height as arguments.
 
@@ -88,7 +88,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 01_Head_count/Head_count_cam/exe/
 su
 ./head_count_cam_app
-exit
+exit # After pressing ENTER key to terminate the application.
 ```
 
 #### Application with USB camera input
@@ -97,7 +97,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 01_Head_count/Head_count_usbcam/exe/
 su
 ./head_count_usbcam_app
-exit
+exit # After pressing ENTER key to terminate the application.
 ```
 
 ### Known issues:
