@@ -85,7 +85,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 05_Age_gender_detection/Age_gender_classification_<cam/usbcam>/exe
 su
 ./age_gender_classification_<cam/usbcam>_app
-exit
+exit # After pressing ENTER key to terminate the application.
 ```
 
 #### Running the image application
@@ -97,7 +97,7 @@ cd /home/root/RZV2L_AiLibrary
 cd 05_Age_gender_detection/Age_gender_classification_img/exe
 su
 ./age_gender_classification_img_app ../test_files/21-40_02.bmp
-exit
+exit # After running the application to terminate it.
 ```
 
 ## Limitation
