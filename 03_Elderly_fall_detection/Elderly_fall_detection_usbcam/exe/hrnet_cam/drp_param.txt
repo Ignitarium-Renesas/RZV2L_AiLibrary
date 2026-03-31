@@ -132,10 +132,14 @@ OFFSET_ADD:232, layer name: /backbone/stage2/stage2.0/fuse_layers.0.1/fuse_layer
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:288, layer name: /backbone/stage3/stage3.0/fuse_layers.0.2/fuse_layers.0.2.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:296, layer name: /backbone/stage3/stage3.0/fuse_layers.0.2/fuse_layers.0.2.2/Resize_output_0
   Param: raddr               Value: 0x81c74000
   Param: waddr               Value: 0x81c77000
   Param: IMG_IWIDHT          Value: 0xc
@@ -159,10 +163,14 @@ OFFSET_ADD:288, layer name: /backbone/stage3/stage3.0/fuse_layers.0.2/fuse_layer
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:344, layer name: /backbone/stage3/stage3.0/fuse_layers.1.2/fuse_layers.1.2.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:360, layer name: /backbone/stage3/stage3.0/fuse_layers.1.2/fuse_layers.1.2.2/Resize_output_0
   Param: raddr               Value: 0x81ca7000
   Param: waddr               Value: 0x81cad000
   Param: IMG_IWIDHT          Value: 0xc
@@ -186,10 +194,14 @@ OFFSET_ADD:344, layer name: /backbone/stage3/stage3.0/fuse_layers.1.2/fuse_layer
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:400, layer name: /backbone/stage3/stage3.0/fuse_layers.0.1/fuse_layers.0.1.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:424, layer name: /backbone/stage3/stage3.0/fuse_layers.0.1/fuse_layers.0.1.2/Resize_output_0
   Param: raddr               Value: 0x81de5000
   Param: waddr               Value: 0x81df1000
   Param: IMG_IWIDHT          Value: 0x18
@@ -213,10 +225,14 @@ OFFSET_ADD:400, layer name: /backbone/stage3/stage3.0/fuse_layers.0.1/fuse_layer
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:456, layer name: /backbone/stage3/stage3.1/fuse_layers.0.1/fuse_layers.0.1.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:488, layer name: /backbone/stage3/stage3.1/fuse_layers.0.1/fuse_layers.0.1.2/Resize_output_0
   Param: raddr               Value: 0x82241000
   Param: waddr               Value: 0x8224d000
   Param: IMG_IWIDHT          Value: 0x18
@@ -240,10 +256,14 @@ OFFSET_ADD:456, layer name: /backbone/stage3/stage3.1/fuse_layers.0.1/fuse_layer
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:512, layer name: /backbone/stage3/stage3.1/fuse_layers.0.2/fuse_layers.0.2.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:552, layer name: /backbone/stage3/stage3.1/fuse_layers.0.2/fuse_layers.0.2.2/Resize_output_0
   Param: raddr               Value: 0x82391000
   Param: waddr               Value: 0x82394000
   Param: IMG_IWIDHT          Value: 0xc
@@ -267,10 +287,14 @@ OFFSET_ADD:512, layer name: /backbone/stage3/stage3.1/fuse_layers.0.2/fuse_layer
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:568, layer name: /backbone/stage3/stage3.1/fuse_layers.1.2/fuse_layers.1.2.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:616, layer name: /backbone/stage3/stage3.1/fuse_layers.1.2/fuse_layers.1.2.2/Resize_output_0
   Param: raddr               Value: 0x82664000
   Param: waddr               Value: 0x8266a000
   Param: IMG_IWIDHT          Value: 0xc
@@ -294,10 +318,14 @@ OFFSET_ADD:568, layer name: /backbone/stage3/stage3.1/fuse_layers.1.2/fuse_layer
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:624, layer name: /backbone/stage3/stage3.2/fuse_layers.0.1/fuse_layers.0.1.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:680, layer name: /backbone/stage3/stage3.2/fuse_layers.0.1/fuse_layers.0.1.2/Resize_output_0
   Param: raddr               Value: 0x827ba000
   Param: waddr               Value: 0x827c6000
   Param: IMG_IWIDHT          Value: 0x18
@@ -321,10 +349,14 @@ OFFSET_ADD:624, layer name: /backbone/stage3/stage3.2/fuse_layers.0.1/fuse_layer
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:680, layer name: /backbone/stage3/stage3.2/fuse_layers.0.2/fuse_layers.0.2.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:744, layer name: /backbone/stage3/stage3.2/fuse_layers.0.2/fuse_layers.0.2.2/Resize_output_0
   Param: raddr               Value: 0x828f2000
   Param: waddr               Value: 0x828f5000
   Param: IMG_IWIDHT          Value: 0xc
@@ -348,10 +380,14 @@ OFFSET_ADD:680, layer name: /backbone/stage3/stage3.2/fuse_layers.0.2/fuse_layer
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:736, layer name: /backbone/stage3/stage3.2/fuse_layers.1.2/fuse_layers.1.2.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:808, layer name: /backbone/stage3/stage3.2/fuse_layers.1.2/fuse_layers.1.2.2/Resize_output_0
   Param: raddr               Value: 0x82bc5000
   Param: waddr               Value: 0x82bcb000
   Param: IMG_IWIDHT          Value: 0xc
@@ -375,10 +411,14 @@ OFFSET_ADD:736, layer name: /backbone/stage3/stage3.2/fuse_layers.1.2/fuse_layer
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:792, layer name: /backbone/stage3/stage3.3/fuse_layers.0.1/fuse_layers.0.1.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:872, layer name: /backbone/stage3/stage3.3/fuse_layers.0.1/fuse_layers.0.1.2/Resize_output_0
   Param: raddr               Value: 0x82d1b000
   Param: waddr               Value: 0x82d27000
   Param: IMG_IWIDHT          Value: 0x18
@@ -402,10 +442,14 @@ OFFSET_ADD:792, layer name: /backbone/stage3/stage3.3/fuse_layers.0.1/fuse_layer
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:848, layer name: /backbone/stage3/stage3.3/fuse_layers.0.2/fuse_layers.0.2.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:936, layer name: /backbone/stage3/stage3.3/fuse_layers.0.2/fuse_layers.0.2.2/Resize_output_0
   Param: raddr               Value: 0x82e53000
   Param: waddr               Value: 0x82e56000
   Param: IMG_IWIDHT          Value: 0xc
@@ -429,10 +473,14 @@ OFFSET_ADD:848, layer name: /backbone/stage3/stage3.3/fuse_layers.0.2/fuse_layer
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:904, layer name: /backbone/stage3/stage3.3/fuse_layers.1.2/fuse_layers.1.2.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1000, layer name: /backbone/stage3/stage3.3/fuse_layers.1.2/fuse_layers.1.2.2/Resize_output_0
   Param: raddr               Value: 0x8313b000
   Param: waddr               Value: 0x83141000
   Param: IMG_IWIDHT          Value: 0xc
@@ -456,10 +504,14 @@ OFFSET_ADD:904, layer name: /backbone/stage3/stage3.3/fuse_layers.1.2/fuse_layer
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:960, layer name: /backbone/stage4/stage4.0/fuse_layers.0.1/fuse_layers.0.1.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1064, layer name: /backbone/stage4/stage4.0/fuse_layers.0.1/fuse_layers.0.1.2/Resize_output_0
   Param: raddr               Value: 0x83291000
   Param: waddr               Value: 0x8329d000
   Param: IMG_IWIDHT          Value: 0x18
@@ -483,10 +535,14 @@ OFFSET_ADD:960, layer name: /backbone/stage4/stage4.0/fuse_layers.0.1/fuse_layer
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1016, layer name: /backbone/stage4/stage4.0/fuse_layers.0.3/fuse_layers.0.3.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1128, layer name: /backbone/stage4/stage4.0/fuse_layers.0.3/fuse_layers.0.3.2/Resize_output_0
   Param: raddr               Value: 0x83399000
   Param: waddr               Value: 0x83399c00
   Param: IMG_IWIDHT          Value: 0x6
@@ -510,10 +566,14 @@ OFFSET_ADD:1016, layer name: /backbone/stage4/stage4.0/fuse_layers.0.3/fuse_laye
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1072, layer name: /backbone/stage4/stage4.0/fuse_layers.1.3/fuse_layers.1.3.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1192, layer name: /backbone/stage4/stage4.0/fuse_layers.1.3/fuse_layers.1.3.2/Resize_output_0
   Param: raddr               Value: 0x833c9c00
   Param: waddr               Value: 0x833cb400
   Param: IMG_IWIDHT          Value: 0x6
@@ -537,10 +597,14 @@ OFFSET_ADD:1072, layer name: /backbone/stage4/stage4.0/fuse_layers.1.3/fuse_laye
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1128, layer name: /backbone/stage4/stage4.0/fuse_layers.2.3/fuse_layers.2.3.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1256, layer name: /backbone/stage4/stage4.0/fuse_layers.2.3/fuse_layers.2.3.2/Resize_output_0
   Param: raddr               Value: 0x833e3400
   Param: waddr               Value: 0x833e6400
   Param: IMG_IWIDHT          Value: 0x6
@@ -564,10 +628,14 @@ OFFSET_ADD:1128, layer name: /backbone/stage4/stage4.0/fuse_layers.2.3/fuse_laye
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1184, layer name: /backbone/stage4/stage4.0/fuse_layers.0.2/fuse_layers.0.2.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1320, layer name: /backbone/stage4/stage4.0/fuse_layers.0.2/fuse_layers.0.2.2/Resize_output_0
   Param: raddr               Value: 0x83482400
   Param: waddr               Value: 0x83485400
   Param: IMG_IWIDHT          Value: 0xc
@@ -591,10 +659,14 @@ OFFSET_ADD:1184, layer name: /backbone/stage4/stage4.0/fuse_layers.0.2/fuse_laye
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1240, layer name: /backbone/stage4/stage4.0/fuse_layers.1.2/fuse_layers.1.2.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1384, layer name: /backbone/stage4/stage4.0/fuse_layers.1.2/fuse_layers.1.2.2/Resize_output_0
   Param: raddr               Value: 0x8379a400
   Param: waddr               Value: 0x837a0400
   Param: IMG_IWIDHT          Value: 0xc
@@ -618,10 +690,14 @@ OFFSET_ADD:1240, layer name: /backbone/stage4/stage4.0/fuse_layers.1.2/fuse_laye
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1296, layer name: /backbone/stage4/stage4.1/fuse_layers.0.1/fuse_layers.0.1.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1448, layer name: /backbone/stage4/stage4.1/fuse_layers.0.1/fuse_layers.0.1.2/Resize_output_0
   Param: raddr               Value: 0x83908400
   Param: waddr               Value: 0x83914400
   Param: IMG_IWIDHT          Value: 0x18
@@ -645,10 +721,14 @@ OFFSET_ADD:1296, layer name: /backbone/stage4/stage4.1/fuse_layers.0.1/fuse_laye
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1352, layer name: /backbone/stage4/stage4.1/fuse_layers.0.2/fuse_layers.0.2.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1512, layer name: /backbone/stage4/stage4.1/fuse_layers.0.2/fuse_layers.0.2.2/Resize_output_0
   Param: raddr               Value: 0x83a5e400
   Param: waddr               Value: 0x83a61400
   Param: IMG_IWIDHT          Value: 0xc
@@ -672,10 +752,14 @@ OFFSET_ADD:1352, layer name: /backbone/stage4/stage4.1/fuse_layers.0.2/fuse_laye
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1408, layer name: /backbone/stage4/stage4.1/fuse_layers.1.2/fuse_layers.1.2.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1576, layer name: /backbone/stage4/stage4.1/fuse_layers.1.2/fuse_layers.1.2.2/Resize_output_0
   Param: raddr               Value: 0x83ac1400
   Param: waddr               Value: 0x83ac7400
   Param: IMG_IWIDHT          Value: 0xc
@@ -699,10 +783,14 @@ OFFSET_ADD:1408, layer name: /backbone/stage4/stage4.1/fuse_layers.1.2/fuse_laye
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1464, layer name: /backbone/stage4/stage4.1/fuse_layers.0.3/fuse_layers.0.3.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1640, layer name: /backbone/stage4/stage4.1/fuse_layers.0.3/fuse_layers.0.3.2/Resize_output_0
   Param: raddr               Value: 0x83b69400
   Param: waddr               Value: 0x83b6a000
   Param: IMG_IWIDHT          Value: 0x6
@@ -726,10 +814,14 @@ OFFSET_ADD:1464, layer name: /backbone/stage4/stage4.1/fuse_layers.0.3/fuse_laye
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1520, layer name: /backbone/stage4/stage4.1/fuse_layers.1.3/fuse_layers.1.3.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1704, layer name: /backbone/stage4/stage4.1/fuse_layers.1.3/fuse_layers.1.3.2/Resize_output_0
   Param: raddr               Value: 0x83e0a000
   Param: waddr               Value: 0x83e0b800
   Param: IMG_IWIDHT          Value: 0x6
@@ -753,10 +845,14 @@ OFFSET_ADD:1520, layer name: /backbone/stage4/stage4.1/fuse_layers.1.3/fuse_laye
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1576, layer name: /backbone/stage4/stage4.2/fuse_layers.0.1/fuse_layers.0.1.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1768, layer name: /backbone/stage4/stage4.2/fuse_layers.0.1/fuse_layers.0.1.2/Resize_output_0
   Param: raddr               Value: 0x83f5b800
   Param: waddr               Value: 0x83f67800
   Param: IMG_IWIDHT          Value: 0x18
@@ -780,10 +876,14 @@ OFFSET_ADD:1576, layer name: /backbone/stage4/stage4.2/fuse_layers.0.1/fuse_laye
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1632, layer name: /backbone/stage4/stage4.1/fuse_layers.2.3/fuse_layers.2.3.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1832, layer name: /backbone/stage4/stage4.1/fuse_layers.2.3/fuse_layers.2.3.2/Resize_output_0
   Param: raddr               Value: 0x83fc7800
   Param: waddr               Value: 0x83fca800
   Param: IMG_IWIDHT          Value: 0x6
@@ -807,10 +907,14 @@ OFFSET_ADD:1632, layer name: /backbone/stage4/stage4.1/fuse_layers.2.3/fuse_laye
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1688, layer name: /backbone/stage4/stage4.2/fuse_layers.0.2/fuse_layers.0.2.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1896, layer name: /backbone/stage4/stage4.2/fuse_layers.0.2/fuse_layers.0.2.2/Resize_output_0
   Param: raddr               Value: 0x84072800
   Param: waddr               Value: 0x84075800
   Param: IMG_IWIDHT          Value: 0xc
@@ -834,10 +938,14 @@ OFFSET_ADD:1688, layer name: /backbone/stage4/stage4.2/fuse_layers.0.2/fuse_laye
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1744, layer name: /backbone/stage4/stage4.2/fuse_layers.0.3/fuse_layers.0.3.2/Resize_output_0
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:1960, layer name: /backbone/stage4/stage4.2/fuse_layers.0.3/fuse_layers.0.3.2/Resize_output_0
   Param: raddr               Value: 0x84123800
   Param: waddr               Value: 0x84124400
   Param: IMG_IWIDHT          Value: 0x6
@@ -861,10 +969,14 @@ OFFSET_ADD:1744, layer name: /backbone/stage4/stage4.2/fuse_layers.0.3/fuse_laye
   Param: RFU2                Value: 0x0
   Param: RFU3                Value: 0x0
   Param: RESIZE_ALG          Value: 0x12
+  Param: DATA_TYPE           Value: 0x1
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
   Param: RFU6                Value: 0x0
-OFFSET_ADD:1800, layer name: post_0_0_transpose
+  Param: RFU7                Value: 0x0
+  Param: RFU8                Value: 0x0
+  Param: RFU9                Value: 0x0
+OFFSET_ADD:2024, layer name: post_0_0_transpose
   Param: raddr               Value: 0x84184400
   Param: waddr               Value: 0x8419dc00
   Param: IMG_IWIDHT          Value: 0x30
@@ -891,7 +1003,7 @@ OFFSET_ADD:1800, layer name: post_0_0_transpose
   Param: IS_CHW2HWC          Value: 0x0
   Param: RFU4                Value: 0x0
   Param: RFU5                Value: 0x0
-OFFSET_ADD:1856, layer name: post_0_1_cast_fp16_fp32
+OFFSET_ADD:2080, layer name: post_0_1_cast_fp16_fp32
   Param: raddr               Value: 0x8419dc00
   Param: waddr               Value: 0x841b7400
   Param: IMG_IWIDHT          Value: 0x30

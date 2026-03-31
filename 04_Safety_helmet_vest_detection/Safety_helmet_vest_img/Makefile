@@ -1,16 +1,19 @@
 all: 04_Safety_helmet_vest_img \
 
+MMNGR_LINK = -isystem ${SDKTARGETSYSROOT}/usr/local/include \
+             -lmmngr -lmmngrbuf \
+
 OPENCV_LINK = -isystem ${SDKTARGETSYSROOT}/usr/include/opencv4 \
 	-lopencv_imgcodecs -lopencv_imgproc -lopencv_core -lopencv_highgui
 
 BSP_SDK_FLAG = \
 	-ljpeg -lwebp -ltiff -lz -ltbb -lgtk-3 -lpng16 -lgdk-3 -lcairo  \
 	-llzma -lrt -lcairo-gobject \
-	-lxkbcommon -lwayland-cursor -lwayland-egl -lwayland-client -lepoxy \
+	-lxkbcommon -lepoxy \
 	-lfribidi -lharfbuzz -lfontconfig \
 	-lglib-2.0 -lgobject-2.0 -lgdk_pixbuf-2.0 -lgmodule-2.0 -lpangocairo-1.0 \
 	-latk-1.0 -lgio-2.0 -lpango-1.0 -lfreetype -lpixman-1 -luuid -lpcre \
-	-lmount -lresolv -lexpat -lpangoft2-1.0 -lblkid \
+	-lmount -lresolv -lexpat -lpangoft2-1.0 -lblkid -lGLESv2 -lEGL \
 
 # List all the files
 SRC_SHV_IMG=examples/Safety_helmet_vest_img_example.cpp \
@@ -32,7 +35,7 @@ CFLAGS_SHV_IMG += -DYOLOV3
 
 04_Safety_helmet_vest_img: ${SRC_SHV_IMG}
 	${CXX} -std=c++14 $(filter %.cpp,${SRC_SHV_IMG}) ${CFLAGS_SHV_IMG} \
-	${OPENCV_LINK} ${BSP_SDK_FLAG} \
+	${MMNGR_LINK} ${OPENCV_LINK} ${BSP_SDK_FLAG} \
 	-lpthread -O2 -ldl ${LDFLAGS} \
 	-o exe/safety_helmet_vest_img_app
 

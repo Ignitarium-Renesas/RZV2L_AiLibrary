@@ -32,14 +32,12 @@ Classifies the given camera frame to genuine or spoofed.
 ```
 |-- Face_recognition_cam # Face recognition with CORAL camera input
 |   |-- Makefile
-|   |-- etc
 |   |-- exe
 |   |   |-- arcface_cam # DRP-AI files of arcface
 |   |   `-- face_recognition_cam_app # The executable
 |   `-- src
 |-- Face_recognition_img # Face recognition with image input
 |   |-- Makefile
-|   |-- etc
 |   |-- exe
 |   |   |-- face_recognition_img_app # The executable
 |   |   |-- arcface_bmp # DRP-AI files of arcface
@@ -47,35 +45,30 @@ Classifies the given camera frame to genuine or spoofed.
 |   `-- src
 |-- Face_recognition_usbcam # Face recognition with USB camera input
 |   |-- Makefile
-|   |-- etc
 |   |-- exe
 |   |   |-- arcface_cam # DRP-AI files of arcface
 |   |   `-- face_recognition_usbcam_app # The executable
 |   `-- src
 -- Face_registration_cam # Face registration app with CORAL camera input
 |   |-- Makefile
-|   |-- etc
 |   |-- exe
 |   |   |-- arcface_bmp # DRP-AI files of arcface
 |   |   `-- face_registration_cam_app # The executable
 |   `-- src
 |-- Face_registration_usbcam # Face registration app with USB camera input
 |   |-- Makefile
-|   |-- etc
 |   |-- exe
 |   |   |-- arcface_bmp # DRP-AI files of arcface
 |   |   `-- face_registration_usbcam_app # The executable
 |   `-- src
 |-- Face_spoof_detection_cam # Face spoof detection on CORAL Camera input
 |   |-- Makefile
-|   |-- etc
 |   |-- exe
 |   |   |-- face_spoof_detection_cam_app # The executable
 |   |   `-- resnet50_classifier_cam # DRP-AI files of resnet50
 |   `-- src
 |-- Face_spoof_detection_img # Face spoof detection on image input
 |   |-- Makefile
-|   |-- etc
 |   |-- exe
 |   |   |-- face_spoof_detection_img_app # The executable
 |   |   |-- resnet50_classifier_bmp # DRP-AI files of resnet50
@@ -83,7 +76,6 @@ Classifies the given camera frame to genuine or spoofed.
 |   `-- src
 |-- Face_spoof_detection_usbcam Face spoof detection on USB Camera input
 |   |-- Makefile
-|   |-- etc
 |   |-- exe
 |   |   |-- face_spoof_detection_usbcam_app # The executable
 |   |   `-- resnet50_classifier_cam # DRP-AI files of resnet50
@@ -121,14 +113,14 @@ Classifies the given camera frame to genuine or spoofed.
 
 ## Running the application
 
-Weight files for this application are availbale in [release 5.00](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v5.00).
-Kindly paste the file [arcface_bmp_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/arcface_bmp_weight.dat) in below folders 
+Weight files for this application are availbale in [release v7.10](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v7.10).
+Kindly paste the file [arcface_bmp_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v7.10/arcface_bmp_weight.dat) in below folders 
 ```
 06_Face_recognition_spoof_detection/Face_recognition_img/exe/arcface_bmp/
 06_Face_recognition_spoof_detection/Face_registration_usbcam/exe/arcface_bmp/
 06_Face_recognition_spoof_detection/Face_registration_cam/exe/arcface_bmp/
 ```
-and [arcface_cam_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/arcface_cam_weight.dat) file in below folders.
+and [arcface_cam_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v7.10/arcface_cam_weight.dat) file in below folders.
 ```
 06_Face_recognition_spoof_detection/Face_recognition_cam/exe/arcface_cam/
 06_Face_recognition_spoof_detection/Face_recognition_usbcam/exe/arcface_cam/
@@ -168,6 +160,7 @@ cd 06_Face_recognition_spoof_detection/Face_registration_<cam/usbcam>/exe/
         3. Enter c (c+Enter) to capture.
 
 ```
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration_usbcam/exe# su
 root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration_usbcam/exe# ./face_registration_usbcam_app
 Choose any one option from below
 [0] for capturing new face
@@ -220,6 +213,7 @@ Inference -----------------------------------------------
 [START] DRP-AI
 [END] DRP-AI
 Input: /home/root/06_Face_recognition_spoof_detection/Face_registration_cam/exe/captures/Chris.bmp
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_registration_cam/exe# exit
 ```
 
 6. The face embedding database - `database/face_features.csv` would get updated.
@@ -236,6 +230,7 @@ cd 06_Face_recognition_spoof_detection/Face_recognition_img/exe/
 3. Copy test image (`sample.bmp`) to `06_Face_recognition_spoof_detection/Face_recognition_img/exe/`.
 4. Run the executable.
 ```
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_img/exe# su
 root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_img/exe# ./face_recognition_img_app
 RZ/V2L DRP-AI Sample Application
 Model : ArcFace    | arcface_bmp
@@ -251,6 +246,7 @@ Inference -----------------------------------------------
 Input: sample.bmp
 
 Recognized person is sahal
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_img/exe# exit
 ```
 
 #### Face Recognition Camera
@@ -266,6 +262,7 @@ cd 06_Face_recognition_spoof_detection/Face_recognition_<cam/webcam>/exe/
 4. Run the executable. When calibrating the background no faces or moving objects be present in the frame.
 
 ```
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_cam/exe# su
 root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_cam/exe# ./face_recognition_cam_app 
 RZ/V2L DRP-AI Sample Application
 Model : ArcFace    | arcface_cam
@@ -318,6 +315,7 @@ Main Process Terminated
 AI Inference Thread Terminated
 Capture Thread Terminated
 Application End
+root@smarc-rzv2l:~/RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_recognition_cam/exe# exit
 ```
 
 #### Face Spoof Detection Image
@@ -332,6 +330,7 @@ cd 06_Face_recognition_spoof_detection/Face_spoof_detection_img/exe/
 4. Copy the image to be checked to `Face_spoof_detection_img/exe/sample.bmp`.
 5. Run the executable.
 ```
+root@smarc-rzv2l:~RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_spoof_detection_img/exe# su
 root@smarc-rzv2l:~RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_spoof_detection_img/exe# ./face_spoof_detection_img_app 
 RZ/V2L DRP-AI Sample Application
 Model : PyTorch ResNet    | resnet50_classifier_bmp
@@ -346,6 +345,7 @@ Inference -----------------------------------------------
 [END] DRP-AI
  
 Genuine Face Detected
+root@smarc-rzv2l:~RZV2L_AiLibrary/06_Face_recognition_spoof_detection/Face_spoof_detection_img/exe# exit
 ```
 
 #### Face Spoof Detection Camera
@@ -359,7 +359,9 @@ cd 06_Face_recognition_spoof_detection/Face_spoof_detection_<cam/webcam>/exe/
 ```
 4. Run the executable.
 ```
+su
 ./face_spoof_detection_cam_app
+exit # After running the application to terminate it.
 ```
 
 ## Limitations
@@ -376,10 +378,3 @@ cd 06_Face_recognition_spoof_detection/Face_spoof_detection_<cam/webcam>/exe/
 4. [ERROR] Failed to initialize USB Camera - This error is observed if camera is not connected to the board. Check camera connection properly. Connect and restart the board.
 5. permission denied - This error may occur if executable file does not have execution permission. Use this command - `chmod 777 executable_filename` to assign proper permissions.
 6. [ERROR] Failed to open: <prefix>/<prefix>_weight.dat error=2. [ERROR] Failed to load data from memory: <prefix>/<prefix>_weight.dat Failed to load DRP-AI object files - This error suggests that the weight file is not availbale in the `exe` folder. Download the weight file from the release in github and place it properly in the `exe/subfolder`.
-7. When capturing a new face, USB camera is not detecting then edit `Face_registration/src/capture_face.cpp` and build new executable. Or you may be able to capture a new face with USB camera at connecting only USB camera.
-
-
-```
-    /* Create a VideoCapture object. Change the constructor argument based on the video feed (/dev/video1 is being captured below) */
-    VideoCapture cap(1);
-```

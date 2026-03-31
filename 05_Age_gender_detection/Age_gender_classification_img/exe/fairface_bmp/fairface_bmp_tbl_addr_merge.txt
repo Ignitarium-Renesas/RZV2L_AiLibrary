@@ -226,8 +226,8 @@ post_0_0_imagescaler_cof_mul      1081353316
 /layer4/layer4.2/conv2/Conv_output_0_o7_k0_i0_param    1102349480
 /layer4/layer4.2/conv2/Conv_output_0_o7_k0_i1_param    1102497128
 output_o0_k0_i0_param             1102644584
-resize_hwc.mem                    1102653824     183000
-imagescaler.mem                   1102836832     157036
-maxpooling_k3_st2.mem             1102993872     131864
-gap.mem                           1103125744     141508
-softmax.mem                       1103267264     157068
+resize_hwc.mem                    1102653824     178780
+imagescaler.mem                   1102832608     157036
+maxpooling_k3_st2.mem             1102989648     131864
+gap.mem                           1103121520     141508
+softmax.mem                       1103263040     137908

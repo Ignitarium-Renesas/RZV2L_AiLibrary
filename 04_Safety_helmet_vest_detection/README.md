@@ -14,33 +14,29 @@ sample video on YouTube -[Safety helmet & vest detection demo video](https://you
 |
 |-- Safety_helmet_vest_cam/ # Safety Helmet Vest Detection application on camera
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- examples/
 |   |   `-- Safety_helmet_vest_cam_example.cpp # example inference code on camera
 |   |-- exe/
 |   |   |-- safety_helmet_vest_cam_app # the executable
-|   |   `-- yolov3_cam # DRP-AI files of yolov3
+|   |   `-- yolov3_Helmet_vest_detection # DRP-AI files of yolov3
 |   `-- src/ # source code directory
 |-- Safety_helmet_vest_img # Safety Helmet Vest Detection application on images input
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- examples/
 |   |   `-- Safety_helmet_vest_example.cpp #example inference code on image input
 |   |-- exe/
 |   |   |-- safety_helmet_vest_img_app # the executable
 |   |   |-- labels.txt # label map
-|   |   `-- yolov3_bmp # DRP-AI files of yolov3
+|   |   `-- yolov3_Helmet_vest_detection # DRP-AI files of yolov3
 |   |-- src/ # source code directory
 |   `-- test_images # test images directory
 |-- Safety_helmet_vest_usbcam # Safety Helmet Vest Detection application on usb camera input
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- examples/
 |   |   `-- Safety_helmet_vest_example.cpp #example inference code on usb camera input
 |   |-- exe/
 |   |   |-- safety_helmet_vest_usbcam_app # the executable
-|   |   |-- labels.txt # label map
-|   |   `-- yolov3_bmp # DRP-AI files of yolov3
+|   |   `-- yolov3_Helmet_vest_detection # DRP-AI files of yolov3
 |   `-- src/ # source code directory
 `-- README.md
 ```
@@ -74,8 +70,8 @@ make
 ```
 
 ## Running the application
-1. Download the `yolov3_Helmet_vest_detection_weight.dat` weights file from the [release v5.00](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v5.00). Precise file link : [yolov3_Helmet_vest_detection_weight.dat]( https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/yolov3_Helmet_vest_detection_weight.dat)
-2. Place `yolov3_Helmet_vest_detection_weights.dat` file at the location `04_Safety_helmet_vest_detection/Safety_helmet_vest_cam/exe/yolov3_Helmet_vest_detection` or `04_Safety_helmet_vest_detection/Safety_helmet_vest_img/exe/yolov3_Helmet_vest_detection` or `04_Safety_helmet_vest_detection/Safety_helmet_vest_usbcam/exe/yolov3_Helmet_vest_detection` according to to the application that needs to be run.
+1. Download the `yolov3_Helmet_vest_detection_weight.dat` weights file from the [release v7.10](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v7.10). Precise file link : [yolov3_Helmet_vest_detection_weight.dat]( https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v7.10/yolov3_Helmet_vest_detection_weight.dat)
+2. Place `yolov3_Helmet_vest_detection_weights.dat` file at the location `04_Safety_helmet_vest_detection/Safety_helmet_vest_cam/exe/yolov3_Helmet_vest_detection` or `04_Safety_helmet_vest_detection/Safety_helmet_vest_img/exe/yolov3_Helmet_vest_detection` or `04_Safety_helmet_vest_detection/Safety_helmet_vest_usbcam/exe/yolov3_Helmet_vest_detection` according to the application that needs to be run.
 3. Now, copy the `RZV2L_AiLibrary` directory to the board (/home/root/).
 4. Please follow these steps:
 
@@ -84,7 +80,9 @@ make
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 04_Safety_helmet_vest_detection/Safety_helmet_vest_<cam/usbcam>/exe
+su
 ./safety_helmet_vest_<cam/usbcam>_app
+exit # After pressing ENTER key to terminate the application.
 ```
 ### Application with image input
 
@@ -94,7 +92,9 @@ The user should pass the path to the image as an argument, optionally it's width
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 04_Safety_helmet_vest_detection/Safety_helmet_vest_img/exe
+su
 ./safety_helmet_vest_img_app ../test_images/1.jpg
+exit # After running the application to terminate it.
 ```
 ### Known issues:
 1. [ERROR] Image buffer address is NULL : This error suggests that the input path to the image is improper. Verify the path, check whether an image available in the path.

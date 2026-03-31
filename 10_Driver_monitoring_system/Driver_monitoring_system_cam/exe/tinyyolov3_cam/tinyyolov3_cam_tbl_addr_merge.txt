@@ -99,10 +99,10 @@ output1_o0_k0_i0_param            1155139784
 176_o3_k0_i1_param                1155956826
 output2_o0_k0_i0_param            1156067418
 conv_yuv2rgb.mem                  1156072064     179492
-resize_hwc.mem                    1156251568     183000
-imagescaler.mem                   1156434576     157036
-maxpooling_k2_st2.mem             1156591616     107184
-maxpooling_k2_st1.mem             1156698800     125668
-resize_onnx.mem                   1156824480     167632
-transpose.mem                     1156992112     134128
-cast_fp16_fp32.mem                1157126240     101648
+resize_hwc.mem                    1156251568     178780
+imagescaler.mem                   1156430352     157036
+maxpooling_k2_st2.mem             1156587392     107184
+maxpooling_k2_st1.mem             1156694576     125668
+resize_onnx.mem                   1156820256     182996
+transpose.mem                     1157003264     134128
+cast_fp16_fp32.mem                1157137392     101648

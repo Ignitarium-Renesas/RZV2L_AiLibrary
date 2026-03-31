@@ -17,7 +17,7 @@ It is recommended to setup the camera as shown in the image below. This applicat
 ## Application detailsl
 
 ```
-|-- Driver_Monitoring_System_cam # Application with CORAL camera input
+|-- Driver_monitoring_system_cam # Application with CORAL camera input
 |   |-- Makefile
 |   |-- exe
 |   |   |-- rf_gaze_dir.xml 
@@ -25,7 +25,7 @@ It is recommended to setup the camera as shown in the image below. This applicat
 |   |   |-- deeppose_cam # DRP-AI files of deeppose
 |   |   `-- tinyyolov3_cam # DRP-AI files of tiny-yolov3
 |   `-- src # source code directory
-|-- Driver_Monitoring_System_usbcam # Application with USB camera input
+|-- Driver_monitoring_system_usbcam # Application with USB camera input
 |   |-- Makefile
 |   |-- exe
 |   |   |-- rf_gaze_dir.xml 
@@ -47,7 +47,7 @@ It is recommended to setup the camera as shown in the image below. This applicat
 
 #### DeepPose
 
-- Model - [MMPose Facial Landmark Localization](https://mmpose.readthedocs.io/en/latest/topics/face.html#deeppose-resnet-on-wflw)
+- Model - [DeepPose](https://download.openmmlab.com/mmpose/face/deeppose/deeppose_res50_wflw_256x256-92d0ba7f_20210303.pth)
 - Dataset - [WFLW](https://wywu.github.io/projects/LAB/WFLW.html)
 - In this application DeepPose is used for detecting face landmarks.
 
@@ -82,7 +82,9 @@ make
 ```
 cd /home/root/RZV2L_AiLibrary
 cd 10_Driver_monitoring_system/Driver_monitoring_system_usbcam/exe/
+su
 ./driver_monitoring_system_<usbcam/cam>_app
+exit # After pressing ENTER key to terminate the application.
 ```
 
 ### Example:
@@ -90,7 +92,9 @@ cd 10_Driver_monitoring_system/Driver_monitoring_system_usbcam/exe/
 ```
 cd /home/root/RZV2L_AiLibrary
 cd 10_Driver_monitoring_system/Driver_monitoring_system_usbcam/exe/
+su
 ./driver_monitoring_system_usbcam_app
+exit # After pressing ENTER key to terminate the application.
 ```
 
 ## Limitations

@@ -14,15 +14,18 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : sample_app_arcface_img.cpp
-* Version      : 7.20
+* Version      : 7.00
 * Description  : RZ/V2L DRP-AI Sample Application for Image version
 ***********************************************************************************************************************/
 
 #include "define.h"
+#include <iostream>
+#include <cstdio>
+#include <string>
 
 using namespace std;
 using namespace cv;
@@ -37,24 +40,76 @@ static void make_cap_dir(void)
     return;
 }
 
+static int query_device_status(const std::string& device_type)
+{
+    const char* command = "v4l2-ctl --list-devices";
+
+    FILE* pipe = popen(command, "r");
+    if (!pipe)
+    {
+        std::cerr << "[ERROR] Unable to open pipe." << std::endl;
+        return -1;
+    }
+
+    char buffer[256];
+
+    while (fgets(buffer, sizeof(buffer), pipe) != nullptr)
+    {
+        std::string response(buffer);
+
+        if (response.find(device_type) != std::string::npos)
+        {
+            // Read next line containing /dev/videoX
+            if (fgets(buffer, sizeof(buffer), pipe) != nullptr)
+            {
+                std::string device_line(buffer);
+
+                size_t pos = device_line.find("video");
+                if (pos != std::string::npos)
+                {
+                    std::string index_str = device_line.substr(pos + 5);
+
+                    // Remove whitespace/newline
+                    index_str.erase(index_str.find_last_not_of(" \n\r\t") + 1);
+
+                    pclose(pipe);
+
+                    return std::stoi(index_str); 
+                }
+            }
+        }
+    }
+
+    pclose(pipe);
+    return -1;  // Not found
+}
+
 #ifdef INPUT_CORAL
 static int coral_cam_init(void)
 {
-    const char* commands[4] =
+    int8_t ret = 0;
+    int32_t i = 0;
+    const char* commands[7] =
     {
         "media-ctl -d /dev/media0 -r",
+        "media-ctl -d /dev/media0 -l \"\'csi-10830400.csi2\':1 -> \'cru-ip-10830000.video\':0 [1]\"",
+        "media-ctl -d /dev/media0 -l \"\'cru-ip-10830000.video\':1 -> \'CRU output\':0 [1]\"",
+        "media-ctl -d /dev/media0 -V \"\'csi-10830400.csi2\':1 [fmt:UYVY8_2X8/640x480 field:none]\"",
         "media-ctl -d /dev/media0 -V \"\'ov5645 0-003c\':0 [fmt:UYVY8_2X8/640x480 field:none]\"",
-        "media-ctl -d /dev/media0 -l \"\'rzg2l_csi2 10830400.csi2\':1 -> \'CRU output\':0 [1]\"",
-        "media-ctl -d /dev/media0 -V \"\'rzg2l_csi2 10830400.csi2\':1 [fmt:UYVY8_2X8/640x480 field:none]\""
+        "media-ctl -d /dev/media0 -V \"\'cru-ip-10830000.video\':0 [fmt:UYVY8_2X8/640x480 field:none]\"",
+        "media-ctl -d /dev/media0 -V \"\'cru-ip-10830000.video\':1 [fmt:UYVY8_2X8/640x480 field:none]\""  
     };
 
     /* media-ctl command */
-    for (int i=0; i<4; i++)
+    for (i=0; i<7; i++)
     {
-        int ret = system(commands[i]);
+        printf("%s\n", commands[i]);
+        ret = system(commands[i]);
+        printf("system ret = %d\n", ret);
         if (ret<0)
         {
             printf("%s: failed media-ctl commands. index = %d\n", __func__, i);
+            ret = -1;
             return -1;
         }
     }
@@ -91,9 +146,9 @@ static int capture_face(void){
 
     /* create capture dir */
     make_cap_dir();
-
+    int coral_index = query_device_status("CRU");
     /* Create a VideoCapture object. Change the constructor argument based on the video feed (/dev/video0 is being captured below) */
-    VideoCapture cap(0);
+    VideoCapture cap(coral_index, cv::CAP_V4L2);
 
     /* Check if camera opened successfully */
     if(!cap.isOpened()){

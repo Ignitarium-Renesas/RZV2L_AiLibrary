@@ -14,31 +14,25 @@ sample video on YouTube -[Head counting demo](https://youtu.be/YNcCCiSx9YM)
 |-- 01_Head_count.mp4 # sample demo
 |-- Head_count_cam/ # Head count application on Coral camera input
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- examples/
-|   |   `-- head_count_cam_example.cpp # example inference code
 |   |-- exe/
-|   |   |-- 01_head_count_cam_app # the executable
+|   |   |-- head_count_cam_app # the executable
 |   |   `-- yolov3_cam # DRP-AI files of yolov3
 |   `-- src/ # source code directory
 |-- Head_count_img # Head count application on image input
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- examples/
-|   |   `-- head_count_example.cpp # example inference code
 |   |-- exe/
-|   |   |-- 01_head_count_img_app # the executable
+|   |   |-- head_count_img_app # the executable
 |   |   |-- labels.txt # label map
 |   |   `-- yolov3_bmp # DRP-AI files of yolov3
 |   |-- src/ # source code directory
 |   `-- test_images # test images directory
 |-- Head_count_usbcam # Head count application on USB camera input
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- examples/
-|   |   `-- head_count_cam_example.cpp # example inference code
 |   |-- exe/
-|   |   |-- 01_head_count_usbcam_app # the executable
+|   |   |-- head_count_usbcam_app # the executable
 |   |   `-- yolov3_cam # DRP-AI files of yolov3
 |   `-- src/ # source code directory
 `-- README.md
@@ -76,7 +70,7 @@ make
 
 ### Running the sample application
 Praparation on laptop:
-1. Download the weight file `yolov3_Head_counting_weights.dat` from the [release v5.00](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v5.00). Precise file link: [yolov3_Head_counting_weights.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/yolov3_Head_counting_weights.dat)
+1. Download the weight file `yolov3_Head_counting_weights.dat` from the [release v7.10](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v7.10). Precise file link: [yolov3_Head_counting_weights.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v7.10/yolov3_Head_counting_weights.dat)
 2. Place the weight files at location proper location `01_Head_count/Head_count_img/exe/yolov3_bmp/`, `01_Head_count/Head_count_cam/exe/yolov3_cam/` or `01_Head_count/Head_count_usbcam/exe/yolov3_cam/`
 3. Now, copy the `RZV2L_AiLibrary` directory to the RZV2L board (/home/root/).
 4. Please follow these steps:
@@ -85,7 +79,9 @@ Praparation on laptop:
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/Head_count_img/exe/
+su
 ./head_count_img_app ../test_images/elevator_google_0007_640_480.bmp
+exit # After running the application to terminate it.
 ```
 Optionally the user can pass width and height as arguments.
 
@@ -93,14 +89,18 @@ Optionally the user can pass width and height as arguments.
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/Head_count_cam/exe/
+su
 ./head_count_cam_app
+exit # After pressing ENTER key to terminate the application.
 ```
 
 #### Application with USB camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 01_Head_count/Head_count_usbcam/exe/
+su
 ./head_count_usbcam_app
+exit # After pressing ENTER key to terminate the application.
 ```
 
 ### Known issues:

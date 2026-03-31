@@ -10,18 +10,16 @@ sample video on YouTube - https://youtu.be/kXZFmK02VQk
 
 ```
 ├── Elderly_fall_detection_cam # Elderly fall detection application on CORAL camera input
-│   ├── etc/ # address map and pre/post process configuration of both hrnet and tiny-yolov2
 │   ├── exe/
-│   │   ├── Elderly_fall_detection_cam_app # The executable
+│   │   ├── elderly_fall_detection_cam_app # The executable
 │   │   ├── hrnet_cam/ # DRP-AI files of hrnet
 │   │   └── tinyyolov2_cam/ # DRP-AI files of tiny-yolov2
 │   ├── Makefile
 │   ├── src # source code directory
 |   └── README.md
 └── Elderly_fall_detection_usbcam # Elderly fall detection application on USB camera input
-│    ├── etc # address map and pre/post process configuration of both hrnet and tiny-yolov2
 │    ├── exe
-│    │   ├── Elderly_fall_detection_usbcam_app # The executable
+│    │   ├── elderly_fall_detection_usbcam_app # The executable
 │    │   ├── hrnet_cam/ # DRP-AI files of hrnet
 │    │   └── tinyyolov2_cam/ # DRP-AI files of tiny-yolov2
 │    ├── Makefile
@@ -78,7 +76,9 @@ make
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 03_Elderly_fall_detection/Elderly_fall_detection_cam/exe/
+su
 ./elderly_fall_detection_cam_app
+exit # After pressing ENTER key to terminate the application.
 ```
 
 ### Example:
@@ -86,7 +86,9 @@ cd 03_Elderly_fall_detection/Elderly_fall_detection_cam/exe/
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 03_Elderly_fall_detection/Elderly_fall_detection_cam/exe/
+su
 ./elderly_fall_detection_cam_app
+exit # After pressing ENTER key to terminate the application.
 ```
 
 ## Limitations

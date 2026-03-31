@@ -14,12 +14,12 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : define.h
-* Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for MMPose HRNet with TinyYOLOv2 MIPI Camera version
+* Version      : 7.00
+* Description  : RZ/V2L DRP-AI Sample Application for MMPose HRNet with TinyYOLOv2 Camera version
 ***********************************************************************************************************************/
 
 #ifndef DEFINE_MACRO_H
@@ -208,10 +208,6 @@ const static uint32_t num_inf_out =  (NUM_CLASS + 5)* NUM_BB * num_grids[0] * nu
 #define IMAGE_OUTPUT_HEIGHT         (720)
 #define IMAGE_CHANNEL_BGRA          (4)
 #define WL_BUF_NUM                  (2)
-
-/*udmabuf memory area Information*/
-#define UDMABUF_OFFSET              (CAM_IMAGE_WIDTH * CAM_IMAGE_HEIGHT * CAM_IMAGE_CHANNEL_YUY2 * CAP_BUF_NUM)
-#define UDMABUF_INFIMAGE_OFFSET     (IMAGE_OUTPUT_WIDTH * IMAGE_OUTPUT_HEIGHT * IMAGE_CHANNEL_BGRA * WL_BUF_NUM + UDMABUF_OFFSET)
 
 /*Image:: Text information to be drawn on image*/
 #define CHAR_SCALE_LARGE            (0.8)

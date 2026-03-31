@@ -14,12 +14,12 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : ascii.h
-* Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for Line Crossing using Darknet-PyTorch Tiny YOLOv3 USB Camera version
+* Version      : 7.00
+* Description  : RZ/V2L DRP-AI Sample Application for Line Crossing using Darknet-PyTorch Tiny YOLOv3 Camera version
 ***********************************************************************************************************************/
 
 /* Multiple inclusion prevention macro */

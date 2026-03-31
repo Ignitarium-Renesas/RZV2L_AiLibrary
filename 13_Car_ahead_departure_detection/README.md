@@ -10,7 +10,6 @@ sample video on YouTube -https://youtu.be/t-owFwsRWTI
 ```
 |-- Car_ahead_departure_detection_cam/ # Car ahead departure detection application on Coral camera input
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of tiny yolovc
 |   |-- examples/
 |   |-- exe/
 |   |   |-- car_ahead_departure_detection_cam_app # the executable
@@ -20,7 +19,6 @@ sample video on YouTube -https://youtu.be/t-owFwsRWTI
 |   `-- src/ # source code directory
 |-- Car_ahead_departure_detection_usbcam/ # Car ahead departure detection application on USB camera input
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of tiny yolov3
 |   |-- examples/
 |   |-- exe/
 |   |   |-- car_ahead_departure_detection_usbcam_app # the executable
@@ -62,13 +60,17 @@ The generated executable file from laptop needs to be transfered on the RZv2L bo
 ~~~ 
 cd /home/root/RZV2L_AiLibrary 
 cd 13_Car_ahead_departure_detection/Car_ahead_departure_detection_cam/exe/
+su
 ./car_ahead_departure_detection_cam_app 0
+exit # After pressing ENTER key to terminate the application.
 ~~~
 - USB Cam
 ~~~ 
 cd /home/root/RZV2L_AiLibrary 
 cd 13_Car_ahead_departure_detection/Car_ahead_departure_detection_usbcam/exe/
+su
 ./car_ahead_departure_detection_usbcam_app 0
+exit # After pressing ENTER key to terminate the application.
 ~~~
 
  

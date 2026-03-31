@@ -23,18 +23,16 @@ sample video on YouTube -[Hand gesture recognition demo video](https://youtu.be/
 
 ## Hand Gesture Recognition Application details
 ```
-|-- Hand_Gesture_Recognition_v2_cam # Application with CORAL camera input
+|-- Hand_gesture_recognition_v2_cam # Application with CORAL camera input
 |   |-- Makefile
-|   |-- etc # address map and pre/post process configuration of both hand gesture recognition (resnet18) and tiny-yolov3 (hand detection)
 |   |-- exe
 |   |   |-- hagrid_labels.txt # Gesture labels
 |   |   |-- hand_gesture_recognition_v2_cam_app # The executable
 |   |   |-- resnet18_cam # DRP-AI files of hand gesture
 |   |   `-- tinyyolov3_cam # DRP-AI files of tiny-yolov3
 |   `-- src # source code directory
-|-- Hand_Gesture_Recognition_v2_usbcam # Application with USB camera input
+|-- Hand_gesture_recognition_v2_usbcam # Application with USB camera input
 |   |-- Makefile
-|   |-- etc # address map and pre/post process configuration of both hand gesture recognition (resnet18) and tiny-yolov3 (hand detection)
 |   |-- exe
 |   |   |-- hagrid_labels.txt # Gesture labels
 |   |   |-- hand_gesture_recognition_v2_usbcam_app # The executable
@@ -86,7 +84,9 @@ Now application's executable file (exe) is built.
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 12_Hand_gesture_recognition_v2/Hand_gesture_recognition_v2_<cam/usbcam>/exe
+su
 ./hand_gesture_recognition_v2_<cam/usbcam>_app
+exit # After pressing ENTER key to terminate the application.
 ```
 Live video feed will be visible on the screen.
 

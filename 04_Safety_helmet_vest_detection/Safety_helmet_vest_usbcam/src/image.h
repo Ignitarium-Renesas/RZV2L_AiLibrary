@@ -14,12 +14,12 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2026 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
 * File Name    : image.h
-* Version      : 7.20
-* Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLOv3 MIPI Camera version
+* Version      : 7.00
+* Description  : RZ/V2L DRP-AI Sample Application for Darknet-PyTorch YOLOv3 Camera version
 ***********************************************************************************************************************/
 
 #ifndef IMAGE_H
@@ -38,14 +38,14 @@ class Image
         uint8_t get_buf_id();
         void write_string_rgb(std::string str, uint32_t x, uint32_t y, float size, uint32_t color);
 
-        uint8_t udmabuf_fd;
         uint32_t get_H();
         uint32_t get_W();
         uint32_t get_C();
+        uint8_t* get_img(uint8_t id);
         uint8_t at(int32_t a);
         void set(int32_t a, uint8_t val);
+        uint8_t init(uint32_t w, uint32_t h, uint32_t c, uint32_t ow, uint32_t oh, uint32_t oc, void *mem);
 
-        uint8_t init(uint32_t w, uint32_t h, uint32_t c, uint32_t ow, uint32_t oh, uint32_t oc);
         void draw_rect(int32_t x, int32_t y, int32_t w, int32_t h, const char* str);
         void convert_format();
         void convert_size();

@@ -10,7 +10,7 @@ sample video on YouTube -[Gaze detection demo](https://youtu.be/U8sqX7KzBxQ)
 
 ```
 |-- 09_Human_Gaze_Detection
-|-- Human_Gaze_Detection_cam
+|-- Human_gaze_detection_cam
 |  |-- Makefile
 |  |-- README.md
 |  |-- exe
@@ -18,7 +18,7 @@ sample video on YouTube -[Gaze detection demo](https://youtu.be/U8sqX7KzBxQ)
 |  |  |-- resnet18_cam # DRP-AI files of resnet-18
 |  |  |-- tinyyolov3_cam # DRP-AI files of tinyyolov3
 |  |-- src # source code directory
-|-- Human_Gaze_Detection_usbcam
+|-- Human_gaze_detection_usbcam
 |  |-- Makefile
 |  |-- README.md
 |  |-- exe
@@ -72,7 +72,9 @@ make
 ```
 cd /home/root/RZV2L_AiLibrary
 cd 09_Human_gaze_detection/Human_gaze_detection_usbcam/exe/
+su
 ./human_gaze_detection_usbcam_app
+exit # After pressing ENTER key to terminate the application.
 ```
 
 ### Example:
@@ -80,7 +82,9 @@ cd 09_Human_gaze_detection/Human_gaze_detection_usbcam/exe/
 ```
 cd /home/root/RZV2L_AiLibrary
 cd 09_Human_gaze_detection/Human_gaze_detection_usbcam/exe/
+su
 ./human_gaze_detection_usbcam_app
+exit # After pressing ENTER key to terminate the application.
 ```
 
 ## Limitations

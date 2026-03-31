@@ -26,33 +26,29 @@ sample video on YouTube -[Animal Detection demo](https://youtu.be/o-3oeOCRHws)
 
 ## Application details
 ```
-|-- 07_Animal_detection.mp4 # sample demo
 |-- Animal_detection_cam/ # Animal detection application on images
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- examples/
 |   |   `-- animal_detection_cam_example.cpp # example inference code on image
 |   |-- exe/
-|   |   |-- 07_animal_detection_cam_app # the executable
-|   |   `-- animal_yolov3_cam # DRP-AI files of yolov3
+|   |   |-- animal_detection_cam_app # the executable
+|   |   `-- animal_yolov3 # DRP-AI files of yolov3
 |   `-- src/ # source code directory
 |-- Animal_detection_img # Animal detection application on camera input
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- examples/
 |   |   `-- animal_detection_example.cpp #example inference code on camera input
 |   |-- exe/
-|   |   |-- 07_animal_detection_img_app # the executable
+|   |   |-- animal_detection_img_app # the executable
 |   |   |-- labels.txt # label map
-|   |   `-- animal_yolov3_bmp # DRP-AI files of yolov3
+|   |   `-- animal_yolov3 # DRP-AI files of yolov3
 |   |-- src/ # source code directory
 |-- Animal_detection_usbcam/ # Animal detection application on images
 |   |-- Makefile
-|   |-- etc/ # address map and pre/post process configuration of yolov3
 |   |-- examples/
 |   |   `-- animal_detection_usbcam_example.cpp # example inference code on image
 |   |-- exe/
-|   |   |-- 07_animal_detection_usbcam_app # the executable
+|   |   |-- animal_detection_usbcam_app # the executable
 |   |   `-- animal_yolov3_cam # DRP-AI files of yolov3
 |   `-- src/ # source code directory
 |   `-- test_images # test images directory
@@ -97,13 +93,9 @@ make
 
 ### Running the sample application
 Praparation on laptop:
-1. Download the weights file `animal_yolov3_weight.dat` or `animal_yolov3_weight_img.dat` from the release [release v5.00](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v5.00) depending on which application is being used.Precise file links: [animal_yolov3_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/animal_yolov3_weight.dat) and [animal_yolov3_weight_img.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/animal_yolov3_weight_img.dat)
-2. Place the weight files at location proper location.<br>
-- For camera input <br>
-Put [animal_yolov3_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/animal_yolov3_weight.dat) in `07_Animal_detection/Animal_detection_<cam/usbcam>/exe/animal_yolov3`.
-
-- For image input <br>
-Change  [animal_yolov3_weight_img.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v5.00/animal_yolov3_weight_img.dat) into animal_yolov3_weight.dat and put it in `07_Animal_detection/Animal_detection_img/exe/animal_yolov3`.
+1. Download the weights file `animal_yolov3_weight.dat` from the release [release v7.10](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/tag/v7.10)
+Precise file links: [animal_yolov3_weight.dat](https://github.com/Ignitarium-Renesas/RZV2L_AiLibrary/releases/download/v7.10/animal_yolov3_weight.dat)
+2. Place `animal_yolov3_weight.dat` file at the location `07_Animal_detection/Animal_detection_cam/exe/animal_yolov3` or `07_Animal_detection/Animal_detection_usbcam/exe/animal_yolov3` or `07_Animal_detection/Animal_detection_img/exe/animal_yolov3` according to the application that needs to be run.
 3. Now, copy the `RZV2L_AiLibrary` directory to the RZV2L board (/home/root/).
 4. Please follow these steps:
 For image input continue with steps 5 to 7.
@@ -115,6 +107,7 @@ For image input continue with steps 5 to 7.
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 07_Animal_detection/Animal_detection_img/exe/
+root@smarc-rzv2l:~/RZV2L_AiLibrary/07_Animal_detection/Animal_detection_img/exe# su
 root@smarc-rzv2l:~/RZV2L_AiLibrary/07_Animal_detection/Animal_detection_img/exe# ./animal_detection_img_app ../test_images/dog.bmp 
 ----------------------------------------
 Running Animal detection demo
@@ -153,21 +146,25 @@ Result 1 -----------------------------------------*
 Class           : Dog
 (X, Y, W, H)    : (227, 379, 173, 338)
 Probability     : 99.1 %
-
+root@smarc-rzv2l:~/RZV2L_AiLibrary/07_Animal_detection/Animal_detection_img/exe# exit
 ```
 
 #### Application with coral camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 07_Animal_detection/Animal_detection_cam/exe/
+su
 ./animal_detection_cam_app
+exit # After pressing ENTER key to terminate the application.
 ```
 
 #### Application with usb camera input
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 07_Animal_detection/Animal_detection_usbcam/exe/
+su
 ./animal_detection_usbcam_app
+exit # After pressing ENTER key to terminate the application.
 ```
 
 

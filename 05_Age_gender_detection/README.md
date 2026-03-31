@@ -10,7 +10,7 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
 ## Age&Gender Application details
 ```
 ├── 05_Age_Gender_Detection
-├── Age_Gender_Classification_cam
+├── Age_gender_classification_cam
     ├── exe
 │       ├── fairface_cam # DRP-AI files of age_gender
 │       ├── age_gender_classification_cam_app # The executable
@@ -18,7 +18,7 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
 |   ├── Makefile
 |   ├── README.md
     └── src # source code directory
-├── Age_Gender_Classification_usbcam
+├── Age_gender_classification_usbcam
     ├── exe
 │       ├── fairface_cam # DRP-AI files of age_gender
 │       ├── age_gender_classification_usbcam_app # The executable
@@ -26,13 +26,15 @@ sample video on YouTube -[Age and gender detection demo video](https://youtu.be/
 |   ├── Makefile
 |   ├── README.md
     └── src # source code directory
-├── Age_Gender_Classification_img
+├── Age_gender_classification_img
+    ├── examples
     ├── exe
 │       ├── fairface_bmp # DRP-AI files of age_gender
 │       ├── age_gender_classification_img_app # The executable
 │       ├── sample.bmp
 |   ├── Makefile
 |   ├── README.md
+|   ├── test_files
     └── src # source code directory
 ```
 ### Model details
@@ -81,7 +83,9 @@ make
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 05_Age_gender_detection/Age_gender_classification_<cam/usbcam>/exe
+su
 ./age_gender_classification_<cam/usbcam>_app
+exit # After pressing ENTER key to terminate the application.
 ```
 
 #### Running the image application
@@ -91,7 +95,9 @@ The user should pass the path to the image as an argument, optionally it's width
 ```
 cd /home/root/RZV2L_AiLibrary 
 cd 05_Age_gender_detection/Age_gender_classification_img/exe
+su
 ./age_gender_classification_img_app ../test_files/21-40_02.bmp
+exit # After running the application to terminate it.
 ```
 
 ## Limitation
